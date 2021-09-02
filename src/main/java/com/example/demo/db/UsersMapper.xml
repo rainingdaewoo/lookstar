@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="users">
+
+
+	<insert id="insert" parameterType="usersVO">
+		insert into users
+		( USERS_NO,
+		USERS_ID, USERS_PW, USERS_EMAIL,
+		USERS_NICKNAME, USERS_BIRTH, USERS_GENDER,
+		USERS_HEIGHT, USERS_WEIGHT, USERS_JOINTYPE, USERS_GRANT,
+		USERS_FNAME, USERS_FSIZE)
+		values
+		(seq_users.nextval,#{users_id},#{users_pw},#{users_email},
+		#{users_nickname},#{users_birth},#{users_gender},#{users_height},
+		#{users_weight},#{users_jointype},#{users_grant},#{users_fname},
+		#{users_fsize})
+	</insert>
+
+	<select id="getUsers" resultType="usersVO">
+		select * from users where
+		users_id=#{username}
+	</select>
+	<update id="updateMyInfo" parameterType="usersVO">
+		update users set users_nickname=#{users_nickname},
+		users_birth=#{users_birth},
+		users_gender=#{users_gender},
+		users_height=#{users_height},
+		users_weight=#{users_weight} where users_no=#{users_no}
+	</update>
+
+	<delete id="deleteUser">
+		delete users where users_no=4 and users_pw=#{users_pw}
+	</delete>
+</mapper>

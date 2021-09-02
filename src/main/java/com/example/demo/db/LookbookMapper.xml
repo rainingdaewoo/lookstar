@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lookbook">
+	<!-- 전체 목록 -->
+	<select id="findAll" resultType="lookbookVO">
+		select * from lookbook
+		<if test="sortField!=null">
+			order by ${sortField} desc
+		</if>
+		<if test="sortField==null">
+			order by lookbook_no desc
+		</if>
+	</select>
+	<!-- 룩북 하나 클릭시 -->
+	<select id="getUsers" resultType="lookbookVO">
+		select * from lookbook where lookbook_no=#{lookbook_no}
+	</select>
+	<!-- 룩북 추가시 -->
+	<insert id="insert" parameterType="lookbookVO">
+		insert into lookbook( LOOKBOOK_NO, USERS_NO, LOOKBOOK_WRITE, LOOKBOOK_DATE, 
+		LOOKBOOK_VIEWS, LOOKBOOK_SHOW, LOOKBOOK_HEIGHT, LOOKBOOK_WEIGHT, LOOKBOOK_FNAME)
+	
+		values(seq_lookbook.nextval, #{users_no}, #{lookbook_write}, sysdate, 0, 0, 
+		#{lookbook_height}, #{lookbook_weight}, #{lookbook_fname})
+	</insert>
+</mapper>

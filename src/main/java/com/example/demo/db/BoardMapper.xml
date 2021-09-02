@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+  <select id="findAll" resultType="boardVO">
+     select board_no, board_title, board_content, users_nickname, board_date, board_views, board_show
+    from (
+        select board_no, board_title, board_content, users_nickname, board_date, board_views, board_show,
+            row_number() over(order by board_no desc) as rNum
+        from board, users 
+        where board.users_no = users.users_no
+        ) mb
+    where rNum between #{start} and #{end} 
+        order by board_no desc
+	</select>
+    <!--
+  초안
+     select board_no, board_title, board_content, users_nickname, board_date, board_views, board_show
+    from (
+        select board_no, board_title, board_content, users_nickname, board_date, board_views, board_show,
+            row_number() over(order by board_no desc) as rNum
+        from board, users 
+        where board.users_no = users.users_no
+        where board_title like '%' || #{board_title} || '%'  
+            where board_content like '%' || #{board_content} || '%'  
+            where users_nickname '%' || #{users_nickname} || '%'  
+            where board_title like '%' || #{board_title} || '%' or (board_content like '%' || #{board_content} || '%')
+        ) b
+    where rNum between #{start} and #{end} 
+        order by board_no desc -->
+  <insert id="insertBoard" parameterType="boardVO">
+  	insert into board(board_no, board_title, users_no, board_content,
+  	board_views, board_date, board_fname, board_fsize) 
+  	values(board_seq.nextval,#{board_titlele},#{users_no},#{board_content},
+  	0, sysdate, #{board_fname},#{board_fsize})
+  </insert>
+  
+  <select id="getNextNo" resultType="int">
+  	select nvl(max(no),0)+1 from board
+  </select>
+  
+  <select id="getBoard" resultType="boardVO">
+  	select board_no, board_title, users_nickname, board_content, board_date, board_views, board_fname, board_fsize 
+  	from board, users
+  	where board_no=#{board_no} and board.users_no = users.users_no
+  </select>
+  
+  <update id="updateViews" parameterType="int">
+  	 update board set board_views=board_views + 1 where board_no=#{board_no} 
+  </update>
+  
+  <update id="updateStep" >
+  	update board set b_step = b_step +1 
+  		where b_ref=#{b_ref} and b_step > #{b_step}
+  </update>
+  
+  <update id="updateBoard" parameterType="boardVO">
+  	update board set title=#{title},
+  	content=#{content},
+  	fname=#{fname},
+  	fsize=#{fsize} where no=#{no} and pwd=#{pwd}
+  </update>
+  
+  <update id="deleteBoard">
+  	UPDATE board SET board_show = 1 WHERE board_no = #{board_no}
+   </update>
+  
+  <select id="totalRecord" resultType="int">
+  	select count(*) from board
+  </select>
+  
+  <select id="listMyBoard" resultType="boardVO">
+    select board_no, BOARD_TITLE, users_nickname, board_date, board_views
+   	FROM board 
+   	WHERE users_no = #{users_no}
+  </select>
+</mapper>

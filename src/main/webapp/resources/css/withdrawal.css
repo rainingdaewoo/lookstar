@@ -1,0 +1,31 @@
+.container{
+	margin-top:200px;
+	border : 1px black;
+}
+
+#subContainer{
+	margin-top:50px;
+}
+
+
+
+#info{
+	margin-top:50px;
+}
+
+#box{
+	margin-top:50px;
+	margin:auto;
+	height:600px;
+	width:800px;
+	position:absolute;
+	
+}
+
+#container{
+	margin:0 auto;
+}
+
+#btn{
+	margin-top:120px;
+}

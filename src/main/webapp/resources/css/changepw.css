@@ -1,0 +1,83 @@
+/*change_pasword.html css*/
+@charset "UTF-8";
+#pw_content{
+	position: relative;
+	padding: 32px 51px 95px;
+}
+
+div{	
+	display:block;
+}
+
+.section_pwconfirm{
+	line-height: 14px;
+	width: 500px;
+	height: 430px;
+	margin: 0 auto;
+	padding: 32px 29px 32px;
+	border: 1px solid #dadada;
+	background: #fff;
+}
+
+.pp {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.h2_pw {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+#changepw{
+    border: 0;
+    background-color: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+
+    font-family: -apple-system,BlinkMacSystemFont,"Malgun Gothic","¸¼Àº °íµñ",helvetica,"Apple SD Gothic Neo",sans-serif;
+    font-size: 12px;
+}
+
+
+.spc_content{
+	margin-top:31px;
+}
+
+
+.btn_area_btm{
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16px;
+    margin-top: 8px;
+    padding: 16px 0 15px;
+    text-align: center;
+    color: #333;
+    border: 1px solid #bfbfbf;
+    background: #fff;
+}
+
+
+
+.spc_row1, .spc_row2, .spc_row3{
+	font-size: 14px;
+    font-weight: 700;
+    line-height: 25px;
+    height: 40px;
+    margin: auto;
+    vertical-align: top;
+    color: #333;
+    border: 0;
+    margin-bottom: 15px;
+}
+
