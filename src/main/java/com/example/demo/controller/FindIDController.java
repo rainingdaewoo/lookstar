@@ -31,7 +31,7 @@ public class FindIDController {
 		
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView mail(String users_email, HttpSession session) {//users_id users_email
+	public ModelAndView mail(String users_email, HttpSession session) {
 		System.out.println("findID.do 동작함");
 		ModelAndView mav = new ModelAndView("redirect:/findOK.do");
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
