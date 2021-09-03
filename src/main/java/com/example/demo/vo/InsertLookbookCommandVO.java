@@ -5,7 +5,24 @@ import java.util.List;
 public class InsertLookbookCommandVO {
 	private LookbookVO lookbook;
 	private List<LookInfoVO> list_info;
-	private List<Lookbook_styleVO> list_style;
+	// list_info["+id+"].category
+	private List<Integer> style_no;
+	public InsertLookbookCommandVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public InsertLookbookCommandVO(LookbookVO lookbook, List<LookInfoVO> list_info, List<Integer> style_no) {
+		super();
+		this.lookbook = lookbook;
+		this.list_info = list_info;
+		this.style_no = style_no;
+	}
+	
+	@Override
+	public String toString() {
+		return "InsertLookbookCommandVO [lookbook=" + lookbook + ", list_info=" + list_info + ", style_no=" + style_no
+				+ "]";
+	}
 	public LookbookVO getLookbook() {
 		return lookbook;
 	}
@@ -18,21 +35,12 @@ public class InsertLookbookCommandVO {
 	public void setList_info(List<LookInfoVO> list_info) {
 		this.list_info = list_info;
 	}
-	public List<Lookbook_styleVO> getList_style() {
-		return list_style;
+	public List<Integer> getStyle_no() {
+		return style_no;
 	}
-	public void setList_style(List<Lookbook_styleVO> list_style) {
-		this.list_style = list_style;
+	public void setStyle_no(List<Integer> style_no) {
+		this.style_no = style_no;
 	}
-	public InsertLookbookCommandVO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public InsertLookbookCommandVO(LookbookVO lookbook, List<LookInfoVO> list_info, List<Lookbook_styleVO> list_style) {
-		super();
-		this.lookbook = lookbook;
-		this.list_info = list_info;
-		this.list_style = list_style;
-	}
+	
 	
 }

@@ -85,16 +85,18 @@ public class DBManager {
 		session.close();
 		return list;
 	}
-
+	
 	public static int insertLookbook(InsertLookbookCommandVO insertlook) {
 		SqlSession session = factory.openSession();
 		int re = session.insert("lookbook.insert",insertlook.getLookbook());
 		int re2 = session.insert("lookinfo.insert",insertlook.getList_info());
-		int re1 = session.insert("lookstyle.insert",insertlook.getList_style());
+		int re1 = session.insert("lookstyle.insert",insertlook.getStyle_no());
+		
 		session.commit();
 		session.close();
 		return re;
 	}
+	
 	
 	public static int insertDM(ChatVO c) {
 		SqlSession session = factory.openSession(true);

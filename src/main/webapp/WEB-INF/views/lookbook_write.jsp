@@ -54,9 +54,9 @@
 		arrInputValue[intId] = strValue;
 	}
 	function createInput(id, value) {
-		return "<select id='list["+id+"].category' name='list["+id+"].category'><option value='0'>-선택-</option><option value='1'>모자</option><option value='2'>상의</option><option value='3'>하의</option><option value='4'>신발</option></select>"
-				+ "<input type='text' style='width:80px' id='list["+id+"].name' name='list["+id+"].name' placeholder='제품명'>"
-				+ "<input type='text' id='list["+id+"].url' name='list["+id+"].url' placeholder='구매처' ><br><br>";
+		return "<select id='list_info["+id+"].lookinfo_category' name='list_info["+id+"].lookinfo_category'><option value='0'>-선택-</option><option value='1'>모자</option><option value='2'>상의</option><option value='3'>하의</option><option value='4'>신발</option></select>"
+				+ "<input type='text' style='width:80px' id='list_info["+id+"].lookinfo_name' name='list_info["+id+"].lookinfo_name' placeholder='제품명'>"
+				+ "<input type='text' id='list_info["+id+"].lookinfo_url' name='list_info["+id+"].lookinfo_url' placeholder='구매처' ><br><br>";
 	}
 	function deleteInput() {
 		if (arrInput.length > 0) {
@@ -65,13 +65,14 @@
 		}
 		display();
 	}
-	
+	<!--
 	// 스타일 체크박스를 모두 리스트로 담아주기
 	var list_style=[];
 	$("input[name=style_no]:checked").each(function(){
 		var style=$(this).val();
 		list_style.push(style);
 	});
+	-->
 </script>
 </head>
 <body>
@@ -90,16 +91,17 @@
 				<div class="row" style="width:80%, text-align: center;">
 					<h1 class="display-5 fw-bolder"></h1>
 					<br> <img id="blah" src="/YouSoSick/image/ready.png" height="400px" /><br> <br> 
-					<input type='file' id="upload_file" name="uploadFile" accept="image/png, image/jpeg" />
+					<input type='file' id="upload_file" name="lookbook.uploadFile" accept="image/png, image/jpeg" />
 
 				</div>
 				<div style="width: 80%; text-align: center; ">
-					<input type="hidden" name="users_no" value="${u.users_no}"> <br>
-					<input type="hidden" name="lookbook_height"
-						value="${u.users_height}"> <input type="hidden"
-						name="lookbook_weight" value="${u.users_weight}"> 
+					<input type="hidden" name="lookbook.users_no" value="${u.users_no}"> <br>
+					<input type="hidden" name="lookbook.lookbook_height"
+						value="${u.users_height}"> 
+						<input type="hidden"
+						name="lookbook.lookbook_weight" value="${u.users_weight}"> 
 					<input type="text" class="form-control" placeholder="간단하게 한마디 써주세요"
-						name="lookbook_write" maxlength="50"><br>
+						name="lookbook.lookbook_write" maxlength="50"><br>
 					<!-- 
 					<table class="table" style="text-align: center; border: 1px solid #dddddd">
 						<tr>

@@ -36,6 +36,11 @@ public class InsertLookbookController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView submit(InsertLookbookCommandVO insertlook, HttpServletRequest request) {
 		System.out.println("Lookbookinsert POST방식 작동함");
+		System.out.println("==================================");
+		System.out.println("lookbookvo:" + insertlook.getLookbook());
+		System.out.println("lookbookinfo:" + insertlook.getList_info());
+		System.out.println("lookbookStyle:" + insertlook.getStyle_no());
+		System.out.println("==================================");
 		System.out.println("userno"+insertlook.getLookbook().getUsers_no());
 		ModelAndView mav = new ModelAndView("redirect:/lookbook.do");
 		String path = request.getRealPath("/resources/look_img");

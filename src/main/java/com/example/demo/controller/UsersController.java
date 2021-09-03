@@ -34,7 +34,7 @@ public class UsersController {
 	public void login() {
 		
 	}
-
+	/*
 	@RequestMapping("/loginOK.do")
 	public ModelAndView loginOK(HttpSession session) {
 		System.out.println("로그인 성공!");
@@ -49,6 +49,23 @@ public class UsersController {
 		
 		return mav;
 	}
+	*/
+	@RequestMapping("/loginOK.do")
+	public ModelAndView loginOK(HttpSession session) {
+		System.out.println("로그인 성공!");
+		ModelAndView mav = new ModelAndView("redirect:/main.do");
+		Authentication authentication
+		= SecurityContextHolder.getContext().getAuthentication();
+		User user = (User)authentication.getPrincipal();
+		String id = user.getUsername();
+		UsersVO u = dao.getUsers(id);
+		session.setAttribute("users", u);
+		
+		return mav;
+	}
+
+	
+	
 	@RequestMapping("/findID.do")
 	public void findID() {
 		

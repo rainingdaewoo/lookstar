@@ -3,13 +3,30 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lookinfo">
-	
-	<!-- 룩북 추가시 추가하는 스타일-->
+	<!-- 
 	<insert id="insert" parameterType="java.util.List">
-		insert into lookinfo (lookinfo_no,lookbook_no,lookinfo_name,lookinfo_url,lookinfo_category)
-		values
-		<foreach item="item" collection="list2" separator=",">
-			((select max(lookbook_no) from lookbook)+1,seq_lookinfo.nextval,#{lookinfo_name},#{lookinfo_url},#{lookinfo_category})
+		insert into lookinfo (lookinfo_no,lookbook_no,lookinfo_name,lookinfo_url,lookinfo_category) values	
+		<foreach item="item" collection="list" separator=",">
+		(seq_lookinfo.nextval,(select max(lookbook_no) from lookbook)+1,#{item.lookinfo_name},#{item.lookinfo_url},#{item.lookinfo_category})
 		</foreach>
 	</insert>
+	 -->
+	
+	<insert id="insert" parameterType="java.util.List">
+		insert into lookinfo (lookinfo_no,lookbook_no,lookinfo_name,lookinfo_url,lookinfo_category) values	
+		<foreach item="item" collection="list" separator=",">
+			<foreach collection="item" item="it" separator=",">
+				(seq_lookinfo.nextval,(select max(lookbook_no) from lookbook)+1,#{it.lookinfo_name},#{it.lookinfo_url},#{it.lookinfo_category)
+			</foreach>
+		</foreach>
+	</insert>
+	
+	<!-- 
+	<insert id="insert" parameterType="java.util.List">
+		<foreach item="item" collection="list" open="INSERT ALL" separator=" ">
+		insert into lookinfo (lookinfo_no,lookbook_no,lookinfo_name,lookinfo_url,lookinfo_category) values	
+		(seq_lookinfo.nextval,(select max(lookbook_no) from lookbook)+1,#{item.lookinfo_name},#{item.lookinfo_url},#{item.lookinfo_category)
+		</foreach>
+	</insert>
+	 -->
 </mapper>
