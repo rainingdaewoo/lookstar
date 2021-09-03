@@ -38,7 +38,7 @@
 		(seq_lookinfo.nextval,(select max(lookbook_no) from lookbook)+1,#{item.lookinfo_name},#{item.lookinfo_url},#{item.lookinfo_category)
 		</foreach>
 	</insert>
-	 -->
+	 --> 
 	 
 	 <!-- update를 사용한 insert all -->
 	 <update id="insert" parameterType="java.util.List">
