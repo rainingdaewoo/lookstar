@@ -61,7 +61,7 @@
 					<img id="blah" src="/YouSoSick/image/ready.png" height="400px" /><br>
 					
 					<input type='file' id="upload_file" name="uploadFile" accept="image/png, image/jpeg"/>
-					 
+					   
 				</div>
 				<div class="col-md-6">
 					<input type="hidden" name="users_no" value="${u.users_no}">
