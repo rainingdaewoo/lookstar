@@ -179,5 +179,16 @@ public class DBManager {
 			return n;
 		}
 		
+		public static String findID(String users_email){	
+			System.out.println("DBManager findID동작함" + users_email);
+			SqlSession session = factory.openSession();
+			String users_id = session.selectOne("users.findID",users_email);
+			session.close();
+			return users_id;
+		}
+		
+		
+		
+		
 		
 }

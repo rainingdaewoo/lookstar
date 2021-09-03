@@ -34,4 +34,12 @@
 	<delete id="deleteUser">
 		delete users where users_no=4 and users_pw=#{users_pw}
 	</delete>
+	<select id="findID" resultType="String" parameterType="String">
+		select nvl(users_id,'') from users where users_email=#{users_email}
+	</select>
+	
+	<select id="findPW" resultType="String">
+		select users_pw from users where users_id=#{users_id} and users_email=#{users_email}
+	</select>
+	
 </mapper>

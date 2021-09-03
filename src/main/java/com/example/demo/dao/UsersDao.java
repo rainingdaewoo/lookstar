@@ -1,5 +1,8 @@
 package com.example.demo.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.DBManager;
@@ -26,5 +29,11 @@ public class UsersDao {
 	public int delete(int users_no,String users_pw) {
 		return DBManager.deleteUser(users_no, users_pw);
 	}
+	
+	public String findID(String users_email) {
+		return DBManager.findID(users_email);
+	}
+	
+	
 	
 }

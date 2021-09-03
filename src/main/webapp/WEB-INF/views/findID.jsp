@@ -43,13 +43,13 @@
             	</p>
             </div>
             <div class="container px-4 px-lg-5 my-5" id="text2">
-                <form class="form-find" action="#">
+                <form class="form-find" action="findID.do" method="post">
                     <div class="form-group">
-                        <input type="email" class="form-control" id="inputId" placeholder="가입된 이메일을 정확히 입력해 주세요.">
+                    	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+                        <input type="email" name="users_email" value="${users_email }" class="form-control" id="inputId" placeholder="가입된 이메일을 정확히 입력해 주세요.">
                     </div>
                     <div class="form-group text-center">
-                        <input type="submit" class="btn btn-lg btn-primary btn-block" value="아이디찾기">
-                        
+                        <input type="submit" class="btn btn-lg btn-primary btn-block" value="아이디찾기"> 
                     </div>
                 </form>
             </div>

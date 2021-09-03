@@ -49,10 +49,7 @@ public class UsersController {
 		
 		return mav;
 	}
-	@RequestMapping("/findID.do")
-	public void findID() {
-		
-	}
+
 	
 	@RequestMapping("/findPW.do")
 	public void findPW() {
