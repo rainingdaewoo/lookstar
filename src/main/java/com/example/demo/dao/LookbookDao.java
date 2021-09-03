@@ -20,11 +20,11 @@ public class LookbookDao {
 	}
 	
 	public int insert(InsertLookbookCommandVO insertlook) {
-		System.out.println("=====Dao의 결과=====");
-		System.out.println("lookbook"+ insertlook.getLookbook());
-		System.out.println("list_info"+ insertlook.getList_info());
-		System.out.println("style_no"+ insertlook.getStyle_no());
-		System.out.println("====================");
+		System.out.println("=====Dao의 결과==================");
+		System.out.println("lookbook: "+ insertlook.getLookbook());
+		System.out.println("list_info: "+ insertlook.getList_info());
+		System.out.println("style_no: "+ insertlook.getStyle_no());
+		System.out.println("===============================");
 		return DBManager.insertLookbook(insertlook);
 	}
 	

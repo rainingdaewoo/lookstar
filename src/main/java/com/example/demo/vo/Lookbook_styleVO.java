@@ -28,7 +28,7 @@ public class Lookbook_styleVO {
 	}
 	@Override
 	public String toString() {
-		return "Lookbook_styleVO [lookbook_no=" + lookbook_no + ", style_no=" + style_no + "]";
+		return "[lookbook_no=" + lookbook_no + ", style_no=" + style_no + "]";
 	}
 	
 	
