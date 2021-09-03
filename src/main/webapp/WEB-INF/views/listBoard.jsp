@@ -15,35 +15,17 @@
 <!-- 아이콘 -->
 <script src="https://kit.fontawesome.com/51db22a717.js"
 	crossorigin="anonymous"></script>
-<!-- 로그인 css -->
-<link href="../resources/css/login.css" rel="stylesheet" />
-<!-- 소셜 로그인 -->
-<link rel="stylesheet"
-	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <!-- 룩북 스타일 -->
 <link rel="stylesheet" href="../resources/css/lookbook.css">
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="../resources/assets/favicon.ico" />
 <!-- Bootstrap icons-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
 	rel="stylesheet" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="../resources/css/styles.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <!-- 버튼 부트스트랩 -->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- 슬라이더 부트스트랩 -->
-<script type="text/javascript"
-	src="./jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-
-
-<!-- 값슬라이더 -->
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- 게시판 스타일 -->
+<link rel="stylesheet" href="../../resources/css/board_css/board.css">
 
 <script type="text/javascript">
 	$(function() {
@@ -57,17 +39,24 @@
 </script>
 <style type="text/css">
 .board-category {
-	float:left;
+	float: left;
+} 
+
+.container {
+	padding-top: 200px;
 }
 </style>
 </head>
 <body>
 	<header>
-		<%@ include file="inc/header.jsp" %>
+		<%@ include file="./inc/header.jsp"%>
 	</header>
 	
 	<!-- Body Section -->
 	<section class="py-5">
+		<div class="container">
+			<h2>게시물 목록</h2>
+	<hr>
 	<div class="board-category">
 	<ul>
 		<li><a href="#">일상게시판</a></li>
@@ -75,12 +64,8 @@
 		<li><a href="#">쇼핑후기</a></li>
 	</ul>
 	</div>
-		<div class="container">
-			<h2>게시물 목록</h2>
-	<hr>
-	
 	<div>
-	<table border="1" width="100%">
+	<table border="1" width="100%" class="table table-hover">
 		<tr>
 			<th width="70">글번호</th>
 			<th>글제목</th>
@@ -116,50 +101,61 @@
 			</c:choose>
 		</c:forEach>
 	</table>
+	
+	
 			<!-- 페이징처리 -->
-			<c:if test="${prev}">
-		 <span>[ <a href="listBoard.do?pageNUM=${startPageNum - 1}">이전</a> ]</span>
-		</c:if>
-		
-		<c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNUM">
-		 <span>
-		 
-		  <c:if test="${select != pageNUM}">
-		   <a href="listBoard.do?pageNUM=${pageNUM}">${pageNUM}</a>
-		  </c:if>    
-		  
-		  <c:if test="${select == pageNUM}">
-		   <b>${pageNUM}</b>
-		  </c:if>
-		    
-		 </span>
-		</c:forEach>
-		
-		<c:if test="${next}">
-		 <span>[ <a href="listBoard.do?pageNUM=${endPageNum + 1}">다음</a> ]</span>
-		</c:if>
+			<div class="col-md-offset-3">
+				<c:if test="${prev}">
+			 <span>[ <a href="listBoard.do?pageNUM=${startPageNum - 1}">이전</a> ]</span>
+				</c:if>
+					<c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNUM">
+					 <span>
+					  <c:if test="${select != pageNUM}">
+					 	  <a href="listBoard.do?pageNUM=${pageNUM}">${pageNUM}</a>
+					  </c:if>    
+					  <c:if test="${select == pageNUM}">
+					   	<b>${pageNUM}</b>
+					  </c:if>
+					 </span>
+					</c:forEach>
+					<c:if test="${next}">
+				 <span>[ <a href="listBoard.do?pageNUM=${endPageNum + 1}">다음</a> ]</span>
+			</c:if>
+		</div>
 	</div>
 				
 			<!-- 검색창 -->
-			<div>
-				<select name="searchType">
+			<div class="seach row">
+				<div class="col-xs-2 col-sm-2">
+				<select name="searchType" class="from-control">
 					<option value="title">제목</option>
 					<option value="content">내용</option>
 					<option value="title_content">제목+내용</option>
 					<option value="writer">작성자</option>
-				</select> <input type="text" name="keyword" />
-				<button type="button">검색</button>
-			</div>
-
-
-
-
-			<!-- 글쓰기 버튼 -->
-			<a href="insertBoard.do"
+				</select> 
+				</div>
+				
+				<div class="col-xs-10 col-sm-10">
+					<div class="input-group-btn">
+						<input type="text" name="keyword" id="ketwordInput" class="form-control"/>
+						<span class="input-group-btn">
+							<button id="searchBtn" class="btn btn-outline-dark pull-right" >검색</button>
+						</span>
+						<!-- 글쓰기 버튼 -->
+			<a href="board_write.do"
 				class="btn btn-outline-dark pull-right">글쓰기</a>
+					</div>
+				</div>
+				
 			</div>
+
+
+
+
+			
+				</div>
 		<footer>
-			<%@ include file="inc/footer.jsp" %>
+			<%@ include file="./inc/footer.jsp"%>
 		</footer>
 	</section>
 	

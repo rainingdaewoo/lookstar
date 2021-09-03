@@ -38,45 +38,46 @@
 </script>
 </head>
 <body>
-	<%-- <%@ include file="./inc/header.jsp"%> --%>
+	<%@ include file="./inc/header.jsp"%>
 	<!-- Section-->
 	<br>
 	<br>
 	<section style="position: relative; text-align: center;">
 		<br>
-		<h2>게시물 등록</h2>
-		<hr>
-		
-<form action="insertBoard.do" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-	<input type="hidden" name="users_no" value="${b.users_no}">
-	
-	<div class="inputArea"> 
-	 <label>게시판 카테고리</label>
-	 <select class="board-category">
-	  <option value="">자유게시판</option>
-	  <option value="">쇼핑후기</option>
-	  <option value="">발매정보</option>
-	  <option value="">비밀글</option>
-	 </select>
-	
-	</div>
-	
-	<div class="inputArea">
-	 <label for="board_title">제목</label>
-	 <input type="text" id="board_title" name="board_title" />
-	</div>
-	
-	
-	<div class="inputArea">
-	 <textarea rows="5" cols="50" id="gdsDes" name="board_content"></textarea>
-	</div>
-	
-	<img id="blah" src="/YouSoSick/image/ready.png" height="400px" /><br>
-	<input type='file' id="upload_file" name="uploadFile" accept="image/png, image/jpeg"/>
-		<!-- 글쓰기 버튼 생성 -->
+		<h3 class="mt-5">게시글 작성</h3><hr>
+		<div class="align-items-center">
+			<form action="insertBoard.do" method="post"
+				enctype="multipart/form-data">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+				<div class="row col-md-6">
+					<h1 class="display-5 fw-bolder"></h1>
+					<br> 
+					
+					
+				</div>
+				<label>게시판 카테고리</label>
+				<select class="board-category">
+					 <option value="">자유게시판</option>
+					 <option value="">쇼핑후기</option>
+					 <option value="">발매정보</option>
+					 <option value="">비밀글</option>
+				 </select>
+				 <label for="board_title">제목</label>
+				 <input class="form-control" type="text" id="board_title" name="board_title" placeholder="제목을 작성해주세요."/>
+				<div class="col-md-6">
+	 					<input type="hidden" name="users_no" value="${u.users_no}"> <br>
+						<div class="inputArea">
+					 <textarea rows="5" cols="50" id="gdsDes" name="board_content" placeholder="내용을 작성해주세요."></textarea>
+					<img id="blah" src="/YouSoSick/image/ready.png" height="400px" /><br>
+					
+					<input type='file' id="board_uploadFile" name="board_uploadFile" accept="image/png, image/jpeg"/>
+					
+					</div>
+					<br>
+
+					<!-- 글쓰기 버튼 생성 -->
 					<input type="reset"	class="btn btn-outline-dark right" value="취소">
-					<input type="submit" class="btn btn-outline-dark right" value="작성"> 
+					<input type="submit" class="btn btn-outline-dark right" value="등록"> 
 				</div>
 			</form>
 			<br><br>
@@ -84,6 +85,6 @@
 
 	</section>
 	<!-- Footer-->
-	<%-- <%@ include file="./inc/footer.jsp"%> --%>
+	<%@ include file="./inc/footer.jsp"%>
 </body>
 </html>
