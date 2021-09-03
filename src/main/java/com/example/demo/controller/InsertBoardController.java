@@ -53,7 +53,7 @@ public class InsertBoardController {
 			
 		}
 		
-		int re = dao.insertBoard(vo);
+		int re = dao.insert(vo);
 		if(re != 1) {
 			mav.addObject("msg", "게시글 등록에 실패하였습니다.");
 			mav.setViewName("error");

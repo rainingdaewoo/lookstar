@@ -179,5 +179,10 @@ public class DBManager {
 			return n;
 		}
 		
-		
+		public static int updateProfile(UsersVO u) {
+			SqlSession session = factory.openSession(true);
+			int re = session.update("users.updateProfile",u);
+			session.close();
+			return re;
+		}
 }

@@ -7,7 +7,7 @@
 <title>비밀번호 변경</title>
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<link rel = "stylesheet" href="css/changepw.css"/>
+<link rel = "stylesheet" href="resources/css/changepw.css"/>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<!-- 웹 페이지 크기 및 위치 자동 고정하기 -->
@@ -26,6 +26,8 @@
 		</script>
 </head>
 <body>
+<br><br><br><br><br>
+<%@ include file="inc/header.jsp" %>
  <!-- Main Content-->
         
         <div id="container">
@@ -71,6 +73,6 @@
 	  			    </div> <!-- section_pwconfirm-->    
 	    		</div>
 	    	</div> 
-	    	
+<%@ include file="inc/footer.jsp" %>	    	
 </body>
 </html>

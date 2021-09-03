@@ -23,6 +23,7 @@
 		select * from users where
 		users_id=#{username}
 	</select>
+	
 	<update id="updateMyInfo" parameterType="usersVO">
 		update users set users_nickname=#{users_nickname},
 		users_birth=#{users_birth},
@@ -34,4 +35,9 @@
 	<delete id="deleteUser">
 		delete users where users_no=4 and users_pw=#{users_pw}
 	</delete>
+	
+	<update id="updateProfile" parameterType="usersVO">
+		update users set users_fname=#{users_fname},
+		users_fsize=#{users_fsize} where users_no=#{users_no}	
+	</update>
 </mapper>

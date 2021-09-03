@@ -27,4 +27,8 @@ public class UsersDao {
 		return DBManager.deleteUser(users_no, users_pw);
 	}
 	
+	public int updateProfile(UsersVO u) {
+		return DBManager.updateProfile(u);
+	}
+	
 }

@@ -83,5 +83,30 @@ public class UsersController {
 	public void updateInfo() {
 		
 	}
+	
+	@RequestMapping("/withdrawal.do")
+	public void withdrawal() {
+		
+	}
+	
+	@RequestMapping("/termsOfService.do")
+	public void termsOfService() {
+		
+	}
+	
+	@RequestMapping("/manageMylook.do")
+	public void manageMylook() {
+		
+	}
+	
+	@RequestMapping("/followList.do")
+	public void followList() {
+		
+	}
+	
+	@RequestMapping("/likeList.do")
+	public void likeList() {
+		
+	}
 }
 

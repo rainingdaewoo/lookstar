@@ -8,9 +8,12 @@
 <meta charset="UTF-8">
 <title>내 글 관리</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<link rel = "stylesheet" href="css/manage.css"/>
+<link rel = "stylesheet" href="resources/css/manage.css"/>
 </head>
 <body>
+<br><br><br><br><br>
+<%@ include file="inc/header.jsp" %>
+
  <!-- Main Content-->
         
         <div id="container">
@@ -43,7 +46,6 @@
 						      <tr>
 						        <th>no </th>
 						        <th>제목</th>
-						        <th>작성자</th>
 						        <th>작성일</th>
 						        <th>조회</th>
 						      </tr>
@@ -54,7 +56,6 @@
 							    	<tr>
 							    		<td>${b.board_no }</td>
 							    		<td>${b.board_title }</td>
-							    		<td>${b.users_nickname }</td>
 							    		<td><fmt:formatDate value="${b.board_date }" pattern="yyyy-MM-dd" /></td>
 							    		<td>${b.board_views }</td>
 							    	</tr>
@@ -65,18 +66,9 @@
 						 </div>		<!-- iframconatiner-->					 
 	  				
 		  				</div>
-				<div class="board_page">
-					<a href="#" class="bt first"> << </a> <a href="#" class="bt prev">
-						< </a> <a href="#" class="num on">1</a> <a href="#" class="num">2</a>
-					<a href="#" class="num">3</a> <a href="#" class="num">4</a> <a
-						href="#" class="num">5</a> <a href="#" class="bt next">></a> <a
-						href="#" class="bt last">>></a>
-				</div>
-				<br>	<br>
 	  				</div> <!-- iframe -->
-	  					
-	  			</div> <!-- board_wrap1 -->
-	  			        
+	  			</div> <!-- board_wrap1 -->  			        
 	        </div> 
+	        <%@ include file="inc/footer.jsp" %>
 </body>
 </html>

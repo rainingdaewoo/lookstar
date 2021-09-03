@@ -6,11 +6,12 @@
 <meta charset="UTF-8">
 <title>내 글 관리</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<link rel = "stylesheet" href="css/manage.css"/>
+<link rel = "stylesheet" href="resources/css/manage.css"/>
 </head>
 <body>
 <!-- Main Content-->
-        
+<br><br><br><br><br>
+<%@ include file="inc/header.jsp" %>       
         <div id="container">
         		<br>
         		<div class="board_wrap1">
@@ -45,9 +46,8 @@
 						<!-- Sale badge-->
 						<div class="badge bg-dark text-white position-absolute"
 							style="top: 0.5rem; right: 0.5rem">Hot</div>
-						<!-- Product image-->
-						<a href="lookbookInfo.do"><img class="card-img-top"
-							src="./images/look1.jpg" alt="..." /></a>
+						<!-- lookbook image-->
+						<a href="lookbookInfo.do"></a>
 						
 					</div>
 				</div>
@@ -56,9 +56,8 @@
 						<!-- Sale badge-->
 						<div class="badge bg-dark text-white position-absolute"
 							style="top: 0.5rem; right: 0.5rem">Hot</div>
-						<!-- Product image-->
-						<img class="card-img-top"
-							src="./images/look2.jpg" alt="..." />
+						<!-- lookbook image-->
+						
 						
 					</div>
 				</div>
@@ -67,17 +66,15 @@
 						<!-- Sale badge-->
 						<div class="badge bg-dark text-white position-absolute"
 							style="top: 0.5rem; right: 0.5rem">Hot</div>
-						<!-- Product image-->
-						<img class="card-img-top"
-							src="./images/look3.jpg" alt="..." />
+						<!-- lookbook image-->
+						
 						
 					</div>
 				</div>
 				<div class="col mb-5">
 					<div class="card h-100">
-						<!-- Product image-->
-						<img class="card-img-top"
-							src="./images/look4.jpg" alt="..." />
+						<!-- lookbook image-->
+						
 					
 					</div>
 				</div>
@@ -118,16 +115,10 @@
 					</div>		<!-- iframconatiner-->					 
 	  				
 		  				</div>
-				<div class="board_page">
-					<a href="#" class="bt first"> << </a> <a href="#" class="bt prev">
-						< </a> <a href="#" class="num on">1</a> <a href="#" class="num">2</a>
-					<a href="#" class="num">3</a> <a href="#" class="num">4</a> <a
-						href="#" class="num">5</a> <a href="#" class="bt next">></a> <a
-						href="#" class="bt last">>></a>
-				</div>
-				<br>	<br>
+
 	  				</div> <!-- iframe -->
 	  		</div> <!-- board_wrap1 -->
 	  	</div> 
+	  	<%@ include file="inc/footer.jsp" %>
 </body>
 </html>

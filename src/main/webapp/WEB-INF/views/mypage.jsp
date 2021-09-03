@@ -27,9 +27,12 @@
 </script>
 </head>
 <body>
-<div class="text-center my-5">
+<br><br><br><br><br>
+<%@ include file="inc/header.jsp" %>
+
+	<div class="text-center my-5">
 		<img id="my_img" class="img-fluid rounded-circle mb-4"
-			src="https://dummyimage.com/150x150/6c757d/dee2e6.jpg" alt="..." />
+			src="https://dummyimage.com/150x150/6c757d/dee2e6.jpg" />
 
 		<div class="modal fade" id="testModal" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -41,14 +44,20 @@
 							id="close_btn">X</button>
 					</div>
 
-					<div class="modal-body">변경할 이미지를 선택하시오.</div>
+					<div class="modal-body">변경할 프로필 사진을 선택해주세요.</div>
 					<div>
-						<form action="#">
-							<input type="file" id="ft">
+						<form action="updateProfile.do" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+							<input type="hidden" name="users_no" value="${u.users_no }">
+							<input type="hidden" name="fname" value="${u.users_fname }">
+							<input type="hidden" name="fsize" value="${u.users_fsize }">
+							<input type="file" name="uploadFile">
+							<input type="submit" value="변경">
+							<input type="reset" value="취소">
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+						
 					</div>
 
 				</div>
@@ -107,5 +116,9 @@
 			</div>
 		</main>
 	</div>
+	
+	
+			<%@ include file="inc/footer.jsp" %>
+		
 </body>
 </html>

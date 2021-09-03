@@ -13,8 +13,11 @@
 
 </head>
 <body>
+<br><br><br><br><br>
+<%@ include file="inc/header.jsp" %>
  <!-- Main Content-->
         <main class="mb-4">
+        <br><br><br><br><br>
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center" id="infoBox">
                 <h2 align="center">개인정보 수정</h2>
@@ -69,5 +72,6 @@
                 </div>
             </div>
         </main>
+        <%@ include file="inc/footer.jsp" %>
 </body>
 </html>
