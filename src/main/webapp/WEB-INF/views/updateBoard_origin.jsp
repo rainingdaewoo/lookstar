@@ -22,7 +22,7 @@
 <script type="text/javascript">
 	
     $(function() {
-        $("#upload_file").on('change', function(){
+        $("#board_uploadFile").on('change', function(){
             readURL(this);
         });
     });
@@ -38,52 +38,28 @@
 </script>
 </head>
 <body>
-	<%-- <%@ include file="./inc/header.jsp"%> --%>
+	<%@ include file="./inc/header.jsp"%>
 	<!-- Section-->
 	<br>
 	<br>
 	<section style="position: relative; text-align: center;">
-		<br>
-		<h2>게시물 등록</h2>
-		<hr>
-		
-<form action="insertBoard.do" method="post" enctype="multipart/form-data">
+<h2>게시물수정</h2>
+<hr>
+	<form action="updateBoard.do" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-	<input type="hidden" name="users_no" value="${b.users_no}">
-	
-	<div class="inputArea"> 
-	 <label>게시판 카테고리</label>
-	 <select class="board-category">
-	  <option value="">자유게시판</option>
-	  <option value="">쇼핑후기</option>
-	  <option value="">발매정보</option>
-	  <option value="">비밀글</option>
-	 </select>
-	
-	</div>
-	
-	<div class="inputArea">
-	 <label for="board_title">제목</label>
-	 <input type="text" id="board_title" name="board_title" />
-	</div>
-	
-	
-	<div class="inputArea">
-	 <textarea rows="5" cols="50" id="gdsDes" name="board_content"></textarea>
-	</div>
-	
-	<img id="blah" src="/YouSoSick/image/ready.png" height="400px" /><br>
-	<input type='file' id="upload_file" name="uploadFile" accept="image/png, image/jpeg"/>
-		<!-- 글쓰기 버튼 생성 -->
-					<input type="reset"	class="btn btn-outline-dark right" value="취소">
-					<input type="submit" class="btn btn-outline-dark right" value="작성"> 
-				</div>
-			</form>
-			<br><br>
-		</div>
-
-	</section>
+		<input type="hidden" name="users_no" value="${b.users_no }">
+		<input type="hidden" name="board_fname" value="${b.board_fname }">
+		<input type="hidden" name="board_fsize" value="${b.board_fsize }">
+		
+		글제목: <input type="text" name="board_title" value="${b.board_title }"><br>
+		글내용: <br>
+		<textarea rows="10" cols="80" name="board_content">${b.board_content }</textarea>
+		첨부파일: ${b.board_fname }(${b.board_fsize })<br>
+		<input type="file" id="board_uploadFile" name="board_uploadFile" accept="image/png, image/jpeg"/>
+		<input type="submit" value="등록">	
+	</form>
+</section>
 	<!-- Footer-->
-	<%-- <%@ include file="./inc/footer.jsp"%> --%>
+	<%@ include file="./inc/footer.jsp"%>
 </body>
 </html>

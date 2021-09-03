@@ -15,8 +15,8 @@ import com.example.demo.dao.BoardDao;
 import com.example.demo.vo.BoardVO;
 
 @Controller
-@RequestMapping("/insertBoard.do")
-public class insertBoardController {
+@RequestMapping("insertBoard.do")
+public class InsertBoardController {
 	
 	@Autowired
 	private BoardDao dao;
@@ -32,33 +32,33 @@ public class insertBoardController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView submit(BoardVO vo, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("redirect:/listGoods.do");
-		String path = request.getRealPath("resources/board_img");
+		System.out.println("BoardInsert POST방식 작동함");
+		System.out.println("users_no"+vo.getUsers_no());
+		ModelAndView mav = new ModelAndView("redirect:/listBoard.do");
+		String path = request.getRealPath("/resources/board_img");
 		System.out.println("path:"+path);
 		String fname = null;
-		MultipartFile uploadfile = vo.getBoard_uploadFile();
-		fname = uploadfile.getOriginalFilename();
+		MultipartFile uploadFile = vo.getBoard_uploadFile();
+		fname = uploadFile.getOriginalFilename();
 		if(fname != null && !fname.equals("")) {
 			try {
-				byte[] data = uploadfile.getBytes();
+				byte []data = uploadFile.getBytes();
 				FileOutputStream fos = new FileOutputStream(path+"/"+fname);
 				fos.write(data);
 				fos.close();
 				vo.setBoard_fname(fname);
-			} catch (Exception e) {
-				System.out.println("예외발생:" + e.getMessage());
+			}catch (Exception e) {
+				System.out.println("예외발생:"+e.getMessage());
 			}
 			
 		}
 		
-		
-		
-		int re = dao.insert(vo);
+		int re = dao.insertBoard(vo);
 		if(re != 1) {
 			mav.addObject("msg", "게시글 등록에 실패하였습니다.");
 			mav.setViewName("error");
 		}
 		
-		return mav; 
+		return mav;
 	}
 }
