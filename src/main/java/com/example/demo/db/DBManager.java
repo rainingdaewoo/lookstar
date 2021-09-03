@@ -11,7 +11,10 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.ChatVO;
+import com.example.demo.vo.InsertLookbookCommandVO;
+import com.example.demo.vo.LookInfoVO;
 import com.example.demo.vo.LookbookVO;
+import com.example.demo.vo.Lookbook_styleVO;
 import com.example.demo.vo.UsersVO;
 
 public class DBManager {
@@ -83,9 +86,11 @@ public class DBManager {
 		return list;
 	}
 
-	public static int insert(LookbookVO l) {
+	public static int insertLookbook(InsertLookbookCommandVO insertlook) {
 		SqlSession session = factory.openSession();
-		int re = session.insert("lookbook.insert",l);
+		int re = session.insert("lookbook.insert",insertlook.getLookbook());
+		int re2 = session.insert("lookinfo.insert",insertlook.getList_info());
+		int re1 = session.insert("lookstyle.insert",insertlook.getList_style());
 		session.commit();
 		session.close();
 		return re;

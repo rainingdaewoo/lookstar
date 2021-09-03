@@ -23,7 +23,7 @@ public class BoardDao {
 		return DBManager.getNextNo();
 	}
 	
-	public int insertBoard(BoardVO b) {
+	public int insert(BoardVO b) {
 		return DBManager.insertBoard(b);
 	}
 	
@@ -40,7 +40,7 @@ public class BoardDao {
 		DBManager.updateStep(b_ref,b_step);
 	}
 	
-	public int updateBoard(BoardVO b) {
+	public int update(BoardVO b) {
 		return DBManager.updateBoard(b);
 	}
 	

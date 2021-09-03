@@ -91,17 +91,14 @@
 	<textarea rows="10" cols="80" readonly="readonly">${b.board_content }</textarea><br>
 	등록일 : <fmt:formatDate value="${b.board_date }" pattern="yyyy-MM-dd" /><br>
 	조회수 : ${b.board_views }<br>
-	<img class="card-img-top"
-	src="resources/board_img/${b.board_fname }"	style="height: 100%; width: 100%;" />
-	<%-- 첨부파일 : ${b.board_fname }(${b.board_fsize }) --%>
+	첨부파일 : ${b.board_fname }(${b.board_fsize })
 	<hr>
 	
-	<a href="board_write.do"
+	<a href="insertBoard.do?board_no=${b.board_no }"
 		class="btn btn-outline-dark pull-right">글쓰기</a>
-		
+	
 	<a href="updateBoard.do?board_no=${b.board_no }"
 		class="btn btn-outline-dark pull-right" id="updateBtn">수정</a>
-		
 	<a onclick="confirmDelete(${b.board_no})"
 		class="btn btn-outline-dark pull-right" id="deleteBtn">삭제</a>
 	<a href="listBoard.do?pageNUM=${pageNUM}"
@@ -121,7 +118,7 @@
 	   formObj.submit();
 	  });		
   </script>			
-			<br><br><br><br>
+			
 				
 		<footer>
 			<%@ include file="inc/footer.jsp" %>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lookinfo">
+	
+	<!-- 룩북 추가시 추가하는 스타일-->
+	<insert id="insert" parameterType="java.util.List">
+		insert into lookinfo (lookinfo_no,lookbook_no,lookinfo_name,lookinfo_url,lookinfo_category)
+		values
+		<foreach item="item" collection="list2" separator=",">
+			((select max(lookbook_no) from lookbook)+1,seq_lookinfo.nextval,#{lookinfo_name},#{lookinfo_url},#{lookinfo_category})
+		</foreach>
+	</insert>
+</mapper>

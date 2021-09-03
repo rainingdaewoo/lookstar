@@ -46,9 +46,9 @@
 				<!-- 룩페이지 이동 -->
 				<li class="nav-item"><a class="nav-link" href="../lookbook.do">Looks</a></li>
 				<!-- 게시판 이동 -->
-				<li class="nav-item"><a class="nav-link" href="#">Board</a></li>
+				<li class="nav-item"><a class="nav-link" href="../listBoard.do">Board</a></li>
 				<!-- DM 이동 -->
-				<li class="nav-item"><a class="nav-link" href="#"><img
+				<li class="nav-item"><a class="nav-link" href="../chat2.do"><img
 						src="../../../resources/assets/chat.png" width="20px"></a></li>
 				<li class="nav-item dropdown">
 					<!-- 마이페이지 이동 -->
