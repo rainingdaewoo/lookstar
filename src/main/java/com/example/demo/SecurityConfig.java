@@ -16,7 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//super.configure(http);
 		
 		http.authorizeRequests()
-		.mvcMatchers("/","/join.do","/login.do","/lookbook.do","/resources/**","/findID.do","/findOK.do","/findPW.do").permitAll()
+		.mvcMatchers("/","/main.do","/join.do","/login.do","/lookbook.do","/resources/**","/findID.do","/findOK.do","/findPW.do").permitAll()
 		.anyRequest().authenticated();
 		
 		http.formLogin().loginPage("/login.do").permitAll()
