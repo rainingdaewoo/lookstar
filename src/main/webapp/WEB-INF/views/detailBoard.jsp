@@ -64,6 +64,12 @@
 .board-category {
 	float:left;
 }
+.comments {
+
+}
+#comments-btn {
+	float: left;
+}
 </style>
 </head>
 <body>
@@ -89,13 +95,35 @@
 	작성자 : ${b.users_nickname }<br>
 	글내용 : <br>
 	<textarea rows="10" cols="80" readonly="readonly">${b.board_content }</textarea><br>
-	등록일 : <fmt:formatDate value="${b.board_date }" pattern="yyyy-MM-dd" /><br>
+	등록일 : <fmt:formatDate value="${b.board_date }" pattern="yyyy-MM-dd HH:ss" /><br>
 	조회수 : ${b.board_views }<br>
 	<img class="card-img-top"
 	src="resources/board_img/${b.board_fname }"	style="height: 100%; width: 100%;" />
-	<%-- 첨부파일 : ${b.board_fname }(${b.board_fsize }) --%>
+	첨부파일 : ${b.board_fname }(${b.board_fsize })
 	<hr>
-	
+	<!-- 댓글 작성 시작 -->
+	<div class="comments">
+				<ul>
+					<c:forEach var="comments" items="${comments }">
+						<li>
+							<div>
+								<p>${comments.users_nickname} 	</p>
+								<p>${comments.comments_content }</p>
+								<p><fmt:formatDate value="${comments.comments_date}" pattern="yyyy-MM-dd HH:ss" /></p>
+							</div>
+						</li>
+					</c:forEach>
+				</ul>
+			
+			<div>
+				<p>
+					<textarea rows="5" cols="50"></textarea>
+				</p>
+					<a class="btn btn-outline-dark pull-right" id="comments-btn">댓글 작성</a>
+			</div>
+			</div>				
+				<br><br>	
+	<!-- 댓글 끝 -->
 	<a href="board_write.do"
 		class="btn btn-outline-dark pull-right">글쓰기</a>
 		

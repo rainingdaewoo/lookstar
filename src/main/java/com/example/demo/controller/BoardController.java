@@ -12,11 +12,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.BoardDao;
+import com.example.demo.dao.CommentsDao;
 import com.example.demo.dao.UsersDao;
 import com.example.demo.db.DBManager;
 
@@ -28,16 +28,44 @@ public class BoardController {
 	private UsersDao userdao;
 	@Autowired
 	private BoardDao dao;
+	@Autowired
+	private CommentsDao commentsdao;
+
+	
+	public UsersDao getUserdao() {
+		return userdao;
+	}
+
+	public void setUserdao(UsersDao userdao) {
+		this.userdao = userdao;
+	}
+
+	public BoardDao getDao() {
+		return dao;
+	}
 
 	public void setDao(BoardDao dao) {
 		this.dao = dao;
+	}
+
+	public CommentsDao getCommentsdao() {
+		return commentsdao;
+	}
+
+	public void setCommentsdao(CommentsDao commentsdao) {
+		this.commentsdao = commentsdao;
 	}
 	
 	/*
 	 * @RequestMapping("/") public ModelAndView main(HttpServletRequest request) {
 	 * ModelAndView mav = new ModelAndView("redirect:/listBoard.do"); return mav; }
 	 */
+
+
+
+
 	
+
 	@RequestMapping("/listBoard.do")
 	public void listBoard(HttpServletRequest request, @RequestParam(value = "pageNUM", 
 						defaultValue = "1") int pageNUM, Model model) {
@@ -91,6 +119,7 @@ public class BoardController {
 	public void detailBoard(HttpServletRequest request, Model model, int board_no) {
 		dao.updateViews(board_no);
 		model.addAttribute("b",dao.getBoard(board_no));
+		model.addAttribute("comments", commentsdao.findAll());
 	}
 	
 	

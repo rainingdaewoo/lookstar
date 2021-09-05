@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comments">
+  <select id="getComments" resultType="commentsVO" >
+     select comments_no, comments_content, comments_date, comments_show, comments_fname, comments_fsize, users_nickname
+     FROM comments, board, users
+     WHERE board.board_no = comments.board_no and comments.users_no = users.users_no
+     ORDER BY comments_no
+	</select>
+    
+  	
+  <insert id="insertComments" parameterType="commentsVO">
+  	insert into comments(comments_no, users_no, comments_content,
+  	 comments_date, comments_fname, comments_fsize, comments_show) 
+  	values(seq_comments.nextval,#{users_no},#{comments_content},
+  	 sysdate, #{comments_fname},#{comments_fsize}, 0)
+  </insert>
+  
+  <update id="updateStep" >
+  	update comments set b_step = b_step +1 
+  		where b_ref=#{b_ref} and b_step > #{b_step}
+  </update>
+  
+  <update id="updateComments" parameterType="commentsVO">
+  	update comments set comments_content=#{comments_content},
+  	comments_fname=#{comments_fname},
+  	comments_fsize=#{comments_fsize} 
+  	where comments_no = #{comments_no}
+  </update>
+  
+  <update id="deleteComments">
+  	UPDATE comments SET comments_show = 1 WHERE comments_no = #{comments_no}
+   </update>
+  
+</mapper>

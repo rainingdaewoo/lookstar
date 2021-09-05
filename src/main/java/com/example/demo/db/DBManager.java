@@ -11,7 +11,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.ChatVO;
+import com.example.demo.vo.CommentsVO;
 import com.example.demo.vo.LookbookVO;
+import com.example.demo.vo.ReplyVO;
 import com.example.demo.vo.UsersVO;
 
 public class DBManager {
@@ -156,6 +158,7 @@ public class DBManager {
 			SqlSession session = factory.openSession(true);
 			int re = session.update("board.updateBoard", b);
 			session.close();
+			System.out.println("DBManager 작동함");
 			return re;
 		}
 		
@@ -179,5 +182,28 @@ public class DBManager {
 			return n;
 		}
 		
+		//댓글 관련 DBManager
+		public static List<CommentsVO> listComments(){
+			SqlSession session = factory.openSession();
+			List<CommentsVO> list = session.selectList("comments.getComments");
+			session.close();
+			return list;
+		}
+		
+		public static int insertComments(CommentsVO c) {
+			SqlSession session = factory.openSession(true);
+			int re = session.insert("comments.insertComments", c);
+			session.close();
+			return re;
+		}
+		
+		
+		//대댓글 관련 DBManager
+		public static List<ReplyVO> listReply(HashMap map){
+			SqlSession session = factory.openSession();
+			List<ReplyVO> list = session.selectList("reply.findAll", map);
+			session.close();
+			return list;
+		}
 		
 }

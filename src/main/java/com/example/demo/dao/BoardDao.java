@@ -41,6 +41,7 @@ public class BoardDao {
 	}
 	
 	public int updateBoard(BoardVO b) {
+		System.out.println("BoardDao 작동함");
 		return DBManager.updateBoard(b);
 	}
 	

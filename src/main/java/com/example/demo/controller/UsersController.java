@@ -41,14 +41,14 @@ public class UsersController {
 		ModelAndView mav = new ModelAndView("redirect:/main.do");
 		Authentication authentication
 		= SecurityContextHolder.getContext().getAuthentication();
-		
-		String id = 
-		((User)authentication.getPrincipal()).getUsername();
-		
-		session.setAttribute("users", dao.getUsers(id));
+		User user = (User)authentication.getPrincipal();
+		String id = user.getUsername();
+		UsersVO u = dao.getUsers(id);
+		session.setAttribute("users", u);
 		
 		return mav;
 	}
+	
 	@RequestMapping("/findID.do")
 	public void findID() {
 		
