@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.ChatVO;
+import com.example.demo.vo.DMVO;
 import com.example.demo.vo.InsertLookbookCommandVO;
 import com.example.demo.vo.LookInfoVO;
 import com.example.demo.vo.LookbookVO;
@@ -98,18 +99,34 @@ public class DBManager {
 	}
 	
 	
-	public static int insertDM(ChatVO c) {
+	public static int insertDM(DMVO d) {
 		SqlSession session = factory.openSession(true);
-		int re = session.insert("chat.insertDM",c);
+		int re = session.insert("dm.insertDM",d);
 		session.close();
 		return re;
 	}
 	
-	public static List<ChatVO> listDM(String from_id) {
+	public static List<DMVO> listDM(){
 		SqlSession session = factory.openSession();
-		List<ChatVO> c = session.selectList("chat.listDM",from_id);
+		List<DMVO> list = session.selectList("dm.findAll");
 		session.close();
-		return c;
+		return list;
+		
+	}
+	
+	public static List<DMVO> listDM2(){
+		SqlSession session = factory.openSession();
+		List<DMVO> dmList = session.selectList("dm.findAll2");
+		session.close();
+		return dmList;
+		
+	}
+	
+	public static DMVO getDM(int dm_no) {
+		SqlSession session = factory.openSession();
+		DMVO d = session.selectOne("dm.getDM",dm_no);
+		session.close();
+		return d;
 	}
 	//board 관련 DBManager
 	
