@@ -1,9 +1,12 @@
 package com.example.demo.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.DBManager;
 import com.example.demo.vo.UsersVO;
+import com.example.demo.vo.followVO;
 
 @Repository
 public class UsersDao {
@@ -29,6 +32,10 @@ public class UsersDao {
 	
 	public int updateProfile(UsersVO u) {
 		return DBManager.updateProfile(u);
+	}
+	
+	public List<UsersVO> listFollow(String users_id){
+		return DBManager.listFollw(users_id);
 	}
 	
 }

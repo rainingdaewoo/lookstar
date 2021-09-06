@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -99,8 +102,12 @@ public class UsersController {
 	}
 	
 	@RequestMapping("/followList.do")
-	public void followList() {
-		
+	public void followList(Model model,HttpSession session) {
+		String users_id = ((UsersVO)session.getAttribute("users")).getUsers_id();
+		System.out.println("users_id:"+users_id);
+		List<UsersVO> list = dao.listFollow(users_id);
+		System.out.println("팔로우목록:"+list);
+		model.addAttribute("flist",list);
 	}
 	
 	@RequestMapping("/likeList.do")

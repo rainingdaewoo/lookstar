@@ -24,6 +24,22 @@
 			$('#testModal').modal("hide");
 		})
 	});
+	
+	$(function() {
+		$("#upload_file").on('change', function() {
+			readURL(this);
+		});
+	});
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#blah').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+
 </script>
 </head>
 <body>
@@ -32,8 +48,10 @@
 
 	<div class="text-center my-5">
 		<img id="my_img" class="img-fluid rounded-circle mb-4"
-			 src="resources/profile/${users.users_fname}" width="50"/>
-	<!-- src = "https://dummyimage.com/150x150/6c757d/dee2e6.jpg"/> -->		
+			 src="resources/profile/${users.users_fname}" width="150"/>
+
+<!-- src = "https://dummyimage.com/150x150/6c757d/dee2e6.jpg"/> -->					
+		
 
 		<div class="modal fade" id="testModal" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -50,9 +68,9 @@
 						<form action="updateProfile.do" method="post" enctype="multipart/form-data">
 						
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-							<input type="hidden" name="users_no" value="41">
-							<input type="hidden" name="fname" value="${u.users_fname }">
-							<input type="hidden" name="fsize" value="${u.users_fsize }">
+							<input type="hidden" name="users_no" value="${users.users_no }">
+							<input type="hidden" name="fname" value="${users.users_fname }">
+							<input type="hidden" name="fsize" value="${users.users_fsize }">
 							<input type="file" name="uploadFile">
 							<input type="submit" value="변경">
 							<input type="reset" value="취소">

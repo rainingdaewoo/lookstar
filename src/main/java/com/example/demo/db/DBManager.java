@@ -13,6 +13,7 @@ import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.ChatVO;
 import com.example.demo.vo.LookbookVO;
 import com.example.demo.vo.UsersVO;
+import com.example.demo.vo.followVO;
 
 public class DBManager {
 	private static SqlSessionFactory factory;
@@ -192,4 +193,14 @@ public class DBManager {
 			session.close();
 			return re;
 		}
+		
+		public static List<UsersVO> listFollw(String users_id) {
+			System.out.println("매니저에서의 users_id:"+users_id);
+			SqlSession session = factory.openSession();
+			List<UsersVO> flist = session.selectList("users.listFollow",users_id);
+			session.close();
+			return flist;
+		}
+		
+		
 }

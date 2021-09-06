@@ -19,6 +19,8 @@ public class UsersVO {
 	private String users_fname;
 	private int users_fsize;
 	private MultipartFile uploadFile;
+	
+	
 	public UsersVO() {
 		super();
 		// TODO Auto-generated constructor stub
