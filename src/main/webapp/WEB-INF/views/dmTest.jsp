@@ -45,7 +45,8 @@
 </script>
 </head>
 <body>
-
+	<%@ include file="./inc/header.jsp"%>
+	<br><br><br><br><br><br><br><br><br>
 	<h2>채팅하기</h2>
 	<iframe id="iframe1" name="iframe1" style="display:none"></iframe>
 	<form id="write_form" action="insertDM.do" method="POST" target="iframe1">	
@@ -76,6 +77,7 @@
 			<tbody id="list"></tbody>
 		</table>
 	</div>
+	<%@ include file="./inc/footer.jsp"%>
 </body>
 </html>
 
