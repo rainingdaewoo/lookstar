@@ -47,7 +47,7 @@
                     <div class="form-group">
                     	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
                         <input type="text" name="users_id" value="${users_id }" class="form-control" id="inputId" placeholder="가입된 아이디를 정확히 입력해 주세요.">
-                        <input type="email" name="useres_email" value="${users_email }" class="form-control" id="inputEmail" placeholder="가입된 이메일을 정확히 입력해 주세요.">
+                        <input type="email" name="users_email" value="${users_email }" class="form-control" id="inputEmail" placeholder="가입된 이메일을 정확히 입력해 주세요.">
                     </div>
                     <div class="form-group text-center">
                         <input type="submit" class="btn btn-lg btn-primary btn-block" value="비밀번호 찾기">

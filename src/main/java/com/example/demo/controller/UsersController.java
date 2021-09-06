@@ -65,6 +65,14 @@ public class UsersController {
 		
 	}
 	
+	@RequestMapping("/compareID.do")
+	@ResponseBody
+	public String compareID(String compare_id) {
+		System.out.println("compareID.do동작함");
+		String users_id = dao.compareID(compare_id);
+		return users_id;
+	}
+	
 	// 보민
 	@RequestMapping("/mypage.do")
 	public void mypage() {

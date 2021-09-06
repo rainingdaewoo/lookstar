@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.UsersDao;
+import com.example.demo.vo.UsersVO;
 
 @Controller
 @RequestMapping("/findID.do")
@@ -47,7 +48,7 @@ public class FindIDController {
 				System.out.println("예외발생:" + e.getMessage());
 			}
 			session.setAttribute("msg","이메일 발송이 완료되었습니다 다시 로그인 해주시기 바랍니다." );
-		}else {
+		}else{
 			session.setAttribute("msg", "이메일을 다시 확인해 주시기 바랍니다.");
 		}
 		return mav;

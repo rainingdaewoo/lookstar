@@ -171,7 +171,7 @@ public class DBManager {
 			session.close();
 			return re;
 		}
-		
+			
 		public static int getTotalRecord() {
 			SqlSession session = factory.openSession();
 			int n = session.selectOne("board.totalRecord");
@@ -187,6 +187,35 @@ public class DBManager {
 			return users_id;
 		}
 		
+		public static String findPW(String users_id, String users_email) {
+			System.out.println("DBManager findPW동작함" + users_id+","+users_email);
+			SqlSession session = factory.openSession();
+			HashMap map = new HashMap();
+			map.put("users_id", users_id);
+			map.put("users_email", users_email);
+			String users_pw = session.selectOne("users.findPW", map);
+			session.close();
+			return users_pw;		
+		} 
+		
+		public static int updatePW(String code, String users_id,String users_email) {
+			System.out.println("DBManager updatePW동작함" + code);
+			SqlSession session = factory.openSession(true);
+			HashMap map = new HashMap();
+			map.put("users_pw", code);
+			map.put("users_id", users_id);
+			map.put("users_email", users_email);
+			int re = session.update("users.updatePW",map); 
+			session.close();
+			return re;
+		}
+		
+		public static String compareID(String compare_id) {
+			System.out.println("DBManager compareID동작함");
+			SqlSession session = factory.openSession();
+			String users_id = session.selectOne("users.compareID", compare_id);
+			return users_id;
+		}
 		
 		
 		

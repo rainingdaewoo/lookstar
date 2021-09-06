@@ -34,6 +34,14 @@ public class UsersDao {
 		return DBManager.findID(users_email);
 	}
 	
-	
+	public String findPW(String users_id,String users_email) {
+		return DBManager.findPW(users_id, users_email);
+	}
+	public int updatePW(String code, String users_id,String users_email) {
+		return DBManager.updatePW(code,users_id,users_email);
+	}
+	public String compareID(String compare_id) {
+		return DBManager.compareID(compare_id);
+	}
 	
 }

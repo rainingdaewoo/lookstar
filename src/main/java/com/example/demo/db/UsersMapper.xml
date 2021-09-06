@@ -38,8 +38,16 @@
 		select nvl(users_id,'') from users where users_email=#{users_email}
 	</select>
 	
-	<select id="findPW" resultType="String">
-		select users_pw from users where users_id=#{users_id} and users_email=#{users_email}
+	<!-- <select id="findPW" resultType="String">
+		select nvl(users_pw,'') from users where users_id=#{users_id} and users_email=#{users_email}
+	</select>
+	-->
+	
+	<update id="updatePW">
+		update users set users_pw=#{users_pw} where users_id =#{users_id} and users_email=#{users_email}
+	</update>
+	<select id="compareID" resultType="String" parameterType="String">
+		select nvl(users_id,'') from users where users_id=#{users_id}
 	</select>
 	
 </mapper>
