@@ -41,43 +41,7 @@
 				}
 			});
 		},1000);
-	});
-	
-	/*
-	$(window).on('load',function(){	
-		setInterval(getDMList,1000);
-		function getDmList(){
-			$("#list").empty();
-			$.ajax({
-				url:"/listChat.do",
-				dataType:"json",
-				success:function(data){					
-					if(data.length>0){
-						
-						for(var i in data){
-							var $dm_no=data[i].dm_no;
-							var $from_id=data[i].from_id;
-							var $to_id=data[i].to_id;
-							var $dm_content=data[i].dm_content;
-							var $dm_date=data[i].dm_date;
-								
-							var row = $("<tr/>").append(
-										$("<td/>").text($dm_no);
-										$("<td/>").text($from_id);
-										$("<td/>").text($to_id);
-										$("<td/>").text($dm_content);
-										$("<td/>").text($dm_date);
-							);
-							$("#list").append(row);
-						}
-						
-					}
-				}
-			});
-		}
-	});
-	*/
-	
+	});	
 </script>
 </head>
 <body>
@@ -87,6 +51,7 @@
 	<form id="write_form" action="insertDM.do" method="POST" target="iframe1">	
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		작성자: ${u.users_nickname}<br>
+		<input type="hidden" name="from_id" value="${u.users_id}"> <br>
 		수신자: <input type="text" name="to_id"><br>
 		<p>메세지</p> 
 		<textarea name="dm_content" rows="10" cols="40"></textarea><br>

@@ -92,7 +92,6 @@
 					<h1 class="display-5 fw-bolder"></h1>
 					<br> <img id="blah" src="/YouSoSick/image/ready.png" height="400px" /><br> <br> 
 					<input type='file' id="upload_file" name="lookbook.uploadFile" accept="image/png, image/jpeg" />
-
 				</div>
 				<div style="width: 80%; text-align: center; ">
 					<input type="hidden" name="lookbook.users_no" value="${u.users_no}"> <br>
