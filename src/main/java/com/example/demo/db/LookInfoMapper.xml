@@ -39,13 +39,24 @@
 		</foreach>
 	</insert>
 	 --> 
+	 <select id="getNext_lookbook_no" resultType="int">
+	 	select nvl(max(lookbook_no),0)+1 from lookbook
+	 </select>
 	 
+	 <insert id="insert" parameterType="lookinfoVO">
+	 	insert into lookinfo (lookinfo_no,lookbook_no,lookinfo_name,lookinfo_url,lookinfo_category) values
+	 	(seq_lookinfo.nextval,#{lookbook_no},#{lookinfo_name},
+	 		 #{lookinfo_url},#{lookinfo_category})
+	 </insert>
 	 <!-- update를 사용한 insert all -->
+	 <!-- 
 	 <update id="insert" parameterType="java.util.List">
 	 	<foreach collection="list" item="item" open="INSERT ALL " close="select * from dual" separator=" ">
 	 		
 	 		into lookinfo (lookinfo_no,lookbook_no,lookinfo_name,lookinfo_url,lookinfo_category) values
-	 		 (seq_lookinfo.nextval,(select max(lookbook_no) from lookbook)+1,#{item.lookinfo_name},#{item.lookinfo_url},#{item.lookinfo_category)
+	 		 (seq_lookinfo.nextval,(select max(lookbook_no) from lookbook)+1,#{item.lookinfo_name},
+	 		 #{item.lookinfo_url},#{item.lookinfo_category)
 	 	</foreach>
 	 </update>
+	  -->
 </mapper>

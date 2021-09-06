@@ -62,9 +62,9 @@
 </style>
 </head>
 <body>
-	<header>
+	
 		<%@ include file="inc/header.jsp" %>
-	</header>
+	
 	
 	<!-- Body Section -->
 	<section class="py-5">
@@ -158,11 +158,11 @@
 			<a href="insertBoard.do"
 				class="btn btn-outline-dark pull-right">글쓰기</a>
 			</div>
-		<footer>
-			<%@ include file="inc/footer.jsp" %>
-		</footer>
+		
+			
+		
 	</section>
-	
+	<%@ include file="inc/footer.jsp" %>
 	
 </body>
 </html>

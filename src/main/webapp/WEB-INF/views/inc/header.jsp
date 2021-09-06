@@ -48,7 +48,7 @@
 				<!-- 게시판 이동 -->
 				<li class="nav-item"><a class="nav-link" href="../listBoard.do">Board</a></li>
 				<!-- DM 이동 -->
-				<li class="nav-item"><a class="nav-link" href="../chat2.do"><img
+				<li class="nav-item"><a class="nav-link" href="../dmTest.do"><img
 						src="../../../resources/assets/chat.png" width="20px"></a></li>
 				<li class="nav-item dropdown">
 					<!-- 마이페이지 이동 -->

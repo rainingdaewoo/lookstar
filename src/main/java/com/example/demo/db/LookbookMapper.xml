@@ -22,7 +22,7 @@
 		insert into lookbook( LOOKBOOK_NO, USERS_NO, LOOKBOOK_WRITE, LOOKBOOK_DATE, 
 		LOOKBOOK_VIEWS, LOOKBOOK_SHOW, LOOKBOOK_HEIGHT, LOOKBOOK_WEIGHT, LOOKBOOK_FNAME)
 	
-		values(seq_lookbook.nextval, #{users_no}, #{lookbook_write}, sysdate, 0, 0, 
+		values(#{lookbook_no}, #{users_no}, #{lookbook_write}, sysdate, 0, 0, 
 		#{lookbook_height}, #{lookbook_weight}, #{lookbook_fname})
 	</insert>
 </mapper>

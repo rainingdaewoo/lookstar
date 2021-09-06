@@ -88,13 +88,43 @@ public class DBManager {
 	}
 	
 	public static int insertLookbook(InsertLookbookCommandVO insertlook) {
-		SqlSession session = factory.openSession();
-		int re = session.insert("lookbook.insert",insertlook.getLookbook());
-		int re2 = session.insert("lookinfo.insert",insertlook.getList_info());
-		int re1 = session.insert("lookstyle.insert",insertlook.getStyle_no());
+		int re = 0;
+		SqlSession session = factory.openSession(true);
+		int r = session.selectOne("lookinfo.getNext_lookbook_no");
+		System.out.println("--------------------------");
+		System.out.println("새로운 lookbook_no:" + r);
+		LookbookVO lookbook =  insertlook.getLookbook();
+		lookbook.setLookbook_no(r);
+		System.out.println("loobook객체: "+ lookbook);
+		int re1 = session.insert("lookbook.insert",lookbook); // 1 
 		
-		session.commit();
+		List<LookInfoVO> list = insertlook.getList_info();
+		int re2 = 0;
+		for(LookInfoVO l : list) {
+			l.setLookbook_no(r);	
+			System.out.println("lookinfo 객체:"+ l);
+			re2 += session.insert("lookinfo.insert", l);
+		}	// list 사이즈
+		
+		
+		List<Integer> list2 =  insertlook.getStyle_no();
+		int re3 = 0;
+		for(int i : list2) {
+			Lookbook_styleVO style = new Lookbook_styleVO(r, i);
+			System.out.println("lookbook_style 객체:"+ style);
+			re3 += session.insert("lookbook_style.insert", style);
+		}	// list2 사이즈
+		
+		//int re2 = session.insert("lookinfo.insert",insertlook.getList_info());
+		//int re1 = session.insert("lookbook_style.insert",insertlook.getStyle_no());
+
+		if(re1== 1&& re2 == list.size() && re3 == list2.size()) {
+			session.commit();
+		}else {
+			session.rollback();
+		}
 		session.close();
+		System.out.println("--------------------------");
 		return re;
 	}
 	

@@ -29,7 +29,6 @@
 							var $dm_content=data[i].dm_content;
 							var $dm_date=data[i].dm_date;
 							var row = row+ "<tr>";
-							var row = row+ "<td>"+$dm_no+"</td>"
 							var row = row+ "<td>"+$from_id+"</td>"
 							var row = row+ "<td>"+$to_id+"</td>"
 							var row = row+ "<td>"+$dm_content+"</td>"
@@ -103,7 +102,6 @@
 		<table border="1" width="80%">
 			<thead>
 				<tr>
-					<th>번호</th>
 					<th>발신</th>
 					<th>수신</th>
 					<th>내용</th>
