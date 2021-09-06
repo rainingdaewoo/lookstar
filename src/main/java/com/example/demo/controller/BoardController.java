@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -66,9 +67,10 @@ public class BoardController {
 
 	
 
-	@RequestMapping("/listBoard.do")
+	@GetMapping("/listBoard.do")
 	public void listBoard(HttpServletRequest request, @RequestParam(value = "pageNUM", 
-						defaultValue = "1") int pageNUM, Model model) {
+						defaultValue = "1") int pageNUM, Model model,
+			@RequestParam(value = "searchType", required = false) String searchType , @RequestParam(value = "keyword", required = false) String keyword) {
 		System.out.println("pageNUM:"+pageNUM);
 		BoardDao.totalRecord = dao.getTotalRecord();
 		BoardDao.totalPage =
@@ -99,7 +101,9 @@ public class BoardController {
 		HashMap map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);
-		
+		map.put("searchType", searchType); 
+		map.put("keyword", keyword);
+		 
 		// 시작 및 끝 번호
 		model.addAttribute("startPageNum", startPageNum);
 		model.addAttribute("endPageNum", endPageNum);

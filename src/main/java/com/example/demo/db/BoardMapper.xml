@@ -3,37 +3,45 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
-  <select id="findAll" resultType="boardVO" parameterType="hashMap">
-     select board_no, board_title, board_content, users_nickname, board_date, board_views, board_show
-    from (
-        select board_no, board_title, board_content, users_nickname, board_date, board_views, board_show,
+  <select id="findAll" resultType="boardVO">
+     SELECT board_no, board_title, board_content, users_nickname, board_date, board_views, board_show
+    FROM (
+        SELECT board_no, board_title, board_content, users_nickname, board_date, board_views, board_show,
             row_number() over(order by board_no desc) as rNum
-        from board, users 
-        where board.users_no = users.users_no
-        ) mb
-    where rNum between #{start} and #{end} 
-        order by board_no desc
-	</select>
-    <!--
-  초안
-     
-       
-        
-         select board_no, board_title, board_content, users_nickname, board_date, board_views, board_show
-    from (
-        select board_no, board_title, board_content, users_nickname, board_date, board_views, board_show,
-            row_number() over(order by board_no desc) as rNum
-        from board, users 
-        where board.users_no = users.users_no
-        where board_title like '%' || #{keyword} || '%'  
-            where board_content like '%' || #{keyword} || '%'  
-            where users_nickname '%' || #{keyword} || '%'  
-            where board_title like '%' || #{keyword} || '%' or (board_content like '%' || #{keyword} || '%')
+        FROM board, users 
+        WHERE board.users_no = users.users_no
+        <!-- <include refid="search"></include>  -->
         ) b
-    where rNum between #{start} and #{end} 
-        order by board_no desc 
-        
-        -->
+    WHERE rNum between #{start} and #{end} 
+    ORDER BY board_no desc
+	</select>
+	
+	<sql id="search">
+		<choose> <!-- 검색옵션이 전체인 경우 -->
+			<when test=" searchType == 'all' " >
+				WHERE users_nickname like '%' || #{keyword} || '%'
+				OR board_content like '%' || #{keyword} || '%'
+				OR board_title like '%' || #{keyword} || '%'
+			</when> <!-- 전체가 아닌 경우 -->
+				<otherwise>
+					WHERE #{searchType} like '%' || #{keyword} || '%'
+				</otherwise>
+		</choose>
+	</sql>
+	<!-- 	 <if test="searchType != null">
+		  <if test="searchType.equals('title')">
+		  	where board_title like '%' || #{keyword} || '%'</if>
+		  	
+		  <if test="searchType.equals('content')">
+		  	where board_content like '%' || #{keyword} || '%'</if>
+		  	
+		   <if test="searchType.equals('title_content')">
+		  	where board_title like '%' || #{keyword} || '%' or board_content like '%' || #{keyword} || '%'</if>
+		  
+		   <if test="searchType.equals('writer')">
+		  	where users.users_nickname like '%' || #{keyword} || '%'</if>
+		 </if> -->
+ 
   <insert id="insertBoard" parameterType="boardVO">
   	insert into board(board_no, board_title, users_no, board_content,
   	board_views, board_date, board_fname, board_fsize, board_show) 
@@ -72,8 +80,9 @@
   	UPDATE board SET board_show = 1 WHERE board_no = #{board_no}
    </update>
   
-  <select id="totalRecord" resultType="int">
+  <select id="totalRecord" resultType="int" parameterType="hashMap">
   	select count(*) from board
+  	<!-- <include refid="search"></include>  -->
   </select>
   
   <select id="listMyBoard" resultType="boardVO">

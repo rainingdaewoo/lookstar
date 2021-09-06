@@ -37,44 +37,38 @@
 		});
 	});
 </script>
-<style type="text/css">
-.board-category {
-	float: left;
-} 
-
-.container {
-	padding-top: 200px;
-}
-</style>
 </head>
 <body>
 	<header>
 		<%@ include file="./inc/header.jsp"%>
 	</header>
-	
+	<br><br><br>
 	<!-- Body Section -->
 	<section class="py-5">
-		<div class="container">
-			<h2>게시물 목록</h2>
-	<hr>
-	<div class="board-category">
+	<div class="container-aside">
 	<ul>
 		<li><a href="#">일상게시판</a></li>
 		<li><a href="#">자유게시판</a></li>
 		<li><a href="#">쇼핑후기</a></li>
 	</ul>
 	</div>
+		<div class="container" width=90%>
+			<h2>게시물 목록</h2>
+	<hr>
+	
 	<div>
-	<table border="1" width="100%" class="table table-hover">
-		<tr>
-			<th width="70">글번호</th>
-			<th>글제목</th>
-			<th width="100">작성자</th>
-			<th width="100">작성일</th>
-			<th width="100">조회수</th>
-		</tr>
-		
-		<c:forEach var="b" items="${list }">
+		<table class="table">
+	  <thead>
+	    <tr>
+	      <th scope="col">글번호</th>
+	      <th scope="col">글제목</th>
+	      <th scope="col">작성자</th>
+	      <th scope="col">작성일</th>
+	      <th scope="col">조회수</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  	<c:forEach var="b" items="${list }">
 			<c:choose>
 				<c:when test="${b.board_show == 0 }">
 					<tr>
@@ -100,11 +94,14 @@
 			</c:otherwise>
 			</c:choose>
 		</c:forEach>
+	  </tbody>
 	</table>
-	
-	
+				<div> 
+				<a href="board_write.do"
+				class="btn btn-outline-dark pull-right" id="writeBtn">글쓰기</a>
+			</div>	
 			<!-- 페이징처리 -->
-			<div class="col-md-offset-3">
+			<div class="paging">
 				<c:if test="${prev}">
 			 <span>[ <a href="listBoard.do?pageNUM=${startPageNum - 1}">이전</a> ]</span>
 				</c:if>
@@ -123,36 +120,32 @@
 			</c:if>
 		</div>
 	</div>
-				
+			<!-- 글쓰기 버튼 -->
+			
+			<br><br>
 			<!-- 검색창 -->
 			<div class="seach row">
 				<div class="col-xs-2 col-sm-2">
 				<select name="searchType" class="from-control">
+					<option value="all">--</option>
 					<option value="title">제목</option>
 					<option value="content">내용</option>
 					<option value="title_content">제목+내용</option>
-					<option value="writer">작성자</option>
+					<option value="users_nickname">작성자</option>
 				</select> 
+			
 				</div>
 				
-				<div class="col-xs-10 col-sm-10">
-					<div class="input-group-btn">
+					<div class="input-group-btn col-sm-8">
 						<input type="text" name="keyword" id="ketwordInput" class="form-control"/>
+					</div>
+					<div>
 						<span class="input-group-btn">
 							<button id="searchBtn" class="btn btn-outline-dark pull-right" >검색</button>
 						</span>
-						<!-- 글쓰기 버튼 -->
-			<a href="board_write.do"
-				class="btn btn-outline-dark pull-right">글쓰기</a>
-					</div>
-				</div>
+						</div>
 				
 			</div>
-
-
-
-
-			
 				</div>
 		<footer>
 			<%@ include file="./inc/footer.jsp"%>
