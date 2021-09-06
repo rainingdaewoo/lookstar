@@ -71,8 +71,7 @@
 	<section id="content">
 		<!-- 스타일필터와 검색 -->
 		<div class="ftr" style="justify-content: center">
-			<span class="unchosenF"><a
-				href="lookbook.do?sortField=lookbook_no">NEW</a></span>&nbsp; <span
+			<span class="unchosenF"><a href="lookbook.do?sortField=lookbook_no">NEW</a></span>&nbsp; <span
 				class="unchosenF"><a
 				href="lookbook.do?sortField=lookbook_views">HOT</a></span>&nbsp; <span
 				class="unchosenF">미니멀</span>&nbsp; <span class="unchosenF">캐주얼</span>&nbsp;
@@ -131,7 +130,7 @@
 								<div class="card h-100 justify-content-center">
 									
 										<!-- Product image-->
-										<a href="lookbook_info.do?l.lookbook_no=${l.lookbook_no}">
+										<a href="lookbook_detail.do?lookbook_no=${l.lookbook_no}">
 											<!-- 이미지 경로 들어가게 해야함. --> <img class="card-img-top"
 											src="resources/look_img/${l.lookbook_fname }"
 											style="height: 100%; width: 100%;" />
@@ -144,6 +143,7 @@
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
+				
 			</div>
 			<!-- 글쓰기 버튼 -->
 			<a href="lookbook_write.do" class="btn btn-outline-dark pull-right">글쓰기</a>

@@ -67,9 +67,8 @@
 </style>
 </head>
 <body>
-	<header>
 		<%@ include file="inc/header.jsp" %>
-	</header>
+
 	
 	<!-- Body Section -->
 	<section class="py-5">

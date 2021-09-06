@@ -16,6 +16,7 @@ import com.example.demo.vo.InsertLookbookCommandVO;
 import com.example.demo.vo.LookInfoVO;
 import com.example.demo.vo.LookbookVO;
 import com.example.demo.vo.Lookbook_styleVO;
+import com.example.demo.vo.SelectLookbookCommandVO;
 import com.example.demo.vo.UsersVO;
 
 public class DBManager {
@@ -86,6 +87,25 @@ public class DBManager {
 		session.close();
 		return list;
 	}
+	// 룩북 클릭시 룩북의 정보
+	public static SelectLookbookCommandVO getLookbook(int no) {
+		
+		SqlSession session = factory.openSession();
+		LookbookVO lookbook = session.selectOne("lookbook.getLookbook", no);
+		UsersVO write_u = session.selectOne("users.getUsersbyNo", lookbook.getUsers_no());
+		List<LookInfoVO> list_info = session.selectList("lookinfo.getLookinfo",no);
+		List<Lookbook_styleVO> list_style = session.selectList("lookbook_style.getLookStyle",no);
+		System.out.println("============================");
+		System.out.println("lookbook의 users 정보: "+write_u);
+		System.out.println("lookbook 정보: "+lookbook);
+		System.out.println("list_info 정보: "+list_info);
+		System.out.println("list_style 정보: "+list_style);
+		System.out.println("============================");
+		session.close();
+		SelectLookbookCommandVO look = new SelectLookbookCommandVO(lookbook,write_u, list_info, list_style);
+		return look;
+		
+	}
 
 	public static int insertLookbook(InsertLookbookCommandVO insertlook) {
 		int re = 0;
@@ -112,11 +132,7 @@ public class DBManager {
 			Lookbook_styleVO style = new Lookbook_styleVO(r, i);
 			System.out.println("lookbook_style 객체:" + style);
 			re3 += session.insert("lookbook_style.insert", style);
-		} // list2 사이즈
-
-		// int re2 = session.insert("lookinfo.insert",insertlook.getList_info());
-		// int re1 = session.insert("lookbook_style.insert",insertlook.getStyle_no());
-
+		} 
 		if (re1 == 1 && re2 == list.size() && re3 == list2.size()) {
 			session.commit();
 		} else {
