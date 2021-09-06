@@ -119,14 +119,14 @@ public class BoardController {
 	public void detailBoard(HttpServletRequest request, Model model, int board_no) {
 		dao.updateViews(board_no);
 		model.addAttribute("b",dao.getBoard(board_no));
-		model.addAttribute("comments", commentsdao.findAll());
+		model.addAttribute("comments", commentsdao.findAll(board_no));
 	}
 	
 	
 	@RequestMapping("/deleteBoard.do")
 	public ModelAndView deleteBoard(int board_no, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("redirect:/listBoard.do");
-		String path = request.getRealPath("resources/images");
+		String path = request.getRealPath("resources/ard_img");
 		String oldFname = dao.getBoard(board_no).getBoard_fname();
 		
 		int re = dao.deleteBoard(board_no);

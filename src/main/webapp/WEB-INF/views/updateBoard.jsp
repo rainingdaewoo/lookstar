@@ -63,7 +63,7 @@
 				 <label for="board_title">제목</label>
 				  <input type="text" name="board_title" value="${b.board_title }"><br>
 				<div class="col-md-6">
-	 					<input type="hidden" name="users_no" value="21<%-- ${u.users_no } --%>"> <br>
+	 					<input type="hidden" name="users_no" value="${u.users_no }"> <br>
 						<div class="inputArea">
 					<textarea rows="10" cols="80" name="board_content">${b.board_content }</textarea>
 					//<img id="blah" src="/YouSoSick/image/ready.png" height="400px" /><br>

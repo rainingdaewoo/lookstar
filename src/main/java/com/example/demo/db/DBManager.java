@@ -183,9 +183,10 @@ public class DBManager {
 		}
 		
 		//댓글 관련 DBManager
-		public static List<CommentsVO> listComments(){
+		public static List<CommentsVO> listComments(int board_no){
 			SqlSession session = factory.openSession();
-			List<CommentsVO> list = session.selectList("comments.getComments");
+			List<CommentsVO> list = session.selectList("comments.listComments", board_no);
+			System.out.println(list);
 			session.close();
 			return list;
 		}
@@ -193,6 +194,25 @@ public class DBManager {
 		public static int insertComments(CommentsVO c) {
 			SqlSession session = factory.openSession(true);
 			int re = session.insert("comments.insertComments", c);
+			session.close();
+			return re;
+		}
+		
+		public static CommentsVO getComments(int comments_no) {
+			SqlSession session = factory.openSession();
+			CommentsVO c = session.selectOne("comments.getComments", comments_no);
+			session.close();
+			return c;
+		}
+		
+		public static int deleteComments(int comments_no) {
+			SqlSession session = factory.openSession(true);
+			/*
+			 * HashMap map = new HashMap(); map.put("no", board_no);
+			 * System.out.println("map:"+map);
+			 */
+			int re = session.delete("comments.deleteComments", comments_no);
+			session.commit();
 			session.close();
 			return re;
 		}

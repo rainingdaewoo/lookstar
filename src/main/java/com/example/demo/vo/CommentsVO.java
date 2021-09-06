@@ -95,5 +95,13 @@ public class CommentsVO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	@Override
+	public String toString() {
+		return "CommentsVO [comments_no=" + comments_no + ", board_no=" + board_no + ", users_no=" + users_no
+				+ ", users_nickname=" + users_nickname + ", comments_content=" + comments_content + ", comments_date="
+				+ comments_date + ", comments_show=" + comments_show + ", comments_fname=" + comments_fname
+				+ ", comments_fsize=" + comments_fsize + ", comments_uploadFile=" + comments_uploadFile + "]";
+	}
+	
 	
 }

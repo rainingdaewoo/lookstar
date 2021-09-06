@@ -54,9 +54,14 @@
 			$('#joinModal').modal("show");
 		});
 	});
-	function confirmDelete(board_no) {
+	function confirmDeleteBoard(board_no) {
 		if(confirm('정말로 삭제할까요')){
 			location.href='deleteBoard.do?board_no='+board_no;
+		}
+	}
+	function confirmDeleteComments(comments_no) {
+		if(confirm('정말로 삭제할까요')){
+			location.href='deleteComments.do?comments_no='+comments_no;
 		}
 	}
 </script>
@@ -78,6 +83,7 @@
 	</header>
 	
 	<!-- Body Section -->
+	<!-- 게시판 내용 -->
 	<section class="py-5">
 	<div class="board-category">
 	<ul>
@@ -101,26 +107,56 @@
 	src="resources/board_img/${b.board_fname }"	style="height: 100%; width: 100%;" />
 	첨부파일 : ${b.board_fname }(${b.board_fsize })
 	<hr>
-	<!-- 댓글 작성 시작 -->
+	
+	<!-- 댓글 목록 -->
 	<div class="comments">
-				<ul>
-					<c:forEach var="comments" items="${comments }">
-						<li>
+			<c:forEach var="comments" items="${comments }">
+			<c:choose>
+				<c:when test="${comments.comments_show == 0 }">
+					<li>
 							<div>
 								<p>${comments.users_nickname} 	</p>
 								<p>${comments.comments_content }</p>
 								<p><fmt:formatDate value="${comments.comments_date}" pattern="yyyy-MM-dd HH:ss" /></p>
 							</div>
 						</li>
-					</c:forEach>
-				</ul>
+							<a onclick="confirmDeleteComments(${comments.comments_no})"
+						class="btn btn-outline-dark pull-right" id="deleteBtn">삭제</a>
+						<hr>
+			</c:when>
+			<c:otherwise>
+				<div>
+						<c:if test="${comments.comments_show == 1 }">
+							삭제된 댓글입니다.
+						</c:if>
+				</div>
+			</c:otherwise>
+			</c:choose>
+		</c:forEach>
 			
-			<div>
-				<p>
-					<textarea rows="5" cols="50"></textarea>
-				</p>
-					<a class="btn btn-outline-dark pull-right" id="comments-btn">댓글 작성</a>
-			</div>
+			<!-- 댓글 작성 -->
+		<form action="insertComments.do" method="post"
+				enctype="multipart/form-data">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+				<div class="row col-md-6">
+					<h1 class="display-5 fw-bolder"></h1>
+					<br> 
+				</div>
+				<div class="col-md-6">
+	 					<input type="hidden" name="users_no" value="21"> <br>
+	 					<input type="hidden" name="board_no" value="${b.board_no }"> <br>
+						<div class="inputArea">
+					 <textarea rows="5" cols="50" id="gdsDes" name="comments_content" placeholder="댓글을 남겨보세요."></textarea>
+					<img id="blah" src="/YouSoSick/image/ready.png" height="400px" /><br>
+					
+					<input type='file' id="comments_uploadFile" name="comments_uploadFile" accept="image/png, image/jpeg"/>
+					
+					</div>
+
+					<!-- 글쓰기 버튼 생성 -->
+					<input type="submit" class="btn btn-outline-dark right" value="댓글 작성"> 
+				</div>
+			</form>
 			</div>				
 				<br><br>	
 	<!-- 댓글 끝 -->
@@ -130,7 +166,7 @@
 	<a href="updateBoard.do?board_no=${b.board_no }"
 		class="btn btn-outline-dark pull-right" id="updateBtn">수정</a>
 		
-	<a onclick="confirmDelete(${b.board_no})"
+	<a onclick="confirmDeleteBoard(${b.board_no})"
 		class="btn btn-outline-dark pull-right" id="deleteBtn">삭제</a>
 	<a href="listBoard.do?pageNUM=${pageNUM}"
 		class="btn btn-outline-dark pull-right">글목록</a>
