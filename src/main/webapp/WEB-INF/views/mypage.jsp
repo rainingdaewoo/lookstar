@@ -32,7 +32,8 @@
 
 	<div class="text-center my-5">
 		<img id="my_img" class="img-fluid rounded-circle mb-4"
-			src="https://dummyimage.com/150x150/6c757d/dee2e6.jpg" />
+			 src="resources/profile/${users.users_fname}" width="50"/>
+	<!-- src = "https://dummyimage.com/150x150/6c757d/dee2e6.jpg"/> -->		
 
 		<div class="modal fade" id="testModal" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -47,8 +48,9 @@
 					<div class="modal-body">변경할 프로필 사진을 선택해주세요.</div>
 					<div>
 						<form action="updateProfile.do" method="post" enctype="multipart/form-data">
+						
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-							<input type="hidden" name="users_no" value="${u.users_no }">
+							<input type="hidden" name="users_no" value="41">
 							<input type="hidden" name="fname" value="${u.users_fname }">
 							<input type="hidden" name="fsize" value="${u.users_fsize }">
 							<input type="file" name="uploadFile">
@@ -63,8 +65,8 @@
 				</div>
 			</div>
 		</div>
-		<h1>id</h1>
-		<p>nickname</p>
+		<h1>${users.users_id }</h1>
+		<p>${users.users_nickname }</p>
 	</div>
 <!-- Main Content-->
 	<div id="container">

@@ -6,6 +6,9 @@ import java.io.FileOutputStream;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +54,10 @@ public class UpdateUsersController {
 	
 	@RequestMapping(value = "/updateProfile.do", method = RequestMethod.POST)
 	public ModelAndView profileSubmit(UsersVO u,HttpServletRequest request) {
+		
 		ModelAndView mav = new ModelAndView("redirect:/mypage.do");
+		
+		
 		String path = request.getRealPath("resources/profile");
 		String oldFname = u.getUsers_fname();
 		int oldFsize = u.getUsers_fsize();

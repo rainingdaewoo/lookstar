@@ -185,4 +185,11 @@ public class DBManager {
 			session.close();
 			return re;
 		}
+		
+		public static int updatePwd(UsersVO u) {
+			SqlSession session = factory.openSession(true);
+			int re = session.update("users.updatePwd",u);
+			session.close();
+			return re;
+		}
 }

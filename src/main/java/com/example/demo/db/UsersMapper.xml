@@ -40,4 +40,8 @@
 		update users set users_fname=#{users_fname},
 		users_fsize=#{users_fsize} where users_no=#{users_no}	
 	</update>
+	
+	<update id="updatePwd">
+		update users set users_pw=#{users_pw} where users_no=#{users_no}
+	</update>
 </mapper>

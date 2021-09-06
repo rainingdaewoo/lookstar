@@ -33,7 +33,7 @@
         <div id="container">
         		<br>
 			        <div id="pw_content">
-			        	<div class="section_pwconfirm">			        		
+			        	<div class="section_pwconfirm" id="boxForm">			        		
 					        <div class="pw_header">
 					             <h2 class="h2_pw">비밀번호 변경</h2>
 					             <p class="pp">회원님의 계정 비밀번호를 재설정 해주세요.<br>
