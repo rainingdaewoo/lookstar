@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,22 +35,7 @@ public class UsersController {
 	public void login() {
 		
 	}
-	/*
-	@RequestMapping("/loginOK.do")
-	public ModelAndView loginOK(HttpSession session) {
-		System.out.println("로그인 성공!");
-		ModelAndView mav = new ModelAndView("redirect:/main.do");
-		Authentication authentication
-		= SecurityContextHolder.getContext().getAuthentication();
-		
-		String id = 
-		((User)authentication.getPrincipal()).getUsername();
-		
-		session.setAttribute("users", dao.getUsers(id));
-		
-		return mav;
-	}
-	*/
+	
 	@RequestMapping("/loginOK.do")
 	public ModelAndView loginOK(HttpSession session) {
 		System.out.println("로그인 성공!");
@@ -83,6 +69,12 @@ public class UsersController {
 	@RequestMapping("/main.do")
 	public void main() {
 		
+	}
+	
+	@RequestMapping("/")
+	public ModelAndView main(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("redirect:/main.do");
+		return mav;
 	}
 	
 	// 보민

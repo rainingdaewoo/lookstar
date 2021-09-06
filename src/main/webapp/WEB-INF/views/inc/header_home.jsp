@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,13 +26,24 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
 	crossorigin="anonymous"></script>
+<style type="text/css">
+.a_not_blue>a:link{
+	color: red; text-decoration: none;
+}
+.a_not_blue>a:visited{
+	color: black; text-decoration: none;
+}
+.a_not_blue>a:hover{
+	color: white;
+}
+</style>
 
 
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		
-			<a class="navbar-brand" href="./mainPage.html">
+			<a class="navbar-brand" href="../main.do">
 			HOME</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarsExampleDefault"
@@ -49,7 +63,7 @@
 						src="../../../resources/assets/chat.png" width="20px"></a></li>
 				<li class="nav-item dropdown">
 					<!-- 마이페이지 이동 -->
-				<li class="nav-item"><a class="nav-link" href="#"><img
+				<li class="nav-item"><a class="nav-link" href="../mypage.do"><img
 						src="../../../resources/assets/user.png" width="20px"></a></li>
 				<li class="nav-item dropdown">
 					<!-- 알림 드롭다운  --> <a class="nav-link dropdown-toggle" href="#"
@@ -63,16 +77,43 @@
 					</div>
 				</li>
 			</ul>
-			<!-- JOIN 버튼(로그인) -->
+			
+
+			
+    		
+    		<sec:authorize access="isAnonymous()"> 
+    			<a href="../login.do"><button type="button" class="btn btn-outline-dark a_not_blue">
+					JOIN
+				</button></a>
+    		</sec:authorize> 
+    		<sec:authorize access="isAuthenticated()"> 
+    			<a href="../logout.do"><button type="button" class="btn btn-outline-dark a_not_blue">
+					Log-out
+				</button></a>
+    		</sec:authorize>
+
+			
+			<!-- 일반 join
+				<form class="d-flex">
+				<a href="../login.do"><button type="button" class="btn btn-outline-dark a_not_blue">
+					JOIN
+				</button></a>
+				</form>
+			 -->
+			
+			<!-- 모달창 로그인
+			
 			<form class="d-flex">
 				<button type="button" class="btn btn-outline-dark"
 					data-toggle="modal" data-target="#joinModal">JOIN</button>
 
 			</form>
+			
+			 -->
 		</div>
 
 	</nav>
-	<!-- 회원가입 확인 Modal-->
+	<!-- 회원가입 확인 Modal
 	<div class="modal fade" id="joinModal" tabindex="-1" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -123,6 +164,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- 회원가입 확인 Modal끝-->
+	</div>-->
 </html>

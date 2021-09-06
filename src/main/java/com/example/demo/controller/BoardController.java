@@ -27,10 +27,7 @@ public class BoardController {
 		this.dao = dao;
 	}
 	
-	/*
-	 * @RequestMapping("/") public ModelAndView main(HttpServletRequest request) {
-	 * ModelAndView mav = new ModelAndView("redirect:/listBoard.do"); return mav; }
-	 */
+	
 	
 	@RequestMapping("/listBoard.do")
 	public void listBoard(HttpServletRequest request, @RequestParam(value = "pageNUM", 

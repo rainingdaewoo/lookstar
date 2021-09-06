@@ -65,14 +65,7 @@
 		}
 		display();
 	}
-	<!--
-	// 스타일 체크박스를 모두 리스트로 담아주기
-	var list_style=[];
-	$("input[name=style_no]:checked").each(function(){
-		var style=$(this).val();
-		list_style.push(style);
-	});
-	-->
+	
 </script>
 </head>
 <body>
