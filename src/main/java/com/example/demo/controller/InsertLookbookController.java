@@ -63,11 +63,13 @@ public class InsertLookbookController {
 		
 		
 		int re = dao.insert(insertlook);
+		System.out.println("INESRT RE의 값: "+ re);
+		/*
 		if(re != 1) {
 			mav.addObject("msg", "상품등록에 실패하였습니다.");
 			mav.setViewName("error");
 		}
-		
+		*/
 		return mav;
 	}
 }
