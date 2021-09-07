@@ -12,7 +12,7 @@
 </head>
 <body>
 <br><br><br><br><br>
-<%@ include file="inc/header.jsp" %>
+<%@ include file="../inc/header.jsp" %>
 
  <!-- Main Content-->
         
@@ -69,6 +69,6 @@
 	  				</div> <!-- iframe -->
 	  			</div> <!-- board_wrap1 -->  			        
 	        </div> 
-	        <%@ include file="inc/footer.jsp" %>
+	        <%@ include file="../inc/footer.jsp" %>
 </body>
 </html>

@@ -71,37 +71,39 @@ public class UsersController {
 	}
 	
 	// 보민
-	@RequestMapping("/mypage.do")
+	@RequestMapping("/mypage/mypage.do")
 	public void mypage() {
 		
 	}
 	
-	@RequestMapping("/changePWD.do")
+	@RequestMapping("/mypage/changePWD.do")
 	public void updatePWD() {
 		
 	}
 	
-	@RequestMapping("/myInform.do")
+	@RequestMapping("/mypage/myInform.do")
 	public void updateInfo() {
 		
 	}
 	
-	@RequestMapping("/withdrawal.do")
-	public void withdrawal() {
-		
+	@RequestMapping("/mypage/withdrawal.do")
+	public void withdrawal(Model model,HttpSession session) {
+		int users_no = ((UsersVO)session.getAttribute("users")).getUsers_no();
+		System.out.println("users_no:"+users_no);
+		model.addAttribute("users_no",users_no);
 	}
 	
-	@RequestMapping("/termsOfService.do")
+	@RequestMapping("/mypage/termsOfService.do")
 	public void termsOfService() {
 		
 	}
 	
-	@RequestMapping("/manageMylook.do")
+	@RequestMapping("/mypage/manageMylook.do")
 	public void manageMylook() {
 		
 	}
 	
-	@RequestMapping("/followList.do")
+	@RequestMapping("/mypage/followList.do")
 	public void followList(Model model,HttpSession session) {
 		String users_id = ((UsersVO)session.getAttribute("users")).getUsers_id();
 		System.out.println("users_id:"+users_id);
@@ -110,7 +112,7 @@ public class UsersController {
 		model.addAttribute("flist",list);
 	}
 	
-	@RequestMapping("/likeList.do")
+	@RequestMapping("/mypage/likeList.do")
 	public void likeList() {
 		
 	}

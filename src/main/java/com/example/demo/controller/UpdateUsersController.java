@@ -31,7 +31,7 @@ public class UpdateUsersController {
 	
 	@RequestMapping(value = "/updateMyInfo.do", method = RequestMethod.GET)
 	public void form(Model model,int users_no) {
-		model.addAttribute("u",dao.getUsers(users_no));
+		model.addAttribute("u",dao.getUser(users_no));
 	}
 	
 	@RequestMapping(value = "/updateMyInfo.do", method = RequestMethod.POST)
@@ -49,7 +49,7 @@ public class UpdateUsersController {
 	
 	@RequestMapping(value = "/updateProfile.do", method = RequestMethod.GET)
 	public void profileForm(Model model, int users_no) {
-		model.addAttribute("u",dao.getUsers(users_no));
+		model.addAttribute("u",dao.getUser(users_no));
 	}
 	
 	@RequestMapping(value = "/updateProfile.do", method = RequestMethod.POST)

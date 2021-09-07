@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.DBManager;
 import com.example.demo.vo.UsersVO;
-import com.example.demo.vo.followVO;
+import com.example.demo.vo.Users_outVO;
+import com.example.demo.vo.FollowVO;
 
 @Repository
 public class UsersDao {
@@ -18,8 +19,8 @@ public class UsersDao {
 	public UsersVO getUsers(String username) {
 		return DBManager.getUsers(username);
 	}
-	public UsersVO getUsers(int users_no) {
-		return DBManager.getUsers(users_no);
+	public UsersVO getUser(int users_no) {
+		return DBManager.getUser(users_no);
 	}
 	//users
 	public int update(UsersVO u) {
@@ -36,6 +37,10 @@ public class UsersDao {
 	
 	public List<UsersVO> listFollow(String users_id){
 		return DBManager.listFollw(users_id);
+	}
+	
+	public int insertUsers_out(Users_outVO uo) {
+		return DBManager.insertUsers_out(uo);
 	}
 	
 }

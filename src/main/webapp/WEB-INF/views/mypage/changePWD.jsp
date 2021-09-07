@@ -27,7 +27,7 @@
 </head>
 <body>
 <br><br><br><br><br>
-<%@ include file="inc/header.jsp" %>
+<%@ include file="../inc/header.jsp" %>
  <!-- Main Content-->
         
         <div id="container">
@@ -73,6 +73,6 @@
 	  			    </div> <!-- section_pwconfirm-->    
 	    		</div>
 	    	</div> 
-<%@ include file="inc/footer.jsp" %>	    	
+<%@ include file="../inc/footer.jsp" %>	    	
 </body>
 </html>

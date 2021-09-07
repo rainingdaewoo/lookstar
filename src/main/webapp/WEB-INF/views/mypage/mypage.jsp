@@ -44,11 +44,11 @@
 </head>
 <body>
 <br><br><br><br><br>
-<%@ include file="inc/header.jsp" %>
+<%@ include file="../inc/header.jsp" %>
 
 	<div class="text-center my-5">
 		<img id="my_img" class="img-fluid rounded-circle mb-4"
-			 src="resources/profile/${users.users_fname}" width="150"/>
+			 src="../resources/profile/${users.users_fname}" width="150"/>
 
 <!-- src = "https://dummyimage.com/150x150/6c757d/dee2e6.jpg"/> -->					
 		
@@ -138,7 +138,7 @@
 	</div>
 	
 	
-			<%@ include file="inc/footer.jsp" %>
+			<%@ include file="../inc/footer.jsp" %>
 		
 </body>
 </html>

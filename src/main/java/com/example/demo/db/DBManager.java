@@ -13,7 +13,8 @@ import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.ChatVO;
 import com.example.demo.vo.LookbookVO;
 import com.example.demo.vo.UsersVO;
-import com.example.demo.vo.followVO;
+import com.example.demo.vo.Users_outVO;
+import com.example.demo.vo.FollowVO;
 
 public class DBManager {
 	private static SqlSessionFactory factory;
@@ -54,25 +55,34 @@ public class DBManager {
 	}
 	
 	
-	
+	//회원탈퇴시 회원정보 삭제하고 탈퇴테이블에 insert
 	public static int deleteUser(int users_no, String users_pw) {
 		SqlSession session = factory.openSession(true);
 		HashMap map = new HashMap();
 		map.put("users_no", users_no);
 		map.put("users_pw", users_pw);
-		int re = session.delete("look.deleteUser",map);
+		int re = session.delete("users.deleteUser",map);
 		session.close();
 		return re;
 	}
+	
+	public static int insertUsers_out(Users_outVO uo) {
+		SqlSession session = factory.openSession(true);
+		int re = session.insert("users.insertUsers_out",uo);
+		session.close();
+		return re;
+	}
+	
+	
 	public static UsersVO getUsers(String username) {
 		SqlSession session = factory.openSession();
 		UsersVO u = session.selectOne("users.getUsers",username);
 		session.close();
 		return u;
 	}
-	public static UsersVO getUsers(int users_no) {
+	public static UsersVO getUser(int users_no) {
 		SqlSession session = factory.openSession();
-		UsersVO u = session.selectOne("look.getUser",users_no);
+		UsersVO u = session.selectOne("users.getUsers",users_no);
 		session.close();
 		return u;
 	}
@@ -127,6 +137,8 @@ public class DBManager {
 			session.close();
 			return re;
 		}
+		
+		
 		
 		public static BoardVO getBoard(int no) {
 			SqlSession session = factory.openSession();

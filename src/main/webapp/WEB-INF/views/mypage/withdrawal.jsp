@@ -13,7 +13,7 @@
 </head>
 <body>
 <br><br><br><br><br>
-<%@ include file="inc/header.jsp" %>
+<%@ include file="../inc/header.jsp" %>
 <!-- Main Content-->
         <main class="mb-4">
         <br><br><br><br><br>
@@ -29,10 +29,11 @@
 			                <div id="checkPWD">
 			                	<div id="pwd" class="input-group">
 				                	<form action="deleteUsers.do" method="post" class="needs-validation">
+				                	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 				                	<div class="row">
 				                		<div >
 				                			<label for="checkPwd">비밀번호를 입력해주세요</label>
-				                			<input type="hidden" name="users_no" value=4>
+				                			<input type="hidden" name="users_no" value=${users.users_no }>				                			
 				                			<input type="password" name="users_pw" id="checkPwd" class="form-control">
 				                			<div class="invalid-feedback">비밀번호가 불일치합니다.</div>
 				                			
@@ -45,15 +46,11 @@
 							                          <option value="new">새 계정을 만들고 싶어요</option>   
 							                          <option value="etc" id="etc">기타</option>   
 							                       </select>
-							                       <div class="invalid-feedback">탈퇴 사유를 선택해 주세요!</div> 
-							                       <textarea rows="3" cols="40" id="txt" style="display: none;"></textarea>
+							                       
 							                </div>
-				                			
-				                			
 				                		</div>
-				                	</div>
-				                			                	
-					                	<input type="submit" value="탈퇴">
+				                	</div>	                	
+					                <input type="submit" value="탈퇴">
 					                </form>	
 			                	</div>
 		                	</div>
@@ -63,6 +60,6 @@
                 </div>
             </div>
         </main>
-        <%@ include file="inc/footer.jsp" %>
+        <%@ include file="../inc/footer.jsp" %>
 </body>
 </html>

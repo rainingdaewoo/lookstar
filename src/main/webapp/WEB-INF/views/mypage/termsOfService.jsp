@@ -14,7 +14,7 @@
 </head>
 <body>
 <br><br><br><br><br>
-<%@ include file="inc/header.jsp" %>
+<%@ include file="../inc/header.jsp" %>
 <!-- Main Content-->
         <main class="mb-4">
         <br><br><br><br><br>
@@ -56,6 +56,6 @@ lookstagram은 어떠한 이유로든 적절한 공지를 통해서 회원님이
                 </div>
             </div>
         </main>
-        <%@ include file="inc/footer.jsp" %>
+        <%@ include file="../inc/footer.jsp" %>
 </body>
 </html>

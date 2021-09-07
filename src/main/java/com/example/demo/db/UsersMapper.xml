@@ -20,8 +20,12 @@
 	</insert>
 
 	<select id="getUsers" resultType="usersVO">
+		select * from users where users_id=#{username}
+	</select>
+	
+	<select id="getUser" resultType="usersVO">
 		select * from users where
-		users_id=#{username}
+		users_no=#{users_no}
 	</select>
 	
 	<update id="updateMyInfo" parameterType="usersVO">
@@ -33,8 +37,12 @@
 	</update>
 
 	<delete id="deleteUser">
-		delete users where users_no=4 and users_pw=#{users_pw}
+		delete users where users_no=#{users_no} and users_pw=#{users_pw} on cascade
 	</delete>
+	
+	<insert id="insertUsers_out">
+		insert into users_out(users_out_no,users_out_reason) values (out_no.nextval,#{users_out_reason})
+	</insert>
 	
 	<update id="updateProfile" parameterType="usersVO">
 		update users set users_fname=#{users_fname},

@@ -1,6 +1,6 @@
 package com.example.demo.vo;
 
-public class followVO {
+public class FollowVO {
 	private int follow_no;
 	private String follower_id;
 	private String following_id;
@@ -22,15 +22,14 @@ public class followVO {
 	public void setFollowing_id(String following_id) {
 		this.following_id = following_id;
 	}
-	public followVO(int follow_no, String follower_id, String following_id) {
+	public FollowVO(int follow_no, String follower_id, String following_id) {
 		super();
 		this.follow_no = follow_no;
 		this.follower_id = follower_id;
 		this.following_id = following_id;
 	}
-	public followVO() {
+	public FollowVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	

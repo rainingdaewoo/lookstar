@@ -28,10 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.logoutSuccessUrl("/login.do");
 		
 		http.httpBasic();
-		//http.csrf().disable();
-		
-		
-		
+
 	}
 	
 }

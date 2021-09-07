@@ -104,7 +104,7 @@ public class BoardController {
 	}
 	
 	
-	@RequestMapping("/manageMyboard.do")
+	@RequestMapping("/mypage/manageMyboard.do")
 	public ModelAndView listMyBoard() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list",dao.listMyBoard());

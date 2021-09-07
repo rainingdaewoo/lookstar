@@ -14,7 +14,7 @@
 </head>
 <body>
 <br><br><br><br><br>
-<%@ include file="inc/header.jsp" %>
+<%@ include file="../inc/header.jsp" %>
  <!-- Main Content-->
         <main class="mb-4">
         <br><br><br><br><br>
@@ -49,6 +49,21 @@
                         <input type="number" class="form-control" id="inputWeight" name="users_weight">
                     </div>
                     
+                    <div class="ftr" style="text-align: middle;">
+						
+						<input type="checkbox" name="style_no" value="1">
+						미니멀&nbsp; <input type="checkbox" name="style_no" value="2">
+						캐주얼&nbsp; <input type="checkbox" name="style_no" value="3">
+						비즈니스&nbsp; <input type="checkbox" name="style_no" value="4">
+						아메카지&nbsp; <input type="checkbox" name="style_no" value="5">
+						스트릿&nbsp; <input type="checkbox" name="style_no" value="6">
+						스포츠&nbsp; <input type="checkbox" name="style_no" value="7">
+						레트로&nbsp; <input type="checkbox" name="style_no" value="8">
+						캠퍼스&nbsp; <input type="checkbox" name="style_no" value="9">
+						댄디&nbsp; <input type="checkbox" name="style_no" value="10">
+						데일리
+					</div>
+					
                     <div>
                         <input type="submit" value="수정" style="margin-top: 30px">
                     </div>
@@ -72,6 +87,6 @@
                 </div>
             </div>
         </main>
-        <%@ include file="inc/footer.jsp" %>
+        <%@ include file="../inc/footer.jsp" %>
 </body>
 </html>
