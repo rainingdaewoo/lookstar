@@ -20,7 +20,7 @@
 	</insert>
 
 	<select id="getUsers" resultType="usersVO">
-		select * from users where users_id=#{username}
+		select * from users where users_id=#{username} and users_del != 1
 	</select>
 	
 	<select id="getUser" resultType="usersVO">
@@ -36,9 +36,9 @@
 		users_weight=#{users_weight} where users_no=#{users_no}
 	</update>
 
-	<delete id="deleteUser">
-		delete users where users_no=#{users_no} and users_pw=#{users_pw} on cascade
-	</delete>
+	<update id="updateUsersDel" >
+		update users set users_del = 1 where users_no = #{users_no}
+	</update>
 	
 	<insert id="insertUsers_out">
 		insert into users_out(users_out_no,users_out_reason) values (out_no.nextval,#{users_out_reason})

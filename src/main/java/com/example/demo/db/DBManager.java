@@ -42,7 +42,7 @@ public class DBManager {
 	}
 	public static int updateInfo(UsersVO u) {
 		SqlSession session = factory.openSession(true);
-		int re = session.update("look.updateMyInfo",u);
+		int re = session.update("users.updateMyInfo",u);
 		session.close();
 		return re;
 	}
@@ -54,17 +54,16 @@ public class DBManager {
 		return list;
 	}
 	
-	
-	//회원탈퇴시 회원정보 삭제하고 탈퇴테이블에 insert
-	public static int deleteUser(int users_no, String users_pw) {
+	//회원탈퇴시 users테이블 속성 업데이트
+	public static int updateUsersDel(int users_no) {
 		SqlSession session = factory.openSession(true);
-		HashMap map = new HashMap();
-		map.put("users_no", users_no);
-		map.put("users_pw", users_pw);
-		int re = session.delete("users.deleteUser",map);
+		int re = session.update("users.updateUsersDel",users_no);
 		session.close();
 		return re;
 	}
+	
+	//회원탈퇴시 탈퇴테이블에 insert
+	
 	
 	public static int insertUsers_out(Users_outVO uo) {
 		SqlSession session = factory.openSession(true);

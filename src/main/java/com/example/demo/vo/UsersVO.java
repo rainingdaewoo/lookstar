@@ -18,9 +18,17 @@ public class UsersVO {
 	private String users_grant;
 	private String users_fname;
 	private int users_fsize;
+	private int users_del;
+	
 	private MultipartFile uploadFile;
 	
 	
+	public int getUsers_del() {
+		return users_del;
+	}
+	public void setUsers_del(int users_del) {
+		this.users_del = users_del;
+	}
 	public UsersVO() {
 		super();
 		// TODO Auto-generated constructor stub

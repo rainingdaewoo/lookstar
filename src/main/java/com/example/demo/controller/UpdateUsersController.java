@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.UsersDao;
 import com.example.demo.vo.UsersVO;
+import com.example.demo.vo.Users_outVO;
 
 @Controller
 public class UpdateUsersController {
@@ -91,4 +93,32 @@ public class UpdateUsersController {
 		}
 		return mav;
 	}
+	
+	@RequestMapping(value = "/deleteUsers.do",method = RequestMethod.GET)
+	public void deleteForm(Model model,int users_no	) {
+		model.addAttribute("users_no",users_no);
+	}
+	
+	@RequestMapping(value = "/deleteUsers.do",method = RequestMethod.POST)
+	public ModelAndView deleteSubmit(int users_no,String users_pw,HttpServletRequest request,Users_outVO uo,HttpSession session) throws Exception {
+		ModelAndView mav = new ModelAndView("redirect:/login.do");
+		
+		int re = dao.insertUsers_out(uo);
+		int re2 = dao.updateUsersDel(users_no);
+		
+		if(re != 1) {
+			mav.addObject("msg","회원 탈퇴에 실패하였습니다.");
+			mav.setViewName("error");
+		}
+		
+		if(re2 == 1) {
+
+		}else {
+			mav.addObject("msg","회원탈퇴에 실패하였습니다. ");
+			mav.setViewName("error");
+		}
+		session.invalidate();
+		return mav;
+	}
+	
 }

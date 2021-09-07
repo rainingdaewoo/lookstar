@@ -28,11 +28,13 @@
 			                
 			                <div id="checkPWD">
 			                	<div id="pwd" class="input-group">
-				                	<form action="deleteUsers.do" method="post" class="needs-validation">
+				                	<form action="/deleteUsers.do" method="post" class="needs-validation">
 				                	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+				                	<input type="hidden" name="users_out_no" value="0">
 				                	<div class="row">
 				                		<div >
 				                			<label for="checkPwd">비밀번호를 입력해주세요</label>
+				                			
 				                			<input type="hidden" name="users_no" value=${users.users_no }>				                			
 				                			<input type="password" name="users_pw" id="checkPwd" class="form-control">
 				                			<div class="invalid-feedback">비밀번호가 불일치합니다.</div>
@@ -40,7 +42,7 @@
 				                			
 				                			<div id="reason" >
 							                	<label for="why">탈퇴 사유를 선택해 주세요</label>
-							                       <select name="reason" class="custom-select d-block w-100" id="why" required>
+							                       <select name="users_out_reason" class="custom-select d-block w-100" id="why" required>
 							                          <option value="many">너무 많이 이용해요</option>   
 							                          <option value="no">보고싶은 룩이 없어요</option>   
 							                          <option value="new">새 계정을 만들고 싶어요</option>   
