@@ -38,7 +38,7 @@
 </script>
 </head>
 <body>
-	<%@ include file="./inc/header.jsp"%>
+	<%@ include file=".././inc/header.jsp"%>
 	<!-- Section-->
 	<br>
 	<br>
@@ -85,6 +85,6 @@
 
 	</section>
 	<!-- Footer-->
-	<%@ include file="./inc/footer.jsp"%>
+	<%@ include file=".././inc/footer.jsp"%>
 </body>
 </html>

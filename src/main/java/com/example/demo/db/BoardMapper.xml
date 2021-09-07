@@ -10,37 +10,47 @@
             row_number() over(order by board_no desc) as rNum
         FROM board, users 
         WHERE board.users_no = users.users_no
-        <!-- <include refid="search"></include>  -->
+             <if test="searchType != null and searchType != 'all'" >
+             	and ${searchType} like '%' || #{keyword} || '%'
+             </if>
+             <if test="searchType != null and searchType == 'all'">
+             	and (board_title like '%' || #{keyword} || '%' or board_content like '%' || #{keyword} || '%')
+             </if>
+             
         ) b
     WHERE rNum between #{start} and #{end} 
     ORDER BY board_no desc
 	</select>
 	
-	<sql id="search">
-		<choose> <!-- 검색옵션이 전체인 경우 -->
+	<!-- <sql id="search">
+		<if test="searchType != null">
+		  <if test="searchType.equals('title')">
+		  	where board_title like <![CDATA['%' || #{keyword} || '%' ]]>
+		  	</if>
+		  	
+		  <if test="searchType.equals('content')">
+		  	where board_content like <![CDATA['%' || #{keyword} || '%' ]]>
+		  	</if>
+		  	
+		   <if test="searchType.equals('title_content')">
+		  	where (board_title like <![CDATA['%' || #{keyword} || '%' ]]>) or (board_content like <![CDATA['%' || #{keyword} || '%' ]]>)
+		  	</if>
+		  
+		   <if test="searchType.equals('writer')">
+		  	where users.users_nickname like <![CDATA['%' || #{keyword} || '%' ]]> </if>
+		  	 </if>
+	</sql> -->
+		
+	<!-- <choose> 검색옵션이 전체인 경우
 			<when test=" searchType == 'all' " >
 				WHERE users_nickname like '%' || #{keyword} || '%'
 				OR board_content like '%' || #{keyword} || '%'
 				OR board_title like '%' || #{keyword} || '%'
-			</when> <!-- 전체가 아닌 경우 -->
+			</when> 전체가 아닌 경우
 				<otherwise>
 					WHERE #{searchType} like '%' || #{keyword} || '%'
 				</otherwise>
-		</choose>
-	</sql>
-	<!-- 	 <if test="searchType != null">
-		  <if test="searchType.equals('title')">
-		  	where board_title like '%' || #{keyword} || '%'</if>
-		  	
-		  <if test="searchType.equals('content')">
-		  	where board_content like '%' || #{keyword} || '%'</if>
-		  	
-		   <if test="searchType.equals('title_content')">
-		  	where board_title like '%' || #{keyword} || '%' or board_content like '%' || #{keyword} || '%'</if>
-		  
-		   <if test="searchType.equals('writer')">
-		  	where users.users_nickname like '%' || #{keyword} || '%'</if>
-		 </if> -->
+		</choose>  -->
  
   <insert id="insertBoard" parameterType="boardVO">
   	insert into board(board_no, board_title, users_no, board_content,
@@ -81,8 +91,14 @@
    </update>
   
   <select id="totalRecord" resultType="int" parameterType="hashMap">
-  	select count(*) from board
-  	<!-- <include refid="search"></include>  -->
+  	select count(*) FROM board, users 
+        WHERE board.users_no = users.users_no
+  	  <if test="searchType != null and searchType != 'all'" >
+             	and ${searchType} like '%' || #{keyword} || '%'
+             </if>
+             <if test="searchType != null and searchType == 'all'">
+             	and (board_title like '%' || #{keyword} || '%' or board_content like '%' || #{keyword} || '%')
+             </if>	
   </select>
   
   <select id="listMyBoard" resultType="boardVO">

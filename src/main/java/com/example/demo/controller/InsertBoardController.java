@@ -15,7 +15,7 @@ import com.example.demo.dao.BoardDao;
 import com.example.demo.vo.BoardVO;
 
 @Controller
-@RequestMapping("insertBoard.do")
+@RequestMapping("/board/insertBoard.do")
 public class InsertBoardController {
 	
 	@Autowired
@@ -34,7 +34,7 @@ public class InsertBoardController {
 	public ModelAndView submit(BoardVO vo, HttpServletRequest request) {
 		System.out.println("BoardInsert POST방식 작동함");
 		System.out.println("users_no"+vo.getUsers_no());
-		ModelAndView mav = new ModelAndView("redirect:/listBoard.do");
+		ModelAndView mav = new ModelAndView("redirect:/board/listBoard.do");
 		String path = request.getRealPath("/resources/board_img");
 		System.out.println("path:"+path);
 		String fname = null;

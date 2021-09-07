@@ -67,12 +67,16 @@ public class BoardController {
 
 	
 
-	@GetMapping("/listBoard.do")
+	@GetMapping("/board/listBoard.do")
 	public void listBoard(HttpServletRequest request, @RequestParam(value = "pageNUM", 
 						defaultValue = "1") int pageNUM, Model model,
-			@RequestParam(value = "searchType", required = false) String searchType , @RequestParam(value = "keyword", required = false) String keyword) {
+			@RequestParam(value = "searchType", required = false, defaultValue = "board_title") String searchType , @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
+	
+		System.out.println("listBoard.do 동작함");
+		System.out.println("검색컬럼:" +searchType);
+		System.out.println("검색어:" + keyword);
 		System.out.println("pageNUM:"+pageNUM);
-		BoardDao.totalRecord = dao.getTotalRecord();
+		BoardDao.totalRecord = dao.getTotalRecord(searchType, keyword);
 		BoardDao.totalPage =
 		(int) Math.ceil( (double) BoardDao.totalRecord / BoardDao.pageSIZE);
 		
@@ -94,7 +98,7 @@ public class BoardController {
 		if(endPageNum > endPageNum_tmp) {
 		 endPageNum = endPageNum_tmp;
 		}
-		
+		// 다음 페이징 숫자 뜨게하기
 		boolean prev = startPageNum == 1 ? false : true;
 		boolean next = endPageNum * BoardDao.pageSIZE >= BoardDao.totalRecord ? false : true;
 		
@@ -117,9 +121,12 @@ public class BoardController {
 		//
 		model.addAttribute("list", dao.findAll(map));
 		model.addAttribute("totalPage", BoardDao.totalPage);
+		// 검색 후에도 검색창 유지
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword", keyword);
 	}
 	
-	@RequestMapping("/detailBoard.do")
+	@RequestMapping("/board/detailBoard.do")
 	public void detailBoard(HttpServletRequest request, Model model, int board_no) {
 		dao.updateViews(board_no);
 		model.addAttribute("b",dao.getBoard(board_no));
@@ -127,9 +134,9 @@ public class BoardController {
 	}
 	
 	
-	@RequestMapping("/deleteBoard.do")
+	@RequestMapping("/board/deleteBoard.do")
 	public ModelAndView deleteBoard(int board_no, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("redirect:/listBoard.do");
+		ModelAndView mav = new ModelAndView("redirect:/board/listBoard.do");
 		String path = request.getRealPath("resources/ard_img");
 		String oldFname = dao.getBoard(board_no).getBoard_fname();
 		
@@ -142,7 +149,7 @@ public class BoardController {
 		return mav;
 	}
 	
-	@RequestMapping("/board_write.do")
+	@RequestMapping("/board/board_write.do")
 	public void board_write(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User)authentication.getPrincipal();

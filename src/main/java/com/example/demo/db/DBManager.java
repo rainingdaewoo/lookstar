@@ -175,9 +175,15 @@ public class DBManager {
 			return re;
 		}
 		
-		public static int getTotalRecord() {
+		public static int getTotalRecord(String searchType, String keyword) {
 			SqlSession session = factory.openSession();
-			int n = session.selectOne("board.totalRecord");
+			
+			HashMap data = new HashMap();
+			 
+			data.put("searchType", searchType);
+			data.put("keyword", keyword);
+			
+			int n = session.selectOne("board.totalRecord", data);
 			session.close();
 			return n;
 		}

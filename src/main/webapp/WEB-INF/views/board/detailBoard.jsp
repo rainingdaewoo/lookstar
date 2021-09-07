@@ -79,7 +79,7 @@
 </head>
 <body>
 	<header>
-		<%@ include file="inc/header.jsp" %>
+		<%@ include file=".././inc/header.jsp" %>
 	</header>
 	
 	<!-- Body Section -->
@@ -188,7 +188,7 @@
 			<br><br><br><br>
 				
 		<footer>
-			<%@ include file="inc/footer.jsp" %>
+			<%@ include file=".././inc/footer.jsp" %>
 		</footer>
 	</section>
 	

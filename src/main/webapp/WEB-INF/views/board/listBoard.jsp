@@ -40,8 +40,8 @@
 </head>
 <body>
 	<header>
-		<%@ include file="./inc/header.jsp"%>
-	</header>
+		<%@ include file=".././inc/header.jsp"%>
+ 	</header>
 	<br><br><br>
 	<!-- Body Section -->
 	<section class="py-5">
@@ -127,28 +127,44 @@
 			<div class="seach row">
 				<div class="col-xs-2 col-sm-2">
 				<select name="searchType" class="from-control">
-					<option value="all">--</option>
-					<option value="title">제목</option>
-					<option value="content">내용</option>
-					<option value="title_content">제목+내용</option>
-					<option value="users_nickname">작성자</option>
-				</select> 
+						<option value="board_title"
+							<c:if test="${searchType eq 'board_title'}">selected</c:if>>제목</option>
+						<option value="board_content"
+							<c:if test="${searchType eq 'board_content'}">selected</c:if>>내용</option>
+						<option value="all"
+							<c:if test="${searchType eq 'title_content'}">selected</c:if>>제목+내용</option> 
+					<option value="users_nickname"
+							<c:if test="${searchType eq 'users_nickname'}">selected</c:if>>작성자</option> 
+					</select> 
 			
 				</div>
 				
 					<div class="input-group-btn col-sm-8">
-						<input type="text" name="keyword" id="ketwordInput" class="form-control"/>
+						<input type="text" value="${keyword }" name="keyword" id="ketwordInput" class="form-control"/>
 					</div>
 					<div>
 						<span class="input-group-btn">
 							<button id="searchBtn" class="btn btn-outline-dark pull-right" >검색</button>
 						</span>
 						</div>
+				<script>
+				 document.getElementById("searchBtn").onclick = function () {
+				    
+				  let searchType = document.getElementsByName("searchType")[0].value;
+				  let keyword =  document.getElementsByName("keyword")[0].value;
+				  
+				  console.log(searchType)
+				  console.log(keyword)
+				  
+				  location.href = "/board/listBoard.do?pageNUM=1" + "&searchType=" + searchType + "&keyword=" + keyword;
+				 };
+				</script>
+				
 				
 			</div>
 				</div>
 		<footer>
-			<%@ include file="./inc/footer.jsp"%>
+			<%@ include file=".././inc/footer.jsp"%> 
 		</footer>
 	</section>
 	

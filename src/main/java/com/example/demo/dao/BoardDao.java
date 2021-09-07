@@ -49,8 +49,8 @@ public class BoardDao {
 		return DBManager.deleteBoard(no);
 	}
 	
-	public int getTotalRecord() {
-		return DBManager.getTotalRecord();
+	public int getTotalRecord(String searchType, String keyword) {
+		return DBManager.getTotalRecord(searchType, keyword);
 	}
 	
 	//보민

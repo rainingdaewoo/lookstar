@@ -22,7 +22,7 @@ import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.CommentsVO;
 
 @Controller
-@RequestMapping("insertComments.do")
+@RequestMapping("/board/insertComments.do")
 public class InsertCommentsController {
 	
 	@Autowired
@@ -56,7 +56,7 @@ public class InsertCommentsController {
 		
 		System.out.println("CommentsInsert POST방식 작동함");
 		System.out.println("users_no"+vo.getUsers_no());
-		ModelAndView mav = new ModelAndView("redirect:/listBoard.do");
+		ModelAndView mav = new ModelAndView("redirect:/board/listBoard.do");
 		String path = request.getRealPath("/resources/comments_img");
 		System.out.println("path:"+path);
 		String fname = null;
