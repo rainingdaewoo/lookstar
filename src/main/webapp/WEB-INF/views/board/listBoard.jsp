@@ -15,8 +15,6 @@
 <!-- 아이콘 -->
 <script src="https://kit.fontawesome.com/51db22a717.js"
 	crossorigin="anonymous"></script>
-<!-- 룩북 스타일 -->
-<link rel="stylesheet" href="../resources/css/lookbook.css">
 <!-- Bootstrap icons-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -39,9 +37,9 @@
 </script>
 </head>
 <body>
-	<header>
+	
 		<%@ include file=".././inc/header.jsp"%>
- 	</header>
+ 	
 	<br><br><br>
 	<!-- Body Section -->
 	<section class="py-5">
@@ -163,11 +161,11 @@
 				
 			</div>
 				</div>
-		<footer>
-			<%@ include file=".././inc/footer.jsp"%> 
-		</footer>
-	</section>
 	
+		
+		
+	</section>
+		<%@ include file=".././inc/footer.jsp"%> 
 	
 </body>
 </html>

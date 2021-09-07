@@ -48,6 +48,8 @@
 		<div class="align-items-center">
 			<form action="updateBoard.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			<input type="hidden" name="users_no" value="21"> <br>	
+			<input type="hidden" name="board_no" value="${b.board_no }"> <br>
 				<div class="row col-md-6">
 					<h1 class="display-5 fw-bolder"></h1>
 					<br> 
@@ -62,11 +64,9 @@
 				 </select>
 				 <label for="board_title">제목</label>
 				  <input type="text" name="board_title" value="${b.board_title }"><br>
-				<div class="col-md-6">
-	 					<input type="hidden" name="users_no" value="${u.users_no }"> <br>
-						<div class="inputArea">
+				  <div class="inputArea">
+					<div class="col-md-6">
 					<textarea rows="10" cols="80" name="board_content">${b.board_content }</textarea>
-					//<img id="blah" src="/YouSoSick/image/ready.png" height="400px" /><br>
 					
 					<input type='file' id="board_uploadFile" name="board_uploadFile" accept="image/png, image/jpeg"/>
 					

@@ -32,8 +32,6 @@ public class InsertBoardController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView submit(BoardVO vo, HttpServletRequest request) {
-		System.out.println("BoardInsert POST방식 작동함");
-		System.out.println("users_no"+vo.getUsers_no());
 		ModelAndView mav = new ModelAndView("redirect:/board/listBoard.do");
 		String path = request.getRealPath("/resources/board_img");
 		System.out.println("path:"+path);

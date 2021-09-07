@@ -223,6 +223,12 @@ public class DBManager {
 			return re;
 		}
 		
+		public static int updateComments(CommentsVO comments_no) {
+			SqlSession session = factory.openSession(true);
+			int re = session.update("comments.updateComments", comments_no);
+			session.close();
+			return re;
+		}
 		
 		//대댓글 관련 DBManager
 		public static List<ReplyVO> listReply(HashMap map){

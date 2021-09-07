@@ -149,13 +149,22 @@ public class BoardController {
 		return mav;
 	}
 	
-	@RequestMapping("/board/board_write.do")
+	@RequestMapping(value = {"/board/board_write.do", "/board/updateBoard.do"})
 	public void board_write(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User)authentication.getPrincipal();
 		String id = user.getUsername();
 		model.addAttribute("u", userdao.getUsers(id));
 	}
+	
+	/*
+	 * @RequestMapping("/board/updateBoard.do") public void updateBoard(Model model)
+	 * { Authentication authentication =
+	 * SecurityContextHolder.getContext().getAuthentication(); User user =
+	 * (User)authentication.getPrincipal(); String id = user.getUsername();
+	 * model.addAttribute("u", userdao.getUsers(id)); }
+	 */
+	
 	
 	
 	@RequestMapping("/manageMyboard.do")

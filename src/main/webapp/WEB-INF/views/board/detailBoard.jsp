@@ -20,8 +20,8 @@
 <!-- 소셜 로그인 -->
 <link rel="stylesheet"
 	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<!-- 룩북 스타일 -->
-<link rel="stylesheet" href="../resources/css/lookbook.css">
+<!-- 게시판 스타일 -->
+<link rel="stylesheet" href="../../resources/css/board_css/board.css">
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="../resources/assets/favicon.ico" />
 <!-- Bootstrap icons-->
@@ -56,12 +56,12 @@
 	});
 	function confirmDeleteBoard(board_no) {
 		if(confirm('정말로 삭제할까요')){
-			location.href='deleteBoard.do?board_no='+board_no;
+			location.href='/board/deleteBoard.do?board_no='+board_no;
 		}
 	}
 	function confirmDeleteComments(comments_no) {
 		if(confirm('정말로 삭제할까요')){
-			location.href='deleteComments.do?comments_no='+comments_no;
+			location.href='/board/deleteComments.do?comments_no='+comments_no;
 		}
 	}
 </script>
@@ -78,14 +78,14 @@
 </style>
 </head>
 <body>
-	<header>
-		<%@ include file=".././inc/header.jsp" %>
-	</header>
 	
+		<%@ include file=".././inc/header.jsp" %>
+	
+	<br><br><br>
 	<!-- Body Section -->
 	<!-- 게시판 내용 -->
 	<section class="py-5">
-	<div class="board-category">
+	<div class="container-aside">
 	<ul>
 		<li><a href="#">일상게시판</a></li>
 		<li><a href="#">자유게시판</a></li>
@@ -160,15 +160,15 @@
 			</div>				
 				<br><br>	
 	<!-- 댓글 끝 -->
-	<a href="board_write.do"
+	<a href="/board/board_write.do"
 		class="btn btn-outline-dark pull-right">글쓰기</a>
 		
-	<a href="updateBoard.do?board_no=${b.board_no }"
+	<a href="/board/updateBoard.do?board_no=${b.board_no }"
 		class="btn btn-outline-dark pull-right" id="updateBtn">수정</a>
 		
 	<a onclick="confirmDeleteBoard(${b.board_no})"
 		class="btn btn-outline-dark pull-right" id="deleteBtn">삭제</a>
-	<a href="listBoard.do?pageNUM=${pageNUM}"
+	<a href="/board/listBoard.do?pageNUM=${pageNUM}"
 		class="btn btn-outline-dark pull-right">글목록</a>
 	</div>	
 	<script>
@@ -187,9 +187,11 @@
   </script>			
 			<br><br><br><br>
 				
-		<footer>
+		
+		
+		
 			<%@ include file=".././inc/footer.jsp" %>
-		</footer>
+		
 	</section>
 	
 	

@@ -21,7 +21,7 @@ import com.example.demo.dao.UsersDao;
 import com.example.demo.vo.BoardVO;
 
 @Controller
-@RequestMapping("/updateBoard.do")
+@RequestMapping("/board/updateBoard.do")
 public class UpdateBoardController {
 	
 	@Autowired
@@ -46,14 +46,19 @@ public class UpdateBoardController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView submit(HttpServletRequest request, BoardVO b, Model model) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		User user = (User)authentication.getPrincipal();
-		String id = user.getUsername();
-		model.addAttribute("u", userdao.getUsers(id));
+		
+		Authentication authentication =
+		SecurityContextHolder.getContext().getAuthentication(); User user =
+		(User)authentication.getPrincipal(); String id = user.getUsername();
+		model.addAttribute("users", userdao.getUsers(id));
+		
+		
 		
 		System.out.println("updateBoard.do POST 동작함.");
-		ModelAndView mav = new ModelAndView("redirect:/listBoard.do");
+		System.out.println("users_no:" + b.getUsers_no());
+		ModelAndView mav = new ModelAndView("redirect:/board/listBoard.do");
 		String path = request.getRealPath("/resources/board_img");
+		System.out.println("path:"+path);
 		String oldFname= b.getBoard_fname();
 		int oldFsize= b.getBoard_fsize();
 		

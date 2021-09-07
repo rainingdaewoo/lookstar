@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.DBManager;
-import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.CommentsVO;
 
 @Repository
@@ -26,5 +25,10 @@ public class CommentsDao {
 	
 	public CommentsVO getComments(int comments_no) {
 		return DBManager.getComments(comments_no);
+	}
+	
+	public int updateComments(CommentsVO c) {
+		System.out.println("BoardDao 작동함");
+		return DBManager.updateComments(c);
 	}
 }
