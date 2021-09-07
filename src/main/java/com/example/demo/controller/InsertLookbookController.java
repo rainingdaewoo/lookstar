@@ -19,7 +19,7 @@ import com.example.demo.vo.LookbookVO;
 import com.example.demo.vo.Lookbook_styleVO;
 
 @Controller
-@RequestMapping("/insertLookbook.do")
+@RequestMapping("/lookbook/insertLookbook.do")
 public class InsertLookbookController {
 	@Autowired
 	private LookbookDao dao;
@@ -42,7 +42,7 @@ public class InsertLookbookController {
 		System.out.println("lookbookStyle:" + insertlook.getStyle_no());
 		System.out.println("==================================");
 		System.out.println("userno"+insertlook.getLookbook().getUsers_no());
-		ModelAndView mav = new ModelAndView("redirect:/lookbook.do");
+		ModelAndView mav = new ModelAndView("redirect:/lookbook/lookbook.do");
 		String path = request.getRealPath("/resources/look_img");
 		System.out.println("path:"+path);
 		String fname = null;

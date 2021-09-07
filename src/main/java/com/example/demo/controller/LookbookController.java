@@ -31,18 +31,18 @@ public class LookbookController {
 	}
 
 
-	@RequestMapping("/lookbook.do")
+	@RequestMapping("/lookbook/lookbook.do")
 	public void lookbook(Model model, String sortField) {
 		model.addAttribute("list", lookbookdao.listLookbook(sortField));
 	}
-	@RequestMapping("/lookbook_write.do")
+	@RequestMapping("/lookbook/lookbook_write.do")
 	public void lookbook_write(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User)authentication.getPrincipal();
 		String id = user.getUsername();
 		model.addAttribute("u", userdao.getUsers(id));
 	}
-	@RequestMapping("/lookbook_detail.do")
+	@RequestMapping("/lookbook/lookbook_detail.do")
 	public void detailLookbook(HttpServletRequest request,Model model,int lookbook_no) {
 		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
