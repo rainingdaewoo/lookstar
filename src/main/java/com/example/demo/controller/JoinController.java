@@ -33,6 +33,7 @@ public class JoinController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public void form() {
+		System.out.println("join.do get동작"); 
 		
 	}
 	

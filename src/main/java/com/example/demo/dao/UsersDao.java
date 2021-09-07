@@ -44,4 +44,8 @@ public class UsersDao {
 		return DBManager.compareID(compare_id);
 	}
 	
+	public String compareNickname(String compare_nickname) {
+		return DBManager.compareNickname(compare_nickname);
+	}
+	
 }

@@ -19,7 +19,7 @@
 		#{users_fsize})
 	</insert>
 
-	<select id="getUsers" resultType="usersVO">
+	<select id="getUsers" resultType="usersVO"> 
 		select * from users where
 		users_id=#{username}
 	</select>
@@ -48,6 +48,10 @@
 	</update>
 	<select id="compareID" resultType="String" parameterType="String">
 		select nvl(users_id,'') from users where users_id=#{users_id}
+	</select>
+	
+	<select id="compareNickname" resultType="String" parameterType="String">
+		select users_nickname from users where users_nickname=#{users_nickname}
 	</select>
 	
 </mapper>

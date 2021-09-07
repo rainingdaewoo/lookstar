@@ -6,27 +6,8 @@
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>Lookstar-insertUsers</title>
-<link rel="stylesheet" href="../resources/css/insertUsersPage.css">
-<!-- Favicon-->
 
-<link rel="icon" type="image/x-icon" 
-	href="../resources/assets/favicon.ico" />
-<!-- Bootstrap icons-->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-	rel="stylesheet" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
-	crossorigin="anonymous">
 
-<!-- 아이콘 -->
-<script src="https://kit.fontawesome.com/51db22a717.js"
-	crossorigin="anonymous"></script> 
 	
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -36,10 +17,6 @@
 
 <script type="text/javascript">
 $(function(){
-	let code;
-	let id_check = false;
-	let nickname_check = false;
-	
 	$("#f2").submit(function(){
 		if ($("#users_id").val() == "") { 
 	    	alert("아이디를 입력하세요.");
@@ -71,11 +48,11 @@ $(function(){
 		    return false;
 		 }
 	  	
-	  	if($("#emailCheck").val() !== code){
+	  	/*if($("#emailCheck").val() !== code){
 	  		alert("인증번호를 확인해주세요.");
 	  		$("#emailCheck").focus();
 		    return false;
-	  	}
+	  	}*/
 	  	
 		if (!$("#female").is(":checked") && !$("#male").is(":checked")) { //둘다 미체크시
 		  alert("성별을 선택해 주세요.");
@@ -87,22 +64,11 @@ $(function(){
 		    return false;
 		 }
 		
-	  
-		if(id_check !== true){
-			alert("닉네임 중복확인을 확인하세요.")
-		}
-		
-		if(nickname_check !== true){
-			alert("닉네임 중복확인을 확인하세요.")
-		}
-		
-		var mail1 = $('#users_email').val();
-		var mail2 = $('#users_email2').val();
-		mail1 += '@' + mail2;
-		$("#users_email").val(mail1);
-		
-	})
+	});
 	
+	let code;
+	let id_check = false;
+	let nickname_check = false;
 	$("#mailslc").change(function(){
 		if($('#mailslc').val() == 'self'){
 			$('#users_email2').attr("disabled", false);
@@ -177,20 +143,25 @@ $(function(){
 		}
 	})
 	
-
+	
+	
+	
+	function validate(){
+		alert("ok") 
+	}
 	
 		
 	   
 	<!-- 뒤로가기 막기 -->   
-	 window.history.forward();
-	 function noBack(){window.history.forward();}
+	 //window.history.forward();
+	 //function noBack(){window.history.forward();}
 })
 	
 
 </script>
 </head>
 <!-- 뒤로가기 막기 -->
-<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+<body>
 	<%@ include file="./inc/header.jsp"%>
 	<!-- 회원가입 섹션 -->
 	<br><br><br><br>

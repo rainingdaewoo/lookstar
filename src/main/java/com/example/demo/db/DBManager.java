@@ -214,7 +214,16 @@ public class DBManager {
 			System.out.println("DBManager compareID동작함");
 			SqlSession session = factory.openSession();
 			String users_id = session.selectOne("users.compareID", compare_id);
+			session.close();
 			return users_id;
+		}
+		
+		public static String compareNickname(String compare_nickname) {
+			SqlSession session = factory.openSession();
+			String users_nickname = session.selectOne("users.compareNickname",compare_nickname);
+			System.out.println("DBManager compareNickname동작함" + users_nickname);
+			session.close();
+			return users_nickname;
 		}
 		
 		
