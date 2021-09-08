@@ -122,6 +122,7 @@
 							<p>${comments.comments_no }</p>
 								<p>${comments.users_nickname} 	</p>
 								<p>${comments.comments_content }</p>
+								깊이: <input name="depth" value="${comments.depth}"> 
 								<%-- 사진확인:<img class="card-img-top"
 								src="resources/comments_img/${commets.comments_fname }"	style="height: 100%; width: 100%;" /> --%>
 								<p><fmt:formatDate value="${comments.comments_date}" pattern="yyyy-MM-dd HH:ss" /></p>
@@ -135,23 +136,22 @@
 						</li>
 						<!-- 답글 쓰기 생성 -->
 						<div class="reComments">
-						<form action="insertComments.do" method="post"
-						enctype="multipart/form-data">
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-				<div class="row col-md-6">
-					<h1 class="display-5 fw-bolder"></h1>
-					<br> 
-				</div>
-				<div class="col-md-6">
-	 					<input type="hidden" name="users_no" value="21"> <br>
-	 					<input type="hidden" name="board_no" value="${b.board_no }"> <br>
-	 					<input type="hidden" name="depth" value="1">
-	 					엄마 번호<input name="ori_comments_no" value="${comments.comments_no}">
-						<div class="inputArea">
-					 <textarea rows="5" cols="50" id="gdsDes" name="comments_content" placeholder="댓글을 남겨보세요."></textarea>
-					<img id="blah" src="/YouSoSick/image/ready.png" height="400px" /><br>
+							<form action="insertComments.do" method="post"
+							enctype="multipart/form-data">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+							<div class="row col-md-6">
+								<h1 class="display-5 fw-bolder"></h1>
+								<br> 
+							</div>
+						<div class="col-md-6">
+			 					<input type="hidden" name="users_no" value="21"> <br>
+			 					<input type="hidden" name="board_no" value="${b.board_no }"> <br>
+			 					<input type="hidden" name="depth" value="1">
+			 					부모번호: <input name="ori_comments_no" value="${comments.comments_no}">
+								<div class="inputArea">
+					 <textarea rows="5" cols="50" class="inputText" name="comments_content" placeholder="댓글을 남겨보세요."></textarea>
 					
-					<input type='file' id="comments_uploadFile" name="comments_uploadFile" accept="image/png, image/jpeg"/>
+					<input type='file' class="comments_uploadFile" name="comments_uploadFile" accept="image/png, image/jpeg"/>
 					
 					</div>
 
@@ -188,7 +188,6 @@
 	 					<input type="hidden" name="ori_comments_no" value="0"> <br>
 						<div class="inputArea">
 					 <textarea rows="5" cols="50" id="gdsDes" name="comments_content" placeholder="댓글을 남겨보세요."></textarea>
-					<img id="blah" src="/YouSoSick/image/ready.png" height="400px" /><br>
 					
 					<input type='file' id="comments_uploadFile" name="comments_uploadFile" accept="image/png, image/jpeg"/>
 					
@@ -223,7 +222,9 @@
 	</section>
 	<script type="text/javascript">
 		$('.rewrite').click(function() {
-			$('.reComments').toggle();
+			/* let valueDepth = $(this).('input[name=depth]').val();
+			console.log(valueDepth);  */
+			$(this).parent().next().toggle();
 		});
 	</script>
 	
