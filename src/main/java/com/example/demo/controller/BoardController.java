@@ -130,7 +130,7 @@ public class BoardController {
 	public void detailBoard(HttpServletRequest request, Model model, int board_no) {
 		dao.updateViews(board_no);
 		model.addAttribute("b",dao.getBoard(board_no));
-		model.addAttribute("comments", commentsdao.findAll(board_no));
+		model.addAttribute("comments", commentsdao.findAll(board_no)); 
 	}
 	
 	
@@ -156,15 +156,6 @@ public class BoardController {
 		String id = user.getUsername();
 		model.addAttribute("u", userdao.getUsers(id));
 	}
-	
-	/*
-	 * @RequestMapping("/board/updateBoard.do") public void updateBoard(Model model)
-	 * { Authentication authentication =
-	 * SecurityContextHolder.getContext().getAuthentication(); User user =
-	 * (User)authentication.getPrincipal(); String id = user.getUsername();
-	 * model.addAttribute("u", userdao.getUsers(id)); }
-	 */
-	
 	
 	
 	@RequestMapping("/manageMyboard.do")

@@ -42,7 +42,8 @@ public class CommentsController {
 	
 	@RequestMapping("/board/deleteComments.do")
 	public ModelAndView deleteBoard(int comments_no, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("redirect:/board/listBoard.do");
+		int board_no = dao.getComments(comments_no).getBoard_no();
+		ModelAndView mav = new ModelAndView("redirect:/board/detailBoard.do?board_no="+ board_no);
 		String path = request.getRealPath("resources/comments_img");
 		String oldFname = dao.getComments(comments_no).getComments_fname();
 		

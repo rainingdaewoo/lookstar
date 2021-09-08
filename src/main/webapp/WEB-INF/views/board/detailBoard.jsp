@@ -110,7 +110,7 @@
 	
 	<!-- 댓글 목록 -->
 	<div class="comments">
-			<c:forEach var="comments" items="${comments }">
+		 <c:forEach var="comments" items="${comments }">
 			<c:choose>
 				<c:when test="${comments.comments_show == 0 }">
 					<li>
@@ -132,7 +132,7 @@
 				</div>
 			</c:otherwise>
 			</c:choose>
-		</c:forEach>
+		</c:forEach> 
 			
 			<!-- 댓글 작성 -->
 		<form action="insertComments.do" method="post"
