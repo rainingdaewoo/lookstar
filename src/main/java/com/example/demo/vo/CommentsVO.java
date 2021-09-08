@@ -14,8 +14,9 @@ public class CommentsVO {
 	private int comments_show;
 	private String comments_fname;
 	private int comments_fsize;
+	private int depth;
+	private int ori_comments_no;
 	private MultipartFile comments_uploadFile;
-	
 	public int getComments_no() {
 		return comments_no;
 	}
@@ -70,6 +71,18 @@ public class CommentsVO {
 	public void setComments_fsize(int comments_fsize) {
 		this.comments_fsize = comments_fsize;
 	}
+	public int getDepth() {
+		return depth;
+	}
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
+	public int getOri_comments_no() {
+		return ori_comments_no;
+	}
+	public void setOri_comments_no(int ori_comments_no) {
+		this.ori_comments_no = ori_comments_no;
+	}
 	public MultipartFile getComments_uploadFile() {
 		return comments_uploadFile;
 	}
@@ -77,8 +90,8 @@ public class CommentsVO {
 		this.comments_uploadFile = comments_uploadFile;
 	}
 	public CommentsVO(int comments_no, int board_no, int users_no, String users_nickname, String comments_content,
-			Date comments_date, int comments_show, String comments_fname, int comments_fsize,
-			MultipartFile comments_uploadFile) {
+			Date comments_date, int comments_show, String comments_fname, int comments_fsize, int depth,
+			int ori_comments_no, MultipartFile comments_uploadFile) {
 		super();
 		this.comments_no = comments_no;
 		this.board_no = board_no;
@@ -89,6 +102,8 @@ public class CommentsVO {
 		this.comments_show = comments_show;
 		this.comments_fname = comments_fname;
 		this.comments_fsize = comments_fsize;
+		this.depth = depth;
+		this.ori_comments_no = ori_comments_no;
 		this.comments_uploadFile = comments_uploadFile;
 	}
 	public CommentsVO() {
@@ -100,8 +115,10 @@ public class CommentsVO {
 		return "CommentsVO [comments_no=" + comments_no + ", board_no=" + board_no + ", users_no=" + users_no
 				+ ", users_nickname=" + users_nickname + ", comments_content=" + comments_content + ", comments_date="
 				+ comments_date + ", comments_show=" + comments_show + ", comments_fname=" + comments_fname
-				+ ", comments_fsize=" + comments_fsize + ", comments_uploadFile=" + comments_uploadFile + "]";
+				+ ", comments_fsize=" + comments_fsize + ", depth=" + depth + ", ori_comments_no=" + ori_comments_no
+				+ ", comments_uploadFile=" + comments_uploadFile + "]";
 	}
+	
 	
 	
 }

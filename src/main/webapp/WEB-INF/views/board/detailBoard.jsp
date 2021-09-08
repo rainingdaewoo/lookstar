@@ -113,15 +113,18 @@
 		 <c:forEach var="comments" items="${comments }">
 			<c:choose>
 				<c:when test="${comments.comments_show == 0 }">
-					<li>
+				<c:if test= "${comments.depth == 1}">
+					<li style="padding-left: 50px">
+				</c:if>
 							<div>
 								<p>${comments.users_nickname} 	</p>
 								<p>${comments.comments_content }</p>
 								<p><fmt:formatDate value="${comments.comments_date}" pattern="yyyy-MM-dd HH:ss" /></p>
+								<input type="hidden" name="depth" value="${comments.depth }">
+								<a onclick="confirmDeleteComments(${comments.comments_no})"
+								class="btn btn-outline-dark pull-right" id="deleteBtn">삭제</a>
 							</div>
 						</li>
-							<a onclick="confirmDeleteComments(${comments.comments_no})"
-						class="btn btn-outline-dark pull-right" id="deleteBtn">삭제</a>
 						<hr>
 			</c:when>
 			<c:otherwise>
