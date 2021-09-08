@@ -29,8 +29,8 @@ aside ul li a {
 	color: black;	
 }
 
-#writeBtn {
-	
+.reComments {
+	display: none;	
 }
 
 /* * {

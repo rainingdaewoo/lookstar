@@ -39,12 +39,6 @@
 	src="./jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 
 
-<!-- 값슬라이더 -->
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
 <script type="text/javascript">
 	$(function() {
 		// JOIN 버튼 누를시 로그인 모달창
@@ -64,6 +58,14 @@
 			location.href='/board/deleteComments.do?comments_no='+comments_no;
 		}
 	}
+	
+	/* function 대댓글쓰기(){
+	      if($('#dis').css('display') == 'none'){
+	      $('#dis').show();
+	    }else{
+	      $('#dis').hide();
+	    }
+	    } */
 </script>
 <style type="text/css">
 .board-category {
@@ -101,7 +103,7 @@
 	작성자 : ${b.users_nickname }<br>
 	글내용 : <br>
 	<textarea rows="10" cols="80" readonly="readonly">${b.board_content }</textarea><br>
-	등록일 : <fmt:formatDate value="${b.board_date }" pattern="yyyy-MM-dd HH:ss" /><br>
+	등록일 : <fmt:formatDate value="${b.board_date }" pattern="yyyy-MM-dd HH:mm" /><br>
 	조회수 : ${b.board_views }<br>
 	<img class="card-img-top"
 	src="resources/board_img/${b.board_fname }"	style="height: 100%; width: 100%;" />
@@ -117,14 +119,48 @@
 					<li style="padding-left: 50px">
 				</c:if>
 							<div>
+							<p>${comments.comments_no }</p>
 								<p>${comments.users_nickname} 	</p>
 								<p>${comments.comments_content }</p>
+								<%-- 사진확인:<img class="card-img-top"
+								src="resources/comments_img/${commets.comments_fname }"	style="height: 100%; width: 100%;" /> --%>
 								<p><fmt:formatDate value="${comments.comments_date}" pattern="yyyy-MM-dd HH:ss" /></p>
+								
 								<input type="hidden" name="depth" value="${comments.depth }">
 								<a onclick="confirmDeleteComments(${comments.comments_no})"
 								class="btn btn-outline-dark pull-right" id="deleteBtn">삭제</a>
+								<a class="btn btn-outline-dark pull-right rewrite" id="writeRecomments">답글쓰기</a>
+								
 							</div>
 						</li>
+						<!-- 답글 쓰기 생성 -->
+						<div class="reComments">
+						<form action="insertComments.do" method="post"
+						enctype="multipart/form-data">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+				<div class="row col-md-6">
+					<h1 class="display-5 fw-bolder"></h1>
+					<br> 
+				</div>
+				<div class="col-md-6">
+	 					<input type="hidden" name="users_no" value="21"> <br>
+	 					<input type="hidden" name="board_no" value="${b.board_no }"> <br>
+	 					<input type="hidden" name="depth" value="1">
+	 					엄마 번호<input name="ori_comments_no" value="${comments.comments_no}">
+						<div class="inputArea">
+					 <textarea rows="5" cols="50" id="gdsDes" name="comments_content" placeholder="댓글을 남겨보세요."></textarea>
+					<img id="blah" src="/YouSoSick/image/ready.png" height="400px" /><br>
+					
+					<input type='file' id="comments_uploadFile" name="comments_uploadFile" accept="image/png, image/jpeg"/>
+					
+					</div>
+
+					<!-- 글쓰기 버튼 생성 -->
+					<input type="submit" class="btn btn-outline-dark right" value="댓글 작성">
+					<input type="reset" class="btn btn-outline-dark right" value="취소"> 
+				</div>
+			</form>
+			</div>
 						<hr>
 			</c:when>
 			<c:otherwise>
@@ -148,6 +184,8 @@
 				<div class="col-md-6">
 	 					<input type="hidden" name="users_no" value="21"> <br>
 	 					<input type="hidden" name="board_no" value="${b.board_no }"> <br>
+	 					<input type="hidden" name="depth" value="0"> <br>
+	 					<input type="hidden" name="ori_comments_no" value="0"> <br>
 						<div class="inputArea">
 					 <textarea rows="5" cols="50" id="gdsDes" name="comments_content" placeholder="댓글을 남겨보세요."></textarea>
 					<img id="blah" src="/YouSoSick/image/ready.png" height="400px" /><br>
@@ -174,20 +212,7 @@
 	<a href="/board/listBoard.do?pageNUM=${pageNUM}"
 		class="btn btn-outline-dark pull-right">글목록</a>
 	</div>	
-	<script>
-	  var formObj = $("form[role='form']");
-	  
-	  $("#modify_Btn").click(function(){
-	   formObj.attr("action", "/admin/goods/modify");
-	   formObj.attr("method", "get")
-	   formObj.submit();
-	  });
-	  
-	  $("#delete_Btn").click(function(){    
-	   formObj.attr("action", "/admin/goods/delete");
-	   formObj.submit();
-	  });		
-  </script>			
+		
 			<br><br><br><br>
 				
 		
@@ -196,7 +221,11 @@
 			<%@ include file=".././inc/footer.jsp" %>
 		
 	</section>
-	
+	<script type="text/javascript">
+		$('.rewrite').click(function() {
+			$('.reComments').toggle();
+		});
+	</script>
 	
 </body>
 </html>

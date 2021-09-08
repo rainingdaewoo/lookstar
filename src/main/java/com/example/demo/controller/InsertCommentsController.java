@@ -56,7 +56,7 @@ public class InsertCommentsController {
 		
 		System.out.println("CommentsInsert POST방식 작동함");
 		System.out.println("users_no"+vo.getUsers_no());
-		ModelAndView mav = new ModelAndView("redirect:/board/listBoard.do");
+		ModelAndView mav = new ModelAndView("redirect:/board/detailBoard.do?board_no="+ board_no);
 		String path = request.getRealPath("/resources/comments_img");
 		System.out.println("path:"+path);
 		String fname = null;

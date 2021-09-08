@@ -26,9 +26,9 @@
   	
   <insert id="insertComments" parameterType="commentsVO">
   	insert into comments(comments_no, board_no, users_no, comments_content,
-  	 comments_date, comments_fname, comments_fsize, comments_show) 
+  	 comments_date, comments_fname, comments_fsize, comments_show, depth, ori_comments_no) 
   	values(seq_comments.nextval, #{board_no}, #{users_no},#{comments_content},
-  	 sysdate, #{comments_fname},#{comments_fsize}, 0)
+  	 sysdate, #{comments_fname},#{comments_fsize}, 0, #{depth}, #{ori_comments_no})
   </insert>
   
   <update id="updateStep" >
