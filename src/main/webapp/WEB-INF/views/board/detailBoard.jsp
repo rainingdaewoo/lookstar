@@ -115,22 +115,23 @@
 		 <c:forEach var="comments" items="${comments }">
 			<c:choose>
 				<c:when test="${comments.comments_show == 0 }">
-				<c:if test= "${comments.depth == 1}">
-					<li style="padding-left: 50px">
+					<li style="list-style:none;">
+				<c:if test= "${comments.depth == 1}" >
+					<li style="padding-left: 50px;  list-style:none;">
 				</c:if>
-							<div>
+							<div class="avc">
 							<p>${comments.comments_no }</p>
 								<p>${comments.users_nickname} 	</p>
 								<p>${comments.comments_content }</p>
 								깊이: <input name="depth" value="${comments.depth}"> 
 								<%-- 사진확인:<img class="card-img-top"
 								src="resources/comments_img/${commets.comments_fname }"	style="height: 100%; width: 100%;" /> --%>
-								<p><fmt:formatDate value="${comments.comments_date}" pattern="yyyy-MM-dd HH:ss" /></p>
-								
-								<input type="hidden" name="depth" value="${comments.depth }">
 								<a onclick="confirmDeleteComments(${comments.comments_no})"
 								class="btn btn-outline-dark pull-right" id="deleteBtn">삭제</a>
 								<a class="btn btn-outline-dark pull-right rewrite" id="writeRecomments">답글쓰기</a>
+								<p><fmt:formatDate value="${comments.comments_date}" pattern="yyyy-MM-dd HH:ss" /></p>
+								<input type="hidden" name="depth" value="${comments.depth }">
+								
 								
 							</div>
 						</li>
@@ -222,9 +223,11 @@
 	</section>
 	<script type="text/javascript">
 		$('.rewrite').click(function() {
-			/* let valueDepth = $(this).('input[name=depth]').val();
-			console.log(valueDepth);  */
-			$(this).parent().next().toggle();
+			
+			let value = $(this).parent().parent().next().toggle();
+			console.log(value.length);
+			  
+			
 		});
 	</script>
 	
