@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dao.LookbookDao;
 import com.example.demo.dao.UsersDao;
@@ -28,6 +31,13 @@ public class LookbookController {
 
 	public void setLookbookdao(LookbookDao lookbookdao) {
 		this.lookbookdao = lookbookdao;
+	}
+	
+	@RequestMapping("/lookbook/ListLookbook.do")
+	@ResponseBody
+	public String listlookbook(List<String> list) {
+		System.out.println("listlookbook의 list" + list);
+		return "OK";
 	}
 
 

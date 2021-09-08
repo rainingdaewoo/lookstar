@@ -41,7 +41,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-		<a class="navbar-brand" href="../main.do"><img
+		<a class="navbar-brand" href="/main.do"><img
 			src="/resources/assets/top_logo.png" width="300px"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarsExampleDefault"
@@ -53,7 +53,7 @@
 		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 			<ul class="navbar-nav mr-auto">
 				<!-- 룩페이지 이동 -->
-				<li class="nav-item"><a class="nav-link" href="../lookbook.do">Looks</a></li>
+				<li class="nav-item"><a class="nav-link" href="/lookbook/lookbook.do">Looks</a></li>
 				<!-- 게시판 이동 -->
 				<li class="nav-item"><a class="nav-link" href="../listBoard.do">Board</a></li>
 				<!-- DM 이동 -->

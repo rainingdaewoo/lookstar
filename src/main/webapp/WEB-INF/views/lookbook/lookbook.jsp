@@ -24,10 +24,38 @@
 
 <script type="text/javascript">
 	$(function() {
-		$(".unchosenF").click(function() {
-			$(this).toggleClass("chosenF")
+		
+		let selected_style = [];
+		
+		// 스타일 선택 
+		$(".unchosenF").each(function(i){
+			$(this).attr("style_no",i+1);
 		});
-		// 몸무게 범위 슬라이더
+		$(".unchosenF").click(function() {
+			$(this).toggleClass("chosenF");
+			let list = $(".chosenF");
+			console.log("--------------------------------------");
+			$.each(list,function(index, item){
+				let style_no = $(item).attr("style_no");
+				
+				selected_style.push(style_no);
+				let data = selected_style;
+				$.ajax({
+					url:"/lookbook/ListLookbook.do",
+					//data:data,
+					,success:function(list){
+						
+					}
+				});
+			});
+			console.log("--------------------------------------");
+			/*let style_no = $(this).attr("style_no");
+			selected_style[style_no] = style_no;
+			console.log(style_no);
+			console.log(selected_style);*/
+			
+		});
+		/* 몸무게 범위 슬라이더
 		$("#weight-range").slider({
 			range : true,
 			min : 40,
@@ -54,6 +82,7 @@
 		$("#height").val(
 				$("#height-range").slider("values", 0) + " ~ "
 						+ $("#height-range").slider("values", 1) + " cm");
+		*/
 
 	});
 </script>
@@ -71,14 +100,21 @@
 	<section id="content">
 		<!-- 스타일필터와 검색 -->
 		<div class="ftr" style="justify-content: center">
-			<span class="unchosenF"><a href="lookbook.do?sortField=lookbook_no">NEW</a></span>&nbsp; <span
-				class="unchosenF"><a
-				href="lookbook.do?sortField=lookbook_views">HOT</a></span>&nbsp; <span
-				class="unchosenF">미니멀</span>&nbsp; <span class="unchosenF">캐주얼</span>&nbsp;
-			<span class="unchosenF">비즈니스</span>&nbsp; <span class="unchosenF">아메카지</span>&nbsp;
-			<span class="unchosenF">스트릿</span>&nbsp; <span class="unchosenF">스포츠</span>&nbsp;
-			<span class="unchosenF">레트로</span>&nbsp; <span class="unchosenF">캠퍼스</span>&nbsp;
-			<span class="unchosenF">댄디</span>&nbsp; <span class="unchosenF">데일리</span>
+			<span class="sortby"><a href="lookbook.do?sortField=lookbook_no">NEW</a></span>&nbsp; 
+			<span class="sortby"><a
+				href="lookbook.do?sortField=lookbook_views">HOT</a></span>&nbsp; 
+				
+				
+			<span class="unchosenF">미니멀</span>&nbsp; 
+			<span class="unchosenF">캐주얼</span>&nbsp;
+			<span class="unchosenF">비즈니스</span>&nbsp; 
+			<span class="unchosenF">아메카지</span>&nbsp;
+			<span class="unchosenF">스트릿</span>&nbsp; 
+			<span class="unchosenF">스포츠</span>&nbsp;
+			<span class="unchosenF">레트로</span>&nbsp; 
+			<span class="unchosenF">캠퍼스</span>&nbsp;
+			<span class="unchosenF">댄디</span>&nbsp; 
+			<span class="unchosenF">데일리</span>
 
 		</div>
 		<!-- 신체 필터/검색 -->

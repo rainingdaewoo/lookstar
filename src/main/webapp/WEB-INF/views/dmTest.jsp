@@ -22,20 +22,21 @@
 				success:function(data){		
 					if(data.length>0){
 						var row = "";	
-						for(var i in data){
 							var $dm_no=data[i].dm_no;
 							var $from_id=data[i].from_id;
 							var $to_id=data[i].to_id;
 							var $dm_content=data[i].dm_content;
 							var $dm_date=data[i].dm_date;
+							
+								
 							var row = row+ "<tr>";
 							var row = row+ "<td>"+$from_id+"</td>"
 							var row = row+ "<td>"+$to_id+"</td>"
 							var row = row+ "<td>"+$dm_content+"</td>"
 							var row = row+ "<td>"+$dm_date+"</td>"
 							var row = row+ "</tr>";
+
 							
-						}
 						$("#list").append(row);
 					}
 				}
