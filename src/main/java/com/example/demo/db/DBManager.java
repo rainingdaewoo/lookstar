@@ -8,11 +8,14 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.aspectj.apache.bcel.classfile.Module.Uses;
 
 import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.ChatVO;
+import com.example.demo.vo.InsertUsersCommandVO;
 import com.example.demo.vo.LookbookVO;
 import com.example.demo.vo.UsersVO;
+import com.example.demo.vo.Users_like_styleVO;
 
 public class DBManager {
 	private static SqlSessionFactory factory;
@@ -28,8 +31,8 @@ public class DBManager {
 			System.out.println("예외발생:"+e.getMessage());
 		}
 	}
-	
-	public static int insertUsers(UsersVO u) {
+	// style 없는
+	/*public static int insertUsers(UsersVO u) {
 		System.out.println("insertUsers 세션 작동함:" + u);
 		SqlSession session = factory.openSession(true);
 		int re = session.insert("users.insert", u);
@@ -37,7 +40,43 @@ public class DBManager {
 		session.close();
 		
 		return re;
+	}*/
+
+	
+	
+	public static int insertUsersWithStyle(InsertUsersCommandVO insertUsers) {
+		int re = 0;
+		SqlSession session = factory.openSession(true);
+		
+		//유저넘버 
+		int r = session.selectOne("users.getNext_users_no");
+		//유저라이크스타일넘버 
+		int u = session.selectOne("users_like_style.getNext_users_like_no");
+		System.out.println("-----------------");
+		System.out.println("새로운 users_no:" + r);
+		UsersVO users = insertUsers.getUsers();
+		users.setUsers_no(r);
+		System.out.println("users의 객체: "+ users);
+		int re1 = session.insert("users.insert",users);
+		
+		List<Integer> list = insertUsers.getStyle_no();
+		int re2 = 0;
+		for(int i: list) {
+			Users_like_styleVO users_style = new Users_like_styleVO(u,r,i);
+			re2+=session.insert("users_like_style.insert", users_style);
+		}
+		
+		if(re1==1 && re2 ==list.size()) {
+			session.commit();
+			re = 1;
+		}else {
+			session.rollback();
+		}
+		session.close();
+		return re;
 	}
+	
+	
 	public static int updateInfo(UsersVO u) {
 		SqlSession session = factory.openSession(true);
 		int re = session.update("look.updateMyInfo",u);

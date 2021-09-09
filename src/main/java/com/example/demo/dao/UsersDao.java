@@ -6,13 +6,21 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.DBManager;
+import com.example.demo.vo.InsertUsersCommandVO;
 import com.example.demo.vo.UsersVO;
 
 @Repository
 public class UsersDao {
-	public int insert(UsersVO u) {
+	/*public int insert(UsersVO u) {
 		System.out.println("Dao 동작함" + u);
 		return DBManager.insertUsers(u);
+	}*/
+	public int insert(InsertUsersCommandVO usersc) {
+		System.out.println("---- Dao의 결과 ----");
+		System.out.println("users: " + usersc.getUsers());
+		System.out.println("users_like_style: " + usersc.getStyle_no());
+		System.out.println("-----------------");
+		return DBManager.insertUsersWithStyle(usersc);
 	}
 	
 	public UsersVO getUsers(String username) {
@@ -47,5 +55,6 @@ public class UsersDao {
 	public String compareNickname(String compare_nickname) {
 		return DBManager.compareNickname(compare_nickname);
 	}
+	
 	
 }

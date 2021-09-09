@@ -14,6 +14,7 @@ public class Users_like_styleVO {
 		this.users_no = users_no;
 		this.style_no = style_no;
 	}
+	
 	public int getUsers_like_style_no() {
 		return users_like_style_no;
 	}

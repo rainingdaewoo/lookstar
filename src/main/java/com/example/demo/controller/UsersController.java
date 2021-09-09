@@ -129,5 +129,10 @@ public class UsersController {
 	public void updateInfo() {
 		
 	}
+	
+	@RequestMapping("/kakao.do")
+	public void kakao() {
+		
+	}
 }
 
