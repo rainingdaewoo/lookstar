@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Users_like_Style">
+	
+	<delete id="deleteStyle" parameterType="users_like_styleVO">
+		delete users_like_style where users_no=#{users_no}
+	</delete>  
+  
+	<insert id="insert" parameterType="users_like_styleVO">
+		insert into users_like_style (users_like_style_no,users_no,style_no)
+		values (seq_users_style.nextval,#{users_no},#{style_no}) 
+	</insert>
+  
+  
+  <select id="getNext_users_like_no" resultType="int">
+	select nvl(max(users_like_style_no),0)+1 from users_like_style
+  </select>
+</mapper>

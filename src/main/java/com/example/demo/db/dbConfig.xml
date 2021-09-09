@@ -34,6 +34,7 @@
 		<mapper resource="com/example/demo/db/BoardMapper.xml"/>
 		<mapper resource="com/example/demo/db/LookbookMapper.xml" />
 		<mapper resource="com/example/demo/db/Lookbook_StyleMapper.xml" />
+		<mapper resource="com/example/demo/db/Users_like_StyleMapper.xml" />
 	</mappers>
 
 </configuration>

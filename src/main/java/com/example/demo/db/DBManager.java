@@ -12,7 +12,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.ChatVO;
 import com.example.demo.vo.LookbookVO;
+import com.example.demo.vo.UpdateUsersCommandVO;
 import com.example.demo.vo.UsersVO;
+import com.example.demo.vo.Users_like_styleVO;
 import com.example.demo.vo.Users_outVO;
 import com.example.demo.vo.FollowVO;
 
@@ -40,6 +42,55 @@ public class DBManager {
 		
 		return re;
 	}
+	
+	public static List<BoardVO> listMyBoard(){
+		SqlSession session = factory.openSession();
+		List<BoardVO> list = session.selectList("board.listMyBoard");
+		session.close();
+		return list;
+	}
+	
+	// 김보민
+	
+	public static int updateUsersWithStyle(UpdateUsersCommandVO updateUsers) {
+		int re = 0;
+		SqlSession session = factory.openSession(true);
+		
+		
+		//유저라이크스타일넘버 
+		int u = session.selectOne("Users_like_Style.getNext_users_like_no");
+		System.out.println("-----------------");
+
+		UsersVO users = updateUsers.getUsers();
+		System.out.println("users의 객체: "+ users);
+		int re1 = session.update("users.updateMyInfo",users);
+		
+		int users_no = users.getUsers_no();
+		System.out.println("users_no:"+users_no);
+		// users_no=1 인 users_like_style 삭제 
+		int re3 = session.delete("Users_like_Style.deleteStyle",users_no);
+		
+		
+		List<Integer> list = updateUsers.getStyle_no();
+		int re2 = 0;
+		for(int i: list) {
+			Users_like_styleVO users_style = new Users_like_styleVO(u,users_no,i);
+			re2+=session.insert("Users_like_Style.insert", users_style);
+		}
+		
+		if(re1==1 && re2 ==list.size()) {
+			session.commit();
+			re = 1;
+		}else {
+			session.rollback();
+		}
+		session.close();
+		return re;
+		
+		
+		
+	}
+	
 	public static int updateInfo(UsersVO u) {
 		SqlSession session = factory.openSession(true);
 		int re = session.update("users.updateMyInfo",u);
@@ -47,11 +98,12 @@ public class DBManager {
 		return re;
 	}
 	
-	public static List<BoardVO> listMyBoard(){
-		SqlSession session = factory.openSession();
-		List<BoardVO> list = session.selectList("board.listMyBoard");
+	public static int updateStyle(int users_no) {
+		System.out.println("dbmanager updatestyle 동작함");
+		SqlSession session = factory.openSession(true);
+		int re = session.update("Users_like_Style.updateUsers_like_Style",users_no);
 		session.close();
-		return list;
+		return re;
 	}
 	
 	//회원탈퇴시 users테이블 속성 업데이트

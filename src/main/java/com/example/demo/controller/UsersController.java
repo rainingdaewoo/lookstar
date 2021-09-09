@@ -71,6 +71,13 @@ public class UsersController {
 	}
 	
 	// 보민
+	
+	@RequestMapping(value = "/logout.do")
+	public String logout(HttpSession session) throws Exception {
+		session.invalidate();
+		return "redirect:/login.do";
+	}
+	
 	@RequestMapping("/mypage/mypage.do")
 	public void mypage() {
 		

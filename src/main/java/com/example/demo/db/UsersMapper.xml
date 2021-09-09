@@ -28,6 +28,10 @@
 		users_no=#{users_no}
 	</select>
 	
+	<select id="getNext_users_no" resultType="int">
+		select nvl(max(users_no),0)+1 from users
+	</select>
+	
 	<update id="updateMyInfo" parameterType="usersVO">
 		update users set users_nickname=#{users_nickname},
 		users_birth=#{users_birth},

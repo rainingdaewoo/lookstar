@@ -94,7 +94,7 @@
 					<div class="col-md-10 col-lg-8 col-xl-7">
 						<div class="my-5">
 
-							<form id="contactForm" data-sb-form-api-token="API_TOKEN">
+							
 								<div class="form-floating">
 									<a href="changePWD.do">비밀번호 변경</a>
 									<hr>
@@ -124,12 +124,17 @@
 									<hr>
 								</div>
 								<br />
+						<!--	<div>
+									<a href="/logout.do">LOG-OUT</a>
+								</div>-->
+							  	<form action="/logout.do">
+									<input type="submit" value="LOG-OUT">
+								</form>
 								
-								
-								<!-- Submit Button-->
+								<!-- Submit Button
 								<button class="btn btn-primary text-uppercase disabled"
-									id="submitButton" type="submit">log-out</button>
-							</form>
+									id="submitButton" type="submit">log-out</button>-->
+						
 						</div>
 					</div>
 				</div>

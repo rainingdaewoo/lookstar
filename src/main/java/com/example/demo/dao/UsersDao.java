@@ -8,6 +8,7 @@ import com.example.demo.db.DBManager;
 import com.example.demo.vo.UsersVO;
 import com.example.demo.vo.Users_outVO;
 import com.example.demo.vo.FollowVO;
+import com.example.demo.vo.UpdateUsersCommandVO;
 
 @Repository
 public class UsersDao {
@@ -22,6 +23,7 @@ public class UsersDao {
 	public UsersVO getUser(int users_no) {
 		return DBManager.getUser(users_no);
 	}
+	
 	//users
 	public int update(UsersVO u) {
 		return DBManager.updateInfo(u);
@@ -33,6 +35,12 @@ public class UsersDao {
 	
 	public int updateProfile(UsersVO u) {
 		return DBManager.updateProfile(u);
+	}
+	
+	public int updateUsers(UpdateUsersCommandVO usersc) {
+		System.out.println("users: " + usersc.getUsers());
+		System.out.println("users_like_style: " + usersc.getStyle_no());
+		return DBManager.updateUsersWithStyle(usersc);
 	}
 	
 	public List<UsersVO> listFollow(String users_id){

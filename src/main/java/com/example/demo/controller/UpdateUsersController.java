@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.UsersDao;
+import com.example.demo.vo.UpdateUsersCommandVO;
 import com.example.demo.vo.UsersVO;
 import com.example.demo.vo.Users_outVO;
 
@@ -37,15 +38,14 @@ public class UpdateUsersController {
 	}
 	
 	@RequestMapping(value = "/updateMyInfo.do", method = RequestMethod.POST)
-	public ModelAndView submit(UsersVO u, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("redirect:/mypage.do");
-		System.out.println("생일:"+u.getUsers_birth());
-		int re = dao.update(u);
+	public ModelAndView submit(UpdateUsersCommandVO updateUsers, HttpServletRequest request) {
+		UsersVO u = updateUsers.getUsers();
+		ModelAndView mav = new ModelAndView("redirect:/mypage/mypage.do");
+		int re = dao.updateUsers(updateUsers);
 		if(re != 1) {
-			mav.addObject("msg","개인정보 수정에 실패하였습니다.");
+			mav.addObject("msg","개인 정보 수정에 실패하였습니다.");
 			mav.setViewName("error");
 		}
-		
 		return mav;
 	}
 	
