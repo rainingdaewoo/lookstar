@@ -1,6 +1,7 @@
 package com.example.demo.db;
 
 import java.io.Reader;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -81,9 +82,17 @@ public class DBManager {
 		return u;
 	}
 
-	public static List<LookbookVO> listLookbook(String sortField) {
+	public static List<LookbookVO> listLookbook(HashMap map) {
+		String[] arr = (String[])map.get("arr_Style");
+		System.out.println("Map 정보: " + Arrays.toString(arr) );
+		
 		SqlSession session = factory.openSession();
-		List<com.example.demo.vo.LookbookVO> list = session.selectList("lookbook.findAll", sortField);
+		
+		List<LookbookVO> list = session.selectList("lookbook.findAll", map);
+		// System.out.println("list: " + list);
+		for(LookbookVO l: list) {
+			System.out.println(l.getLookbook_no());
+		}
 		session.close();
 		return list;
 	}

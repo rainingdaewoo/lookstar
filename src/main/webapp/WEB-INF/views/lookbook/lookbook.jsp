@@ -23,8 +23,7 @@
 <!-- 값슬라이더 -->
 
 <script type="text/javascript">
-	$(function() {
-		
+	$(function() {		
 		let selected_style = [];
 		
 		// 스타일 선택 
@@ -34,56 +33,24 @@
 		$(".unchosenF").click(function() {
 			$(this).toggleClass("chosenF");
 			let list = $(".chosenF");
+			selected_style = [];
 			console.log("--------------------------------------");
+			
 			$.each(list,function(index, item){
 				let style_no = $(item).attr("style_no");
-				
 				selected_style.push(style_no);
-				let data = selected_style;
-				$.ajax({
-					url:"/lookbook/ListLookbook.do",
-					//data:data,
-					,success:function(list){
-						
-					}
-				});
+								
 			});
+			console.log(selected_style);
 			console.log("--------------------------------------");
-			/*let style_no = $(this).attr("style_no");
-			selected_style[style_no] = style_no;
-			console.log(style_no);
-			console.log(selected_style);*/
-			
+			$.ajax({
+				url:"/lookbook/ListLookbook.do",
+				data:{arr:selected_style},
+				success:function(list){
+					console.log(list);
+				}
+			});
 		});
-		/* 몸무게 범위 슬라이더
-		$("#weight-range").slider({
-			range : true,
-			min : 40,
-			max : 130,
-			values : [ 40, 130 ],
-			slide : function(event, ui) {
-				$("#weight").val(ui.values[0] + " ~ " + ui.values[1] + " kg");
-			}
-		});
-		$("#weight").val(
-				$("#weight-range").slider("values", 0) + " ~ "
-						+ $("#weight-range").slider("values", 1) + " kg");
-
-		// 키 범위 슬라이더
-		$("#height-range").slider({
-			range : true,
-			min : 140,
-			max : 200,
-			values : [ 140, 200 ],
-			slide : function(event, ui) {
-				$("#height").val(ui.values[0] + " ~ " + ui.values[1] + " cm");
-			}
-		});
-		$("#height").val(
-				$("#height-range").slider("values", 0) + " ~ "
-						+ $("#height-range").slider("values", 1) + " cm");
-		*/
-
 	});
 </script>
 </head>
@@ -100,9 +67,8 @@
 	<section id="content">
 		<!-- 스타일필터와 검색 -->
 		<div class="ftr" style="justify-content: center">
-			<span class="sortby"><a href="lookbook.do?sortField=lookbook_no">NEW</a></span>&nbsp; 
-			<span class="sortby"><a
-				href="lookbook.do?sortField=lookbook_views">HOT</a></span>&nbsp; 
+			<span class="sortby"><a href="lookbook.do?sortField=lookbook_date">NEW</a></span>&nbsp; 
+			<span class="sortby"><a href="lookbook.do?sortField=lookbook_views">HOT</a></span>&nbsp; 
 				
 				
 			<span class="unchosenF">미니멀</span>&nbsp; 
@@ -130,25 +96,28 @@
 				<button type="submit" class="btn btn-outline-dark">검색</button>
 			</form>
 			<div style="float: left; padding-left: 50px">
-				<p>
-					&nbsp;&nbsp;&nbsp;<label for="weight"><b>몸무게 </b></label> <input
-						type="range" class="slider" value="50" min="0" max="100" step="10">
-
-
-				</p>
-				<!-- 몸무게 슬라이더 -->
-				<div id="weight-range" style='width: 180px;'></div>
+				키: <select name="height" id="height">
+						<option value="0~230" selected>-선택-</option>
+						<option value="140~150">140~150</option>
+						<option value="151~160">151~160</option>
+						<option value="161~170">161~170</option>
+						<option value="171~180">171~180</option>
+						<option value="181~190">181~190</option>
+						<option value="191~230">190이상</option>
+					</select>
 			</div>
 			<!-- 키 필터 -->
 			<div style="float: left; padding-left: 50px">
-				<p>
-					<label for="height"><b>키 </b></label> <input type="text"
-						id="height" readonly
-						style="width: 250px; border: none; color: rgb(0, 0, 0); font-weight: bold;">
-
-				</p>
-				<!-- 키 슬라이더 -->
-				<div id="height-range" style='width: 180px'></div>
+				몸무게: <select name="weight" id="weight">
+						<option value="0~150" selected>-선택-</option>
+						<option value="41~50">40~50</option>
+						<option value="51~60">51~60</option>
+						<option value="71~80">61~70</option>
+						<option value="81~90">71~80</option>
+						<option value="91~100">81~90</option>
+						<option value="91~100">91~100</option>
+						<option value="101~150">100 이상</option>
+					</select>
 			</div>
 
 		</div>

@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dao.LookbookDao;
 import com.example.demo.dao.UsersDao;
+import com.example.demo.vo.LookbookVO;
 import com.example.demo.vo.SelectLookbookCommandVO;
+import com.example.demo.vo.Style_searchVO;
 
 @Controller
 public class LookbookController {
@@ -35,15 +39,24 @@ public class LookbookController {
 	
 	@RequestMapping("/lookbook/ListLookbook.do")
 	@ResponseBody
-	public String listlookbook(List<String> list) {
-		System.out.println("listlookbook의 list" + list);
-		return "OK";
+	public List<LookbookVO> listlookbook(Style_searchVO sv, Model model) {
+		//System.out.println("listlookbook의 list" + list);
+		System.out.println("ListLookbook.do의 likelookbook 동작함:"+ Arrays.toString(sv.getArr()));
+		String arr_Style[] = sv.getArr();
+		HashMap map = new HashMap();
+		map.put("arr_Style", arr_Style);
+		List<LookbookVO> list = lookbookdao.listLookbook(map);
+		return list;
 	}
 
 
 	@RequestMapping("/lookbook/lookbook.do")
-	public void lookbook(Model model, String sortField) {
-		model.addAttribute("list", lookbookdao.listLookbook(sortField));
+	public void lookbook(Model model, String sortField, Style_searchVO sv) {
+		HashMap map = new HashMap();
+		String arr_Style[] = sv.getArr();
+		map.put("sortField", sortField);
+		map.put("arr_Style", arr_Style);
+		model.addAttribute("list", lookbookdao.listLookbook(map));
 	}
 	@RequestMapping("/lookbook/lookbook_write.do")
 	public void lookbook_write(Model model) {

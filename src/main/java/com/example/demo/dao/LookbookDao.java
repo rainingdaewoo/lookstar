@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -17,9 +18,9 @@ import com.example.demo.vo.UsersVO;
 public class LookbookDao {
 	
 	// lookbook 사진 조회시
-	public List<LookbookVO> listLookbook(String sortField) {
+	public List<LookbookVO> listLookbook(HashMap arr_style) {
 		// TODO Auto-generated method stub
-		return DBManager.listLookbook(sortField);
+		return DBManager.listLookbook(arr_style);
 	}
 	// 룩북 넣을 시
 	public int insert(InsertLookbookCommandVO insertlook) {
@@ -33,6 +34,6 @@ public class LookbookDao {
 	// 룩북 클릭시
 	public SelectLookbookCommandVO selectLookbook(int lookbook_no) {
 		return DBManager.getLookbook(lookbook_no);
-		
 	}
+	
 }
