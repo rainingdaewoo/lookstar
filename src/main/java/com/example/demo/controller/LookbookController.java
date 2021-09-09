@@ -58,6 +58,9 @@ public class LookbookController {
 		map.put("arr_Style", arr_Style);
 		model.addAttribute("list", lookbookdao.listLookbook(map));
 	}
+	
+	
+	
 	@RequestMapping("/lookbook/lookbook_write.do")
 	public void lookbook_write(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

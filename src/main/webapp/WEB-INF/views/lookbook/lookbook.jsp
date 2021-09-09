@@ -48,9 +48,36 @@
 				data:{arr:selected_style},
 				success:function(list){
 					console.log(list);
+					$("#lookbookimage").empty();
+					$.each(list, function(index,item){
+						let img = $("<div class='col mb-5'><div class='card h-100 justify-content-center'><a href='lookbook_detail.do?lookbook_no="+item.lookbook_no + "'><img class='card-img-top' src='/resources/look_img/"+item.lookbook_fname+"' style='height: 100%; width: 100%;' /></a></div></div>");
+						$("#lookbookimage").append(img);
+					});
 				}
 			});
 		});
+		
+		
+		
+		
+		var getWeight = $("#weight option:selected").text();
+		var arrayWeight = getWeight.split("~");
+		var weight_low = arrayWeight[0];
+		var weight_high = arrayWeight[1];
+		
+		var getHeight = $("#height option:selected").text();
+		var arrayHeight = getHeight.split("~");
+		var height_low = arrayHeight[0];
+		var height_high = arrayHeight[1];
+		/*
+		$.ajax({
+			url:"/lookbook/ListWeightHeight.do",
+			data:{weight_low:weight_low, weight_high:weight_high, height_low, height_high},
+			success:function(list){
+				console.log(list);
+			}
+		});
+		*/
 	});
 </script>
 </head>
@@ -126,28 +153,8 @@
 		<br> <br>
 		<hr>
 		<div class="center-block px-4 px-lg-5 mt-5 justify-content-center">
-			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"  id="lookbookimage">
 
-				<c:forEach var="l" items="${list}">
-					<c:choose>
-						<c:when test="${l.lookbook_show==0}">
-							<div class="col mb-5">
-								<div class="card h-100 justify-content-center">
-									
-										<!-- Product image-->
-										<a href="lookbook_detail.do?lookbook_no=${l.lookbook_no}">
-											<!-- 이미지 경로 들어가게 해야함. --> <img class="card-img-top"
-											src="/resources/look_img/${l.lookbook_fname }"
-											style="height: 100%; width: 100%;" />
-										</a>
-									
-								</div>
-							</div>
-						</c:when>
-						<c:otherwise>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
 				
 			</div>
 			<!-- 글쓰기 버튼 -->

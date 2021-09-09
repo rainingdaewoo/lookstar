@@ -3,56 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lookbook">
-<!--
-	
-	<select id="findAll" resultType="lookbookVO">
-		select * from lookbook
-		<if test="sortField!=null">
-			order by ${sortField} desc
-		</if>
-		<if test="sortField==null">
-			order by lookbook.lookbook_no desc
-		</if>
-	</select>
-  -->
-	<!-- 
-	<select id="findAll" resultType="lookbookVO">
-	<choose>
-		<when test="style_list==null">
-			select * from lookbook
-			<if test="sortField!=null">
-				order by ${sortField} desc
-			</if>
-			<if test="sortField==null">
-				order by lookbook.lookbook_no desc
-			</if>
-		</when>
-		<otherwise>
-			select * from lookbook l,lookbook_style s
-			where l.lookbook_no = s.lookbook_no
-			and s.style_no = #{style_list.selected_style}
-		</otherwise>
-	</choose>
-	</select>
-	 -->
+
 	 <select id="findAll" resultType="lookbookVO">
-	 	select * from lookbook l
-	 	<if test="arr_Style != null">
-	 	 left join lookbook_style s on l.lookbook_no = s.lookbook_no 
-	 	where s.style_no in 
+	 	select * from lookbook
+		<if test="arr_Style != null">
+		 where lookbook_no 
+			in (select distinct l.lookbook_no no from lookbook l, lookbook_style s where l.lookbook_no = s.lookbook_no 
+	 		and s.style_no in 
 			<foreach item="item" collection="arr_Style" open="(" separator="," close=")">
 	     	 	 ${item}
 	 		</foreach>
+	 		)
 	 	</if>
-	 	<if test="sortField!=null">
-			order by ${sortField} desc
-		</if>
-		<if test="sortField==null">
-			order by l.lookbook_no desc
-		</if>
+			
 	 </select>
-	
-	
 	<!-- 룩북 하나 클릭시 -->
 	<select id="getLookbook" resultType="lookbookVO">
 		select * from lookbook where lookbook_no=#{lookbook_no}
