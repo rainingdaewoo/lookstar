@@ -57,6 +57,8 @@
 			});
 		});
 		
+		$("#firstclick").trigger("click");
+		$("#firstclick").trigger("click");
 		
 		
 		
@@ -69,15 +71,15 @@
 		var arrayHeight = getHeight.split("~");
 		var height_low = arrayHeight[0];
 		var height_high = arrayHeight[1];
-		/*
+		
 		$.ajax({
 			url:"/lookbook/ListWeightHeight.do",
 			data:{weight_low:weight_low, weight_high:weight_high, height_low, height_high},
-			success:function(list){
-				console.log(list);
+			success:function(listW){
+				console.log("신체조건 ajax: " + listW);
 			}
 		});
-		*/
+		
 	});
 </script>
 </head>
@@ -98,7 +100,7 @@
 			<span class="sortby"><a href="lookbook.do?sortField=lookbook_views">HOT</a></span>&nbsp; 
 				
 				
-			<span class="unchosenF">미니멀</span>&nbsp; 
+			<span class="unchosenF" id="firstclick">미니멀</span>&nbsp; 
 			<span class="unchosenF">캐주얼</span>&nbsp;
 			<span class="unchosenF">비즈니스</span>&nbsp; 
 			<span class="unchosenF">아메카지</span>&nbsp;
