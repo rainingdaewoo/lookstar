@@ -11,22 +11,34 @@
 		USERS_ID, USERS_PW, USERS_EMAIL,
 		USERS_NICKNAME, USERS_BIRTH, USERS_GENDER,
 		USERS_HEIGHT, USERS_WEIGHT, USERS_JOINTYPE, USERS_GRANT,
-		USERS_FNAME, USERS_FSIZE)
+		USERS_FNAME, USERS_FSIZE,users_del)
 		values
 		(#{users_no},#{users_id},#{users_pw},#{users_email},
 		#{users_nickname},#{users_birth},#{users_gender},#{users_height},
 		#{users_weight},#{users_jointype},#{users_grant},#{users_fname},
-		#{users_fsize})
+		#{users_fsize},0)
 	</insert>
 
-	<select id="getUsers" resultType="usersVO"> 
-		select * from users where
-		users_id=#{username}
+
+	<select id="getUsers" resultType="usersVO">
+		select * from users where users_id=#{username} and users_del != 1
 	</select>
+	
+	
 	<select id="getUsersbyNo" resultType="usersVO">
 		select * from users where
 		users_no=#{user_no}
 	</select>
+	
+	<select id="getUser" resultType="usersVO">
+		select * from users where
+		users_no=#{users_no}
+	</select>
+	
+	<select id="getNext_users_no" resultType="int">
+		select nvl(max(users_no),0)+1 from users
+	</select>
+	
 	<update id="updateMyInfo" parameterType="usersVO">
 		update users set users_nickname=#{users_nickname},
 		users_birth=#{users_birth},
@@ -58,8 +70,26 @@
 		select users_nickname from users where users_nickname=#{users_nickname}
 	</select>
 	
-	<select id="getNext_users_no" resultType="int">
-		select nvl(max(users_no),0)+1 from users
-	</select>
 	
+	
+	<update id="updateUsersDel" >
+		update users set users_del = 1 where users_no = #{users_no}
+	</update>
+	
+	<insert id="insertUsers_out">
+		insert into users_out(users_out_no,users_out_reason) values (out_no.nextval,#{users_out_reason})
+	</insert>
+	
+	<update id="updateProfile" parameterType="usersVO">
+		update users set users_fname=#{users_fname},
+		users_fsize=#{users_fsize} where users_no=#{users_no}	
+	</update>
+	
+	<update id="updatePwd">
+		update users set users_pw=#{users_pw} where users_no=#{users_no}
+	</update>
+	
+	<select id="listFollow" resultType="usersVO">
+		select users_id,users_nickname,users_fname from users where users_id in (select following_id from follow where follower_id = #{users_id})
+	</select>
 </mapper>

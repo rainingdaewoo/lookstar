@@ -21,11 +21,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.example.demo.dao.BoardDao;
+
 
 import com.example.demo.dao.CommentsDao;
 import com.example.demo.dao.UsersDao;
-
 import com.example.demo.db.DBManager;
 
 
@@ -158,8 +163,9 @@ public class BoardController {
 		model.addAttribute("u", userdao.getUsers(id));
 	}
 
-
-	@RequestMapping("/manageMyboard.do")
+	
+	
+	@RequestMapping("/mypage/manageMyboard.do")
 	public ModelAndView listMyBoard() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list",dao.listMyBoard());

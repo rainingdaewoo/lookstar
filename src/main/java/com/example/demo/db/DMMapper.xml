@@ -4,24 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="dm">
  	<insert id="insertDM" parameterType="DMVO">
-<<<<<<< HEAD
- 		insert into dm(dm_no,from_id,to_id,dm_content,dm_date) 
- 		values(seq_dm.nextval,#{from_id},#{to_id},#{dm_content},SYSDATE)
- 	</insert>
- 	
- 	
- 	<select id="findAll" resultType="DMVO">
- 		select * from dm order by DM_DATE
- 	</select>
- 	
- 	
- 	<select id="findAll2" resultType="DMVO">
- 		select * from dm order by DM_DATE
- 	</select>
- 
- 	
- 	<select id="getDM" parameterType="int" resultType="DMVo">
-=======
  		insert into dm(dm_no,from_nickname,to_nickname,dm_content,dm_date) values(seq_dm.nextval,#{from_nickname},#{to_nickname},#{dm_content},SYSDATE)
  	</insert>
  	
@@ -42,7 +24,6 @@
  
  	
  	<select id="getDM" parameterType="int" resultType="DMVO">
->>>>>>> refs/heads/dm
   		select * from dm where dm_no=#{dm_no}
   	</select>
  </mapper>
