@@ -20,7 +20,7 @@
 <!-- 버튼 부트스트랩 -->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- 값슬라이더 -->
+
 
 <script type="text/javascript">
 	$(function() {		
