@@ -6,27 +6,8 @@
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>Lookstar-insertUsers</title>
-<link rel="stylesheet" href="../resources/css/insertUsersPage.css">
-<!-- Favicon-->
 
-<link rel="icon" type="image/x-icon" 
-	href="../resources/assets/favicon.ico" />
-<!-- Bootstrap icons-->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-	rel="stylesheet" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
-	crossorigin="anonymous">
 
-<!-- 아이콘 -->
-<script src="https://kit.fontawesome.com/51db22a717.js"
-	crossorigin="anonymous"></script> 
 	
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -36,10 +17,6 @@
 
 <script type="text/javascript">
 $(function(){
-	let code;
-	let id_check = false;
-	let nickname_check = false;
-	
 	$("#f2").submit(function(){
 		if ($("#users_id").val() == "") { 
 	    	alert("아이디를 입력하세요.");
@@ -71,11 +48,11 @@ $(function(){
 		    return false;
 		 }
 	  	
-	  	if($("#emailCheck").val() !== code){
+	  	/*if($("#emailCheck").val() !== code){
 	  		alert("인증번호를 확인해주세요.");
 	  		$("#emailCheck").focus();
 		    return false;
-	  	}
+	  	}*/
 	  	
 		if (!$("#female").is(":checked") && !$("#male").is(":checked")) { //둘다 미체크시
 		  alert("성별을 선택해 주세요.");
@@ -87,24 +64,11 @@ $(function(){
 		    return false;
 		 }
 		
-	  
-		if(id_check !== true){
-			alert("닉네임 중복확인을 확인하세요.")
-		}
-		
-		if(nickname_check !== true){
-			alert("닉네임 중복확인을 확인하세요.")
-		}
-		
-		var mail1 = $('#users_email').val();
-		var mail2 = $('#users_email2').val();
-		mail1 += '@' + mail2;
-		$("#users_email").val(mail1);
-		
-		alert("룩스타그램 회원가입을 축하합니다.");
-		
-	})
+	});
 	
+	let code;
+	let id_check = false;
+	let nickname_check = false;
 	$("#mailslc").change(function(){
 		if($('#mailslc').val() == 'self'){
 			$('#users_email2').attr("disabled", false);
@@ -178,28 +142,34 @@ $(function(){
 			return;
 		}
 	})
-
+	
+	
+	
+	
+	function validate(){
+		alert("ok") 
+	}
 	
 		
 	   
 	<!-- 뒤로가기 막기 -->   
-	 window.history.forward();
-	 function noBack(){window.history.forward();}
+	 //window.history.forward();
+	 //function noBack(){window.history.forward();}
 })
 	
 
 </script>
 </head>
 <!-- 뒤로가기 막기 -->
-<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+<body>
 	<%@ include file="./inc/header.jsp"%>
 	<!-- 회원가입 섹션 -->
 	<br><br><br><br>
 	<hr>
 	<form method="post" id="f2" name="join" action="/join.do" enctype="multipart/form-data">
 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
-		<input type="hidden" name="users.users_jointype" value="1"> 
-		<input type="hidden" name="users.users_grant" value="client">
+		<input type="hidden" name="users_jointype" value="1"> 
+		<input type="hidden" name="users_grant" value="client">
 		<div class="container">
 			<div class="insert">
 				<br> <br>
@@ -207,14 +177,14 @@ $(function(){
 					<tr>
 						<td class="col1">아이디</td>
 						<td class="col2">
-						<input type="text" id="users_id" name="users.users_id" maxlength="20"> 
+						<input type="text" id="users_id" name="users_id" maxlength="20"> 
 						<input class='but1' type="button" value="중복확인" id="compareID">
 						</td>
 					</tr>
 
 					<tr>
 						<td class="col1">비밀번호</td>
-						<td class="col2"><br> <input type="password" id="users_pw" name="users.users_pw" maxlength="16">
+						<td class="col2"><br> <input type="password" id="users_pw" name="users_pw" maxlength="16">
 							<p>
 								※비밀번호는 <span class="num">문자, 숫자, 특수문자(~!@#$%^&*)의 조합 10 ~
 									16자리</span>로 입력이 가능합니다.
@@ -230,7 +200,7 @@ $(function(){
 					<tr>
 						<td class="col1">이메일</td>
 						<td class="col2">
-						<span class="input w1 mailId"> <input type="text" id="users_email" name="users.users_email"></span> 
+						<span class="input w1 mailId"> <input type="text" id="users_email" name="users_email"></span> 
 						<span class="a">@</span> 
 						<input type="text" name="users_email2" id="users_email2"> 
 						<select name="mailslc" id="mailslc">
@@ -254,20 +224,20 @@ $(function(){
 					<tr>
 						<td class="col1">닉네임</td>
 						<td class="col2">
-						<input type="text" id="users_nickname" name="users.users_nickname" maxlength="16">
+						<input type="text" id="users_nickname" name="users_nickname" maxlength="16">
 						<input class='but2' type="button" value="중복 확인" id="compareNickname"></td>
 					</tr>
 
 					<tr>
 						<td class="col1">생년월일</td>
 						<td class="col2">
-						<input type="date" id="users_birth" name="users.users_birth"></td>
+						<input type="date" id="users_birth" name="users_birth"></td>
 					</tr>
 
 					<tr>
 						<td class="col1">성별</td>
-						<td class="col2">남 <input type="radio" name="users.users_gender"
-							value="1" id="male"> 여 <input type="radio" name="users.users_gender"
+						<td class="col2">남 <input type="radio" name="users_gender"
+							value="1" id="male"> 여 <input type="radio" name="users_gender"
 							value="0" id="female">
 						</td>
 					</tr>
@@ -275,34 +245,34 @@ $(function(){
 					<tr>
 						<td class="col1">키</td>
 						<td class="col2">
-						<input type="number" id="users_height" name="users.users_height" value="0">
+						<input type="number" id="users_height" name="users_height" value="0">
 						</td>
 					</tr>
 
 					<tr>
 						<td class="col1">몸무게</td>
 						<td class="col2">
-						<input type="number" id="users_weight" name="users.users_weight" value="0"></td>
+						<input type="number" id="users_weight" name="users_weight" value="0"></td>
 					</tr>
 
 					<tr>
 						<td class="col1">선호스타일</td>
-						<td class="col2">
-							미니멀<input type="checkbox" name="style_no" value="1" style="margin-top: 15px">&nbsp;&nbsp;&nbsp;
-							캐주얼<input type="checkbox" name="style_no" value="2">&nbsp;&nbsp;&nbsp;
-							비즈니스<input type="checkbox" name="style_no" value="3">&nbsp;&nbsp;&nbsp;
-							아메카지<input type="checkbox" name="style_no" value="4">&nbsp;&nbsp;&nbsp;
-							스트릿<input type="checkbox" name="style_no" value="5">&nbsp;&nbsp;&nbsp;
-							스포츠<input type="checkbox" name="style_no" value="6"><br>
-							레트로<input type="checkbox" name="style_no" value="7">&nbsp;&nbsp;&nbsp;
-							캠퍼스<input type="checkbox" name="style_no" value="8">&nbsp;&nbsp;&nbsp;
-							댄디<input type="checkbox" name="style_no" value="9">&nbsp;&nbsp;&nbsp;
-							데일리<input type="checkbox" name="style_no" value="10">
+						<td class="col2">미니멀
+						<input type="checkbox" name="style_no" value="미니멀" style="margin-top: 15px">&nbsp;&nbsp;&nbsp;
+							이지캐주얼<input type="checkbox" name="looks" value="이지캐주얼">&nbsp;&nbsp;&nbsp;
+							비즈니스<input type="checkbox" name="looks" value="비즈니스">&nbsp;&nbsp;&nbsp;
+							아메카지<input type="checkbox" name="looks" value="아메카지">&nbsp;&nbsp;&nbsp;
+							스트릿<input type="checkbox" name="looks" value="스트릿">&nbsp;&nbsp;&nbsp;
+							스포츠<input type="checkbox" name="looks" value="스포츠"><br>
+							레트로<input type="checkbox" name="looks" value="레트로">&nbsp;&nbsp;&nbsp;
+							댄디<input type="checkbox" name="looks" value="댄디">&nbsp;&nbsp;&nbsp;
+							캠퍼스<input type="checkbox" name="looks" value="캠퍼스">&nbsp;&nbsp;&nbsp;
+							데일리<input type="checkbox" name="looks" value="데일리">
 							</td>
 					</tr>
 					<tr>
 						<td class="col1">프로필사진</td>
-						<td><input type="file" id="uploadFile" name="users.uploadFile"></td>
+						<td><input type="file" id="uploadFile" name="uploadFile"></td>
 						<br>
 					</tr>
 

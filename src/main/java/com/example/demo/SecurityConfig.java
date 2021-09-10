@@ -16,8 +16,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//super.configure(http);
 		
 		http.authorizeRequests()
-		.mvcMatchers("/","board/listBoard.do","board/detalBoard.do","/lookbook/ListLookbook.do","/lookbook/ListWeightHeight.do","/lookbook/lookbook_detail.do","/dmTest.do", "listChat.do","/insertDM.do","/main.do","/join.do","/login.do","/lookbook/lookbook.do","/resources/**","/findID.do","/findOK.do","/findPW.do").permitAll()
-		.anyRequest().authenticated();
+		.mvcMatchers("/","/board/listBoard.do","/board/detalBoard.do","/lookbook/ListLookbook.do","/lookbook/ListWeightHeight.do","/lookbook/lookbook_detail.do","/dmTest.do", "listChat.do","/insertDM.do","/main.do","/join.do","/login.do","/lookbook/lookbook.do","/resources/**","/findID.do","/findOK.do","/findPW.do","/compareID.do","/compareNickname.do","/sendCode.do","/kakao.do").permitAll()
+		.anyRequest().authenticated(); 
 		
 		http.formLogin().loginPage("/login.do").permitAll()
 		.defaultSuccessUrl("/loginOK.do");
@@ -28,6 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.logoutSuccessUrl("/login.do");
 		
 		http.httpBasic();	
+		
+		
 		
 	}
 	

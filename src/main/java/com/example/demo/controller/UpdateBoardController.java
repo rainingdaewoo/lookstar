@@ -85,7 +85,7 @@ public class UpdateBoardController {
 		System.out.println(fname);
 		System.out.println(fsize);
 		System.out.println("수정할 게시물:"+b);
-		int re = dao.updateBoard(b);
+		int re = dao.updateBoard(b); 
 		if(re != 1) {
 			mav.addObject("msg", "게시물 수정에 실패하였습니다.");
 			mav.setViewName("error");

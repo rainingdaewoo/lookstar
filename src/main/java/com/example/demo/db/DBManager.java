@@ -9,6 +9,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.aspectj.apache.bcel.classfile.Module.Uses;
 
 import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.ChatVO;
@@ -16,11 +17,13 @@ import com.example.demo.vo.DMVO;
 import com.example.demo.vo.InsertLookbookCommandVO;
 import com.example.demo.vo.LookInfoVO;
 import com.example.demo.vo.CommentsVO;
+import com.example.demo.vo.InsertUsersCommandVO;
 import com.example.demo.vo.LookbookVO;
 import com.example.demo.vo.Lookbook_styleVO;
 import com.example.demo.vo.RangeWeightHeightVO;
 import com.example.demo.vo.SelectLookbookCommandVO;
 import com.example.demo.vo.UsersVO;
+import com.example.demo.vo.Users_like_styleVO;
 
 public class DBManager {
 	private static SqlSessionFactory factory;
@@ -35,8 +38,7 @@ public class DBManager {
 			System.out.println("예외발생:" + e.getMessage());
 		}
 	}
-
-	public static int insertUsers(UsersVO u) {
+/*public static int insertUsers(UsersVO u) {
 		System.out.println("insertUsers 세션 작동함:" + u);
 		SqlSession session = factory.openSession(true);
 		int re = session.insert("users.insert", u);
@@ -44,8 +46,43 @@ public class DBManager {
 		session.close();
 
 		return re;
+	}*/
+
+	
+	
+	public static int insertUsersWithStyle(InsertUsersCommandVO insertUsers) {
+		int re = 0;
+		SqlSession session = factory.openSession(true);
+		
+		//유저넘버 
+		int r = session.selectOne("users.getNext_users_no");
+		//유저라이크스타일넘버 
+		int u = session.selectOne("users_like_style.getNext_users_like_no");
+		System.out.println("-----------------");
+		System.out.println("새로운 users_no:" + r);
+		UsersVO users = insertUsers.getUsers();
+		users.setUsers_no(r);
+		System.out.println("users의 객체: "+ users);
+		int re1 = session.insert("users.insert",users);
+		
+		List<Integer> list = insertUsers.getStyle_no();
+		int re2 = 0;
+		for(int i: list) {
+			Users_like_styleVO users_style = new Users_like_styleVO(u,r,i);
+			re2+=session.insert("users_like_style.insert", users_style);
+		}
+		
+		if(re1==1 && re2 ==list.size()) {
+			session.commit();
+			re = 1;
+		}else {
+			session.rollback();
+		}
+		session.close();
+		return re;
 	}
 
+	
 	public static int updateInfo(UsersVO u) {
 		SqlSession session = factory.openSession(true);
 		int re = session.update("look.updateMyInfo", u);
@@ -235,12 +272,7 @@ public class DBManager {
 	}
 
 
-	public static int getTotalRecord() {
-		SqlSession session = factory.openSession();
-		int n = session.selectOne("board.totalRecord");
-		session.close();
-		return n;
-	}
+	
 
 		public static void updateStep(int b_ref, int b_step) {
 			// TODO Auto-generated method stub
@@ -274,8 +306,10 @@ public class DBManager {
 			session.close();
 			return re;
 		}
+
 		
 		public static int getTotalRecord(String searchType, String keyword) {
+
 			SqlSession session = factory.openSession();
 			
 			HashMap data = new HashMap();
@@ -296,6 +330,56 @@ public class DBManager {
 			session.close();
 			return list;
 		}
+		
+		public static String findID(String users_email){	
+			System.out.println("DBManager findID동작함" + users_email);
+			SqlSession session = factory.openSession();
+			String users_id = session.selectOne("users.findID",users_email);
+			session.close();
+			return users_id;
+		}
+		
+		public static String findPW(String users_id, String users_email) {
+			System.out.println("DBManager findPW동작함" + users_id+","+users_email);
+			SqlSession session = factory.openSession();
+			HashMap map = new HashMap();
+			map.put("users_id", users_id);
+			map.put("users_email", users_email);
+			String users_pw = session.selectOne("users.findPW", map);
+			session.close();
+			return users_pw;		
+		} 
+		
+		public static int updatePW(String code, String users_id,String users_email) {
+			System.out.println("DBManager updatePW동작함" + code);
+			SqlSession session = factory.openSession(true);
+			HashMap map = new HashMap();
+			map.put("users_pw", code);
+			map.put("users_id", users_id);
+			map.put("users_email", users_email);
+			int re = session.update("users.updatePW",map); 
+			session.close();
+			return re;
+		}
+		
+		public static String compareID(String compare_id) {
+			System.out.println("DBManager compareID동작함");
+			SqlSession session = factory.openSession();
+			String users_id = session.selectOne("users.compareID", compare_id);
+			session.close();
+			return users_id;
+		}
+		
+		public static String compareNickname(String compare_nickname) {
+			SqlSession session = factory.openSession();
+			String users_nickname = session.selectOne("users.compareNickname",compare_nickname);
+			System.out.println("DBManager compareNickname동작함" + users_nickname);
+			session.close();
+			return users_nickname;
+		}
+		
+		
+		
 		
 		public static int insertComments(CommentsVO c) {
 			SqlSession session = factory.openSession(true);

@@ -13,13 +13,13 @@
 		USERS_HEIGHT, USERS_WEIGHT, USERS_JOINTYPE, USERS_GRANT,
 		USERS_FNAME, USERS_FSIZE)
 		values
-		(seq_users.nextval,#{users_id},#{users_pw},#{users_email},
+		(#{users_no},#{users_id},#{users_pw},#{users_email},
 		#{users_nickname},#{users_birth},#{users_gender},#{users_height},
 		#{users_weight},#{users_jointype},#{users_grant},#{users_fname},
 		#{users_fsize})
 	</insert>
 
-	<select id="getUsers" resultType="usersVO">
+	<select id="getUsers" resultType="usersVO"> 
 		select * from users where
 		users_id=#{username}
 	</select>
@@ -38,4 +38,28 @@
 	<delete id="deleteUser">
 		delete users where users_no=4 and users_pw=#{users_pw}
 	</delete>
+	<select id="findID" resultType="String" parameterType="String">
+		select nvl(users_id,'') from users where users_email=#{users_email}
+	</select>
+	
+	<!-- <select id="findPW" resultType="String">
+		select nvl(users_pw,'') from users where users_id=#{users_id} and users_email=#{users_email}
+	</select>
+	-->
+	
+	<update id="updatePW">
+		update users set users_pw=#{users_pw} where users_id =#{users_id} and users_email=#{users_email}
+	</update>
+	<select id="compareID" resultType="String" parameterType="String">
+		select nvl(users_id,'') from users where users_id=#{users_id}
+	</select>
+	
+	<select id="compareNickname" resultType="String" parameterType="String">
+		select users_nickname from users where users_nickname=#{users_nickname}
+	</select>
+	
+	<select id="getNext_users_no" resultType="int">
+		select nvl(max(users_no),0)+1 from users
+	</select>
+	
 </mapper>

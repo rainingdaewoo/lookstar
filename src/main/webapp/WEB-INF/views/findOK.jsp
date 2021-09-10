@@ -37,12 +37,11 @@
             </div>
             <div>
             	<p class="field">
-            	<!-- ${msg }-->
-            	메일전송이 완료되었습니다. 확인 후 로그인 해주시기 바랍니다.
+            	${msg }
             	</p>
             </div>
             <div class="container px-4 px-lg-5 my-5" id="text2">
-                <form class="form-find" action="#">
+                <form class="form-find" action="login.do">
                     <div class="form-group text-center">
                         <input type="submit" class="btn btn-lg btn-primary btn-block" value="로그인하러 가기">
                     </div>

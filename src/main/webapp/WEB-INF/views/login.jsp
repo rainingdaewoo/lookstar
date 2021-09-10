@@ -11,6 +11,8 @@
     <title>Lookstar-loginUsers</title>
 	<!-- 아이콘 -->
 	<script src="https://kit.fontawesome.com/51db22a717.js" crossorigin="anonymous"></script>
+	<!-- 카카오 -->
+	 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<!-- Favicon-->
 	<link rel="icon" type="image/x-icon" href="../resources/assets/favicon.ico" />
 	<!-- Bootstrap icons-->
@@ -21,12 +23,40 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5.3/examples/sign-in/">
     <!-- Custom styles for this template -->
     <link href="../resources/css/signin.css" rel="stylesheet">
+    <script type="text/javascript">
+    	window.Kakao.init("2e1f490b7eb0980dbf31d4d83821cf0d");
+    	function kakaoLogin() {
+    		window.Kakao.Auth.login({
+    			scope:'profile_nickname,account_email,gender',
+    			success: function(authObj){
+    				console.log(authObj);
+    				window.Kakao.API.request({
+    					url:'/v2/user/me',
+    					success: res =>{
+ 							const profile = res.properties.nickname;   						
+    						const email = res.kakao_account.email;
+    						const gender = res.kakao_account.gender;
+    						
+    						console.log(profile);
+    						console.log(email);
+    						console.log(gender);
+    						
+    						$("#kakaoprofile").val(profile);
+    						$("#kakaoemail").val(email);
+    						$("#kakaogender").val(gender);
+    						location.href = 'join.do';
+    					}
+    				});
+    			}
+    		})
+    	} 
+    </script>
   </head>
 
   <%@ include file="./inc/header.jsp" %>
 
   <body class="text-center">
-    <form class="form-signin" action="login.do" method="post">
+    <form class="form-signin" name="login_frm" action="login.do" method="post" >
     <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
   <h1 class="h3 mb-3 font-weight-normal">login</h1>
   <input type="text" id="inputId" name="username" class="form-control" placeholder="Id" required autofocus>
@@ -42,8 +72,22 @@
     </label>
   </div>
   <input type="submit" class="btn btn-lg btn-primary btn-block" value="login">
+  <br>
+  <div class="form-group row" id="kakaologin">
+  	<div class="kakaobtn">
+  		<input type="hidden" name="kakaoprofile" id="kakaoprofile"/>
+  		<input type="hidden" name="kakaoemail" id="kakaoemail"/>
+  		<input type="hidden" name="kakaogender" id="kakaogender"/>
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	<a href="javascript:kakaoLogin();">
+  	<img src="https://www.gb.go.kr/Main/Images/ko/member/certi_kakao_login.png" style="height:50px;width:auto"/>
+  	</a>
+  	</div>
+  </div>
+  <br>
+  <a href="#"><img src="https://static.nid.naver.com/oauth/big_g.PNG?version=js-2.0.0" style="height:50px;width:auto"/></a>
 </form>
-
+	
 	<!-- Footer-->
 	<%@ include file="./inc/footer.jsp" %>
 </body>

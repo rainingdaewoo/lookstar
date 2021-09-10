@@ -16,13 +16,36 @@
              <if test="searchType != null and searchType == 'all'">
              	and (board_title like '%' || #{keyword} || '%' or board_content like '%' || #{keyword} || '%')
              </if>
+        from board, users 
+        where board.users_no = users.users_no
+        ) mb
+    where rNum between #{start} and #{end} 
+        order by board_no desc
+	</select>
+    <!--
+  초안
+     select board_no, board_title, board_content, users_nickname, board_date, board_views, board_show
+    from (
+        select board_no, board_title, board_content, users_nickname, board_date, board_views, board_show,
+            row_number() over(order by board_no desc) as rNum
+        from board, users 
+        where board.users_no = users.users_no
+        where board_title like '%' || #{board_title} || '%'  
+            where board_content like '%' || #{board_content} || '%'  
+            where users_nickname '%' || #{users_nickname} || '%'  
+            where board_title like '%' || #{board_title} || '%' or (board_content like '%' || #{board_content} || '%')
+>>>>>>> refs/heads/users
         ) b
+<<<<<<< HEAD
     WHERE rNum between #{start} and #{end} 
     ORDER BY board_no desc
 	</select>
     
     
     
+=======
+    where rNum between #{start} and #{end} 
+        order by board_no desc -->
   <insert id="insertBoard" parameterType="boardVO">
   	insert into board(board_no, board_title, users_no, board_content,
   	board_views, board_date, board_fname, board_fsize, board_show) 
