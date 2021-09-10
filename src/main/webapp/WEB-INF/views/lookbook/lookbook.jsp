@@ -57,20 +57,21 @@
 			});
 		});
 		
-		$("#firstclick").trigger("click");
-		$("#firstclick").trigger("click");
 		
 		
 		
-		var getWeight = $("#weight option:selected").text();
+		
+		
+		var getWeight = $("#weight option:selected").value();
 		var arrayWeight = getWeight.split("~");
 		var weight_low = arrayWeight[0];
 		var weight_high = arrayWeight[1];
 		
-		var getHeight = $("#height option:selected").text();
+		var getHeight = $("#height option:selected").value();
 		var arrayHeight = getHeight.split("~");
 		var height_low = arrayHeight[0];
 		var height_high = arrayHeight[1];
+		console.log(height_low)
 		
 		$.ajax({
 			url:"/lookbook/ListWeightHeight.do",

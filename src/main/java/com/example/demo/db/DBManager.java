@@ -17,6 +17,7 @@ import com.example.demo.vo.InsertLookbookCommandVO;
 import com.example.demo.vo.LookInfoVO;
 import com.example.demo.vo.LookbookVO;
 import com.example.demo.vo.Lookbook_styleVO;
+import com.example.demo.vo.RangeWeightHeightVO;
 import com.example.demo.vo.SelectLookbookCommandVO;
 import com.example.demo.vo.UsersVO;
 
@@ -89,6 +90,21 @@ public class DBManager {
 		SqlSession session = factory.openSession();
 		
 		List<LookbookVO> list = session.selectList("lookbook.findAll", map);
+		// System.out.println("list: " + list);
+		for(LookbookVO l: list) {
+			System.out.println(l.getLookbook_no());
+		}
+		session.close();
+		return list;
+	}
+	// 신체스펙을 통한 lookbooklist
+	public static List<LookbookVO> listLookbook(RangeWeightHeightVO rw) {
+		
+		System.out.println("신체스펙 정보: " + rw);
+		
+		SqlSession session = factory.openSession();
+		
+		List<LookbookVO> list = session.selectList("lookbook.findRange", rw);
 		// System.out.println("list: " + list);
 		for(LookbookVO l: list) {
 			System.out.println(l.getLookbook_no());

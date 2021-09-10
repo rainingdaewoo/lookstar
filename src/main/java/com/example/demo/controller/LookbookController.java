@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.dao.LookbookDao;
 import com.example.demo.dao.UsersDao;
 import com.example.demo.vo.LookbookVO;
+import com.example.demo.vo.RangeWeightHeightVO;
 import com.example.demo.vo.SelectLookbookCommandVO;
 import com.example.demo.vo.Style_searchVO;
 
@@ -46,6 +48,19 @@ public class LookbookController {
 		HashMap map = new HashMap();
 		map.put("arr_Style", arr_Style);
 		List<LookbookVO> list = lookbookdao.listLookbook(map);
+		return list;
+	}
+	@RequestMapping("/lookbook/ListWeightHeight.do")
+	@ResponseBody
+	public List<LookbookVO> rangelookbook(RangeWeightHeightVO rw, Model model){
+		System.out.println("ListWeightHeight.do 작동:");
+		System.out.println("Height_low: "+ rw.getHeight_low() );
+		System.out.println("Height_high: "+ rw.getHeight_high() );
+		System.out.println("Weight_low: "+ rw.getWeight_low() );
+		System.out.println("Weight_high: "+ rw.getWeight_high() );
+		
+		List<LookbookVO> list = lookbookdao.listLookbook(rw);
+		
 		return list;
 	}
 

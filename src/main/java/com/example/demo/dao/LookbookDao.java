@@ -11,6 +11,7 @@ import com.example.demo.vo.InsertLookbookCommandVO;
 import com.example.demo.vo.LookInfoVO;
 import com.example.demo.vo.LookbookVO;
 import com.example.demo.vo.Lookbook_styleVO;
+import com.example.demo.vo.RangeWeightHeightVO;
 import com.example.demo.vo.SelectLookbookCommandVO;
 import com.example.demo.vo.UsersVO;
 
@@ -21,6 +22,10 @@ public class LookbookDao {
 	public List<LookbookVO> listLookbook(HashMap arr_style) {
 		// TODO Auto-generated method stub
 		return DBManager.listLookbook(arr_style);
+	}
+	public List<LookbookVO> listLookbook(RangeWeightHeightVO rw) {
+		// TODO Auto-generated method stub
+		return DBManager.listLookbook(rw);
 	}
 	// 룩북 넣을 시
 	public int insert(InsertLookbookCommandVO insertlook) {
