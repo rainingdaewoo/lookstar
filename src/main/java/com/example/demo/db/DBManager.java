@@ -15,6 +15,7 @@ import com.example.demo.vo.ChatVO;
 import com.example.demo.vo.DMVO;
 import com.example.demo.vo.InsertLookbookCommandVO;
 import com.example.demo.vo.LookInfoVO;
+import com.example.demo.vo.CommentsVO;
 import com.example.demo.vo.LookbookVO;
 import com.example.demo.vo.Lookbook_styleVO;
 import com.example.demo.vo.RangeWeightHeightVO;
@@ -233,37 +234,6 @@ public class DBManager {
 		session.close();
 	}
 
-	public static void updateStep(int b_ref, int b_step) {
-		// TODO Auto-generated method stub
-		SqlSession session = factory.openSession();
-		HashMap map = new HashMap();
-		map.put("b_ref", b_ref);
-		map.put("b_step", b_step);
-
-		session.update("board.updateStep", map);
-		session.commit();
-		session.close();
-	}
-
-	public static int updateBoard(BoardVO b) {
-		SqlSession session = factory.openSession(true);
-		int re = session.update("board.updateBoard", b);
-		session.close();
-		return re;
-	}
-
-	public static int deleteBoard(int board_no) {
-		SqlSession session = factory.openSession(true);
-		/*
-		 * HashMap map = new HashMap(); map.put("no", board_no);
-		 * System.out.println("map:"+map);
-		 */
-		int re = session.delete("board.deleteBoard", board_no);
-
-		session.commit();
-		session.close();
-		return re;
-	}
 
 	public static int getTotalRecord() {
 		SqlSession session = factory.openSession();
@@ -271,5 +241,93 @@ public class DBManager {
 		session.close();
 		return n;
 	}
+
+		public static void updateStep(int b_ref, int b_step) {
+			// TODO Auto-generated method stub
+			SqlSession session = factory.openSession();
+			HashMap map = new HashMap();
+			map.put("b_ref", b_ref);
+			map.put("b_step", b_step);
+			
+			session.update("board.updateStep", map);
+			session.commit();
+			session.close();
+		}
+		
+		public static int updateBoard(BoardVO b) {
+			SqlSession session = factory.openSession(true);
+			int re = session.update("board.updateBoard", b);
+			session.close();
+			System.out.println("DBManager 작동함");
+			return re;
+		}
+		
+		public static int deleteBoard(int board_no) {
+			SqlSession session = factory.openSession(true);
+			/*
+			 * HashMap map = new HashMap(); map.put("no", board_no);
+			 * System.out.println("map:"+map);
+			 */
+			int re = session.delete("board.deleteBoard", board_no);
+			
+			session.commit();
+			session.close();
+			return re;
+		}
+		
+		public static int getTotalRecord(String searchType, String keyword) {
+			SqlSession session = factory.openSession();
+			
+			HashMap data = new HashMap();
+			 
+			data.put("searchType", searchType);
+			data.put("keyword", keyword);
+			
+			int n = session.selectOne("board.totalRecord", data);
+			session.close();
+			return n;
+		}
+		
+		//댓글 관련 DBManager
+		public static List<CommentsVO> listComments(int board_no){
+			SqlSession session = factory.openSession();
+			List<CommentsVO> list = session.selectList("comments.listComments", board_no);
+			System.out.println(list);
+			session.close();
+			return list;
+		}
+		
+		public static int insertComments(CommentsVO c) {
+			SqlSession session = factory.openSession(true);
+			int re = session.insert("comments.insertComments", c);
+			session.close();
+			return re;
+		}
+		
+		public static CommentsVO getComments(int comments_no) {
+			SqlSession session = factory.openSession();
+			CommentsVO c = session.selectOne("comments.getComments", comments_no);
+			session.close();
+			return c;
+		}
+		
+		public static int deleteComments(int comments_no) {
+			SqlSession session = factory.openSession(true);
+			/*
+			 * HashMap map = new HashMap(); map.put("no", board_no);
+			 * System.out.println("map:"+map);
+			 */
+			int re = session.delete("comments.deleteComments", comments_no);
+			session.commit();
+			session.close();
+			return re;
+		}
+		
+		public static int updateComments(CommentsVO comments_no) {
+			SqlSession session = factory.openSession(true);
+			int re = session.update("comments.updateComments", comments_no);
+			session.close();
+			return re;
+		}
 
 }

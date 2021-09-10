@@ -51,7 +51,6 @@ public class UsersController {
 	}
 
 	
-	
 	@RequestMapping("/findID.do")
 	public void findID() {
 		

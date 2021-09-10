@@ -8,32 +8,26 @@
     from (
         select board_no, board_title, board_content, users_nickname, board_date, board_views, board_show,
             row_number() over(order by board_no desc) as rNum
-        from board, users 
-        where board.users_no = users.users_no
-        ) mb
-    where rNum between #{start} and #{end} 
-        order by board_no desc
-	</select>
-    <!--
-  초안
-     select board_no, board_title, board_content, users_nickname, board_date, board_views, board_show
-    from (
-        select board_no, board_title, board_content, users_nickname, board_date, board_views, board_show,
-            row_number() over(order by board_no desc) as rNum
-        from board, users 
-        where board.users_no = users.users_no
-        where board_title like '%' || #{board_title} || '%'  
-            where board_content like '%' || #{board_content} || '%'  
-            where users_nickname '%' || #{users_nickname} || '%'  
-            where board_title like '%' || #{board_title} || '%' or (board_content like '%' || #{board_content} || '%')
+        FROM board, users 
+        WHERE board.users_no = users.users_no
+             <if test="searchType != null and searchType != 'all'" >
+             	and ${searchType} like '%' || #{keyword} || '%'
+             </if>
+             <if test="searchType != null and searchType == 'all'">
+             	and (board_title like '%' || #{keyword} || '%' or board_content like '%' || #{keyword} || '%')
+             </if>
         ) b
-    where rNum between #{start} and #{end} 
-        order by board_no desc -->
+    WHERE rNum between #{start} and #{end} 
+    ORDER BY board_no desc
+	</select>
+    
+    
+    
   <insert id="insertBoard" parameterType="boardVO">
   	insert into board(board_no, board_title, users_no, board_content,
-  	board_views, board_date, board_fname, board_fsize) 
-  	values(board_seq.nextval,#{board_titlele},#{users_no},#{board_content},
-  	0, sysdate, #{board_fname},#{board_fsize})
+  	board_views, board_date, board_fname, board_fsize, board_show) 
+  	values(seq_board.nextval,#{board_title},#{users_no},#{board_content},
+  	0, sysdate, #{board_fname},#{board_fsize}, 0)
   </insert>
   
   <select id="getNextNo" resultType="int">
@@ -66,8 +60,15 @@
   	UPDATE board SET board_show = 1 WHERE board_no = #{board_no}
    </update>
   
-  <select id="totalRecord" resultType="int">
-  	select count(*) from board
+  <select id="totalRecord" resultType="int" parameterType="hashMap">
+  	select count(*) FROM board, users 
+        WHERE board.users_no = users.users_no
+  	  <if test="searchType != null and searchType != 'all'" >
+             	and ${searchType} like '%' || #{keyword} || '%'
+             </if>
+             <if test="searchType != null and searchType == 'all'">
+             	and (board_title like '%' || #{keyword} || '%' or board_content like '%' || #{keyword} || '%')
+             </if>	
   </select>
   
   <select id="listMyBoard" resultType="boardVO">
@@ -75,4 +76,5 @@
    	FROM board 
    	WHERE users_no = #{users_no}
   </select>
+  
 </mapper>

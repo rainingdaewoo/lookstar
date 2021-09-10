@@ -19,6 +19,7 @@
 		<typeAlias type="com.example.demo.vo.Lookbook_styleVO"
 			alias="lookbook_styleVO" />
 		<typeAlias type="com.example.demo.vo.DMVO" alias="dmVO" />
+		<typeAlias type="com.example.demo.vo.CommentsVO" alias="commentsVO"/>
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -34,7 +35,8 @@
 
 	<mappers>
 		<mapper resource="com/example/demo/db/UsersMapper.xml" />
-		<mapper resource="com/example/demo/db/BoardMapper.xml" />
+		<mapper resource="com/example/demo/db/BoardMapper.xml"/>
+		<mapper resource="com/example/demo/db/CommentsMapper.xml"/>
 		<mapper resource="com/example/demo/db/LookbookMapper.xml" />
 		<mapper resource="com/example/demo/db/LookInfoMapper.xml" />
 		<mapper resource="com/example/demo/db/DMMapper.xml" />
