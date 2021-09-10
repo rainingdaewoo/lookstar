@@ -20,13 +20,15 @@ public class UsersService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
+		
 		System.out.println("loadUserByUsername 동작함:" + username);
 
 		UsersVO u = dao.getUsers(username);
+		
 		if (u == null) {
 			throw new UsernameNotFoundException(username);
 		}
+		
 		System.out.println("회원정보: " + u);
 
 		return User.builder().username(username).password(u.getUsers_pw()).roles(u.getUsers_grant()).build();

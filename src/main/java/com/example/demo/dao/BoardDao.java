@@ -23,7 +23,7 @@ public class BoardDao {
 		return DBManager.getNextNo();
 	}
 	
-	public int insert(BoardVO b) {
+	public int insertBoard(BoardVO b) {
 		return DBManager.insertBoard(b);
 	}
 	
