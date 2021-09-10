@@ -50,6 +50,7 @@
          <span class="navbar-toggler-icon"></span>
       </button>
 
+<<<<<<< HEAD
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
          <ul class="navbar-nav mr-auto">
             <!-- 룩페이지 이동 -->
@@ -90,6 +91,37 @@
          <form class="d-flex">
             <button type="button" class="btn btn-outline-dark"
                data-toggle="modal" data-target="#joinModal">JOIN</button>
+=======
+		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+			<ul class="navbar-nav mr-auto">
+				<!-- 룩페이지 이동 -->
+				<li class="nav-item"><a class="nav-link" href="../lookbook.do">Looks</a></li>
+				<!-- 게시판 이동 -->
+				<li class="nav-item"><a class="nav-link" href="../listBoard.do">Board</a></li>
+				<!-- DM 이동 -->
+				<li class="nav-item"><a class="nav-link" href="../dmTest.do"><img
+						src="../../../resources/assets/chat.png" width="20px"></a></li>
+				<li class="nav-item dropdown">
+					<!-- 마이페이지 이동 -->
+				<li class="nav-item"><a class="nav-link" href="#"><img
+						src="../../../resources/assets/user.png" width="20px"></a></li>
+				<li class="nav-item dropdown">
+					<!-- 알림 드롭다운  --> <a class="nav-link dropdown-toggle" href="#"
+					id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"><img src="../../../resources/assets/bell.png"
+						width="20px"></a>
+					<div class="dropdown-menu" aria-labelledby="dropdown01">
+						<a class="dropdown-item" href="#">nilepa님이 내 게시판에 댓글을 달았습니다!</a> <a
+							class="dropdown-item" href="#">호랑호랑님이 나를 팔로우합니다!</a> <a
+							class="dropdown-item" href="#">누군가가 내 룩페이지를 좋아합니다!</a>
+					</div>
+				</li>
+			</ul>
+			<!-- JOIN 버튼(로그인) -->
+			<form class="d-flex">
+				<button type="button" class="btn btn-outline-dark"
+					data-toggle="modal" data-target="#joinModal">JOIN</button>
+>>>>>>> refs/heads/dm
 
          </form>
          

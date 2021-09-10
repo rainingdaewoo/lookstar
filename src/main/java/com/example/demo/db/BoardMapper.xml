@@ -34,7 +34,10 @@
             where board_content like '%' || #{board_content} || '%'  
             where users_nickname '%' || #{users_nickname} || '%'  
             where board_title like '%' || #{board_title} || '%' or (board_content like '%' || #{board_content} || '%')
+<<<<<<< HEAD
 >>>>>>> refs/heads/users
+=======
+>>>>>>> refs/heads/dm
         ) b
 <<<<<<< HEAD
     WHERE rNum between #{start} and #{end} 
@@ -48,9 +51,15 @@
         order by board_no desc -->
   <insert id="insertBoard" parameterType="boardVO">
   	insert into board(board_no, board_title, users_no, board_content,
+<<<<<<< HEAD
   	board_views, board_date, board_fname, board_fsize, board_show) 
   	values(seq_board.nextval,#{board_title},#{users_no},#{board_content},
   	0, sysdate, #{board_fname},#{board_fsize}, 0)
+=======
+  	board_views, board_date, board_fname, board_fsize) 
+  	values(board_seq.nextval,#{board_titlele},#{users_no},#{board_content},
+  	0, sysdate, #{board_fname},#{board_fsize})
+>>>>>>> refs/heads/dm
   </insert>
   
   <select id="getNextNo" resultType="int">

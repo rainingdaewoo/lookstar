@@ -17,11 +17,14 @@
 		(#{lookbook_no},#{style_no})
 	</insert>
 	
+<<<<<<< HEAD
 	<select id="getLookStyle" resultType="lookbook_styleVO">
 		select * from lookbook_style where lookbook_no=#{lookbook_no}
 		order by style_no asc
 	</select>
 	
+=======
+>>>>>>> refs/heads/dm
 	<!-- 
 	<insert id="insert" parameterType="java.util.List">
 		<foreach item="item" collection="list" open="INSERT ALL" separator=" ">

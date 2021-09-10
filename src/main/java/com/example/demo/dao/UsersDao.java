@@ -29,6 +29,12 @@ public class UsersDao {
 	public UsersVO getUsers(int users_no) {
 		return DBManager.getUsers(users_no);
 	}
+	
+	//가연
+	public UsersVO getUsersByNickname(String users_nickname) {
+		return DBManager.getUsersByNickname(users_nickname);
+	}
+	
 	//users
 	public int update(UsersVO u) {
 		return DBManager.updateInfo(u);

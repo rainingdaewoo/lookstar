@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lookinfo">
+<<<<<<< HEAD
 	
 	 <select id="getNext_lookbook_no" resultType="int">
 	 	select nvl(max(lookbook_no),0)+1 from lookbook
@@ -18,4 +19,62 @@
 	 	select * from lookinfo where lookbook_no=#{lookbook_no}
 	 	order by lookinfo_category asc
 	 </select>
+=======
+	<!-- insert문// for eacch (item.~~~)사용
+	<insert id="insert" parameterType="java.util.List">
+		insert into lookinfo (lookinfo_no,lookbook_no,lookinfo_name,lookinfo_url,lookinfo_category) values	
+		<foreach item="item" collection="list" separator=",">
+		(seq_lookinfo.nextval,(select max(lookbook_no) from lookbook)+1,#{item.lookinfo_name},#{item.lookinfo_url},#{item.lookinfo_category})
+		</foreach>
+	</insert>
+	 -->
+	<!-- 이중 FOREACH
+	<insert id="insert" parameterType="java.util.List">
+		insert into lookinfo (lookinfo_no,lookbook_no,lookinfo_name,lookinfo_url,lookinfo_category) values	
+		<foreach item="item" collection="list" separator=",">
+			<foreach collection="item" item="it" separator=",">
+				(seq_lookinfo.nextval,(select max(lookbook_no) from lookbook)+1,#{it.lookinfo_name},#{it.lookinfo_url},#{it.lookinfo_category)
+			</foreach>
+		</foreach>
+	</insert>
+	 -->
+	<!-- 이중 FOREACH// item.LookInfoVO
+	<insert id="insert" parameterType="java.util.List">
+		insert into lookinfo (lookinfo_no,lookbook_no,lookinfo_name,lookinfo_url,lookinfo_category) values	
+		<foreach item="item" collection="list" separator=",">
+			<foreach collection="item.LookInfoVO" item="it" separator=",">
+				(seq_lookinfo.nextval,(select max(lookbook_no) from lookbook)+1,#{it.lookinfo_name},#{it.lookinfo_url},#{it.lookinfo_category)
+			</foreach>
+		</foreach>
+	</insert>
+	-->
+	<!-- insert all, foreach 사용 
+	<insert id="insert" parameterType="java.util.List">
+		<foreach collection="list" item="item" open="INSERT ALL " close="select * from dual" separator=" ">
+		into lookinfo (lookinfo_no,lookbook_no,lookinfo_name,lookinfo_url,lookinfo_category) values	
+		(seq_lookinfo.nextval,(select max(lookbook_no) from lookbook)+1,#{item.lookinfo_name},#{item.lookinfo_url},#{item.lookinfo_category)
+		</foreach>
+	</insert>
+	 --> 
+	 <select id="getNext_lookbook_no" resultType="int">
+	 	select nvl(max(lookbook_no),0)+1 from lookbook
+	 </select>
+	 
+	 <insert id="insert" parameterType="lookinfoVO">
+	 	insert into lookinfo (lookinfo_no,lookbook_no,lookinfo_name,lookinfo_url,lookinfo_category) values
+	 	(seq_lookinfo.nextval,#{lookbook_no},#{lookinfo_name},
+	 		 #{lookinfo_url},#{lookinfo_category})
+	 </insert>
+	 <!-- update를 사용한 insert all -->
+	 <!-- 
+	 <update id="insert" parameterType="java.util.List">
+	 	<foreach collection="list" item="item" open="INSERT ALL " close="select * from dual" separator=" ">
+	 		
+	 		into lookinfo (lookinfo_no,lookbook_no,lookinfo_name,lookinfo_url,lookinfo_category) values
+	 		 (seq_lookinfo.nextval,(select max(lookbook_no) from lookbook)+1,#{item.lookinfo_name},
+	 		 #{item.lookinfo_url},#{item.lookinfo_category)
+	 	</foreach>
+	 </update>
+	  -->
+>>>>>>> refs/heads/dm
 </mapper>

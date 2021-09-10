@@ -12,7 +12,6 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.aspectj.apache.bcel.classfile.Module.Uses;
 
 import com.example.demo.vo.BoardVO;
-import com.example.demo.vo.ChatVO;
 import com.example.demo.vo.DMVO;
 import com.example.demo.vo.InsertLookbookCommandVO;
 import com.example.demo.vo.LookInfoVO;
@@ -44,7 +43,6 @@ public class DBManager {
 		int re = session.insert("users.insert", u);
 		System.out.println("re:" + re);
 		session.close();
-
 		return re;
 	}*/
 
@@ -206,35 +204,7 @@ public class DBManager {
 		return re;
 	}
 
-	public static int insertDM(DMVO d) {
-		SqlSession session = factory.openSession(true);
-		int re = session.insert("dm.insertDM", d);
-		session.close();
-		return re;
-	}
-
-	public static List<DMVO> listDM() {
-		SqlSession session = factory.openSession();
-		List<DMVO> list = session.selectList("dm.findAll");
-		session.close();
-		return list;
-
-	}
-
-	public static List<DMVO> listDM2() {
-		SqlSession session = factory.openSession();
-		List<DMVO> dmList = session.selectList("dm.findAll2");
-		session.close();
-		return dmList;
-
-	}
-
-	public static DMVO getDM(int dm_no) {
-		SqlSession session = factory.openSession();
-		DMVO d = session.selectOne("dm.getDM", dm_no);
-		session.close();
-		return d;
-	}
+	
 	// board 관련 DBManager
 
 	public static List<BoardVO> listBoard(HashMap map) {
@@ -414,4 +384,46 @@ public class DBManager {
 			return re;
 		}
 
+		
+		
+		//dm
+		//가연
+		public static UsersVO getUsersByNickname(String users_nickname) {
+			SqlSession session = factory.openSession();
+			UsersVO u = session.selectOne("users.getUsersByNickname",users_nickname);
+			session.close();
+			return u;
+		}
+		
+		
+		public static int insertDM(DMVO d) {
+			SqlSession session = factory.openSession(true);
+			int re = session.insert("dm.insertDM",d);
+			session.close();
+			return re;
+		}
+		
+		public static List<DMVO> listPeople(String users_nickname){
+			SqlSession session = factory.openSession();
+			List<DMVO> list = session.selectList("dm.findAll",users_nickname);
+			session.close();
+			return list;
+			
+		}
+		
+		public static List<DMVO> listDM(String users_nickname){
+			SqlSession session = factory.openSession();
+			List<DMVO> dmList = session.selectList("dm.findAll2",users_nickname);
+			session.close();
+			return dmList;
+			
+		}
+		
+		public static DMVO getDM(int dm_no) {
+			SqlSession session = factory.openSession();
+			DMVO d = session.selectOne("dm.getDM",dm_no);
+			session.close();
+			return d;
+		}
+		
 }
