@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Random;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -124,24 +127,60 @@ public class UsersController {
 	}
 	
 	// 보민
-	@RequestMapping("/mypage.do")
+	
+	@RequestMapping(value = "/logout.do")
+	public String logout(HttpSession session) throws Exception {
+		session.invalidate();
+		return "redirect:/login.do";
+	}
+	
+	@RequestMapping("/mypage/mypage.do")
 	public void mypage() {
 		
 	}
 	
-	@RequestMapping("/changePWD.do")
+	@RequestMapping("/mypage/changePWD.do")
 	public void updatePWD() {
 		
 	}
 	
-	@RequestMapping("/myInform.do")
+	@RequestMapping("/mypage/myInform.do")
 	public void updateInfo() {
 		
 	}
 	
 	@RequestMapping("/kakao.do")
-	public void kakao() {
+	public void kakao() {}
+
+	@RequestMapping("/mypage/withdrawal.do")
+	public void withdrawal(Model model,HttpSession session) {
+		int users_no = ((UsersVO)session.getAttribute("users")).getUsers_no();
+		System.out.println("users_no:"+users_no);
+		model.addAttribute("users_no",users_no);
+	}
+	
+	@RequestMapping("/mypage/termsOfService.do")
+	public void termsOfService() {
+		
+	}
+	
+	@RequestMapping("/mypage/manageMylook.do")
+	public void manageMylook() {
+		
+	}
+	
+	@RequestMapping("/mypage/followList.do")
+	public void followList(Model model,HttpSession session) {
+		String users_id = ((UsersVO)session.getAttribute("users")).getUsers_id();
+		System.out.println("users_id:"+users_id);
+		List<UsersVO> list = dao.listFollow(users_id);
+		System.out.println("팔로우목록:"+list);
+		model.addAttribute("flist",list);
+	}
+	
+	@RequestMapping("/mypage/likeList.do")
+	public void likeList() {
+
 		
 	}
 }
-

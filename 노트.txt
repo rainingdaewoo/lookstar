@@ -1,0 +1,18 @@
+insert into follow values(1,81,41);
+insert into follow values(2,81,61);
+insert into follow values(3,81,21);
+
+
+insert into follow values(4,41,21);
+insert into follow values(5,41,61);
+insert into follow values(6,41,81);
+
+
+insert into follow values(1,'hhh','bbb');
+insert into follow values(2,'hhh','kkk');
+insert into follow values(3,'hhh','www');
+
+create table users_out(
+	users_out_no number primary key,
+	users_out_reason varchar2(100)
+);

@@ -21,6 +21,7 @@
 	rel="stylesheet" />
 	<!-- Core theme CSS (includes Bootstrap)-->
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5.3/examples/sign-in/">
+    
     <!-- Custom styles for this template -->
     <link href="../resources/css/signin.css" rel="stylesheet">
     <script type="text/javascript">

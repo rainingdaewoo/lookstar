@@ -10,14 +10,15 @@ import com.example.demo.vo.DMVO;
 @Repository
 public class DMDao {
 	
-	public List<DMVO> findAll(){
-		return DBManager.listDM();
+	public List<DMVO> findAll(String users_nickname){
+		return DBManager.listPeople(users_nickname);
 	}
 	
-	public List<DMVO> findAll2(){
-		return DBManager.listDM2();
+	public List<DMVO> findAll2(String users_nickname){
+		return DBManager.listDM(users_nickname);
 	}
 	
+
 	public DMVO getDM(int dm_no) {
 		return DBManager.getDM(dm_no);
 	}

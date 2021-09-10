@@ -34,4 +34,7 @@
       values(#{lookbook_no}, #{users_no}, #{lookbook_write}, sysdate, 0, 0, 
       #{lookbook_height}, #{lookbook_weight}, #{lookbook_fname})
    </insert>
+	
+	
+	
 </mapper>

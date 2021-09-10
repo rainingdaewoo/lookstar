@@ -11,7 +11,7 @@
         FROM board, users 
         WHERE board.users_no = users.users_no
              <if test="searchType != null and searchType != 'all'" >
-             	and ${searchType} like '%' || #{keyword} || '%'
+                and ${searchType} like '%' || #{keyword} || '%'
              </if>
              <if test="searchType != null and searchType == 'all'">
                 and (board_title like '%' || #{keyword} || '%' or board_content like '%' || #{keyword} || '%')

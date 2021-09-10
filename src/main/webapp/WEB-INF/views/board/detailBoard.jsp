@@ -145,7 +145,7 @@
 								<br> 
 							</div>
 						<div class="col-md-6">
-			 					<input type="hidden" name="users_no" value="21"> <br>
+			 					<input type="hidden" name="users_no" value="1"> <br>
 			 					<input type="hidden" name="board_no" value="${b.board_no }"> <br>
 			 					<input type="hidden" name="depth" value="1">
 			 					부모번호: <input name="ori_comments_no" value="${comments.comments_no}">
