@@ -62,7 +62,8 @@ public class UpdateUsersController {
 		ModelAndView mav = new ModelAndView("redirect:/mypage/mypage.do");
 		
 		
-		String path = request.getRealPath("../resources/profile");
+		String path = request.getRealPath("./resources/profile");
+		System.out.println("path:"+path);
 		String oldFname = u.getUsers_fname();
 		int oldFsize = u.getUsers_fsize();
 		String fname = null;

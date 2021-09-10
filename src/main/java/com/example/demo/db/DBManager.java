@@ -12,7 +12,6 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.aspectj.apache.bcel.classfile.Module.Uses;
 
 import com.example.demo.vo.BoardVO;
-import com.example.demo.vo.ChatVO;
 import com.example.demo.vo.DMVO;
 import com.example.demo.vo.InsertLookbookCommandVO;
 import com.example.demo.vo.LookInfoVO;
@@ -91,39 +90,39 @@ public class DBManager {
 	   }
 
 	   public static int updateUsersWithStyle(UpdateUsersCommandVO updateUsers) {
-	      int re = 0;
-	      SqlSession session = factory.openSession(true);
+	         int re = 0;
+	         SqlSession session = factory.openSession(true);
 
-	      // 유저라이크스타일넘버
-	      int u = session.selectOne("Users_like_Style.getNext_users_like_no");
-	      System.out.println("-----------------");
+	         // 유저라이크스타일넘버
+	         int u = session.selectOne("users_like_style.getNext_users_like_no");
+	         System.out.println("-----------------");
 
-	      UsersVO users = updateUsers.getUsers();
-	      System.out.println("users의 객체: " + users);
-	      int re1 = session.update("users.updateMyInfo", users);
+	         UsersVO users = updateUsers.getUsers();
+	         System.out.println("users의 객체: " + users);
+	         int re1 = session.update("users.updateMyInfo", users);
 
-	      int users_no = users.getUsers_no();
-	      System.out.println("users_no:" + users_no);
-	      // users_no=1 인 users_like_style 삭제
-	      int re3 = session.delete("Users_like_Style.deleteStyle", users_no);
+	         int users_no = users.getUsers_no();
+	         System.out.println("users_no:" + users_no);
+	         // users_no=1 인 users_like_style 삭제
+	         int re3 = session.delete("users_like_style.deleteStyle", users_no);
 
-	      List<Integer> list = updateUsers.getStyle_no();
-	      int re2 = 0;
-	      for (int i : list) {
-	         Users_like_styleVO users_style = new Users_like_styleVO(u, users_no, i);
-	         re2 += session.insert("Users_like_Style.insert", users_style);
+	         List<Integer> list = updateUsers.getStyle_no();
+	         int re2 = 0;
+	         for (int i : list) {
+	            Users_like_styleVO users_style = new Users_like_styleVO(u, users_no, i);
+	            re2 += session.insert("users_like_style.insert", users_style);
+	         }
+
+	         if (re1 == 1 && re2 == list.size()) {
+	            session.commit();
+	            re = 1;
+	         } else {
+	            session.rollback();
+	         }
+	         session.close();
+	         return re;
+
 	      }
-
-	      if (re1 == 1 && re2 == list.size()) {
-	         session.commit();
-	         re = 1;
-	      } else {
-	         session.rollback();
-	      }
-	      session.close();
-	      return re;
-
-	   }
 
 	   public static int updateStyle(int users_no) {
 	      System.out.println("dbmanager updatestyle 동작함");
@@ -259,35 +258,7 @@ public class DBManager {
 	      return re;
 	   }
 
-	   public static int insertDM(DMVO d) {
-	      SqlSession session = factory.openSession(true);
-	      int re = session.insert("dm.insertDM", d);
-	      session.close();
-	      return re;
-	   }
 
-	   public static List<DMVO> listDM() {
-	      SqlSession session = factory.openSession();
-	      List<DMVO> list = session.selectList("dm.findAll");
-	      session.close();
-	      return list;
-
-	   }
-
-	   public static List<DMVO> listDM2() {
-	      SqlSession session = factory.openSession();
-	      List<DMVO> dmList = session.selectList("dm.findAll2");
-	      session.close();
-	      return dmList;
-
-	   }
-
-	   public static DMVO getDM(int dm_no) {
-	      SqlSession session = factory.openSession();
-	      DMVO d = session.selectOne("dm.getDM", dm_no);
-	      session.close();
-	      return d;
-	   }
 	   // board 관련 DBManager
 
 	   public static List<BoardVO> listBoard(HashMap map) {
@@ -475,5 +446,46 @@ public class DBManager {
 	         session.close();
 	         return re;
 	      }
+
+	   
+	 //dbmanager/db
+		//가연
+		public static UsersVO getUsersByNickname(String users_nickname) {
+			SqlSession session = factory.openSession();
+			UsersVO u = session.selectOne("users.getUsersByNickname",users_nickname);
+			session.close();
+			return u;
+		}
+
+		public static int insertDM(DMVO d) {
+			SqlSession session = factory.openSession(true);
+			int re = session.insert("dm.insertDM",d);
+			session.close();
+			return re;
+		}
+		
+		public static List<DMVO> listPeople(String users_nickname){
+			SqlSession session = factory.openSession();
+			List<DMVO> list = session.selectList("dm.findAll",users_nickname);
+			session.close();
+			return list;
+			
+		}
+		
+		public static List<DMVO> listDM(String users_nickname){
+			SqlSession session = factory.openSession();
+			List<DMVO> dmList = session.selectList("dm.findAll2",users_nickname);
+			session.close();
+			return dmList;
+			
+		}
+		
+		public static DMVO getDM(int dm_no) {
+			SqlSession session = factory.openSession();
+			DMVO d = session.selectOne("dm.getDM",dm_no);
+			session.close();
+			return d;
+		}
+
 
 	}
