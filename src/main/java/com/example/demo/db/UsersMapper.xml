@@ -23,6 +23,10 @@
 		select * from users where
 		users_id=#{username}
 	</select>
+	<select id="getUsersbyNo" resultType="usersVO">
+		select * from users where
+		users_no=#{user_no}
+	</select>
 	<update id="updateMyInfo" parameterType="usersVO">
 		update users set users_nickname=#{users_nickname},
 		users_birth=#{users_birth},

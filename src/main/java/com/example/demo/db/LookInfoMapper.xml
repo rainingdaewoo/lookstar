@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lookinfo">
+	
+	 <select id="getNext_lookbook_no" resultType="int">
+	 	select nvl(max(lookbook_no),0)+1 from lookbook
+	 </select>
+	 
+	 <insert id="insert" parameterType="lookinfoVO">
+	 	insert into lookinfo (lookinfo_no,lookbook_no,lookinfo_name,lookinfo_url,lookinfo_category) values
+	 	(seq_lookinfo.nextval,#{lookbook_no},#{lookinfo_name},
+	 		 #{lookinfo_url},#{lookinfo_category})
+	 </insert>
+	 
+	 <select id="getLookinfo" resultType="lookinfoVO">
+	 	select * from lookinfo where lookbook_no=#{lookbook_no}
+	 	order by lookinfo_category asc
+	 </select>
+</mapper>

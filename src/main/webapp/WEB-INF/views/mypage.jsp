@@ -27,6 +27,8 @@
 </script>
 </head>
 <body>
+<%@ include file="./inc/header.jsp"%>
+<br><br><br><br><br><br>
 <div class="text-center my-5">
 		<img id="my_img" class="img-fluid rounded-circle mb-4"
 			src="https://dummyimage.com/150x150/6c757d/dee2e6.jpg" alt="..." />
@@ -107,5 +109,6 @@
 			</div>
 		</main>
 	</div>
+<%@ include file="./inc/footer.jsp"%>
 </body>
 </html>

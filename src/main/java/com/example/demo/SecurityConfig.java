@@ -16,7 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//super.configure(http);
 		
 		http.authorizeRequests()
-		.mvcMatchers("/","/join.do","/login.do","/lookbook.do","/resources/**","/findID.do","/findOK.do","/findPW.do").permitAll()
+		.mvcMatchers("/","/lookbook/ListLookbook.do","/lookbook/ListWeightHeight.do","/lookbook/lookbook_detail.do","/dmTest.do", "listChat.do","/insertDM.do","/main.do","/join.do","/login.do","/lookbook/lookbook.do","/resources/**","/findID.do","/findOK.do","/findPW.do").permitAll()
 		.anyRequest().authenticated();
 		
 		http.formLogin().loginPage("/login.do").permitAll()
@@ -28,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.logoutSuccessUrl("/login.do");
 		
 		http.httpBasic();
-		http.csrf().disable();
+		//http.csrf().disable();
 		
 		
 		

@@ -8,10 +8,17 @@
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	<typeAliases>
-		<typeAlias type="com.example.demo.vo.BoardVO" alias="boardVO"/>
-		<typeAlias type="com.example.demo.vo.UsersVO" alias="usersVO" />
-		<typeAlias type="com.example.demo.vo.LookbookVO" alias="lookbookVO" />
-		<typeAlias type="com.example.demo.vo.Lookbook_styleVO" alias="lookbook_styleVO" />
+		<typeAlias type="com.example.demo.vo.BoardVO"
+			alias="boardVO" />
+		<typeAlias type="com.example.demo.vo.UsersVO"
+			alias="usersVO" />
+		<typeAlias type="com.example.demo.vo.LookbookVO"
+			alias="lookbookVO" />
+		<typeAlias type="com.example.demo.vo.LookInfoVO"
+			alias="lookinfoVO" />
+		<typeAlias type="com.example.demo.vo.Lookbook_styleVO"
+			alias="lookbook_styleVO" />
+		<typeAlias type="com.example.demo.vo.DMVO" alias="dmVO" />
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -27,8 +34,10 @@
 
 	<mappers>
 		<mapper resource="com/example/demo/db/UsersMapper.xml" />
-		<mapper resource="com/example/demo/db/BoardMapper.xml"/>
+		<mapper resource="com/example/demo/db/BoardMapper.xml" />
 		<mapper resource="com/example/demo/db/LookbookMapper.xml" />
+		<mapper resource="com/example/demo/db/LookInfoMapper.xml" />
+		<mapper resource="com/example/demo/db/DMMapper.xml" />
 		<mapper resource="com/example/demo/db/Lookbook_StyleMapper.xml" />
 	</mappers>
 

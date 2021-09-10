@@ -6,9 +6,6 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.BoardDao;
-import com.example.demo.dao.UsersDao;
 import com.example.demo.db.DBManager;
 
 
@@ -25,18 +21,13 @@ import com.example.demo.db.DBManager;
 public class BoardController {
 	
 	@Autowired
-	private UsersDao userdao;
-	@Autowired
 	private BoardDao dao;
 
 	public void setDao(BoardDao dao) {
 		this.dao = dao;
 	}
 	
-	/*
-	 * @RequestMapping("/") public ModelAndView main(HttpServletRequest request) {
-	 * ModelAndView mav = new ModelAndView("redirect:/listBoard.do"); return mav; }
-	 */
+	
 	
 	@RequestMapping("/listBoard.do")
 	public void listBoard(HttpServletRequest request, @RequestParam(value = "pageNUM", 
@@ -107,14 +98,6 @@ public class BoardController {
 			file.delete();
 		}
 		return mav;
-	}
-	
-	@RequestMapping("/board_write.do")
-	public void board_write(Model model) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		User user = (User)authentication.getPrincipal();
-		String id = user.getUsername();
-		model.addAttribute("u", userdao.getUsers(id));
 	}
 	
 	
