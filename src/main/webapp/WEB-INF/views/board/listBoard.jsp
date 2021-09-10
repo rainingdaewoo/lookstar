@@ -45,10 +45,14 @@
 	<section class="py-5">
 	<div class="container-aside">
 	<ul>
-		<li><a href="#">일상게시판</a></li>
-		<li><a href="#">자유게시판</a></li>
-		<li><a href="#">쇼핑후기</a></li>
+		<li class="일상게시판"><a href="#">일상게시판</a></li>
+		<li class="자유게시판"><a href="#">자유게시판</a></li>
+		<li class="쇼핑후기"><a href="#">쇼핑후기</a></li>
 	</ul>
+	<script type="text/javascript">
+	
+	</script>
+	
 	</div>
 		<div class="container" width=90%>
 			<h2>게시물 목록</h2>
