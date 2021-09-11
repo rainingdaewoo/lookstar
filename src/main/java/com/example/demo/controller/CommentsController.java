@@ -42,12 +42,14 @@ public class CommentsController {
 	
 	@RequestMapping("/board/deleteComments.do")
 	public ModelAndView deleteBoard(int comments_no, HttpServletRequest request) {
+		System.out.println("controller 삭제될 게시글 번호:" + comments_no);
 		int board_no = dao.getComments(comments_no).getBoard_no();
 		ModelAndView mav = new ModelAndView("redirect:/board/detailBoard.do?board_no="+ board_no);
 		String path = request.getRealPath("resources/comments_img");
 		String oldFname = dao.getComments(comments_no).getComments_fname();
 		
 		int re = dao.deleteComments(comments_no);
+		System.out.println("re = "+re);
 		System.out.println(comments_no);
 		if(re == 1) {
 			File file = new File(path+"/"+oldFname);
@@ -55,6 +57,7 @@ public class CommentsController {
 		}
 		return mav;
 	}
+	
 	
 	@RequestMapping(value = "board/updateComments.do", method = RequestMethod.GET)
 	public void form(HttpServletRequest request, Model model, int comments_no) {

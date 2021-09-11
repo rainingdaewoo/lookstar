@@ -350,6 +350,40 @@ public class DBManager {
 	      session.close();
 	      return list;
 	   }
+	   public static int insertComments(CommentsVO c) {
+		      SqlSession session = factory.openSession(true);
+		      int re = session.insert("comments.insertComments", c);
+		      session.close();
+		      return re;
+		   }
+
+	   public static CommentsVO getComments(int comments_no) {
+		      SqlSession session = factory.openSession();
+		      CommentsVO c = session.selectOne("comments.getComments", comments_no);
+		      session.close();
+		      return c;
+		   }
+
+		public static int deleteComments(int comments_no) {
+		      SqlSession session = factory.openSession(true);
+		      /*
+		       * HashMap map = new HashMap(); map.put("no", board_no);
+		       * System.out.println("map:"+map);
+		       */
+		      int re = session.delete("comments.deleteComments", comments_no);
+		      System.out.println("DBManager 삭제될 게시글 번호 " + comments_no);
+		      session.commit();
+		      session.close();
+		      return re;
+		   }
+
+		public static int updateComments(CommentsVO comments_no) {
+		      SqlSession session = factory.openSession(true);
+		      int re = session.update("comments.updateComments", comments_no);
+		      session.close();
+		      return re;
+		   }
+	   
 	   
 	   public static List<UsersVO> listFollw(String users_id) {
 	      System.out.println("매니저에서의 users_id:"+users_id);
@@ -406,38 +440,7 @@ public class DBManager {
 	      return users_nickname;
 	   }
 
-	   public static int insertComments(CommentsVO c) {
-	      SqlSession session = factory.openSession(true);
-	      int re = session.insert("comments.insertComments", c);
-	      session.close();
-	      return re;
-	   }
-
-	   public static CommentsVO getComments(int comments_no) {
-	      SqlSession session = factory.openSession();
-	      CommentsVO c = session.selectOne("comments.getComments", comments_no);
-	      session.close();
-	      return c;
-	   }
-
-	   public static int deleteComments(int comments_no) {
-	      SqlSession session = factory.openSession(true);
-	      /*
-	       * HashMap map = new HashMap(); map.put("no", board_no);
-	       * System.out.println("map:"+map);
-	       */
-	      int re = session.delete("comments.deleteComments", comments_no);
-	      session.commit();
-	      session.close();
-	      return re;
-	   }
-
-	   public static int updateComments(CommentsVO comments_no) {
-	      SqlSession session = factory.openSession(true);
-	      int re = session.update("comments.updateComments", comments_no);
-	      session.close();
-	      return re;
-	   }
+	   
 	   
 	   public static int updateProfile(UsersVO u) {
 		   System.out.println("디비매니저 프로필변경 작동");

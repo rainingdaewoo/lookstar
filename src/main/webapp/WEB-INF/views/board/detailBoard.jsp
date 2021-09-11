@@ -54,25 +54,19 @@
 		}
 	}
 	function confirmDeleteComments(comments_no) {
+		console.log(comments_no);
 		if(confirm('정말로 삭제할까요')){
 			location.href='/board/deleteComments.do?comments_no='+comments_no;
 		}
 	}
 	
-	/* function 대댓글쓰기(){
-	      if($('#dis').css('display') == 'none'){
-	      $('#dis').show();
-	    }else{
-	      $('#dis').hide();
-	    }
-	    } */
+
 </script>
 <style type="text/css">
 .board-category {
 	float:left;
 }
 .comments {
-
 }
 #comments-btn {
 	float: left;
@@ -130,9 +124,7 @@
 								class="btn btn-outline-dark pull-right" id="deleteBtn">삭제</a>
 								<a class="btn btn-outline-dark pull-right rewrite" id="writeRecomments">답글쓰기</a>
 								<p><fmt:formatDate value="${comments.comments_date}" pattern="yyyy-MM-dd HH:ss" /></p>
-								<input type="hidden" name="depth" value="${comments.depth }">
-								
-								
+									
 							</div>
 						</li>
 						<!-- 답글 쓰기 생성 -->
@@ -145,7 +137,7 @@
 								<br> 
 							</div>
 						<div class="col-md-6">
-			 					<input type="hidden" name="users_no" value="1"> <br>
+			 					<input type="hidden" name="users_no" value="21"> <br>
 			 					<input type="hidden" name="board_no" value="${b.board_no }"> <br>
 			 					<input type="hidden" name="depth" value="1">
 			 					부모번호: <input name="ori_comments_no" value="${comments.comments_no}">
