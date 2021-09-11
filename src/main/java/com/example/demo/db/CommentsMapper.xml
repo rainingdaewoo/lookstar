@@ -50,6 +50,6 @@
   <select id="getComments" resultType="commentsVO">
   	select comments_no, users_nickname, comments_content, comments_date, comments_fname, comments_fsize, board_no, depth
   	from comments, users
-  	where comments_no=#{comments_no} and comments.users_no = comments.users_no
+  	where comments_no=#{comments_no} and comments.users_no = users.users_no
   </select> 
 </mapper>
