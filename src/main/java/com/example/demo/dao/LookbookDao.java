@@ -12,16 +12,12 @@ import com.example.demo.vo.SelectLookbookCommandVO;
 
 @Repository
 public class LookbookDao {
-	/* lookbook 사진 조회시
-	public List<LookbookVO> listLookbook(HashMap arr_style) {
-		// TODO Auto-generated method stub
-		return DBManager.listLookbook(arr_style);
-	}
-	*/
+	
 	
 	// lookbook 사진 조회시
 	public List<LookbookVO> listLookbookFilter(HashMap map) {
 		// TODO Auto-generated method stub
+		
 		return DBManager.listLookbookFilter(map);
 	}
 	

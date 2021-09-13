@@ -26,8 +26,8 @@
    $(function() {      
 
 	      
-	  $("#firstclick").click();
-	  $("#firstclick").click();
+	 // $("#firstclick").click();
+	 // $("#firstclick").click();
 	   
 	   
       let selected_style = [];

@@ -14,7 +14,7 @@
 	
 	
 	<!-- 스타일 필터를 통한 조회 -->
-	<select id="findAllField" resultType="lookbookVO">
+	<select id="findAllFilter" resultType="lookbookVO">
 		select * from lookbook
 		<if test="arr_Style != null">
 			where lookbook_no
@@ -31,16 +31,16 @@
 				lookbook_height between #{height_low} and #{height_high})
 			</if>
 		</if>
-		<if test="rw!=null">
+		<if test="rw!=null and arr_Style==null">
 			where (lookbook_weight between #{weight_low} and #{weight_high} and
 			lookbook_height between #{height_low} and #{height_high})
 		</if>
 		<choose>
-			<when test="sortField.equals('HOT')">
-				order by lookbook_views desc
+			<when test="sortField!=null or sortField.equals('NEW') ">
+				order by lookbook_date desc
 			</when>
 			<otherwise>
-				order by lookbook_date desc
+				order by lookbook_views desc				
 			</otherwise>
 		</choose>
 	</select>

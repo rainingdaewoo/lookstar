@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -46,33 +46,66 @@ public class LookbookController {
 		System.out.println("ListLookbook.do의 likelookbook 동작함:"+ Arrays.toString(sv.getArr()));
 		String arr_Style[] = sv.getArr();
 		HashMap map = new HashMap();
+		/*
+		
+		if(sortField==null) {
+			sortField="NEW";
+		}
+		if(arr_Style.length==0) {
+			arr_Style[0] = "1";
+			arr_Style[1] = "2";
+			arr_Style[2] = "3";
+			arr_Style[3] = "4";
+			arr_Style[4] = "5";
+			arr_Style[5] = "6";
+			arr_Style[6] = "7";
+			arr_Style[7] = "8";
+			arr_Style[8] = "9";
+			arr_Style[9] = "10";
+		}
+		if(rw.getWeight_low()==null && rw.getHeight_low()==null) {
+			rw.setWeight_low("0");
+			rw.setWeight_high("150");
+			rw.setHeight_low("0");
+			rw.setHeight_high("220");
+		}
+		*/
 		map.put("sortField", sortField);
 		map.put("arr_Style", arr_Style);
 		map.put("rw", rw);
 		List<LookbookVO> list = lookbookdao.listLookbookFilter(map);
 		return list;
 	}
-	/*
-	@RequestMapping("/lookbook/ListWeightHeight.do")
-	@ResponseBody
-	public List<LookbookVO> rangelookbook(RangeWeightHeightVO rw, Model model){
-		System.out.println("ListWeightHeight.do 작동:");
-		System.out.println("Height_low: "+ rw.getHeight_low() );
-		System.out.println("Height_high: "+ rw.getHeight_high() );
-		System.out.println("Weight_low: "+ rw.getWeight_low() );
-		System.out.println("Weight_high: "+ rw.getWeight_high() );
-		
-		List<LookbookVO> list = lookbookdao.listLookbook(rw);
-		System.out.println(rw);
-		return list;
-	}
-	 */
+
 
 	@RequestMapping("/lookbook/lookbook.do")
 	public void lookbook(String sortField,RangeWeightHeightVO rw,Style_searchVO sv, Model model) {
 		System.out.println("lookbook.do 작동");
-		String arr_Style[] = sv.getArr();
+		String arr_Style[] = sv.getArr();		
 		HashMap map = new HashMap();
+
+		if(sortField==null) {
+			sortField="NEW";
+		}
+		if(arr_Style==null || arr_Style.length==0) {
+			
+			arr_Style[0] = "1";
+			arr_Style[1] = "2";
+			arr_Style[2] = "3";
+			arr_Style[3] = "4";
+			arr_Style[4] = "5";
+			arr_Style[5] = "6";
+			arr_Style[6] = "7";
+			arr_Style[7] = "8";
+			arr_Style[8] = "9";
+			arr_Style[9] = "10";
+		}
+		if(rw.getWeight_low()==null && rw.getHeight_low()==null) {
+			rw.setWeight_low("0");
+			rw.setWeight_high("150");
+			rw.setHeight_low("0");
+			rw.setHeight_high("220");
+		}
 		map.put("sortField", sortField);
 		map.put("arr_Style", arr_Style);
 		map.put("rw", rw);

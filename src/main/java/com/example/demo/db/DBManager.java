@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.binding.MapperMethod.ParamMap;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -172,6 +173,7 @@ public class DBManager {
 	}
 	
 	// 전체 룩북
+	/*
 	public static List<LookbookVO> listLookbook(HashMap map) {
 		String[] arr = (String[]) map.get("arr_Style");
 		System.out.println("Map 정보: " + Arrays.toString(arr));
@@ -186,18 +188,22 @@ public class DBManager {
 		session.close();
 		return list;
 	}
+	*/
 
 	// 필터
 	public static List<LookbookVO> listLookbookFilter(HashMap map) {
 
 		String sortField = (String) map.get("sortField");
-		String[] arr = (String[]) map.get("arr_Style");
-		String RangeWH = (String) map.get("rw");
+		String[] arr_Style = (String[]) map.get("arr_Style");
+		RangeWeightHeightVO rw = (RangeWeightHeightVO) map.get("rw");
+		
+		
 		System.out.println("Map 정보/ sortField: " + sortField);
-		System.out.println("Map 정보/ arr: " + Arrays.toString(arr));
-		System.out.println("Map 정보/ RangeWH: " + RangeWH);
+		System.out.println("Map 정보/ arr: " + Arrays.toString(arr_Style));
+		System.out.println("Map 정보/ RangeWH: " + rw);
 
 		SqlSession session = factory.openSession();
+		
 
 		List<LookbookVO> list = session.selectList("lookbook.findAllFilter", map);
 		// System.out.println("list: " + list);
