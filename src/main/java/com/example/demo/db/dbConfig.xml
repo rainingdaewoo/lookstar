@@ -19,7 +19,12 @@
 		<typeAlias type="com.example.demo.vo.Lookbook_styleVO"
 			alias="lookbook_styleVO" />
 		<typeAlias type="com.example.demo.vo.DMVO" alias="dmVO" />
+		<typeAlias type="com.example.demo.vo.CommentsVO" alias="commentsVO"/>
+		<typeAlias type="com.example.demo.vo.Users_like_styleVO" alias="users_like_styleVO"/>
+		<typeAlias type="com.example.demo.vo.FollowVO" alias="followVO" />
+		<typeAlias type="com.example.demo.vo.Users_outVO" alias="users_outVO" />
 	</typeAliases>
+	
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
@@ -34,11 +39,13 @@
 
 	<mappers>
 		<mapper resource="com/example/demo/db/UsersMapper.xml" />
-		<mapper resource="com/example/demo/db/BoardMapper.xml" />
+		<mapper resource="com/example/demo/db/BoardMapper.xml"/>
+		<mapper resource="com/example/demo/db/CommentsMapper.xml"/>
 		<mapper resource="com/example/demo/db/LookbookMapper.xml" />
 		<mapper resource="com/example/demo/db/LookInfoMapper.xml" />
 		<mapper resource="com/example/demo/db/DMMapper.xml" />
 		<mapper resource="com/example/demo/db/Lookbook_StyleMapper.xml" />
+		<mapper resource="com/example/demo/db/Users_Like_StyleMapper.xml" />
 	</mappers>
 
 </configuration>

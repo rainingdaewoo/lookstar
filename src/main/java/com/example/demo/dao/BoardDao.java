@@ -23,7 +23,7 @@ public class BoardDao {
 		return DBManager.getNextNo();
 	}
 	
-	public int insert(BoardVO b) {
+	public int insertBoard(BoardVO b) {
 		return DBManager.insertBoard(b);
 	}
 	
@@ -40,7 +40,9 @@ public class BoardDao {
 		DBManager.updateStep(b_ref,b_step);
 	}
 	
-	public int update(BoardVO b) {
+
+	public int updateBoard(BoardVO b) {
+		System.out.println("BoardDao 작동함");
 		return DBManager.updateBoard(b);
 	}
 	
@@ -48,8 +50,8 @@ public class BoardDao {
 		return DBManager.deleteBoard(no);
 	}
 	
-	public int getTotalRecord() {
-		return DBManager.getTotalRecord();
+	public int getTotalRecord(String searchType, String keyword) {
+		return DBManager.getTotalRecord(searchType, keyword);
 	}
 	
 	//보민

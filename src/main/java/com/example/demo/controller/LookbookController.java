@@ -60,7 +60,7 @@ public class LookbookController {
 		System.out.println("Weight_high: "+ rw.getWeight_high() );
 		
 		List<LookbookVO> list = lookbookdao.listLookbook(rw);
-		
+		System.out.println(rw);
 		return list;
 	}
 

@@ -22,7 +22,7 @@
 <script type="text/javascript">
 	
     $(function() {
-        $("#upload_file").on('change', function(){
+        $("#board_uploadFile").on('change', function(){
             readURL(this);
         });
     });
@@ -38,7 +38,7 @@
 </script>
 </head>
 <body>
-	<%@ include file="./inc/header.jsp"%>
+	<%@ include file=".././inc/header.jsp"%>
 	<!-- Section-->
 	<br>
 	<br>
@@ -46,13 +46,13 @@
 		<br>
 		<h3 class="mt-5">게시글 작성</h3><hr>
 		<div class="align-items-center">
-			<form action="insertBoard.do" method="post"
-				enctype="multipart/form-data">
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			<form action="updateBoard.do" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			<input type="hidden" name="users_no" value="21"> <br>	
+			<input type="hidden" name="board_no" value="${b.board_no }"> <br>
 				<div class="row col-md-6">
 					<h1 class="display-5 fw-bolder"></h1>
 					<br> 
-					
 					
 				</div>
 				<label>게시판 카테고리</label>
@@ -63,12 +63,10 @@
 					 <option value="">비밀글</option>
 				 </select>
 				 <label for="board_title">제목</label>
-				 <input class="form-control" type="text" id="board_title" name="board_title" placeholder="제목을 작성해주세요."/>
-				<div class="col-md-6">
-	 					<input type="hidden" name="users_no" value="${u.users_no}"> <br>
-						<div class="inputArea">
-					 <textarea rows="5" cols="50" id="gdsDes" name="board_content" placeholder="내용을 작성해주세요."></textarea>
-					<img id="blah" src="/YouSoSick/image/ready.png" height="400px" /><br>
+				  <input type="text" name="board_title" value="${b.board_title }"><br>
+				  <div class="inputArea">
+					<div class="col-md-6">
+					<textarea rows="10" cols="80" name="board_content">${b.board_content }</textarea>
 					
 					<input type='file' id="board_uploadFile" name="board_uploadFile" accept="image/png, image/jpeg"/>
 					
@@ -76,7 +74,6 @@
 					<br>
 
 					<!-- 글쓰기 버튼 생성 -->
-					<input type="reset"	class="btn btn-outline-dark right" value="취소">
 					<input type="submit" class="btn btn-outline-dark right" value="등록"> 
 				</div>
 			</form>
@@ -85,6 +82,6 @@
 
 	</section>
 	<!-- Footer-->
-	<%@ include file="./inc/footer.jsp"%>
+	<%@ include file=".././inc/footer.jsp"%>
 </body>
 </html>
