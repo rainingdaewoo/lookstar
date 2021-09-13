@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.LookbookDao;
 import com.example.demo.dao.UsersDao;
@@ -146,5 +148,23 @@ public class LookbookController {
 		model.addAttribute("info", look.getList_info());
 		model.addAttribute("style", look.getList_style());
 		
+	}
+	
+	
+	@RequestMapping("/lookbook/deletelookbook.do")
+	public ModelAndView deleteBoard(int lookbook_no, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("redirect:/board/listBoard.do");
+		String path = request.getRealPath("/resources/look_img");
+		String oldFname = lookbookdao.getDelLookbook(lookbook_no).getLookbook_fname();
+		
+		
+		
+		int re = lookbookdao.deleteLookbook(lookbook_no);
+		System.out.println(lookbook_no);
+		if(re == 1) {
+			File file = new File(path+"/"+oldFname);
+			file.delete();
+		}
+		return mav;
 	}
 }

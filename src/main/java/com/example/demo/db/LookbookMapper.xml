@@ -56,6 +56,15 @@
 	<select id="getLookbook" resultType="lookbookVO">
 		select * from lookbook where lookbook_no=#{lookbook_no}
 	</select>
+	
+	<!-- 삭제할 룩북 선택 -->
+	<select id="getDelBoard" resultType="lookbookVO">
+		select * from lookbook where lookbook_no=#{lookbook_no}
+	</select>
+	<!-- 룩북삭제(update) -->
+	<update id="deleteLookbook">
+		update lookbook set lookbook_show=1 where lookbook_no=#{lookbook_no}
+	</update>
 	<!-- 룩북 추가시 -->
 	<insert id="insert" parameterType="lookbookVO">
 		insert into lookbook( LOOKBOOK_NO, USERS_NO, LOOKBOOK_WRITE, LOOKBOOK_DATE,

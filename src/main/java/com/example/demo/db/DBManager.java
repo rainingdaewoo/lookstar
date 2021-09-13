@@ -214,6 +214,22 @@ public class DBManager {
 		return list;
 	}
 
+	public static LookbookVO getDelLookbook(int no) {
+		SqlSession session = factory.openSession();
+		LookbookVO l = session.selectOne("lookbook.getDelBoard", no);
+		session.close();
+		return l;
+	}
+
+	public static int deleteLookbook(int no) {
+		SqlSession session = factory.openSession(true);
+		int re = session.delete("lookbook.deleteLookbook", no);
+
+		session.commit();
+		session.close();
+		return re;
+	}
+
 	// 룩북 클릭시 룩북의 정보
 	public static SelectLookbookCommandVO getLookbook(int no) {
 
@@ -269,6 +285,8 @@ public class DBManager {
 		System.out.println("--------------------------");
 		return re;
 	}
+	
+	
 
 	// board 관련 DBManager
 
@@ -496,5 +514,6 @@ public class DBManager {
 		session.close();
 		return d;
 	}
+
 
 }

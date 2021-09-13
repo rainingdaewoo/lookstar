@@ -35,4 +35,12 @@ public class LookbookDao {
 		return DBManager.getLookbook(lookbook_no);
 	}
 	
+	public LookbookVO getDelLookbook(int no) {
+		return DBManager.getDelLookbook(no);
+	}
+
+	public int deleteLookbook(int no) {
+		return DBManager.deleteLookbook(no);
+	}
+	
 }
