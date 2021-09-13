@@ -41,15 +41,18 @@ public class LookbookController {
 	
 	@RequestMapping("/lookbook/ListLookbook.do")
 	@ResponseBody
-	public List<LookbookVO> listlookbook(Style_searchVO sv, Model model) {
+	public List<LookbookVO> listlookbook(String sortField,RangeWeightHeightVO rw,Style_searchVO sv, Model model) {
 		//System.out.println("listlookbook의 list" + list);
 		System.out.println("ListLookbook.do의 likelookbook 동작함:"+ Arrays.toString(sv.getArr()));
 		String arr_Style[] = sv.getArr();
 		HashMap map = new HashMap();
+		map.put("sortField", sortField);
 		map.put("arr_Style", arr_Style);
-		List<LookbookVO> list = lookbookdao.listLookbook(map);
+		map.put("rw", rw);
+		List<LookbookVO> list = lookbookdao.listLookbookFilter(map);
 		return list;
 	}
+	/*
 	@RequestMapping("/lookbook/ListWeightHeight.do")
 	@ResponseBody
 	public List<LookbookVO> rangelookbook(RangeWeightHeightVO rw, Model model){
@@ -63,15 +66,17 @@ public class LookbookController {
 		System.out.println(rw);
 		return list;
 	}
-
+	 */
 
 	@RequestMapping("/lookbook/lookbook.do")
-	public void lookbook(Model model, String sortField, Style_searchVO sv) {
-		HashMap map = new HashMap();
+	public void lookbook(String sortField,RangeWeightHeightVO rw,Style_searchVO sv, Model model) {
+		System.out.println("lookbook.do 작동");
 		String arr_Style[] = sv.getArr();
+		HashMap map = new HashMap();
 		map.put("sortField", sortField);
 		map.put("arr_Style", arr_Style);
-		model.addAttribute("list", lookbookdao.listLookbook(map));
+		map.put("rw", rw);
+		model.addAttribute("list", lookbookdao.listLookbookFilter(map));
 	}
 	
 	

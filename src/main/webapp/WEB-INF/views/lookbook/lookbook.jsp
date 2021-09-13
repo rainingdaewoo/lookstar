@@ -24,7 +24,38 @@
 
 <script type="text/javascript">
    $(function() {      
+
+	      
+	  $("#firstclick").click();
+	  $("#firstclick").click();
+	   
+	   
       let selected_style = [];
+      let sortField;
+      let bodyspec;
+      
+      // 스타일, 키, 몸무게의 변수를 전역변수로.. 
+      function listLookbook() {
+    	  $.ajax({
+              url:"/lookbook/ListLookbook.do",
+              data:{arr:selected_style, bodyspec:bodyspec,sortField:sortField},
+              success:function(list){
+                 console.log(list);
+                 $("#lookbookimage").empty();
+                 $.each(list, function(index,item){
+                    let img = $("<div class='col mb-5'><div class='card h-100 justify-content-center'><a href='lookbook_detail.do?lookbook_no="+item.lookbook_no + "'><img class='card-img-top' src='/resources/look_img/"+item.lookbook_fname+"' style='height: 100%; width: 100%;' /></a></div></div>");
+                    $("#lookbookimage").append(img);
+                 });
+              }
+           });
+		}
+      
+      // 분류기준(HOT/NEW) 선택
+      $(".sortField").click(function(){
+    	  sortField = $(this).text();
+    	  console.log(sortField);
+    	  listLookbook();
+      })
       
       // 스타일 선택 
       $(".unchosenF").each(function(i){
@@ -34,34 +65,18 @@
          $(this).toggleClass("chosenF");
          let list = $(".chosenF");
          selected_style = [];
-         console.log("--------------------------------------");
          
          $.each(list,function(index, item){
             let style_no = $(item).attr("style_no");
-            selected_style.push(style_no);
-                        
+            selected_style.push(style_no);               
          });
-         console.log(selected_style);
-         console.log("--------------------------------------");
-         $.ajax({
-            url:"/lookbook/ListLookbook.do",
-            data:{arr:selected_style},
-            success:function(list){
-               console.log(list);
-               $("#lookbookimage").empty();
-               $.each(list, function(index,item){
-                  let img = $("<div class='col mb-5'><div class='card h-100 justify-content-center'><a href='lookbook_detail.do?lookbook_no="+item.lookbook_no + "'><img class='card-img-top' src='/resources/look_img/"+item.lookbook_fname+"' style='height: 100%; width: 100%;' /></a></div></div>");
-                  $("#lookbookimage").append(img);
-               });
-            }
-         });
+         
+         listLookbook();
+         
       });
       
       
-      $("#firstclick").click();
-      $("#firstclick").click();
-      
-      
+      // 신체 스펙 선택
       $(".bodyspec").change(function() {
     	  let getWeight = $("#weight option:selected").val();
     	  let arrayWeight = getWeight.split("~");
@@ -72,10 +87,6 @@
     	  let arrayHeight = getHeight.split("~");
     	  let height_low = arrayHeight[0];
     	  let height_high = arrayHeight[1];
-    	  console.log(weight_low);
-          console.log(weight_high);
-          console.log(height_low);
-          console.log(height_high);
           
           
           let bodyspec = {
@@ -85,13 +96,7 @@
         		  "height_high":height_high
           }
           
-          $.ajax({
-             url:"/lookbook/ListWeightHeight.do",
-             data: bodyspec,
-             success:function(list){
-                console.log("신체조건 ajax: " + list);
-             }
-          })
+          listLookbook();
     	 }
      );
      
@@ -111,8 +116,8 @@
    <section id="content">
       <!-- 스타일필터와 검색 -->
       <div class="ftr" style="justify-content: center">
-         <span class="sortby"><a href="lookbook.do?sortField=lookbook_date">NEW</a></span>&nbsp; 
-         <span class="sortby"><a href="lookbook.do?sortField=lookbook_views">HOT</a></span>&nbsp; 
+         <span class="sortField">NEW</span>&nbsp; 
+         <span class="sortField">HOT</span>&nbsp; 
             
             
          <span class="unchosenF" id="firstclick">미니멀</span>&nbsp; 
@@ -154,11 +159,11 @@
          <div style="float: left; padding-left: 50px" class="bodyspec">
             몸무게: <select name="weight" id="weight">
                   <option value="0~150" selected>-선택-</option>
-                  <option value="41~50">40~50</option>
+                  <option value="41~50">41~50</option>
                   <option value="51~60">51~60</option>
-                  <option value="71~80">61~70</option>
-                  <option value="81~90">71~80</option>
-                  <option value="91~100">81~90</option>
+                  <option value="61~70">61~70</option>
+                  <option value="71~80">71~80</option>
+                  <option value="81~90">81~90</option>
                   <option value="91~100">91~100</option>
                   <option value="101~150">100 이상</option>
                </select>

@@ -23,6 +23,7 @@
 		<typeAlias type="com.example.demo.vo.Users_like_styleVO" alias="users_like_styleVO"/>
 		<typeAlias type="com.example.demo.vo.FollowVO" alias="followVO" />
 		<typeAlias type="com.example.demo.vo.Users_outVO" alias="users_outVO" />
+		<typeAlias type="com.example.demo.vo.RangeWeightHeightVO" alias="rangeVO" />
 	</typeAliases>
 	
 	<environments default="development">
