@@ -34,6 +34,14 @@ public class BoardDao {
 	public void updateViews(int no) {
 		DBManager.updateViews(no);
 	}
+	
+	public void plusCommentsCount(int no) {
+		DBManager.plusCommentsCount(no);
+	}
+	
+	public void minusCommentsCount(int no) {
+		DBManager.minusCommentsCount(no);
+	}
 
 	public void updateStep(int b_ref, int b_step) {
 		// TODO Auto-generated method stub

@@ -77,6 +77,9 @@
 						<td>${b.board_no }</td>
 						<td>
 							<a href="detailBoard.do?board_no=${b.board_no }">${b.board_title }</a>
+							<c:if test="${b.board_comments_count > 0 }">
+							<a style="color: red;">(${b.board_comments_count })</a>
+							</c:if>
 						</td>
 						<td>${b.users_nickname }</td>
 						<td>

@@ -152,6 +152,7 @@
 			 					<input type="hidden" name="users_no" value="21"> <br>
 			 					<input type="hidden" name="board_no" value="${b.board_no }"> <br>
 			 					<input type="hidden" name="depth" value="1">
+			 					<input type="hidden" name="ori_comments_no" value="${comments.comments_no}">
 								<div class="inputArea">
 					 <textarea rows="5" cols="50" class="inputText" name="comments_content" placeholder="댓글을 남겨보세요."></textarea>
 					
@@ -177,7 +178,8 @@
 						<div class="col-md-6">
 			 					<input type="hidden" name="users_no" value="21"> <br>
 			 					<input type="hidden" name="board_no" value="${b.board_no }"> <br>
-			 					<input type="hidden" name="depth" value="1">
+			 					<input type="hidden" name="depth" value="${comments.depth }">
+			 					<input type="hidden" name="comments_no" value="${comments.comments_no }">
 								<div class="inputArea">
 					 <textarea rows="5" cols="50" class="inputText" name="comments_content">${comments.comments_content }</textarea>
 					
@@ -258,7 +260,7 @@
 		$('.extra-button').click(function() {
 				$(this).next().toggle();
 		});
-		$('.updateCommentsBtn').click(function() {
+		$('#updateCommentsBtn').click(function() {
 			$(this).parent().parent().parent().next().next().toggle();
 		});
 		

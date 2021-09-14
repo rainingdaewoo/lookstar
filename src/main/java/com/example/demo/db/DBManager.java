@@ -413,6 +413,19 @@ public class DBManager {
 	      session.close();
 	      return re;
 	   }
+	   
+	   public static void plusCommentsCount(int no) {
+		      SqlSession session = factory.openSession(true);
+		      session.update("board.plusCommentsCount", no);
+		      session.close();
+		   }
+	   
+	   public static void minusCommentsCount(int no) {
+		      SqlSession session = factory.openSession(true);
+		      session.update("board.minusCommentsCount", no);
+		      session.close();
+		   }
+
 
 	   public static CommentsVO getComments(int comments_no) {
 	      SqlSession session = factory.openSession();
@@ -438,6 +451,7 @@ public class DBManager {
 	      SqlSession session = factory.openSession(true);
 	      int re = session.update("comments.updateComments", co);
 	      session.close();
+	      System.out.println("updateComments 작동함");
 	      return re;
 	   }
 	   
