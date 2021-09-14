@@ -434,9 +434,9 @@ public class DBManager {
 	      return re;
 	   }
 
-	   public static int updateComments(CommentsVO comments_no) {
+	   public static int updateComments(CommentsVO co) {
 	      SqlSession session = factory.openSession(true);
-	      int re = session.update("comments.updateComments", comments_no);
+	      int re = session.update("comments.updateComments", co);
 	      session.close();
 	      return re;
 	   }

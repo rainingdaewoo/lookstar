@@ -59,13 +59,13 @@ public class CommentsController {
 	}
 	
 	
-	@RequestMapping(value = "board/updateComments.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/board/updateComments.do", method = RequestMethod.GET)
 	public void form(HttpServletRequest request, Model model, int comments_no) {
 		model.addAttribute("c", dao.getComments(comments_no));
 	
 	}
 	
-	@RequestMapping(value = "board/updateComments.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/board/updateComments.do", method = RequestMethod.POST)
 	public ModelAndView submit(HttpServletRequest request, CommentsVO c, Model model) {
 		
 		Authentication authentication =
@@ -75,7 +75,7 @@ public class CommentsController {
 		
 		
 		
-		System.out.println("updateBoard.do POST 동작함.");
+		System.out.println("updateComments.do POST 동작함.");
 		System.out.println("users_no:" + c.getUsers_no());
 		ModelAndView mav = new ModelAndView("redirect:/board/listBoard.do");
 		String path = request.getRealPath("/resources/board_img");

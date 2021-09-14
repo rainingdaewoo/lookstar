@@ -15,6 +15,9 @@ aside ul li a {
 
 .container{
 	width: 800px;
+	padding: 29px 29px 0;
+    border: 1px solid var(--skinLayoutBorder);
+    border-radius: 6px;
 }
 .container-aside{
 	    float: left;
@@ -32,7 +35,32 @@ aside ul li a {
 .reComments {
 	display: none;	
 }
+.ArticleContentBox {
+	padding: 29px 29px 0;
+    border: 1px solid var(--skinLayoutBorder);
+    border-radius: 6px;
+}
+#input_board_content {
+	 height: 170px;
+}
 
+.comments-usersNickname {
+	float: left;
+}
+.extra-button {
+	float: right;
+}
+
+.comments-extra {
+	 display: none;
+}
+
+.updateComments {
+	display: none;
+}
+.writeRecomments {
+	width: 70px;	
+}
 /* * {
     margin: 0;
     padding: 0;

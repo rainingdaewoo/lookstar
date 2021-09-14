@@ -18,6 +18,9 @@
 	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- 룩북 스타일 -->
 <link rel="stylesheet" href="../../resources/css/lookbook.css">
+<!-- ck 에디터 -->
+<script src="../../resources/ckeditor/ckeditor.js"></script>
+
 
 <script type="text/javascript">
 	
