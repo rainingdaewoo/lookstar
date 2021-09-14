@@ -11,13 +11,21 @@
 	<!-- 스타일 필터를 통한 조회 -->
 	<!--  -->
 	
+	<!-- 초기 페이지 열 시 룩북 조회 -->
+	<select id="listlookbook" resultType="lookbookVO">
+		select * from lookbook order by lookbook_date desc
+	</select>
 	
 	
 	<!-- 스타일 필터를 통한 조회 -->
 	<select id="findAllFilter" resultType="lookbookVO">
 		select * from lookbook
+		<if test="rw.weight_low != null">
+			where (lookbook_weight between #{rw.weight_low} and #{rw.weight_high}) and
+			(lookbook_height between #{rw.height_low} and #{rw.height_high})
+		</if>
 		<if test="arr_Style != null">
-			where lookbook_no
+			and lookbook_no
 			in (select distinct l.lookbook_no no from lookbook l, lookbook_style s
 			where l.lookbook_no = s.lookbook_no
 			and s.style_no in
@@ -25,18 +33,10 @@
 				separator="," close=")">
 				${item}
 			</foreach>
-			)
-			<if test="rw!=null">
-				and (lookbook_weight between #{weight_low} and #{weight_high} and
-				lookbook_height between #{height_low} and #{height_high})
-			</if>
-		</if>
-		<if test="rw!=null and arr_Style==null">
-			where (lookbook_weight between #{weight_low} and #{weight_high} and
-			lookbook_height between #{height_low} and #{height_high})
+			)			
 		</if>
 		<choose>
-			<when test="sortField!=null or sortField.equals('NEW') ">
+			<when test="sortField!=null or sortField.equals('NEW')">
 				order by lookbook_date desc
 			</when>
 			<otherwise>

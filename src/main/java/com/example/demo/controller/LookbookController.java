@@ -48,30 +48,6 @@ public class LookbookController {
 		System.out.println("ListLookbook.do의 likelookbook 동작함:"+ Arrays.toString(sv.getArr()));
 		String arr_Style[] = sv.getArr();
 		HashMap map = new HashMap();
-		/*
-		
-		if(sortField==null) {
-			sortField="NEW";
-		}
-		if(arr_Style.length==0) {
-			arr_Style[0] = "1";
-			arr_Style[1] = "2";
-			arr_Style[2] = "3";
-			arr_Style[3] = "4";
-			arr_Style[4] = "5";
-			arr_Style[5] = "6";
-			arr_Style[6] = "7";
-			arr_Style[7] = "8";
-			arr_Style[8] = "9";
-			arr_Style[9] = "10";
-		}
-		if(rw.getWeight_low()==null && rw.getHeight_low()==null) {
-			rw.setWeight_low("0");
-			rw.setWeight_high("150");
-			rw.setHeight_low("0");
-			rw.setHeight_high("220");
-		}
-		*/
 		map.put("sortField", sortField);
 		map.put("arr_Style", arr_Style);
 		map.put("rw", rw);
@@ -81,37 +57,9 @@ public class LookbookController {
 
 
 	@RequestMapping("/lookbook/lookbook.do")
-	public void lookbook(String sortField,RangeWeightHeightVO rw,Style_searchVO sv, Model model) {
+	public void lookbook(Model model) {
 		System.out.println("lookbook.do 작동");
-		String arr_Style[] = sv.getArr();		
-		HashMap map = new HashMap();
-
-		if(sortField==null) {
-			sortField="NEW";
-		}
-		if(arr_Style==null || arr_Style.length==0) {
-			
-			arr_Style[0] = "1";
-			arr_Style[1] = "2";
-			arr_Style[2] = "3";
-			arr_Style[3] = "4";
-			arr_Style[4] = "5";
-			arr_Style[5] = "6";
-			arr_Style[6] = "7";
-			arr_Style[7] = "8";
-			arr_Style[8] = "9";
-			arr_Style[9] = "10";
-		}
-		if(rw.getWeight_low()==null && rw.getHeight_low()==null) {
-			rw.setWeight_low("0");
-			rw.setWeight_high("150");
-			rw.setHeight_low("0");
-			rw.setHeight_high("220");
-		}
-		map.put("sortField", sortField);
-		map.put("arr_Style", arr_Style);
-		map.put("rw", rw);
-		model.addAttribute("list", lookbookdao.listLookbookFilter(map));
+		model.addAttribute("list", lookbookdao.listLookbook());
 	}
 	
 	

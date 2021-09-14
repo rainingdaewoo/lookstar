@@ -189,6 +189,12 @@ public class DBManager {
 		return list;
 	}
 	*/
+	
+	public static List<LookbookVO> listlookbook() {
+		SqlSession session = factory.openSession();
+		List<LookbookVO> list = session.selectList("lookbook.listlookbook");
+		return list;
+	}
 
 	// 필터
 	public static List<LookbookVO> listLookbookFilter(HashMap map) {
@@ -514,6 +520,8 @@ public class DBManager {
 		session.close();
 		return d;
 	}
+
+	
 
 
 }

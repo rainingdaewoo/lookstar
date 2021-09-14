@@ -42,5 +42,10 @@ public class LookbookDao {
 	public int deleteLookbook(int no) {
 		return DBManager.deleteLookbook(no);
 	}
+
+	public List<LookbookVO> listLookbook() {
+		
+		return DBManager.listlookbook();
+	}
 	
 }
