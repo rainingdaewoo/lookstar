@@ -1,6 +1,17 @@
 /*manage_board.html, manage_looks.html css*/
 @charset "UTF-8";
 
+#pageBox{
+	position:absolute;
+	top:80%;
+	left:50%;
+}
+
+#boardPageBox{
+	position:absolute;
+	top:80%;
+	left:50%;
+}
 
 .board_top{
 	width:75%;
@@ -117,10 +128,12 @@
     border-left: 1px solid #ddd;
 }
 
-
-
 .form-group1{
 	width:50%;
 	margin:auto;
 	margin-top:20px;
+}
+
+#imgBox{
+	float:left;
 }

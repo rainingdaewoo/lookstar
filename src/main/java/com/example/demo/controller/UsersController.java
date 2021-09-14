@@ -164,11 +164,6 @@ public class UsersController {
 		
 	}
 	
-	@RequestMapping("/mypage/manageMylook.do")
-	public void manageMylook() {
-		
-	}
-	
 	@RequestMapping("/mypage/followList.do")
 	public void followList(Model model,HttpSession session) {
 		String users_id = ((UsersVO)session.getAttribute("users")).getUsers_id();

@@ -7,7 +7,7 @@
 <title>LOOKSTAGRAM-MYINFO</title>
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<link rel = "stylesheet" href="css/myInfo.css"/>
+<link rel = "stylesheet" href="/resources/css/myInfo.css"/>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -31,27 +31,27 @@
 				
                     <div class="form-group">
                         <label for="inputNickname">닉네임</label>
-                        <input type="text" class="form-control" id="inputNickname" placeholder="로그인 계정 닉네임" name="users.users_nickname">
+                        <input type="text" class="form-control"  placeholder="${users.users_nickname}" name="users.users_nickname">
                     </div>
                     <div>
                     	<label for="inputBirthday">생년월일</label>
-                        <input type="date" class="form-control" id="inputBirthday" name="users.users_birth">
+                        <input type="date" class="form-control" name="users.users_birth">
                     </div>
                     <div>
                     	<label for="inputSex">성별</label><br>
-                        <label><input type="radio" id="inputSex"  value="1" name="users.users_gender">남</label>
-                        <label><input type="radio" id="inputSex"  value="2" name="users.users_gender">여</label>
+                        <label><input type="radio"  value="1" name="users.users_gender">남</label>
+                        <label><input type="radio"  value="2" name="users.users_gender">여</label>
                     </div>
                     <div>
                     	<label for="inputHeight">키</label>
-                        <input type="number" class="form-control" id="inputHeight" name="users.users_height">
+                        <input type="number" class="form-control" name="users.users_height" placeholder="${users.users_height}">
                     </div>
                     <div>
                     	<label for="inputWeight">몸무게</label>
-                        <input type="number" class="form-control" id="inputWeight" name="users.users_weight">
+                        <input type="number" class="form-control" name="users.users_weight" placeholder="${users.users_weight}">
                     </div>
-                    
-                    <div class="ftr" style="text-align: middle;">
+                    <br><br>
+                    <div class="ftr" style="text-align: middle;" id="styleBox">
 						<h5>선호하는 스타일</h5>
 						
 						미니멀&nbsp; 	<input type="checkbox" name="style_no" value="1">&nbsp;

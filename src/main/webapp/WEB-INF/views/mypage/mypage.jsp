@@ -104,7 +104,11 @@
 									<hr>
 								</div>
 								<div class="form-floating">
-									<a href="manageMyboard.do">내 글 관리</a>
+									<a href="manageMyboard.do?users_no=${users.users_no}">내 글 관리</a>
+									<hr>
+								</div>
+								<div class="form-floating">
+									<a href="manageMylook.do?users_no=${users.users_no}">내 룩북 관리</a>
 									<hr>
 								</div>
 								<div class="form-floating">

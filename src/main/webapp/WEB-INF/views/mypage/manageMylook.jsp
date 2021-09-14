@@ -1,12 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내 글 관리</title>
+<title>내 룩북 관리</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<link rel = "stylesheet" href="resources/css/manage.css"/>
+<link rel = "stylesheet" href="/resources/css/manage.css"/>
+<script type="text/javascript"src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$("#upload_file").on('change', function() {
+		readURL(this);
+	});
+});
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$('#blah').attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+</script>
 </head>
 <body>
 <!-- Main Content-->
@@ -14,18 +32,18 @@
 <%@ include file="../inc/header.jsp" %>       
         <div id="container">
         		<br>
-        		<div class="board_wrap1">
+        		<div class="board_wrap1" width="80%">
 			         <div class="board_top" style="padding-left: 150px">
 				        <div class="board_title">
-				            <strong>내 글 관리</strong>
+				            <h2><strong>내 룩북 관리</strong></h2>
 				        </div>
-			        
-			  			<div class="btnlist">
-			  				<button type ="button" onclick="location.href='manageMylook.do'" 
-			  					class="btn btn-secondary" id="looksBtn">looks</button>
-			  				<button type ="button" onclick="location.href='manageMyboard.do'" 
-			  				class="btn btn-light" id="boardBtn">게시판</button>
-			  			</div>
+			        <c:forEach var="l" items="${list}">
+		  			<!-- 사진파일명 : ${l.lookbook_fname}<br> -->
+		  			<div id="imgBox" style="float:left; width:250px; height:300px; margin:50px; padding:20px;">
+						<a href="/lookbookInfo.do"><img src="/resources/look_img/${l.lookbook_fname}"  height="600px" width="400px;"></a>
+					</div>	
+				</c:forEach>
+			  			
 			  		</div> <!-- board_top -->	
 	  			
 		  			<br>
@@ -33,92 +51,18 @@
 		  			<br>
 		  			<br>
 	  			
-	  			<div id="iframe" class="horizontal">
-	  				<div id="iframecontainer" class="horizontal" style="height: 70%; width: 100%;"> 				
-			  			
-			  			<!-- Section-->
-						<section class="py-5">	
-							<div class="container px-4 px-lg-5 mt-5">
-			<div
-				class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-				<div class="col mb-5">
-					<div class="card h-100">
-						<!-- Sale badge-->
-						<div class="badge bg-dark text-white position-absolute"
-							style="top: 0.5rem; right: 0.5rem">Hot</div>
-						<!-- lookbook image-->
-						<a href="lookbookInfo.do"></a>
-						
-					</div>
-				</div>
-				<div class="col mb-5">
-					<div class="card h-100">
-						<!-- Sale badge-->
-						<div class="badge bg-dark text-white position-absolute"
-							style="top: 0.5rem; right: 0.5rem">Hot</div>
-						<!-- lookbook image-->
-						
-						
-					</div>
-				</div>
-				<div class="col mb-5">
-					<div class="card h-100">
-						<!-- Sale badge-->
-						<div class="badge bg-dark text-white position-absolute"
-							style="top: 0.5rem; right: 0.5rem">Hot</div>
-						<!-- lookbook image-->
-						
-						
-					</div>
-				</div>
-				<div class="col mb-5">
-					<div class="card h-100">
-						<!-- lookbook image-->
-						
-					
-					</div>
-				</div>
-				<div class="col mb-5">
-					<div class="card h-100">
-						<!-- Product image-->
-						<img class="card-img-top"
-							src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-					</div>
-				</div>
-				<div class="col mb-5">
-					<div class="card h-100">
-						<!-- Product image-->
-						<img class="card-img-top"
-							src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-					</div>
-				</div>
-				<div class="col mb-5">
-					<div class="card h-100">
-						<!-- Product image-->
-						<img class="card-img-top"
-							src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-					
-					</div>
-				</div>
-				<div class="col mb-5">
-					<div class="card h-100">
-						<!-- Product image-->
-						<img class="card-img-top"
-							src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-					
-					</div>
-				</div>
-			</div>
-		</div>
-						</section>
-			  					  			 
-					</div>		<!-- iframconatiner-->					 
-	  				
-		  				</div>
-
-	  				</div> <!-- iframe -->
-	  		</div> <!-- board_wrap1 -->
-	  	</div> 
-	  	<%@ include file="../inc/footer.jsp" %>
+				
+				
+	  			
+			</div> <!-- board_wrap1 -->
+			
+	  	</div> <!-- container -->
+		<span id="pageBox">
+			<c:forEach var="i" begin="1" end="${totalPage}">
+					<a href="/mypage/manageMylook.do?pageNUM=${i}&users_no=${users.users_no}">${i} &nbsp;</a>
+			</c:forEach>
+		</span>
+		
+<%@ include file="../inc/footer.jsp" %>
 </body>
 </html>

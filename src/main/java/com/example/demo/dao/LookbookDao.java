@@ -18,6 +18,10 @@ import com.example.demo.vo.UsersVO;
 @Repository
 public class LookbookDao {
 	
+	public static int pageSIZE = 4;
+	public static int totalMyLook;
+	public static int totalPage;
+	
 	// lookbook 사진 조회시
 	public List<LookbookVO> listLookbook(HashMap arr_style) {
 		// TODO Auto-generated method stub
@@ -39,6 +43,17 @@ public class LookbookDao {
 	// 룩북 클릭시
 	public SelectLookbookCommandVO selectLookbook(int lookbook_no) {
 		return DBManager.getLookbook(lookbook_no);
+	}
+	
+	//보민 - 마이페이지 내 룩북 관리
+	
+	public int getTotalMyLook(int users_no) {
+		return DBManager.getTotalMyLook(users_no);
+	}
+	
+	public List<LookbookVO> listMyLook(HashMap map){
+		//System.out.println("lookbookdao users_no:"+map.users_no);
+		return DBManager.listMyLook(map);
 	}
 	
 }

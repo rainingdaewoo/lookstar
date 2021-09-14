@@ -8,7 +8,7 @@
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <link rel="stylesheet" href="css/css.css">
-<link rel = "stylesheet" href="resources/css/followList.css"/>
+<link rel = "stylesheet" href="/resources/css/followList.css"/>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>

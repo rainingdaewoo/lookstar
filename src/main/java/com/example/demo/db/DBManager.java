@@ -80,8 +80,8 @@ public class DBManager {
 	      session.close();
 	      return re;
 	   }
+	   
 	   // 회원탈퇴시 탈퇴테이블에 insert
-
 	   public static int insertUsers_out(Users_outVO uo) {
 	      SqlSession session = factory.openSession(true);
 	      int re = session.insert("users.insertUsers_out", uo);
@@ -139,13 +139,37 @@ public class DBManager {
 	      return re;
 	   }
 
-	   public static List<BoardVO> listMyBoard() {
+	   public static List<BoardVO> listMyBoard(HashMap map) {
 	      SqlSession session = factory.openSession();
-	      List<BoardVO> list = session.selectList("board.listMyBoard");
+	      List<BoardVO> list = session.selectList("board.listMyBoard",map);
 	      session.close();
 	      return list;
 	   }
+	   
+	   public static List<LookbookVO> listMyLook(HashMap map){
+		   
+		   SqlSession session = factory.openSession();
+		   List<LookbookVO> list = session.selectList("lookbook.listMyLook",map);
+		   System.out.println("listMyLookbook:"+list);
+		  // System.out.println("users_no:"+users_no);
+		   session.close();
+		   return list;
+	   }
 
+	   public static int getTotalMyLook(int users_no) {
+		   SqlSession session = factory.openSession();
+		   int n = session.selectOne("lookbook.totalMyLook",users_no);
+		   session.close();
+		   return n;
+	   }
+	   
+	   public static int getTotalMyBoard(int users_no) {
+		   SqlSession session = factory.openSession();
+		   int n = session.selectOne("board.totalMyBoard",users_no);
+		   session.close();
+		   return n;
+	   }
+	   
 	   public static int deleteUser(int users_no, String users_pw) {
 	      SqlSession session = factory.openSession(true);
 	      HashMap map = new HashMap();
