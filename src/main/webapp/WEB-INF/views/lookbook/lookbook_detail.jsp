@@ -66,6 +66,8 @@
 				<br>
 				<br>
 				<div class="text-center">
+					<h4>${look.lookbook_write}</h4>
+					<br>
 					<table class="info_table">
 						<c:forEach var="i" items="${info}">
 							<c:choose>
@@ -104,7 +106,7 @@
 					</table>
 					<c:choose>
 						<c:when test="${look.users_no == u.users_no}">
-							<a href="/lookbook/lookbookUpdate.do?lookbook_no=${look.lookbook_no}"><button type="button"
+							<a href="/lookbook/lookbook_update.do?lookbook_no=${look.lookbook_no}"><button type="button"
 									class="btn btn-outline-dark a_not_blue">수정</button></a>
 
 							<a href="/lookbook/deletelookbook.do?lookbook_no=${look.lookbook_no}" class="btn btn-outline-dark a_not_blue" id="deleteLookbook">삭제</a>

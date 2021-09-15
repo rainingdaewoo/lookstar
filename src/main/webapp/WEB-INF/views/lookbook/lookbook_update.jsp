@@ -1,25 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- Favicon(인터넷창 아이콘) -->
+<link rel="icon" type="image/x-icon"
+	href="/resources/assets/favicon.ico" />
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+	crossorigin="anonymous">
 <!-- 버튼 부트스트랩 -->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<style type="text/css">
-.info_table {
-	width: 400px;
-	margin: auto;
-	border-bottom: 1px solid gray;
-}
+<!-- 룩북 스타일 -->
+<link rel="stylesheet" href="../../../resources/css/lookbook.css">
 
-.info_line {
-	border-bottom: 1px solid gray;
-}
-</style>
 <script type="text/javascript">
 	// 업로드한 파일을 바로 읽을수 있도록 하는 메소드
 	$(function() {
@@ -31,7 +30,7 @@
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
 			reader.onload = function(e) {
-				$('#img').attr('src', e.target.result);
+				$('#blah').attr('src', e.target.result);
 			}
 			reader.readAsDataURL(input.files[0]);
 		}
@@ -66,92 +65,73 @@
 		}
 		display();
 	}
+	
 </script>
 </head>
 <body>
 	<%@ include file="../inc/header.jsp"%>
+	<!-- Section-->
 	<br>
 	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<!-- 룩인포 Modal-->
-	<div tabindex="-1" class="text-center" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<form action="/lookbook/insertLookbook.do" method="post"
-			enctype="multipart/form-data">
-			<div role="document">
-				<div>
-					<h5>수 정</h5>
+	<section style="position: relative; text-align: center;">
+		<br>
+		<h3 class="mt-5">나의 룩 작성</h3>
+		<hr>
+		<div class="align-items-center">
+			<form action="/lookbook/lookbook_update.do" method="post"
+				enctype="multipart/form-data">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+				<div class="row" style="width:80%, text-align: center;">
+					<h1 class="display-5 fw-bolder"></h1>
+					<br> <img id="blah" src="/resources/look_img/${l.lookbook_fname}" height="400px" /><br> <br> 
+					<input type='file' id="upload_file" name="lookbook.uploadFile" accept="image/png, image/jpeg" />
 				</div>
-				<input type="hidden" name="${_csrf.parameterName}"
-					value="${_csrf.token}"> <img id="img"
-					src="/resources/look_img/${look.lookbook_fname}" width="30%">
-				<input type='file' id="upload_file" name="lookbook.uploadFile"
-					accept="image/png, image/jpeg" /> <br> <br>
-				<div class="text-center">
-
-					<br> <br>
-					<div class="text-center">
-						<table class="info_table">
-							<c:forEach var="i" items="${info}">
-								<c:choose>
-									<c:when test="${i.lookinfo_category == 1}">
-										<tr class="info_line">
-											<td><img src="/resources/images/cap.png" width=50
-												height=50></td>
-											<td><b>${i.lookinfo_name}</b><br>${i.lookinfo_url}</td>
-										</tr>
-									</c:when>
-									<c:when test="${i.lookinfo_category == 2}">
-										<tr class="info_line">
-											<td><img src="/resources/images/shirt.png" width=50
-												height=50></td>
-											<td><b>${i.lookinfo_name}</b><br>${i.lookinfo_url}</td>
-										</tr>
-									</c:when>
-									<c:when test="${i.lookinfo_category == 3}">
-										<tr class="info_line">
-											<td><img src="/resources/images/pants.png" width=50
-												height=50></td>
-											<td><b>${i.lookinfo_name}</b><br>${i.lookinfo_url}</td>
-										</tr>
-									</c:when>
-									<c:when test="${i.lookinfo_category == 4}">
-										<tr class="info_line">
-											<td><img src="/resources/images/shoe.png" width=50
-												height=50></td>
-											<td><b>${i.lookinfo_name}</b><br>${i.lookinfo_url}</td>
-										</tr>
-									</c:when>
-								</c:choose>
-							</c:forEach>
-						</table>
+				<div style="width: 80%; text-align: center; ">
+					<input type="hidden" name="lookbook.users_no" value="${u.users_no}"> <br>
+					<input type="hidden" name="lookbook.lookbook_height" value="${u.users_height}"> 
+					<input type="hidden" name="lookbook.lookbook_weight" value="${u.users_weight}">
+					<input type="hidden" name="lookbook.lookbook_no" value="${l.lookbook_no }">
+					<input type="hidden" name="lookbook.lookbook_fname" value="${l.lookbook_fname }">
+					<input type="hidden" name="lookbook_no" value="${l.lookbook_no }"> 
+					<input type="text" class="form-control" placeholder="간단하게 한마디 써주세요"
+						name="lookbook.lookbook_write" maxlength="50"><br>
+					
+					
+					
+					<div id="styleInput"></div>
+					<br> <input class="btn btn-outline-dark" type="button"
+						value="추가" onclick="addInput();" />&nbsp;&nbsp;&nbsp; <input
+						class="btn btn-outline-dark" type="button" value="삭제"
+						onclick="deleteInput();" /> <br>
+					<br>
 
 
-						<div class="ftr" style="text-align: middle;">
 
-							<input type="checkbox" name="style_no" value="1">
-							미니멀&nbsp; <input type="checkbox" name="style_no" value="2">
-							캐주얼&nbsp; <input type="checkbox" name="style_no" value="3">
-							비즈니스&nbsp; <input type="checkbox" name="style_no" value="4">
-							아메카지&nbsp; <input type="checkbox" name="style_no" value="5">
-							스트릿&nbsp; <input type="checkbox" name="style_no" value="6">
-							스포츠&nbsp; <input type="checkbox" name="style_no" value="7">
-							레트로&nbsp; <input type="checkbox" name="style_no" value="8">
-							캠퍼스&nbsp; <input type="checkbox" name="style_no" value="9">
-							댄디&nbsp; <input type="checkbox" name="style_no" value="10">
-							데일리
-						</div>
+					<div class="ftr" style="text-align: middle;">
+						
+						<input type="checkbox" name="style_no" value="1">
+						미니멀&nbsp; <input type="checkbox" name="style_no" value="2">
+						캐주얼&nbsp; <input type="checkbox" name="style_no" value="3">
+						비즈니스&nbsp; <input type="checkbox" name="style_no" value="4">
+						아메카지&nbsp; <input type="checkbox" name="style_no" value="5">
+						스트릿&nbsp; <input type="checkbox" name="style_no" value="6">
+						스포츠&nbsp; <input type="checkbox" name="style_no" value="7">
+						레트로&nbsp; <input type="checkbox" name="style_no" value="8">
+						캠퍼스&nbsp; <input type="checkbox" name="style_no" value="9">
+						댄디&nbsp; <input type="checkbox" name="style_no" value="10">
+						데일리
 					</div>
 
+					<!-- 글쓰기 버튼 생성 -->
+					<input type="reset" class="btn btn-outline-dark pull-right"	value="취소"> 
+					<input type="submit" class="btn btn-outline-dark pull-right" value="작성">
 				</div>
+			</form>
+			<br> <br>
+		</div>
 
-			</div>
-		</form>
-	</div>
-	<!-- 룩인포 Modal끝-->
+	</section>
+	<!-- Footer-->
 	<%@ include file="../inc/footer.jsp"%>
 </body>
 </html>

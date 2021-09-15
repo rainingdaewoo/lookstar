@@ -82,14 +82,18 @@ public class LookbookController {
 			String id = user.getUsername();
 			System.out.println("ooooooooooooooooooooo");
 			System.out.println("id값: "+id);
-			
+			// 현재 로그인 되어 있는 유저의 정보
 			model.addAttribute("u", userdao.getUsers(id));
 		}
 		SelectLookbookCommandVO look = lookbookdao.selectLookbook(lookbook_no);
 		lookbookdao.updateLookbookViews(lookbook_no);
+		// 룩북 쓴 유저의 정보
 		model.addAttribute("write_u", look.getUsers());
+		// lookbook에 대한 정보
 		model.addAttribute("look", look.getLookbook());
+		// lookinfo에 대한 정보
 		model.addAttribute("info", look.getList_info());
+		// lookbook_style에 대한 정보
 		model.addAttribute("style", look.getList_style());
 		
 	}

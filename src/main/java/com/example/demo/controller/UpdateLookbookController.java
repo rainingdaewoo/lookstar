@@ -44,9 +44,9 @@ public class UpdateLookbookController {
 		Authentication authentication =	SecurityContextHolder.getContext().getAuthentication(); 
 		User user =	(User)authentication.getPrincipal(); 
 		String id = user.getUsername();
-		model.addAttribute("users", userdao.getUsers(id));
-		model.addAttribute("write_u", look.getUsers());
-		model.addAttribute("look", look.getLookbook());
+		model.addAttribute("u", look.getUsers());
+		model.addAttribute("l",dao.getDelLookbook(lookbook_no));
+		model.addAttribute("lookbook", look.getLookbook());
 		model.addAttribute("info", look.getList_info());
 		model.addAttribute("style", look.getList_style());
 	}
@@ -63,27 +63,31 @@ public class UpdateLookbookController {
 		ModelAndView mav = new ModelAndView("redirect:/lookbook/lookbook.do");
 		String path = request.getRealPath("/resources/look_img");
 		System.out.println("path:"+path);
-		String fname = null;
+		
 		MultipartFile uploadFile = updatelook.getLookbook().getUploadFile();
-		
-		
-		fname = uploadFile.getOriginalFilename();
-		if(fname != null && !fname.equals("")) {
-			try {
-				byte []data = uploadFile.getBytes();
-				FileOutputStream fos = new FileOutputStream(path + "/" + fname);
-				fos.write(data);
-				fos.close();
-				updatelook.getLookbook().setLookbook_fname(fname);
-				
-			}catch (Exception e) {
-				System.out.println("예외발생:"+e.getMessage());
-			}
+		String fname = null;
+		if(!uploadFile.isEmpty()) {
 			
-		}
-		int re = dao.update(updatelook);
-		
-		
+			fname = uploadFile.getOriginalFilename();
+			System.out.println("Empty가 아닐때 작동");
+			if(fname != null && !fname.equals("")) {
+				try {
+					byte []data = uploadFile.getBytes();
+					FileOutputStream fos = new FileOutputStream(path + "/" + fname);
+					fos.write(data);
+					fos.close();
+					updatelook.getLookbook().setLookbook_fname(fname);
+					
+				}catch (Exception e) {
+					System.out.println("예외발생:"+e.getMessage());
+				}
+				
+			}
+		}else {
+			System.out.println("Empty일때 작동");
+			fname=updatelook.getLookbook().getLookbook_fname();
+		}		
+		int re = dao.update(updatelook);		
 		return mav;
 	}
 	
