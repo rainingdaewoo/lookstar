@@ -51,7 +51,7 @@
 		<div class="align-items-center">
 			<form action="updateBoard.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-			<input type="hidden" name="users_no" value="21"> <br>	
+			<input type="hidden" name="users_no" value="${users.users_no}"> <br>	
 			<input type="hidden" name="board_no" value="${b.board_no }"> <br>
 				<div class="row col-md-6">
 					<h1 class="display-5 fw-bolder"></h1>

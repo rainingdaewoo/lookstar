@@ -133,6 +133,10 @@ public class BoardController {
 	@RequestMapping("/board/detailBoard.do")
 	public void detailBoard(HttpServletRequest request, Model model, int board_no) {
 		dao.updateViews(board_no);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User)authentication.getPrincipal();
+		String id = user.getUsername();
+		model.addAttribute("users", userdao.getUsers(id));
 		model.addAttribute("b",dao.getBoard(board_no));
 		model.addAttribute("comments", commentsdao.findAll(board_no)); 
 	}
@@ -160,7 +164,7 @@ public class BoardController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User)authentication.getPrincipal();
 		String id = user.getUsername();
-		model.addAttribute("u", userdao.getUsers(id));
+		model.addAttribute("users", userdao.getUsers(id));
 	}
 
 	

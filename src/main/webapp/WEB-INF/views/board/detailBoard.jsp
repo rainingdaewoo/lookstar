@@ -90,6 +90,7 @@
 			<h2>게시물 상세</h2>
 		<input type="hidden" name="board_no" value="${b.board_no }">
 	<hr>
+	<input type="hidden" name="users_no" value="${users.users_no}">
 	글번호 : ${b.board_no }<br>
 	글제목 : ${b.board_title }<br>
 	작성자 : ${b.users_nickname }<br>
@@ -121,9 +122,12 @@
 								</div>
 								
 								<div class="comments-extra">
-								<a class="btn btn-outline-dark pull-right" id="updateCommentsBtn">수정</a>
-								<a onclick="confirmDeleteComments(${comments.comments_no})"
-								class="btn btn-outline-dark pull-right" id="deleteBtn">삭제</a>
+								
+								<c:if test="${comments.users_no == users.users_no }">
+									<a class="btn btn-outline-dark pull-right" id="updateCommentsBtn">수정</a>
+									<a onclick="confirmDeleteComments(${comments.comments_no})"
+									class="btn btn-outline-dark pull-right" id="deleteBtn">삭제</a>	
+								</c:if>	
 								<a class="btn btn-outline-dark pull-right" id="reportCommentsBtn">신고</a>
 								
 								
@@ -235,12 +239,14 @@
 	<!-- 댓글 끝 -->
 	<a href="/board/board_write.do"
 		class="btn btn-outline-dark pull-right">글쓰기</a>
-		
-	<a href="/board/updateBoard.do?board_no=${b.board_no }"
+	<c:if test="${b.users_no == users.users_no }">
+		<a href="/board/updateBoard.do?board_no=${b.board_no }"
 		class="btn btn-outline-dark pull-right" id="updateBtn">수정</a>
-		
-	<a onclick="confirmDeleteBoard(${b.board_no})"
+		<a onclick="confirmDeleteBoard(${b.board_no})"
 		class="btn btn-outline-dark pull-right" id="deleteBtn">삭제</a>
+	</c:if>	
+		
+	
 	<a href="/board/listBoard.do?pageNUM=${pageNUM}"
 		class="btn btn-outline-dark pull-right">글목록</a>
 	</div>	

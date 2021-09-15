@@ -38,10 +38,15 @@ public class UpdateBoardController {
 		return userdao;
 	}
 	
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public void form(HttpServletRequest request, Model model, int board_no) {
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User)authentication.getPrincipal();
+		String id = user.getUsername();
+		model.addAttribute("users", userdao.getUsers(id));
 		model.addAttribute("b", dao.getBoard(board_no));
-	
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
