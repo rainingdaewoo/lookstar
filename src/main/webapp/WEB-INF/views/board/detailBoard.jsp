@@ -153,7 +153,7 @@
 								<br> 
 							</div>
 						<div class="col-md-6">
-			 					<input type="hidden" name="users_no" value="21"> <br>
+			 					<input type="hidden" name="users_no" value="${users.users_no}"> <br>
 			 					<input type="hidden" name="board_no" value="${b.board_no }"> <br>
 			 					<input type="hidden" name="depth" value="1">
 			 					<input type="hidden" name="ori_comments_no" value="${comments.comments_no}">
@@ -180,7 +180,7 @@
 								<br> 
 							</div>
 						<div class="col-md-6">
-			 					<input type="hidden" name="users_no" value="21"> <br>
+			 					<input type="hidden" name="users_no" value="${users.users_no}"> <br>
 			 					<input type="hidden" name="board_no" value="${b.board_no }"> <br>
 			 					<input type="hidden" name="depth" value="${comments.depth }">
 			 					<input type="hidden" name="comments_no" value="${comments.comments_no }">
@@ -219,7 +219,7 @@
 					<br> 
 				</div>
 				<div class="col-md-6">
-	 					<input type="hidden" name="users_no" value="21"> <br>
+	 					<input type="hidden" name="users_no" value="${users.users_no}"> <br>
 	 					<input type="hidden" name="board_no" value="${b.board_no }"> <br>
 	 					<input type="hidden" name="depth" value="0"> <br>
 	 					<input type="hidden" name="ori_comments_no" value="0"> <br>

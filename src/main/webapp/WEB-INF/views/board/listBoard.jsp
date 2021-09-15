@@ -44,11 +44,13 @@
 	<!-- Body Section -->
 	<section class="py-5">
 	<div class="container-aside">
-	<ul>
-		<li class="일상게시판"><a href="#">일상게시판</a></li>
-		<li class="자유게시판"><a href="#">자유게시판</a></li>
-		<li class="쇼핑후기"><a href="#">쇼핑후기</a></li>
-	</ul>
+		<ul>
+			<li class="일상게시판"><a href="#">자유게시판</a></li>
+			<li class="자유게시판"><a href="#">쇼핑후기</a></li>
+			<li class="쇼핑후기"><a href="#">발매 및 할인정보</a></li>
+			<li class="쇼핑후기"><a href="#">비밀글</a></li>
+			<li class="쇼핑후기"><a href="#">공지사항</a></li>
+		</ul>
 	<script type="text/javascript">
 	
 	</script>
