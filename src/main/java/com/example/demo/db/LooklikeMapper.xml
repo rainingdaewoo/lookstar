@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="looklike">
+	<select id="totalRecord" resultType="int">
+		select count(*) from looklike where users_no=#{users_no}
+	</select>
+
+  <select id="listLikes" resultType="lookbookVO">
+    select lookbook_fname from (select rownum n,lookbook_fname from (select lookbook_fname from lookbook , looklike
+	where lookbook.lookbook_no = looklike.lookbook_no
+	and looklike.users_no=#{users_no}))
+	where n between #{start} and #{end}
+  </select>
+</mapper>

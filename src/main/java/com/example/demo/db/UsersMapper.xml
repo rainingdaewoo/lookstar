@@ -89,7 +89,5 @@
 		update users set users_pw=#{users_pw} where users_no=#{users_no}
 	</update>
 	
-	<select id="listFollow" resultType="usersVO">
-		select users_id,users_nickname,users_fname from users where users_id in (select following_id from follow where follower_id = #{users_id})
-	</select>
+	
 </mapper>

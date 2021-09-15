@@ -16,11 +16,24 @@
 }
 
 .board_wrap{
-	margin : 100px;
-	padding : 100px;
+	margin : 70px;
+	padding : 70px;
+	width:70%;
 }
 
 .board_title{
 	margin : 20px;
 	padding : 20px;
+}
+
+#followBox{
+	width:70%;
+	margin:60px;
+	paddig:30px;
+}
+
+#pageBox{
+	position:absolute;
+	top:80%;
+	left:50%;
 }

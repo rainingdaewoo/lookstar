@@ -32,15 +32,18 @@ public class UsersDao {
 	public UsersVO getUsers(String username) {
 		return DBManager.getUsers(username);
 	}
-	
-	
+
 	public UsersVO getUser(int users_no) {
 		return DBManager.getUser(users_no);
 	}
 	
-	//users
+	//가연
+	public UsersVO getUsersByNickname(String users_nickname) {
+		return DBManager.getUsersByNickname(users_nickname);
+	}
 	
 	
+	//보민
 	public int updateUsersDel(int users_no) {
 		return DBManager.updateUsersDel(users_no);
 	}
@@ -53,10 +56,6 @@ public class UsersDao {
 		System.out.println("users: " + usersc.getUsers());
 		System.out.println("users_like_style: " + usersc.getStyle_no());
 		return DBManager.updateUsersWithStyle(usersc);
-	}
-	
-	public List<UsersVO> listFollow(String users_id){
-		return DBManager.listFollw(users_id);
 	}
 	
 	public int insertUsers_out(Users_outVO uo) {

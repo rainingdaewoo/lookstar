@@ -13,13 +13,14 @@
 	margin-top:50px;
 }
 
+#long{
+	width:400px;	
+}
+
 #box{
 	margin-top:50px;
 	margin:auto;
-	height:600px;
-	width:800px;
-	position:absolute;
-	
+	width:600px;
 }
 
 #container{

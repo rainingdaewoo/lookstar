@@ -57,13 +57,13 @@
             <!-- 룩페이지 이동 -->
             <li class="nav-item"><a class="nav-link" href="/lookbook/lookbook.do">Looks</a></li>
             <!-- 게시판 이동 -->
-            <li class="nav-item"><a class="nav-link" href="../listBoard.do">Board</a></li>
+            <li class="nav-item"><a class="nav-link" href="../board/listBoard.do">Board</a></li>
             <!-- DM 이동 -->
             <li class="nav-item"><a class="nav-link" href="../dmTest.do"><img
                   src="../../../resources/assets/chat.png" width="20px"></a></li>
             <li class="nav-item dropdown">
                <!-- 마이페이지 이동 -->
-            <li class="nav-item"><a class="nav-link" href="../mypage.do"><img
+            <li class="nav-item"><a class="nav-link" href="../mypage/mypage.do"><img
                   src="../../../resources/assets/user.png" width="20px"></a></li>
             <li class="nav-item dropdown">
                <!-- 알림 드롭다운  --> <a class="nav-link dropdown-toggle" href="#"
@@ -106,7 +106,6 @@
          <form class="d-flex">
             <button type="button" class="btn btn-outline-dark"
                data-toggle="modal" data-target="#joinModal">JOIN</button>
-
          </form>
          
           -->
@@ -145,7 +144,6 @@
                         <i class="far fa-check-circle"></i> <span>로그인 유지</span>
                      </div>
                   </section>
-
                </div>
                <div id="modal_footer">
                   <div class="social_login_button">

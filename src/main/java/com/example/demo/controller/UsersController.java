@@ -164,24 +164,4 @@ public class UsersController {
 		
 	}
 	
-	@RequestMapping("/mypage/manageMylook.do")
-	public void manageMylook() {
-		
-	}
-	
-	@RequestMapping("/mypage/followList.do")
-	public void followList(Model model,HttpSession session) {
-		String users_id = ((UsersVO)session.getAttribute("users")).getUsers_id();
-		System.out.println("users_id:"+users_id);
-		List<UsersVO> list = dao.listFollow(users_id);
-		System.out.println("팔로우목록:"+list);
-		model.addAttribute("flist",list);
-	}
-	
-	@RequestMapping("/mypage/likeList.do")
-	public void likeList() {
-
-		
-	}
 }
-

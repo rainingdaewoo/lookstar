@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="follow">
+	<select id="totalRecord" resultType="int">
+		select count(*) from follow
+		where follower_id = #{users_id}
+	</select>
+
+  	<select id="listFollow" resultType="usersVO">
+		select users_id,users_nickname,users_fname from(select rownum n,users_id,users_nickname,users_fname from(
+		select users_id,users_nickname,users_fname from users 
+		where users_id in (select following_id from follow where follower_id = #{users_id})))
+		where n between #{start} and #{end}
+	</select>
+</mapper>

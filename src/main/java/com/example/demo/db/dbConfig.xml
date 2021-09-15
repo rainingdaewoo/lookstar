@@ -24,7 +24,7 @@
 
 		<typeAlias type="com.example.demo.vo.FollowVO" alias="followVO" />
 		<typeAlias type="com.example.demo.vo.Users_outVO" alias="users_outVO" />
-
+		<typeAlias type="com.example.demo.vo.LooklikeVO" alias="looklikeVO"/>
 		
 	</typeAliases>
 	<environments default="development">
@@ -48,6 +48,8 @@
 		<mapper resource="com/example/demo/db/DMMapper.xml" />
 		<mapper resource="com/example/demo/db/Lookbook_StyleMapper.xml" />
 		<mapper resource="com/example/demo/db/Users_Like_StyleMapper.xml" />
+		<mapper resource="com/example/demo/db/LooklikeMapper.xml" />
+		<mapper resource="com/example/demo/db/FollowMapper.xml" />
 	</mappers>
 
 </configuration>

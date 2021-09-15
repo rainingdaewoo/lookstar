@@ -9,7 +9,7 @@ import com.example.demo.vo.DMVO;
 
 @Repository
 public class DMDao {
-	
+	/*
 	public List<DMVO> findAll(){
 		return DBManager.listDM();
 	}
@@ -25,5 +25,5 @@ public class DMDao {
 	public int insertDM(DMVO d) {
 		return DBManager.insertDM(d);
 	}
-	
+	*/
 }

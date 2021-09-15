@@ -28,7 +28,7 @@ public class DMController {
 	public void setDao(DMDao dao) {
 		this.dao = dao;
 	}
-	
+/*	
 	@RequestMapping("/listChat.do")
 	@ResponseBody	
 	public List<DMVO> listDM(){
@@ -56,5 +56,5 @@ public class DMController {
 		mav.addObject("dmList",dao.findAll2());
 		return mav;
 	}
-
+*/
 }
