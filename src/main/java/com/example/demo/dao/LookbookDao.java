@@ -46,7 +46,6 @@ public class LookbookDao {
 		return DBManager.getLookbook(lookbook_no);
 	}
 	
-<<<<<<< HEAD
 	//보민 - 마이페이지 내 룩북 관리
 	
 	public int getTotalMyLook(int users_no) {
@@ -58,6 +57,5 @@ public class LookbookDao {
 		return DBManager.listMyLook(map);
 	}
 	
-=======
->>>>>>> branch 'mypage2' of https://github.com/Gichan94/lookstargram.git
+
 }
