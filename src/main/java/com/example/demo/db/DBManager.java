@@ -171,9 +171,7 @@ public class DBManager {
 		session.close();
 		return u;
 	}
-	
 
-	
 	public static List<LookbookVO> listlookbook() {
 		SqlSession session = factory.openSession();
 		List<LookbookVO> list = session.selectList("lookbook.listlookbook");
@@ -186,14 +184,12 @@ public class DBManager {
 		String sortField = (String) map.get("sortField");
 		String[] arr_Style = (String[]) map.get("arr_Style");
 		RangeWeightHeightVO rw = (RangeWeightHeightVO) map.get("rw");
-		
-		
+
 		System.out.println("Map 정보/ sortField: " + sortField);
 		System.out.println("Map 정보/ arr: " + Arrays.toString(arr_Style));
 		System.out.println("Map 정보/ RangeWH: " + rw);
 
 		SqlSession session = factory.openSession();
-		
 
 		List<LookbookVO> list = session.selectList("lookbook.findAllFilter", map);
 		// System.out.println("list: " + list);
@@ -275,20 +271,20 @@ public class DBManager {
 		System.out.println("--------------------------");
 		return re;
 	}
+
 	public static int updateLookbook(InsertLookbookCommandVO updatelook) {
 		int re = 0;
-		
+
 		SqlSession session = factory.openSession(true);
-		 
+
 		System.out.println("--------------------------");
-		
+
 		LookbookVO lookbook = updatelook.getLookbook();
 		System.out.println("loobook객체: " + lookbook);
-		int no =lookbook.getLookbook_no();
+		int no = lookbook.getLookbook_no();
 		int re1 = session.update("lookbook.update", lookbook); // 1 - 룩북 업데이트
-		
-		
-		int re2 = session.delete("lookinfo.delete",no);		   // 일단 룩북의 모든 정보 삭제
+
+		int re2 = session.delete("lookinfo.delete", no); // 일단 룩북의 모든 정보 삭제
 		List<LookInfoVO> list = updatelook.getList_info();
 		int re3 = 0;
 		for (LookInfoVO l : list) {
@@ -297,8 +293,7 @@ public class DBManager {
 			re3 += session.insert("lookinfo.insert", l);
 		} // list 사이즈 만큼 lookinfo 추가
 
-		
-		int re4 = session.delete("lookbook_style.delete", no);	// 일단 룩북의 모든 스타일 삭제
+		int re4 = session.delete("lookbook_style.delete", no); // 일단 룩북의 모든 스타일 삭제
 		List<Integer> list2 = updatelook.getStyle_no();
 		int re5 = 0;
 		for (int i : list2) {
@@ -311,20 +306,17 @@ public class DBManager {
 		} else {
 			session.rollback();
 		}
-		
-		
-		
-		
+
 		session.close();
 		System.out.println("--------------------------");
 		return re;
 	}
+
 	public static void updateLookbookViews(int no) {
 		SqlSession session = factory.openSession(true);
 		session.update("lookbook.updateViews", no);
 		session.close();
 	}
-	
 
 	// board 관련 DBManager
 
@@ -553,9 +545,19 @@ public class DBManager {
 		return d;
 	}
 
-	
+	// follow
+	public static int getTotalMyFollow(String users_id) {
+		SqlSession session = factory.openSession();
+		int n = session.selectOne("follow.totalRecord", users_id);
+		session.close();
+		return n;
+	}
 
-	
-
+	public static List<UsersVO> listFollw(HashMap map) {
+		SqlSession session = factory.openSession();
+		List<UsersVO> flist = session.selectList("follow.listFollow", map);
+		session.close();
+		return flist;
+	}
 
 }

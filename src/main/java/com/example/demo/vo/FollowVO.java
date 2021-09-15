@@ -12,7 +12,7 @@ public class FollowVO {
 	}
 	public String getFollower_id() {
 		return follower_id;
-	}
+	}     
 	public void setFollower_id(String follower_id) {
 		this.follower_id = follower_id;
 	}
