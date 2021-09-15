@@ -21,12 +21,15 @@
 		<typeAlias type="com.example.demo.vo.DMVO" alias="dmVO" />
 		<typeAlias type="com.example.demo.vo.CommentsVO" alias="commentsVO"/>
 		<typeAlias type="com.example.demo.vo.Users_like_styleVO" alias="users_like_styleVO"/>
-
 		<typeAlias type="com.example.demo.vo.FollowVO" alias="followVO" />
 		<typeAlias type="com.example.demo.vo.Users_outVO" alias="users_outVO" />
+<<<<<<< HEAD
 		<typeAlias type="com.example.demo.vo.LooklikeVO" alias="looklikeVO"/>
 		
+=======
+>>>>>>> branch 'mypage2' of https://github.com/Gichan94/lookstargram.git
 	</typeAliases>
+	
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />

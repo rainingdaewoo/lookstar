@@ -41,6 +41,16 @@ public class UsersDao {
 	public UsersVO getUsersByNickname(String users_nickname) {
 		return DBManager.getUsersByNickname(users_nickname);
 	}
+<<<<<<< HEAD
+=======
+	
+	//users
+	public int update(UsersVO u) {
+		return DBManager.updateInfo(u);
+	}
+
+	//users
+>>>>>>> branch 'mypage2' of https://github.com/Gichan94/lookstargram.git
 	
 	
 	//보민

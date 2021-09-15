@@ -125,6 +125,7 @@ public class DBManager {
 
 	      }
 
+<<<<<<< HEAD
 	  public static List<LookbookVO> listLikes(HashMap map){
 		  SqlSession session = factory.openSession();
 		  List<LookbookVO> list = session.selectList("looklike.listLikes",map);
@@ -134,6 +135,24 @@ public class DBManager {
 	  }
 
 	  public static List<UsersVO> listFollw(HashMap map) {
+=======
+	   public static int updateStyle(int users_no) {
+	      System.out.println("dbmanager updatestyle 동작함");
+	      SqlSession session = factory.openSession(true);
+	      int re = session.update("Users_like_Style.updateUsers_like_Style", users_no);
+	      session.close();
+	      return re;
+	   }
+
+	   public static int updateInfo(UsersVO u) {
+	      SqlSession session = factory.openSession(true);
+	      int re = session.update("look.updateMyInfo", u);
+	      session.close();
+	      return re;
+	   }
+
+	   public static List<BoardVO> listMyBoard() {
+>>>>>>> branch 'mypage2' of https://github.com/Gichan94/lookstargram.git
 	      SqlSession session = factory.openSession();
 	      List<UsersVO> flist = session.selectList("follow.listFollow",map);
 	      session.close();

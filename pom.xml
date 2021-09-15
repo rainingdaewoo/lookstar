@@ -82,9 +82,6 @@
 		</dependency>
 
 		<!-- json simple maven 추가 -->
-
-
-
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
