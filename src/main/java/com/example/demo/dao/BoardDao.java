@@ -17,12 +17,13 @@ public class BoardDao {
 	public static String searchTypeKeyword; 
 
 	public String setSearchTypeKeyword(String searchType, String keyword, int board_category_no) {
-	 
 	 if(searchType.equals("") || keyword.equals("") || board_category_no == 4000) {
-	  searchTypeKeyword = ""; 
-	 } else {
+		 searchTypeKeyword = "&board_category_no=" + board_category_no;
+		 System.out.println("searchTypeKeyword: " + searchTypeKeyword);
+	 }
+	 else {
 	  searchTypeKeyword = "&searchType=" + searchType + "&keyword=" + keyword + "&board_category_no=" + board_category_no; 
-	  System.out.println(searchTypeKeyword);
+	  System.out.println("searchTypeKeyword: " + searchTypeKeyword);
 	 }
 	return searchTypeKeyword;  
 	}

@@ -187,8 +187,6 @@
 				
 			</div>
 				</div>
-	
-		
 		
 	</section>
 		<%@ include file=".././inc/footer.jsp"%> 
