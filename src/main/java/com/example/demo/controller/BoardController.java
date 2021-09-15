@@ -74,13 +74,15 @@ public class BoardController {
 	@GetMapping("/board/listBoard.do")
 	public void listBoard(HttpServletRequest request, @RequestParam(value = "pageNUM", 
 						defaultValue = "1") int pageNUM, Model model,
-			@RequestParam(value = "searchType", required = false, defaultValue = "board_title") String searchType , @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
+			@RequestParam(value = "searchType", required = false, defaultValue = "board_title") String searchType , @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+			@RequestParam(value = "board_category_no", required = false, defaultValue = "0") int board_category_no ) {
 	
 		System.out.println("listBoard.do 동작함");
 		System.out.println("검색컬럼:" +searchType);
 		System.out.println("검색어:" + keyword);
 		System.out.println("pageNUM:"+pageNUM);
-		BoardDao.totalRecord = dao.getTotalRecord(searchType, keyword);
+		System.out.println("board_category_no:"+board_category_no);
+		BoardDao.totalRecord = dao.getTotalRecord(searchType, keyword, board_category_no);
 		BoardDao.totalPage =
 		(int) Math.ceil( (double) BoardDao.totalRecord / BoardDao.pageSIZE);
 		
@@ -111,6 +113,7 @@ public class BoardController {
 		map.put("end", end);
 		map.put("searchType", searchType); 
 		map.put("keyword", keyword);
+		map.put("board_category_no", board_category_no);
 		 
 		// 시작 및 끝 번호
 		model.addAttribute("startPageNum", startPageNum);
@@ -128,6 +131,7 @@ public class BoardController {
 		// 검색 후에도 검색창 유지
 		model.addAttribute("searchType", searchType);
 		model.addAttribute("keyword", keyword);
+		model.addAttribute("board_category_no", board_category_no);
 	}
 	
 	@RequestMapping("/board/detailBoard.do")

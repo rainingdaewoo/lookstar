@@ -4,12 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
   <select id="findAll" resultType="boardVO">
-     SELECT board_no, board_title, board_content, users_nickname, board_date, board_views, board_show, board_comments_count
+     SELECT board_no, board_title, board_content, users_nickname, board_date, board_views, board_show, board_comments_count, board_category_no
     FROM (
-        SELECT board_no, board_title, board_content, users_nickname, board_date, board_views, board_show, board_comments_count,
+        SELECT board_no, board_title, board_content, users_nickname, board_date, board_views, board_show, board_comments_count, board_category_no,
             row_number() over(order by board_no desc) as rNum
         FROM board, users 
         WHERE board.users_no = users.users_no
+        	and board_category_no = #{board_category_no}
              <if test="searchType != null and searchType != 'all'" >
              	and ${searchType} like '%' || #{keyword} || '%'
              </if>
@@ -73,6 +74,7 @@
   <select id="totalRecord" resultType="int" parameterType="hashMap">
   	select count(*) FROM board, users 
         WHERE board.users_no = users.users_no
+        		and board_category_no = #{board_category_no}
   	  <if test="searchType != null and searchType != 'all'" >
              	and ${searchType} like '%' || #{keyword} || '%'
              </if>

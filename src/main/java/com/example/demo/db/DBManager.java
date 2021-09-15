@@ -328,7 +328,7 @@ public class DBManager {
 	      return re;
 	   }
 
-	   public static int getTotalRecord(String searchType, String keyword) {
+	   public static int getTotalRecord(String searchType, String keyword, int board_category_no) {
 
 	      SqlSession session = factory.openSession();
 
@@ -336,6 +336,7 @@ public class DBManager {
 
 	      data.put("searchType", searchType);
 	      data.put("keyword", keyword);
+	      data.put("board_category_no", board_category_no);
 
 	      int n = session.selectOne("board.totalRecord", data);
 	      session.close();
