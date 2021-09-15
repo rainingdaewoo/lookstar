@@ -24,36 +24,25 @@
 
 <script type="text/javascript">
    $(function() {      
-
-	      
-	  //$("#firstclick").click();
-		
+	
 	  let selected_style= ['1','2','3','4','5','6','7','8','9','10'];
       let sortField="NEW";
-      //let bodyspec={"weight_low":0,"weight_high":120,"height_low":0,"height_high":220};
       let weight_low=0;
       let weight_high=150;
       let height_low=0;
       let height_high=220;
-	  /*
-      let selected_style= ['1','2','3','4','5','6','7','8','9','10'];
-      let sortField="NEW";
-      //let bodyspec={"weight_low":0,"weight_high":120,"height_low":0,"height_high":220};
-      let weight_low=0;
-      let weight_high=120;
-      let height_low=0;
-      let height_high=220;
-      */
+      
+      $("#firstclick").trigger("click");
+      $("#firstclick").trigger("click");
+	 
       listLookbook();
       // 스타일, 키, 몸무게의 변수를 전역변수로.. 
       function listLookbook() {
-//    	  let data ={arr:selected_style, bodyspec:bodyspec,sortField:sortField};
     	  let data ={arr:selected_style,weight_low:weight_low,weight_high:weight_high,height_low:height_low,height_high:height_high,sortField:sortField};
     	  console.log("data값:" + data);
     	  $.each(data,function(i,item){
     		  console.log(i+":"+item);
     	  });
-    	 // console.log(data.bodyspec);
     	  
     	  $.ajax({
               url:"/lookbook/ListLookbook.do",
@@ -62,8 +51,11 @@
                  console.log(list);
                  $("#lookbookimage").empty();
                  $.each(list, function(index,item){
-                    let img = $("<div class='col mb-5'><div class='card h-100 justify-content-center'><a href='lookbook_detail.do?lookbook_no="+item.lookbook_no + "'><img class='card-img-top' src='/resources/look_img/"+item.lookbook_fname+"' style='height: 100%; width: 100%;' /></a></div></div>");
-                    $("#lookbookimage").append(img);
+                	if(item.lookbook_show == 0){
+                		let img = $("<div class='col mb-5'><div class='card h-100 justify-content-center'><a href='lookbook_detail.do?lookbook_no="+item.lookbook_no + "'><img class='card-img-top' src='/resources/look_img/"+item.lookbook_fname+"' style='height: 100%; width: 100%;' /></a></div></div>");
+                		$("#lookbookimage").append(img);
+                	}                    
+                    
                  });
               }
            });
@@ -96,7 +88,6 @@
       });
       
       
-      // 신체 스펙 선택       0 150
       $(".bodyspec").change(function() {
     	  let getWeight = $("#weight option:selected").val();
     	  let arrayWeight = getWeight.split("~");
@@ -107,8 +98,7 @@
     	  let arrayHeight = getHeight.split("~");
     	  height_low = arrayHeight[0];
     	  height_high = arrayHeight[1];
-          
-          
+       
          
           
           listLookbook();

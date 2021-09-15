@@ -30,6 +30,15 @@ public class LookbookDao {
 		System.out.println("===============================");
 		return DBManager.insertLookbook(insertlook);
 	}
+	// 룩북 수정 시
+	public int update(InsertLookbookCommandVO updatelook) {
+		System.out.println("=====Dao의 결과==================");
+		System.out.println("lookbook: "+ updatelook.getLookbook());
+		System.out.println("list_info: "+ updatelook.getList_info());
+		System.out.println("style_no: "+ updatelook.getStyle_no());
+		System.out.println("===============================");
+		return DBManager.updateLookbook(updatelook);
+	}
 	// 룩북 클릭시
 	public SelectLookbookCommandVO selectLookbook(int lookbook_no) {
 		return DBManager.getLookbook(lookbook_no);
@@ -46,6 +55,10 @@ public class LookbookDao {
 	public List<LookbookVO> listLookbook() {
 		
 		return DBManager.listlookbook();
+	}
+	
+	public void updateLookbookViews(int no) {
+		DBManager.updateLookbookViews(no);
 	}
 	
 }

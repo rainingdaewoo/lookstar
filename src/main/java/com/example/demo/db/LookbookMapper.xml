@@ -3,14 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lookbook">
-	<!-- 스타일 필터를 통한 조회 <select id="findAll" resultType="lookbookVO"> select 
-		* from lookbook <if test="arr_Style != null"> where lookbook_no in (select 
-		distinct l.lookbook_no no from lookbook l, lookbook_style s where l.lookbook_no 
-		= s.lookbook_no and s.style_no in <foreach item="item" collection="arr_Style" 
-		open="(" separator="," close=")"> ${item} </foreach> ) </if> </select> -->
-	<!-- 스타일 필터를 통한 조회 -->
-	<!--  -->
-	
+
 	<!-- 초기 페이지 열 시 룩북 조회 -->
 	<select id="listlookbook" resultType="lookbookVO">
 		select * from lookbook order by lookbook_date desc
@@ -36,7 +29,7 @@
 			)			
 		</if>
 		<choose>
-			<when test="sortField!=null or sortField.equals('NEW')">
+			<when test="sortField==null or sortField.equals('NEW')">
 				order by lookbook_date desc
 			</when>
 			<otherwise>
@@ -45,17 +38,23 @@
 		</choose>
 	</select>
 
-	<!-- 
-	<select id="findRange" resultType="lookbookVO">
-		select * from lookbook where lookbook_weight between #{weight_low} and
-		#{weight_high} and lookbook_height between #{height_low} and
-		#{height_high}
-	</select>
-몸무게 필터를 통한 조회 -->
 	<!-- 룩북 하나 클릭시 -->
 	<select id="getLookbook" resultType="lookbookVO">
 		select * from lookbook where lookbook_no=#{lookbook_no}
 	</select>
+	
+	<!-- 룩북 클릭시 view 증가 -->
+	<update id="updateViews" parameterType="int">
+      update lookbook set lookbook_views=lookbook_views + 1 where lookbook_no=#{lookbook_no} 
+  	</update>
+	
+	<!-- 룩북 업데이트 -->
+	<update id="update">
+		update lookbook set lookbook_write=#{lookbook_write}, lookbook_fname=#{lookbook_fname}  
+		where lookbook_no=#{lookbook_no}
+	</update>
+	
+	
 	
 	<!-- 삭제할 룩북 선택 -->
 	<select id="getDelBoard" resultType="lookbookVO">

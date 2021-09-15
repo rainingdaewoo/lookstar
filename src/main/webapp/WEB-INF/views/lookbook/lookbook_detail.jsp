@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 버튼 부트스트랩 -->
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
 .info_table {
 	width: 400px;
@@ -17,7 +20,17 @@
 	border-bottom: 1px solid gray;
 }
 </style>
-
+<script type="text/javascript">
+	$(function(){
+		/*
+		function confirmDeleteLookbook(lookbook_no) {
+			if(confirm('정말로 삭제할까요')){
+				location.href='/lookbook/deletelookbook.do?lookbook_no='+lookbook_no;
+			}
+		};
+		*/
+	});
+</script>
 </head>
 <body>
 	<%@ include file="../inc/header.jsp"%>
@@ -91,11 +104,10 @@
 					</table>
 					<c:choose>
 						<c:when test="${look.users_no == u.users_no}">
-							<a href="/lookbook/lookbookUpdate.do"><button type="button"
+							<a href="/lookbook/lookbookUpdate.do?lookbook_no=${look.lookbook_no}"><button type="button"
 									class="btn btn-outline-dark a_not_blue">수정</button></a>
 
-							<a href="/lookbook/lookbookDelete.do"><button type="button"
-									class="btn btn-outline-dark a_not_blue">삭제</button></a>
+							<a href="/lookbook/deletelookbook.do?lookbook_no=${look.lookbook_no}" class="btn btn-outline-dark a_not_blue" id="deleteLookbook">삭제</a>
 						</c:when>
 					</c:choose>
 				</div>

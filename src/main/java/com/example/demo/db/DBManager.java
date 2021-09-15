@@ -172,23 +172,7 @@ public class DBManager {
 		return u;
 	}
 	
-	// 전체 룩북
-	/*
-	public static List<LookbookVO> listLookbook(HashMap map) {
-		String[] arr = (String[]) map.get("arr_Style");
-		System.out.println("Map 정보: " + Arrays.toString(arr));
 
-		SqlSession session = factory.openSession();
-
-		List<LookbookVO> list = session.selectList("lookbook.findAllField", map);
-		// System.out.println("list: " + list);
-		for (LookbookVO l : list) {
-			System.out.println(l.getLookbook_no());
-		}
-		session.close();
-		return list;
-	}
-	*/
 	
 	public static List<LookbookVO> listlookbook() {
 		SqlSession session = factory.openSession();
@@ -227,9 +211,9 @@ public class DBManager {
 		return l;
 	}
 
-	public static int deleteLookbook(int no) {
+	public static int deleteLookbook(int lookbook_no) {
 		SqlSession session = factory.openSession(true);
-		int re = session.delete("lookbook.deleteLookbook", no);
+		int re = session.delete("lookbook.deleteLookbook", lookbook_no);
 
 		session.commit();
 		session.close();
@@ -291,7 +275,55 @@ public class DBManager {
 		System.out.println("--------------------------");
 		return re;
 	}
-	
+	public static int updateLookbook(InsertLookbookCommandVO updatelook) {
+		int re = 0;
+		
+		SqlSession session = factory.openSession(true);
+		 
+		System.out.println("--------------------------");
+		
+		LookbookVO lookbook = updatelook.getLookbook();
+		System.out.println("loobook객체: " + lookbook);
+		int no =lookbook.getLookbook_no();
+		int re1 = session.update("lookbook.update", lookbook); // 1 - 룩북 업데이트
+		
+		
+		int re2 = session.delete("lookinfo.delete",no);		   // 일단 룩북의 모든 정보 삭제
+		List<LookInfoVO> list = updatelook.getList_info();
+		int re3 = 0;
+		for (LookInfoVO l : list) {
+			l.setLookbook_no(no);
+			System.out.println("lookinfo 객체:" + l);
+			re3 += session.insert("lookinfo.insert", l);
+		} // list 사이즈 만큼 lookinfo 추가
+
+		
+		int re4 = session.delete("lookbook_style.delete", no);	// 일단 룩북의 모든 스타일 삭제
+		List<Integer> list2 = updatelook.getStyle_no();
+		int re5 = 0;
+		for (int i : list2) {
+			Lookbook_styleVO style = new Lookbook_styleVO(no, i);
+			System.out.println("lookbook_style 객체:" + style);
+			re5 += session.insert("lookbook_style.insert", style);
+		}
+		if (re1 == 1 && re3 == list.size() && re5 == list2.size()) {
+			session.commit();
+		} else {
+			session.rollback();
+		}
+		
+		
+		
+		
+		session.close();
+		System.out.println("--------------------------");
+		return re;
+	}
+	public static void updateLookbookViews(int no) {
+		SqlSession session = factory.openSession(true);
+		session.update("lookbook.updateViews", no);
+		session.close();
+	}
 	
 
 	// board 관련 DBManager
@@ -520,6 +552,8 @@ public class DBManager {
 		session.close();
 		return d;
 	}
+
+	
 
 	
 

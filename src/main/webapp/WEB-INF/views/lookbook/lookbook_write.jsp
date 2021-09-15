@@ -94,21 +94,9 @@
 						name="lookbook.lookbook_weight" value="${u.users_weight}"> 
 					<input type="text" class="form-control" placeholder="간단하게 한마디 써주세요"
 						name="lookbook.lookbook_write" maxlength="50"><br>
-					<!-- 
-					<table class="table" style="text-align: center; border: 1px solid #dddddd">
-						<tr>
-							<td valign="middle" rowspan="3" align="center" bgcolor="gray"
-								width="200px"><b>룩정보</b></td>
-						</tr>
-							<td>
-						<tr>
-							<td>+ 추가</td>
-						</tr>
-						<tr>
-							<td>+ 추가</td>
-						</tr>
-					</table>
-					  -->
+					
+					
+					
 					<div id="styleInput"></div>
 					<br> <input class="btn btn-outline-dark" type="button"
 						value="추가" onclick="addInput();" />&nbsp;&nbsp;&nbsp; <input
@@ -134,9 +122,8 @@
 					</div>
 
 					<!-- 글쓰기 버튼 생성 -->
-					<input type="reset" class="btn btn-outline-dark pull-right"
-						value="취소"> <input type="submit"
-						class="btn btn-outline-dark pull-right" value="작성">
+					<input type="reset" class="btn btn-outline-dark pull-right"	value="취소"> 
+					<input type="submit" class="btn btn-outline-dark pull-right" value="작성">
 				</div>
 			</form>
 			<br> <br>

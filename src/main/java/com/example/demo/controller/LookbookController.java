@@ -71,6 +71,8 @@ public class LookbookController {
 		String id = user.getUsername();
 		model.addAttribute("u", userdao.getUsers(id));
 	}
+	
+	
 	@RequestMapping("/lookbook/lookbook_detail.do")
 	public void detailLookbook(HttpServletRequest request,Model model,int lookbook_no) {
 		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
@@ -83,14 +85,8 @@ public class LookbookController {
 			
 			model.addAttribute("u", userdao.getUsers(id));
 		}
-		
-		
-		
-		
-		
 		SelectLookbookCommandVO look = lookbookdao.selectLookbook(lookbook_no);
-		
-		
+		lookbookdao.updateLookbookViews(lookbook_no);
 		model.addAttribute("write_u", look.getUsers());
 		model.addAttribute("look", look.getLookbook());
 		model.addAttribute("info", look.getList_info());
@@ -101,7 +97,7 @@ public class LookbookController {
 	
 	@RequestMapping("/lookbook/deletelookbook.do")
 	public ModelAndView deleteBoard(int lookbook_no, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("redirect:/board/listBoard.do");
+		ModelAndView mav = new ModelAndView("redirect:/lookbook/lookbook.do");
 		String path = request.getRealPath("/resources/look_img");
 		String oldFname = lookbookdao.getDelLookbook(lookbook_no).getLookbook_fname();
 		
