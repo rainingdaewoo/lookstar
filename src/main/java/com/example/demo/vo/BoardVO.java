@@ -127,5 +127,4 @@ public class BoardVO {
 				+ ", board_comments_count=" + board_comments_count + ", board_uploadFile=" + board_uploadFile + "]";
 	}
 	
-	
 }

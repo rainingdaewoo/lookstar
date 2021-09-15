@@ -61,7 +61,7 @@
 				<a href="/board/listBoard.do?pageNUM=1&board_category_no=4">공지사항</a>
 			</li>
 		</ol>
-		<input type="hidden" name="board_category_no" value="${b.board_category_no}">
+		<input type="hidden" name="board_category_no" value="${board_category_no}">
 	<script type="text/javascript">
 	
 	</script>
@@ -121,12 +121,12 @@
 			<!-- 페이징처리 -->
 			<div class="paging">
 				<c:if test="${prev}">
-			 <span>[ <a href="listBoard.do?pageNUM=${startPageNum - 1}">이전</a> ]</span>
+			 <span>[ <a href="listBoard.do?pageNUM=${startPageNum - 1}${searchTypeKeyword}">이전</a> ]</span>
 				</c:if>
 					<c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNUM">
 					 <span>
 					  <c:if test="${select != pageNUM}">
-					 	  <a href="listBoard.do?pageNUM=${pageNUM}">${pageNUM}</a>
+					 	  <a href="listBoard.do?pageNUM=${pageNUM}${searchTypeKeyword}">${pageNUM}</a>
 					  </c:if>    
 					  <c:if test="${select == pageNUM}">
 					   	<b>${pageNUM}</b>
@@ -134,7 +134,7 @@
 					 </span>
 					</c:forEach>
 					<c:if test="${next}">
-				 <span>[ <a href="listBoard.do?pageNUM=${endPageNum + 1}">다음</a> ]</span>
+				 <span>[ <a href="listBoard.do?pageNUM=${endPageNum + 1}${searchTypeKeyword}">다음</a> ]</span>
 			</c:if>
 		</div>
 	</div>
@@ -174,10 +174,11 @@
 				  console.log(searchType)
 				  console.log(keyword)
 				  
-				  location.href = "/board/listBoard.do?pageNUM=1" + "&searchType=" + searchType + "&keyword=" + keyword;
+				  location.href = "/board/listBoard.do?pageNUM=1" + "&searchType=" + searchType + "&keyword=" + keyword
+						  	+ "&board_category_no=" + ${board_category_no};
 				 };
 				 
-				 $('#자유게시판').click(function() {
+				 $('.category').click(function() {
 						let board_category_no= $(this).value;
 						console.log(board_category_no);
 					});

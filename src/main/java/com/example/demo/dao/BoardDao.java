@@ -14,6 +14,22 @@ public class BoardDao {
 	public static int totalRecord;
 	public static int totalPage;
 	
+	public static String searchTypeKeyword; 
+
+	public String setSearchTypeKeyword(String searchType, String keyword, int board_category_no) {
+	 
+	 if(searchType.equals("") || keyword.equals("") || board_category_no == 4000) {
+	  searchTypeKeyword = ""; 
+	 } else {
+	  searchTypeKeyword = "&searchType=" + searchType + "&keyword=" + keyword + "&board_category_no=" + board_category_no; 
+	  System.out.println(searchTypeKeyword);
+	 }
+	return searchTypeKeyword;  
+	}
+
+	public String getSearchTypeKeyword() {
+	 return searchTypeKeyword;
+	}
 	
 	public List<BoardVO> findAll(HashMap map){
 		return DBManager.listBoard(map);
@@ -66,4 +82,5 @@ public class BoardDao {
 	public List<BoardVO> listMyBoard(){
 		return DBManager.listMyBoard();
 	}
+
 }

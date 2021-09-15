@@ -69,8 +69,6 @@ public class BoardController {
 	}
 	
 
-	
-
 	@GetMapping("/board/listBoard.do")
 	public void listBoard(HttpServletRequest request, @RequestParam(value = "pageNUM", 
 						defaultValue = "1") int pageNUM, Model model,
@@ -114,7 +112,10 @@ public class BoardController {
 		map.put("searchType", searchType); 
 		map.put("keyword", keyword);
 		map.put("board_category_no", board_category_no);
-		 
+		
+		// 검색 타입, 검색어, 카테고리
+		dao.setSearchTypeKeyword(searchType, keyword, board_category_no);
+		
 		// 시작 및 끝 번호
 		model.addAttribute("startPageNum", startPageNum);
 		model.addAttribute("endPageNum", endPageNum);
@@ -132,6 +133,7 @@ public class BoardController {
 		model.addAttribute("searchType", searchType);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("board_category_no", board_category_no);
+		model.addAttribute("searchTypeKeyword", dao.setSearchTypeKeyword(searchType, keyword, board_category_no));
 	}
 	
 	@RequestMapping("/board/detailBoard.do")
@@ -170,9 +172,8 @@ public class BoardController {
 		String id = user.getUsername();
 		model.addAttribute("users", userdao.getUsers(id));
 	}
+	
 
-	
-	
 	@RequestMapping("/mypage/manageMyboard.do")
 	public ModelAndView listMyBoard() {
 		ModelAndView mav = new ModelAndView();
