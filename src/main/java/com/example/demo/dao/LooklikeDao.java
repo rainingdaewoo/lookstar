@@ -23,3 +23,4 @@ public class LooklikeDao {
 		return DBManager.listLikes(map);
 	}
 }
+      

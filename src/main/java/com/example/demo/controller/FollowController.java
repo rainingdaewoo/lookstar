@@ -31,7 +31,7 @@ public class FollowController {
 
 	public void setUsersdao(UsersDao usersdao) {
 		this.usersdao = usersdao;
-	}
+	}      
 
 	@RequestMapping("/mypage/followList.do")
 	public ModelAndView followList(@RequestParam(value="pageNUM",defaultValue = "1") int pageNUM, Model model,HttpSession session,String users_id) {

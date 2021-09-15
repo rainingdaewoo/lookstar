@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="css/css.css">
 <link rel = "stylesheet" href="/resources/css/followList.css"/>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
+</head>     
 <body>
 <br><br><br><br><br>
 <%@ include file="../inc/header.jsp" %>

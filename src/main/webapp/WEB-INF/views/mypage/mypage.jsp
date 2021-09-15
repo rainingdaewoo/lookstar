@@ -18,7 +18,7 @@
 		$('#my_img').click(function(e) {
 			e.preventDefault();
 			$('#testModal').modal("show");
-		});
+		});    
 		
 		$('#close_btn').click(function(){
 			$('#testModal').modal("hide");

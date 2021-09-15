@@ -22,7 +22,7 @@
 			
 			function alertDialogBox(){
 				alert("비밀번호가 변경되었습니다.");
-			}
+			}   
 		</script>
 </head>
 <body>

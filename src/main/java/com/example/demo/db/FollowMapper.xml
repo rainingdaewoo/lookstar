@@ -14,4 +14,4 @@
 		where users_id in (select following_id from follow where follower_id = #{users_id})))
 		where n between #{start} and #{end}
 	</select>
-</mapper>
+</mapper>    

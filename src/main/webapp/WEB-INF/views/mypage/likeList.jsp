@@ -14,7 +14,7 @@
 $(function() {
 	$("#upload_file").on('change', function() {
 		readURL(this);
-	});
+	});    
 });
 function readURL(input) {
 	if (input.files && input.files[0]) {

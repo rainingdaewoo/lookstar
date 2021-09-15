@@ -12,7 +12,7 @@ public class LooklikeVO {
 	}
 	public int getUsers_no() {
 		return users_no;
-	}
+	}     
 	public void setUsers_no(int users_no) {
 		this.users_no = users_no;
 	}
