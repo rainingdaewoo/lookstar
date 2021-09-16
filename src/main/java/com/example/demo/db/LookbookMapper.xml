@@ -12,9 +12,15 @@
 	
 	<!-- 스타일 필터를 통한 조회 -->
 	<select id="findAllFilter" resultType="lookbookVO">
-		select * from lookbook
+		select lookbook_no,users_no,lookbook_write,lookbook_date,lookbook_views,lookbook_show,lookbook_height,lookbook_weight,lookbook_fname,lookbook_fsize
+		from
+		(
+			select lookbook_no,users_no,lookbook_write,lookbook_date,lookbook_views,lookbook_show,lookbook_height,lookbook_weight,lookbook_fname,lookbook_fsize, row_number() over(order by lookbook_no desc) as rNum 
+			from lookbook where lookbook_show=0
+		)
+		WHERE rNum between #{start} and #{end}
 		<if test="rw.weight_low != null">
-			where (lookbook_weight between #{rw.weight_low} and #{rw.weight_high}) and
+			and (lookbook_weight between #{rw.weight_low} and #{rw.weight_high}) and
 			(lookbook_height between #{rw.height_low} and #{rw.height_high})
 		</if>
 		<if test="arr_Style != null">
@@ -54,7 +60,10 @@
 		where lookbook_no=#{lookbook_no}
 	</update>
 	
-	
+	<!-- 게시물 숫자 반환 -->
+	<select id="totalRecordLookbook" resultType="int">
+		select count(*) from lookbook l, users u where l.users_no=u.users_no and lookbook_show=0
+	</select>
 	
 	<!-- 삭제할 룩북 선택 -->
 	<select id="getDelBoard" resultType="lookbookVO">

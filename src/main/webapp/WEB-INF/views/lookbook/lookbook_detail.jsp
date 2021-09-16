@@ -29,10 +29,34 @@
 			}
 		};
 		*/
+		let follower_id = $('#follower_id').val();
+		let following_id = $('#following_id').val();
+		
+		function refresh(){
+			location.reload();
+		}
+		
+		$("#follow").click(function(){
+			let data = {
+					follower_id:follower_id,
+					following_id:following_id					
+			}
+			
+			console.log("팔로우 클릭");
+			$.ajax({
+				url:'/insertFollow.do',
+				data: data
+			})
+		}
+		
+		
+		);
+		
 	});
 </script>
 </head>
 <body>
+
 	<%@ include file="../inc/header.jsp"%>
 	<br>
 	<br>
@@ -43,19 +67,32 @@
 	<!-- 룩인포 Modal-->
 	<div tabindex="-1" class="text-center" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		
 		<div role="document">
 			<div>
 				<div>
 					<h5>
 						<img src="/resources/images/user.png" width=50 height=50>&nbsp;&nbsp;&nbsp;${write_u.users_nickname}<span></span>
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						<button>+팔로우</button>
+							<input type="hidden" id="follower_id" name="follower_id" value="${u.users_id}">
+							<input type="hidden" id="following_id" name="following_id" value="${write_u.users_id}">
+						<c:choose>
+							<c:when test="${look.users_no == u.users_no}">
+							</c:when>
+							<c:when test="${isFollow!=0}">
+								<a class="btn btn-outline-dark follow" id="follow">팔로우</a>								
+							</c:when>
+							<c:when test="${isFollow==0}">
+								<a href="언팔로우ㅇㅇㅇ" class="btn btn-outline-dark follow">언팔로우</a>
+							</c:when>
+						</c:choose>						
 					</h5>
 				</div>
 			</div>
 			<div>
 				<b>${look.lookbook_height}cm ${look.lookbook_weight}kg</b>
 			</div>
+			
 			<img src="/resources/look_img/${look.lookbook_fname}" width="30%">
 			<br>
 			<br>

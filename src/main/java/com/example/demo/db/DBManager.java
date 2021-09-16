@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.aspectj.apache.bcel.classfile.Module.Uses;
 
+import com.example.demo.dao.UsersDao;
 import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.DMVO;
 import com.example.demo.vo.InsertLookbookCommandVO;
@@ -184,10 +185,15 @@ public class DBManager {
 		String sortField = (String) map.get("sortField");
 		String[] arr_Style = (String[]) map.get("arr_Style");
 		RangeWeightHeightVO rw = (RangeWeightHeightVO) map.get("rw");
+		int start = (int)map.get("start");
+		int end = (int)map.get("end");
 
 		System.out.println("Map 정보/ sortField: " + sortField);
 		System.out.println("Map 정보/ arr: " + Arrays.toString(arr_Style));
 		System.out.println("Map 정보/ RangeWH: " + rw);
+		System.out.println("Map 정보/ start: " + start);
+		System.out.println("Map 정보/ end: " + end);
+		
 
 		SqlSession session = factory.openSession();
 
@@ -212,6 +218,13 @@ public class DBManager {
 		int re = session.delete("lookbook.deleteLookbook", lookbook_no);
 
 		session.commit();
+		session.close();
+		return re;
+	}
+	
+	public static int getTotalRecordLookbook() {
+		SqlSession session = factory.openSession();
+		int re = session.selectOne("lookbook.totalRecordLookbook");
 		session.close();
 		return re;
 	}
@@ -386,6 +399,8 @@ public class DBManager {
 		session.close();
 		return re;
 	}
+	
+	
 
 	public static int getTotalRecord(String searchType, String keyword) {
 
@@ -545,7 +560,7 @@ public class DBManager {
 		return d;
 	}
 
-	// follow
+	// follow 관련
 	public static int getTotalMyFollow(String users_id) {
 		SqlSession session = factory.openSession();
 		int n = session.selectOne("follow.totalRecord", users_id);
@@ -559,5 +574,29 @@ public class DBManager {
 		session.close();
 		return flist;
 	}
+	
+	public static int insertFollow(FollowVO f) { // 팔로우
+		SqlSession session = factory.openSession();
+		//
+		int follow_no = session.selectOne("follow.getNext_follow_no");
+		int re = session.insert("follow.insertFollow", f);
+		session.close();
+		return re;
+	}
+	/*
+	public void deleteByFollowingIdAndFollowerId(int following_id) { // 언팔로우
+		SqlSession session = factory.openSession();
+		int re = session.delete("follow.insertFollow",following_id);
+		session.close();
+		return re;
+	}
+
+	public boolean find(int id, String userId) { // 팔로우가 되어있는지를 확인하기위해
+		if(fdao.countByFollowerIdAndFollowingUserId(id, userId) == 0)
+			return false; 
+		return true;
+	}
+	*/
+	
 
 }

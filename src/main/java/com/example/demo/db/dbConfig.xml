@@ -46,6 +46,7 @@
 		<mapper resource="com/example/demo/db/LookInfoMapper.xml" />
 		<mapper resource="com/example/demo/db/DMMapper.xml" />
 		<mapper resource="com/example/demo/db/Lookbook_StyleMapper.xml" />
+		<mapper resource="com/example/demo/db/FollowMapper.xml" />
 		<mapper resource="com/example/demo/db/Users_Like_StyleMapper.xml" />
 	</mappers>
 

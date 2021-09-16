@@ -12,12 +12,12 @@ import com.example.demo.vo.SelectLookbookCommandVO;
 
 @Repository
 public class LookbookDao {
-	
+	public static int pageSIZE = 12;
+	public static int totalRecord;
+	public static int totalPage;
 	
 	// lookbook 사진 조회시
 	public List<LookbookVO> listLookbookFilter(HashMap map) {
-		// TODO Auto-generated method stub
-		
 		return DBManager.listLookbookFilter(map);
 	}
 	
@@ -59,6 +59,10 @@ public class LookbookDao {
 	
 	public void updateLookbookViews(int no) {
 		DBManager.updateLookbookViews(no);
+	}
+
+	public int getTotalRecordLookbook() {
+		return DBManager.getTotalRecordLookbook();
 	}
 	
 }
