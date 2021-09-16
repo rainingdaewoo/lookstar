@@ -16,7 +16,8 @@
 }
 
 .board_wrap{
-	margin : 70px;
+	margin : 50px;
+	margin-left:400px;
 	padding : 70px;
 	width:70%;
 }

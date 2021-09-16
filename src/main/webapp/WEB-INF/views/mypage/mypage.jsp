@@ -32,6 +32,16 @@
 	});
 
 </script>
+<style type="text/css">
+#lobtn{
+	margin-left:100px;
+	border-color: #1081FA;
+    background: #1081FA;
+    color: white;
+    border-radius: 1px;
+    text-transform: uppercase;
+}
+</style>
 </head>
 <body>
 <br><br><br><br><br>
@@ -123,7 +133,7 @@
 									<a href="/logout.do">LOG-OUT</a>
 								</div>-->
 							  	<form action="/logout.do">
-									<input type="submit" value="LOG-OUT">
+									<input type="submit" value="LOG-OUT" id="lobtn">
 								</form>
 								
 								<!-- Submit Button

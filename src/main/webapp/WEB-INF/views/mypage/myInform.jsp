@@ -8,7 +8,7 @@
 <title>LOOKSTAGRAM-MYINFO</title>
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<link rel = "stylesheet" href="/resources/css/myInfo.css"/>
+<link rel = "stylesheet" href="/resources/css/mypage_css/myInfo.css"/>
 <script type="text/javascript"src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -110,7 +110,7 @@ $(function(){
 					</div>
 					
                     <div>
-                        <input type="submit" value="수정" style="margin-top: 30px" class="update">
+                        <input type="submit" value="수정" style="margin-top: 30px" class="update" id="upbtn">
                     </div>
               </form>
                     

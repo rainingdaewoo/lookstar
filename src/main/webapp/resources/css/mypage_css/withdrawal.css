@@ -1,0 +1,46 @@
+.container{
+	margin-top:200px;
+	border : 1px black;
+}
+
+#subContainer{
+	margin-top:50px;
+}
+
+
+
+#info{
+	margin-top:50px;
+}
+
+#long{
+	width:500px;	
+	text-align:center;
+	margin-left:100px;
+}
+
+#box{
+	margin-top:50px;
+	margin:auto;
+	width:800px;
+}
+
+#container{
+	margin:0 auto;
+}
+
+input.btn {
+    /* Input은 다른 태그들과 패딩값이 다르게 입력된다. top + 1, bottom -1 을 해준다. */
+    padding: 9px 12px 7px;
+}
+
+
+#wb{
+	margin-left:100px;
+	border-color: gray;
+    background: gray;
+    color: white;
+}
+.btn_blue:hover {
+    background: darkblue;
+}
