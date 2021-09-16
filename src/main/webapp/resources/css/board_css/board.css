@@ -61,6 +61,10 @@ aside ul li a {
 .writeRecomments {
 	width: 70px;	
 }
+
+#inputCategory {
+	float: left;
+}
 /* * {
     margin: 0;
     padding: 0;

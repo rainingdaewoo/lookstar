@@ -27,9 +27,9 @@
  
   <insert id="insertBoard" parameterType="boardVO">
   	insert into board(board_no, board_title, users_no, board_content,
-  	board_views, board_date, board_fname, board_fsize, board_show, board_comments_count) 
+  	board_views, board_date, board_fname, board_fsize, board_show, board_comments_count, board_category_no) 
   	values(seq_board.nextval,#{board_title},#{users_no},#{board_content},
-  	0, sysdate, #{board_fname},#{board_fsize}, 0, 0)
+  	0, sysdate, #{board_fname},#{board_fsize}, 0, 0, #{board_category_no})
   </insert>
   
   <select id="getNextNo" resultType="int">

@@ -57,6 +57,17 @@
 		    <div class="content" style="width: 120%">
 		    
 		        <div class="row justify-content-md-center">
+		            <div class="col-sm-4" id="inputCategory">
+		                <div class="input-group mb-3">
+		                    <select class="custom-select" id="inputGroupSelect03" name="board_category_no">
+		                  <!--  <select class="board-category"> -->
+								 <option value="0">자유게시판</option>
+								 <option value="1">쇼핑후기</option>
+								 <option value="2">발매정보</option>
+								 <option value="3">비밀글</option>
+							 </select>
+		                </div>
+		            </div> 
 		            <div class="col-sm-9">
 		            <div class="input-group mb-3">
 		                <div class="input-group-prepend">
@@ -65,17 +76,6 @@
 		                  </div>            
 		                </div>
 		            </div>
-		            <div class="col-sm-4">
-		                <div class="input-group mb-3">
-		                    <select class="custom-select" id="inputGroupSelect03">
-		                  <!--  <select class="board-category"> -->
-								 <option value="">자유게시판</option>
-								 <option value="">쇼핑후기</option>
-								 <option value="">발매정보</option>
-								 <option value="">비밀글</option>
-							 </select>
-		                </div>
-		            </div>            
 		      </div>
 		      
 		      <hr>
@@ -83,16 +83,19 @@
 		      <div class="row justify-content-md-center">
 		          <div class="col_c" style="margin-bottom: 30px">
 		                <div class="input-group">                 
-		                  
 		                  <textarea id="input_board_content" name="board_content"></textarea>
-		               <script type="text/javascript">
-		               ClassicEditor
-				       		.create(document.querySelector('#input_board_content'))
-				       		.catch(error=>{
-				       			console.error(error);
-				       		});
-		               
-		               </script>
+		                  <script>
+		                  ClassicEditor
+		                  .create( document.querySelector( '#input_board_content' ), {
+		                      cloudServices: {
+		                          tokenUrl: 'https://83434.cke-cs.com/token/dev/29019a7e76fb96313a55a0920566c2ef06dd305ef16a3efd387205aee0ba',
+		                          uploadUrl: 'https://83434.cke-cs.com/easyimage/upload/'
+		                      }
+		                  } )
+		                 .catch( error => {
+				            console.error( error );
+				        } );
+							</script>
 		                </div>
 		            </div> 
 		      </div>
@@ -121,9 +124,9 @@
 			</form>
 			<br><br>
 		</div> 
-
 	</section>
 	<!-- Footer-->
 	<%@ include file=".././inc/footer.jsp"%>
+
 </body>
 </html>
