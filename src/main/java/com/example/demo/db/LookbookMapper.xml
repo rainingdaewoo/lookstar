@@ -15,8 +15,17 @@
 		select lookbook_no,users_no,lookbook_write,lookbook_date,lookbook_views,lookbook_show,lookbook_height,lookbook_weight,lookbook_fname,lookbook_fsize
 		from
 		(
-			select lookbook_no,users_no,lookbook_write,lookbook_date,lookbook_views,lookbook_show,lookbook_height,lookbook_weight,lookbook_fname,lookbook_fsize, row_number() over(order by lookbook_no desc) as rNum 
+			select lookbook_no,users_no,lookbook_write,lookbook_date,lookbook_views,lookbook_show,lookbook_height,lookbook_weight,lookbook_fname,lookbook_fsize, row_number() over(
+			<choose>
+				<when test="sortField==null or sortField.equals('NEW')">
+					order by lookbook_date desc
+				</when>
+				<otherwise>
+					order by lookbook_views desc				
+				</otherwise>
+			</choose>) as rNum 
 			from lookbook where lookbook_show=0
+			
 		)
 		WHERE rNum between #{start} and #{end}
 		<if test="rw.weight_low != null">

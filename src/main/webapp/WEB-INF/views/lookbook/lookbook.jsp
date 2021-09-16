@@ -45,7 +45,7 @@
 			 function OnScroll () { //스크롤 이벤트 함수
 			   const fullHeight = fullContent.clientHeight; // infinite 클래스의 높이   
 			   const scrollPosition = pageYOffset; // 스크롤 위치
-			   if (fullHeight-screenHeight/1.2 <= scrollPosition && !oneTime) { // 만약 전체높이-화면높이/1.2가 스크롤포지션보다 작아진다면, 그리고 oneTime 변수가 거짓이라면
+			   if (fullHeight-screenHeight/1.1 <= scrollPosition && !oneTime) { // 만약 전체높이-화면높이/1.2가 스크롤포지션보다 작아진다면, 그리고 oneTime 변수가 거짓이라면
 			     oneTime = true; // oneTime 변수를 true로 변경해주고,
 			     plusLookbook(); // 컨텐츠를 추가하는 함수를 불러온다.
 			  }
@@ -78,6 +78,7 @@
 					console.log(list);
 					$("#lookbookimage").empty();
 						$.each(list,function(index, item) {
+							
 								if (item.lookbook_show == 0) {
 									let img = $("<div class='col mb-5'><div class='card h-100 justify-content-center'><a href='lookbook_detail.do?lookbook_no="	+ item.lookbook_no
 											+ "'><img class='card-img-top' src='/resources/look_img/" + item.lookbook_fname
