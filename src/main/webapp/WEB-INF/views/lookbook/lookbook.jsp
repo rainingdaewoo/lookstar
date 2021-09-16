@@ -24,6 +24,9 @@
 
 <script type="text/javascript">
 	$(function() {
+		
+		// 스크롤 및 필터 작업
+		
 		let selected_style = [ '1', '2', '3', '4', '5', '6', '7', '8', '9',	'10' ];
 		let sortField = "NEW";
 		let weight_low = 0;

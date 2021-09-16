@@ -15,11 +15,22 @@
 		where n between #{start} and #{end}
 	</select>
 	
-	<!--  팔로우 -->
+	<!-- 팔로우 여부 조회 -->
+	<select id="isFollow" resultType="int">
+		select count(*) from follow 
+		where follower_id=#{follower_id} and following_id=#{following_id}
+	</select>
+	
+	<!-- 팔로우 -->
 	<insert id="insertFollow" parameterType="followVO">
 		insert into follow (follow_no, follower_id,following_id) values 
-		(seq_follow.NEXTVAL, #{follower_id},#{following_id})
+		(#{follow_no}, #{follower_id},#{following_id})
 	</insert>
+	
+	<!-- 언팔로우 -->
+	<delete id="deleteFollow">
+		delete follow where follower_id=#{follower_id} and following_id=#{following_id}
+	</delete>
 	
 	<!--  팔로우번호 -->
 	<select id="getNext_follow_no" resultType="int">

@@ -21,6 +21,7 @@ import com.example.demo.vo.CommentsVO;
 import com.example.demo.vo.InsertUsersCommandVO;
 import com.example.demo.vo.LookbookVO;
 import com.example.demo.vo.Lookbook_styleVO;
+import com.example.demo.vo.LooklikeVO;
 import com.example.demo.vo.RangeWeightHeightVO;
 import com.example.demo.vo.SelectLookbookCommandVO;
 import com.example.demo.vo.UpdateUsersCommandVO;
@@ -149,15 +150,7 @@ public class DBManager {
 		return list;
 	}
 
-	public static int deleteUser(int users_no, String users_pw) {
-		SqlSession session = factory.openSession(true);
-		HashMap map = new HashMap();
-		map.put("users_no", users_no);
-		map.put("users_pw", users_pw);
-		int re = session.delete("look.deleteUser", map);
-		session.close();
-		return re;
-	}
+	 
 
 	public static UsersVO getUsers(String username) {
 		SqlSession session = factory.openSession();
@@ -576,9 +569,11 @@ public class DBManager {
 	}
 	
 	public static int insertFollow(FollowVO f) { // 팔로우
-		SqlSession session = factory.openSession();
+		SqlSession session = factory.openSession(true);
 		//
 		int follow_no = session.selectOne("follow.getNext_follow_no");
+		// 위에서 선언한 변수 follow_no는 무엇을 위한
+		f.setFollow_no(follow_no);
 		int re = session.insert("follow.insertFollow", f);
 		session.close();
 		return re;
@@ -590,13 +585,69 @@ public class DBManager {
 		session.close();
 		return re;
 	}
-
-	public boolean find(int id, String userId) { // 팔로우가 되어있는지를 확인하기위해
-		if(fdao.countByFollowerIdAndFollowingUserId(id, userId) == 0)
-			return false; 
-		return true;
-	}
 	*/
+
+
+	public static int isFollow(String follower_id, String following_id) {
+		SqlSession session = factory.openSession();
+		HashMap map = new HashMap();
+		map.put("follower_id", follower_id);
+		map.put("following_id", following_id);
+		int r = session.selectOne("follow.isFollow",map);
+		session.close();
+		return r;
+	}
+
+	public static int deleteFollow(String follower_id, String following_id) {
+		SqlSession session = factory.openSession(true);
+		HashMap map = new HashMap();
+		map.put("follower_id", follower_id);
+		map.put("following_id", following_id);
+		int r = session.delete("follow.deleteFollow",map);
+		session.close();
+		return r;
+	}
+	
+	// 좋아요 수 세기
+	public static int countLooklike(int lookbook_no) {
+		SqlSession session = factory.openSession();
+		int r = session.selectOne("looklike.countLooklike",lookbook_no);
+		session.close();
+		return r;
+	}
+	
+	// 좋아요 누른 사람인지 판별
+	public static int isLooklike(int users_no, int lookbook_no) {
+		SqlSession session = factory.openSession();
+		HashMap map = new HashMap();
+		map.put("users_no", users_no);
+		map.put("lookbook_no", lookbook_no);
+		int r = session.selectOne("looklike.isLooklike",map);
+		session.close();
+		return r;
+	}
+
+	public static int insertLooklike(LooklikeVO looklike) {
+		SqlSession session = factory.openSession(true);
+		//
+		int like_no = session.selectOne("looklike.getNext_like_no");
+		// 위에서 선언한 변수 follow_no는 무엇을 위한
+		looklike.setLike_no(like_no);
+		int re = session.insert("looklike.insertLooklike", looklike);
+		session.close();
+		return re;
+	}
+
+	public static int deleteLooklike(int users_no, int lookbook_no) {
+		SqlSession session = factory.openSession(true);
+		HashMap map = new HashMap();
+		map.put("users_no", users_no);
+		map.put("lookbook_no", lookbook_no);
+		int r = session.delete("looklike.deleteLooklike",map);
+		session.close();
+		return r;
+	}
+
 	
 
 }

@@ -23,6 +23,7 @@
 		<typeAlias type="com.example.demo.vo.Users_like_styleVO" alias="users_like_styleVO"/>
 		<typeAlias type="com.example.demo.vo.FollowVO" alias="followVO" />
 		<typeAlias type="com.example.demo.vo.Users_outVO" alias="users_outVO" />
+		<typeAlias type="com.example.demo.vo.LooklikeVO" alias="looklikeVO" />
 		<typeAlias type="com.example.demo.vo.RangeWeightHeightVO" alias="rangeVO" />
 	</typeAliases>
 	
@@ -47,6 +48,7 @@
 		<mapper resource="com/example/demo/db/DMMapper.xml" />
 		<mapper resource="com/example/demo/db/Lookbook_StyleMapper.xml" />
 		<mapper resource="com/example/demo/db/FollowMapper.xml" />
+		<mapper resource="com/example/demo/db/LooklikeMapper.xml" />
 		<mapper resource="com/example/demo/db/Users_Like_StyleMapper.xml" />
 	</mappers>
 

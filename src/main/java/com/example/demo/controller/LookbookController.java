@@ -21,12 +21,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.BoardDao;
+import com.example.demo.dao.FollowDao;
 import com.example.demo.dao.LookbookDao;
+import com.example.demo.dao.LooklikeDao;
 import com.example.demo.dao.UsersDao;
 import com.example.demo.vo.LookbookVO;
 import com.example.demo.vo.RangeWeightHeightVO;
 import com.example.demo.vo.SelectLookbookCommandVO;
 import com.example.demo.vo.Style_searchVO;
+
 
 @Controller
 public class LookbookController {
@@ -34,15 +37,24 @@ public class LookbookController {
 	private UsersDao userdao;
 	@Autowired
 	private LookbookDao lookbookdao;
+	@Autowired
+	private FollowDao followdao;
+	@Autowired
+	private LooklikeDao looklikedao;
 
 	public void setUserdao(UsersDao userdao) {
 		this.userdao = userdao;
 	}
-
 	public void setLookbookdao(LookbookDao lookbookdao) {
 		this.lookbookdao = lookbookdao;
 	}
-	
+	public void setFollowdao(FollowDao followdao) {
+		this.followdao = followdao;
+	}
+
+	public void setLooklikedao(LooklikeDao looklikedao) {
+		this.looklikedao = looklikedao;
+	}
 	@RequestMapping("/lookbook/ListLookbook.do")
 	@ResponseBody
 	public List<LookbookVO> listlookbook(@RequestParam(value = "pageNUM", defaultValue = "1") int pageNUM, Model model,
@@ -175,7 +187,11 @@ public class LookbookController {
 	}
 
 	@RequestMapping("/lookbook/lookbook_detail.do")
-	public void detailLookbook(HttpServletRequest request, Model model, int lookbook_no) {
+	public void detailLookbook(HttpServletRequest request, Model model, int lookbook_no) {		
+		SelectLookbookCommandVO look = lookbookdao.selectLookbook(lookbook_no);
+		lookbookdao.updateLookbookViews(lookbook_no);
+		
+		
 		if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			System.out.println("인증정보: " + authentication);
@@ -183,19 +199,41 @@ public class LookbookController {
 			String id = user.getUsername();
 			System.out.println("ooooooooooooooooooooo");
 			System.out.println("id값: " + id);
-			// 현재 로그인 되어 있는 유저의 정보
 			model.addAttribute("u", userdao.getUsers(id));
+			String follower_id = id;
+			String following_id = look.getUsers().getUsers_id();
+			System.out.println("로그인한 아이디: "+ follower_id);
+			System.out.println("글쓴 아이디: "+ following_id);
+			
+			// 팔로우 여부 조회
+			int followBtn =followdao.isFollow(follower_id,following_id);
+			System.out.print("팔로우여부: " + followBtn);
+			model.addAttribute("followBtn",followBtn);
+			
+			// 좋아요 여부 조회 
+			int isLooklike = looklikedao.isLooklike(userdao.getUsers(id).getUsers_no(),look.getLookbook().getLookbook_no());
+			model.addAttribute("isLooklike", isLooklike);
+			
+		}else {
+			// 비로그인시 팔로우버튼/ 빈하트버튼 보여줌
+			model.addAttribute("followBtn", 0);
+			model.addAttribute("isLooklike", 0);
 		}
-		SelectLookbookCommandVO look = lookbookdao.selectLookbook(lookbook_no);
-		lookbookdao.updateLookbookViews(lookbook_no);
+		
+		// 룩북 좋아요 개수 정보
+		int likelookCount = looklikedao.countLooklike(look.getLookbook().getLookbook_no());
+		model.addAttribute("likelookCount",likelookCount);
 		// 룩북 쓴 유저의 정보
-		model.addAttribute("write_u", look.getUsers());
+		model.addAttribute("write_u",look.getUsers());
 		// lookbook에 대한 정보
-		model.addAttribute("look", look.getLookbook());
+		model.addAttribute("look",look.getLookbook());
 		// lookinfo에 대한 정보
-		model.addAttribute("info", look.getList_info());
+		model.addAttribute("info",look.getList_info());
 		// lookbook_style에 대한 정보
-		model.addAttribute("style", look.getList_style());
+		model.addAttribute("style",look.getList_style());
+		
+		
+			
 
 	}
 

@@ -22,36 +22,94 @@
 </style>
 <script type="text/javascript">
 	$(function(){
-		/*
-		function confirmDeleteLookbook(lookbook_no) {
-			if(confirm('정말로 삭제할까요')){
-				location.href='/lookbook/deletelookbook.do?lookbook_no='+lookbook_no;
-			}
-		};
-		*/
+
+		// 팔로우, 언팔로우 버튼
+		
 		let follower_id = $('#follower_id').val();
-		let following_id = $('#following_id').val();
-		
-		function refresh(){
-			location.reload();
-		}
-		
+		let following_id = $('#following_id').val();	
+		// 팔로우 클릭시
 		$("#follow").click(function(){
 			let data = {
-					follower_id:follower_id,
-					following_id:following_id					
+					follower_id:follower_id,    //a
+					following_id:following_id	//b				
 			}
 			
-			console.log("팔로우 클릭");
+			console.log("팔로우 클릭:"+data.follower_id);
+			console.log("팔로잉 아이디:"+data.following_id);
+
 			$.ajax({
 				url:'/insertFollow.do',
-				data: data
-			})
-		}
+				data: data,
+				success:function(data){
+					console.log(data);
+				}
+			});
+		});
+		// 언팔로우 클릭시
+		$("#unfollow").click(function(){
+			let data = {
+					follower_id:follower_id,    //a
+					following_id:following_id	//b				
+			}
+			
+			console.log("팔로우 클릭:"+data.follower_id);
+			console.log("팔로잉 아이디:"+data.following_id);
+
+			$.ajax({
+				url:'/deleteFollow.do',
+				data: data,
+				success:function(data){
+					console.log(data);
+				}
+			});
+		});	
 		
 		
-		);
 		
+		let users_no=$('#users_no').val();
+		let lookbook_no=$('#lookbook_no').val();
+		
+		$("#likelook").click(function(){
+			let data = {
+					users_no:users_no,
+					lookbook_no:lookbook_no
+			}
+			console.log("좋아요 누른 회원:"+data.users_no);
+			console.log("좋아요할 게시물번호:"+data.lookbook_no);
+
+			$.ajax({
+				url:'/insertLooklike.do',
+				data: data,
+				success:function(data){
+					console.log(data);
+				}
+			});
+		})
+		
+		
+		$("#offlikelook").click(function(){
+			let data = {
+					users_no:users_no,
+					lookbook_no:lookbook_no
+			}
+			console.log("좋아요 누른 회원:"+data.users_no);
+			console.log("좋아요할 게시물번호:"+data.lookbook_no);
+
+			$.ajax({
+				url:'/deleteLooklike.do',
+				data: data,
+				success:function(data){
+					console.log(data);
+				}
+			});
+		})		
+		
+		
+		
+		
+		$(".follow,.heartlook").click(function(){
+			location.reload();
+		})
 	});
 </script>
 </head>
@@ -72,21 +130,30 @@
 			<div>
 				<div>
 					<h5>
+						
 						<img src="/resources/images/user.png" width=50 height=50>&nbsp;&nbsp;&nbsp;${write_u.users_nickname}<span></span>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="hidden" id="follower_id" name="follower_id" value="${u.users_id}">
 							<input type="hidden" id="following_id" name="following_id" value="${write_u.users_id}">
+							<input type="hidden" id="users_no" name="users_no" value="${u.users_no}">
+							<input type="hidden" id="lookbook_no" name="lookbook_no" value="${look.lookbook_no}">
+							
+										
+					</h5>
+					<div class="follow">
+					</div>
 						<c:choose>
 							<c:when test="${look.users_no == u.users_no}">
 							</c:when>
-							<c:when test="${isFollow!=0}">
+							<c:when test="${u.users_no==null}">
+							</c:when>
+							<c:when test="${followBtn!=1}">
 								<a class="btn btn-outline-dark follow" id="follow">팔로우</a>								
 							</c:when>
-							<c:when test="${isFollow==0}">
-								<a href="언팔로우ㅇㅇㅇ" class="btn btn-outline-dark follow">언팔로우</a>
+							<c:when test="${followBtn==1}">
+								<a class="btn btn-outline-dark follow" id="unfollow">언팔로우</a>
 							</c:when>
-						</c:choose>						
-					</h5>
+						</c:choose>			
 				</div>
 			</div>
 			<div>
@@ -98,7 +165,17 @@
 			<br>
 			<div class="text-center">
 				<div>
-					<img src="/resources/images/heart.png" height=50 width=50>
+					<!-- 로그인 상태가 아니거나 좋아요 상태가 아닐시 빈 하트/ 좋아요 눌렀을 시 꽉찬하트 -->
+					<c:choose>
+						<c:when test="${isLooklike==0}">
+							<img class="heartlook" id="likelook" src="/resources/images/heart_empty.png" height=50 width=50>
+						</c:when>
+						<c:when test="${isLooklike!=0}">
+							<img class="heartlook" id="offlikelook" src="/resources/images/heart.png" height=50 width=50>
+						</c:when>
+					</c:choose>
+					&nbsp;&nbsp;&nbsp;
+					<b>${likelookCount}</b>
 				</div>
 				<br>
 				<br>

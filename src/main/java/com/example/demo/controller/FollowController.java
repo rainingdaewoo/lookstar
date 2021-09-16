@@ -76,38 +76,38 @@ public class FollowController {
 	
 	
 	
-	/* 팔로우 실험용
-	@RequestMapping("/follow")
-	public void follow(HttpServletRequest request, Model model) throws Exception {
-		if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			System.out.println("인증정보: " + authentication);
-			User user = (User) authentication.getPrincipal();
-			String id = user.getUsername();
-			System.out.println("ooooooooooooooooooooo");
-			System.out.println("id값: " + id);
-			// 현재 로그인 되어 있는 유저의 정보
-			model.addAttribute("u", usersdao.getUsers(id));
-		}
-		
-		// lookbook에 대한 정보
-		model.addAttribute("look", look.getLookbook());
-		String following = request.getParameter("user_id");
-		String followed = request.getParameter("page_id");
-
-		fdao.follow(following, followed);
-
-	}
-	*/
+	
 	@ResponseBody
 	@RequestMapping(value = "/insertFollow.do")
-	public void insertFollow(HttpServletRequest request, Model model, FollowVO follow) {
-		System.out.println("insertFollow 작동함");
-		
+	public String insertFollow(HttpServletRequest request, Model model, FollowVO follow) {
+		System.out.println("insertFollow 작동함"+follow);
 		
 		int re = fdao.insertFollow(follow);
 		System.out.println("follow 값:" + follow);
 		System.out.println("insertFollow.do의 re값: " + re);
 		
+		return "ok";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/deleteFollow.do")
+	public String deleteFollow(HttpServletRequest request, Model model,String follower_id, String following_id) {
+		System.out.println("deleteFollow 작동함");
+		
+		/*
+		HashMap map = new HashMap();
+		map.put("follower_id", follower_id);
+		map.put("following_id", following_id);
+		*/
+		int re = fdao.deleteFollow(follower_id, following_id);
+		return "ok";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

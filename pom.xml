@@ -116,7 +116,13 @@
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/jason/jason -->
 
-		
+		<!-- JSON 데이터 자동 처리 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+
+
 
 	</dependencies>
 
