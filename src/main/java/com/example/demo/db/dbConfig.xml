@@ -5,6 +5,8 @@
 <configuration>
 	<properties resource="com/example/demo/db/db.properties" />
 	<settings>
+		<setting name="cacheEnabled" value="true"/>
+		<setting name="callSettersOnNulls" value="true"/>
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	<typeAliases>

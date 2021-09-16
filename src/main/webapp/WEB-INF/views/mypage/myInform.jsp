@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +27,7 @@ $(function(){
 		
 		if (!$("#female").is(":checked") && !$("#male").is(":checked")) { 
 	        alert("성별을 선택해 주세요.");
-	          return false;
+	          return false
 	    };
 	    
 		if($("#users_height").val()==""){
@@ -41,9 +42,17 @@ $(function(){
 			return false
 		};
 	    
+	    let st = $(".style_no:checked");
+	    console.log(st.length);
+	    if(st.length == 0){
+	    	alert("스타일을 선택해주세요.")
+	    	return false;
+	    };
 	    
-	})
-})
+	    alert("개인정보가 수정되었습니다.");
+	    return true;
+	});
+});
 </script>
 </head>
 <body>
@@ -88,16 +97,16 @@ $(function(){
                     <div class="form-check" style="text-align: middle;" id="styleBox">
 						<h5>선호하는 스타일</h5>
 						
-						미니멀&nbsp; 	<input type="checkbox" name="style_no" value="1" id="s1">&nbsp;
-						캐주얼&nbsp; 	<input type="checkbox" name="style_no" value="2" id="s2">&nbsp;
-						비즈니스&nbsp; <input type="checkbox" name="style_no" value="3" id="s3">&nbsp;
-						아메카지&nbsp; <input type="checkbox" name="style_no" value="4" id="s4">&nbsp;
-						스트릿&nbsp; <input type="checkbox" name="style_no" value="5" id="s5">&nbsp;
-						스포츠&nbsp; <input type="checkbox" name="style_no" value="6" id="s6">&nbsp;
-						레트로&nbsp; <input type="checkbox" name="style_no" value="7" id="s7">&nbsp;
-						캠퍼스&nbsp; <input type="checkbox" name="style_no" value="8" id="s8">&nbsp;
-						댄디&nbsp; <input type="checkbox" name="style_no" value="9" id="s9">&nbsp;
-						데일리&nbsp;<input type="checkbox" name="style_no" value="10" id="s10">
+						미니멀&nbsp; 	<input type="checkbox" name="style_no" value="1" id="s1" class="style_no">&nbsp;
+						캐주얼&nbsp; 	<input type="checkbox" name="style_no" value="2" id="s2" class="style_no">&nbsp;
+						비즈니스&nbsp; <input type="checkbox" name="style_no" value="3" id="s3" class="style_no">&nbsp;
+						아메카지&nbsp; <input type="checkbox" name="style_no" value="4" id="s4" class="style_no">&nbsp;
+						스트릿&nbsp; <input type="checkbox" name="style_no" value="5" id="s5" class="style_no">&nbsp;
+						스포츠&nbsp; <input type="checkbox" name="style_no" value="6" id="s6" class="style_no">&nbsp;
+						레트로&nbsp; <input type="checkbox" name="style_no" value="7" id="s7" class="style_no">&nbsp;
+						캠퍼스&nbsp; <input type="checkbox" name="style_no" value="8" id="s8" class="style_no">&nbsp;
+						댄디&nbsp; <input type="checkbox" name="style_no" value="9" id="s9" class="style_no">&nbsp;
+						데일리&nbsp;<input type="checkbox" name="style_no" value="10" id="s10" class="style_no">
 					</div>
 					
                     <div>

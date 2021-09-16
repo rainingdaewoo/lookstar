@@ -63,6 +63,13 @@ public class UsersDao {
 		return DBManager.insertUsers_out(uo);
 	}
 	
+	public int updatePWD(HashMap map) {
+		return DBManager.updatePWD(map);
+	}
+	
+	
+	
+	//끝
 	public String findID(String users_email) {
 		return DBManager.findID(users_email);
 	}

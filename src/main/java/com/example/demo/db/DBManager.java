@@ -74,6 +74,15 @@ public class DBManager {
 	   }
 	   // 김보민
 
+	   public static int updatePWD(HashMap map) {
+		   int re = -1;
+		   SqlSession session = factory.openSession();
+		   re = session.update("users.updatePwd", map);
+		   session.commit();
+		   session.close();
+		   return re;
+	   }
+	   
 	   // 회원탈퇴시 users테이블 속성 업데이트
 	   public static int updateUsersDel(int users_no) {
 	      SqlSession session = factory.openSession(true);
@@ -212,6 +221,8 @@ public class DBManager {
 	      return u;
 	   }
 
+	   
+	   //lookbook
 	   public static List<LookbookVO> listLookbook(HashMap map) {
 	      String[] arr = (String[]) map.get("arr_Style");
 	      System.out.println("Map 정보: " + Arrays.toString(arr));

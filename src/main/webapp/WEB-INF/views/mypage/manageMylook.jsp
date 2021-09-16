@@ -39,7 +39,7 @@ function readURL(input) {
 				        </div>
 			    <c:forEach var="l" items="${list}">
 		  			<!-- 사진파일명 : ${l.lookbook_fname}<br> -->
-		  			<div id="imgBox" style="float:left; width:250px; height:300px; margin:50px; padding:20px;">
+		  			<div id="imgBox" style="float:left; width:250px; height:300px; margin:50px; padding:50px;">
 						<a href="/lookbookInfo.do"><img src="/resources/look_img/${l.lookbook_fname}"  height="600px" width="400px;"></a>
 					</div>	
 				</c:forEach>
