@@ -16,8 +16,11 @@
 <!-- 버튼 부트스트랩 -->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- 룩북 스타일 -->
-<link rel="stylesheet" href="../../resources/css/lookbook.css">
+	<!-- 게시판 스타일 -->
+<link rel="stylesheet" href="../../resources/css/board_css/board.css">
+<!-- CK editor5 -->
+<script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
+
 
 <script type="text/javascript">
 	
@@ -48,34 +51,70 @@
 		<div class="align-items-center">
 			<form action="updateBoard.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-			<input type="hidden" name="users_no" value="21"> <br>	
+			<input type="hidden" name="users_no" value="${users.users_no}"> <br>	
 			<input type="hidden" name="board_no" value="${b.board_no }"> <br>
-				<div class="row col-md-6">
-					<h1 class="display-5 fw-bolder"></h1>
-					<br> 
-					
-				</div>
-				<label>게시판 카테고리</label>
-				<select class="board-category">
-					 <option value="">자유게시판</option>
-					 <option value="">쇼핑후기</option>
-					 <option value="">발매정보</option>
-					 <option value="">비밀글</option>
-				 </select>
-				 <label for="board_title">제목</label>
-				  <input type="text" name="board_title" value="${b.board_title }"><br>
-				  <div class="inputArea">
-					<div class="col-md-6">
-					<textarea rows="10" cols="80" name="board_content">${b.board_content }</textarea>
-					
-					<input type='file' id="board_uploadFile" name="board_uploadFile" accept="image/png, image/jpeg"/>
-					
-					</div>
-					<br>
-
-					<!-- 글쓰기 버튼 생성 -->
-					<input type="submit" class="btn btn-outline-dark right" value="등록"> 
-				</div>
+				<div class="container">
+		    <div class="content" style="width: 120%">
+		    
+		        <div class="row justify-content-md-center">
+		            <div class="col-sm-4" id="inputCategory">
+		                <div class="input-group mb-3">
+		                    <select class="custom-select" id="inputGroupSelect03" name="board_category_no">
+								 <option value="0">자유게시판</option>
+								 <option value="1">쇼핑후기</option>
+								 <option value="2">발매정보</option>
+								 <option value="3">비밀글</option>
+							 </select>
+		                </div>
+		            </div> 
+		            <div class="col-sm-9">
+		            <div class="input-group mb-3">
+		                <div class="input-group-prepend">
+		                    <label class="input-group-text">제목</label>
+						 <input class="form-control" type="text" id="board_title" name="board_title" value="${b.board_title }"/>
+		                  </div>            
+		                </div>
+		            </div>
+		      </div>
+		      
+		      <hr>
+		      
+		      <div class="row justify-content-md-center">
+		          <div class="col_c" style="margin-bottom: 30px">
+		                <div class="input-group">                 
+		                  <textarea id="input_board_content" name="board_content" > ${b.board_content }</textarea>
+		                  <script>
+		                  ClassicEditor
+		                  .create( document.querySelector( '#input_board_content' ), {
+		                      cloudServices: {
+		                          tokenUrl: 'https://83434.cke-cs.com/token/dev/29019a7e76fb96313a55a0920566c2ef06dd305ef16a3efd387205aee0ba',
+		                          uploadUrl: 'https://83434.cke-cs.com/easyimage/upload/'
+		                      }
+		                  } )
+		                 .catch( error => {
+				            console.error( error );
+				        } );
+							</script>
+		                </div>
+		            </div> 
+		      </div>
+		        <div class="row justify-content-md-center">
+		            <div class="input-group mb-3">
+		              <div class="input-group-prepend">
+		                <span class="input-group-text" id="inputGroupFileAddon01">첨부파일</span>
+		              </div>
+		              <div class="custom-file">
+		                  &nbsp; <input type='file' class="form-control-file" id="board_uploadFile" name="board_uploadFile" accept="image/png, image/jpeg"/>
+		              </div>
+		            </div>
+		      </div>
+		      <div class="row justify-content-md-center">
+		        <button type="submit" class="btn btn-outline-secondary" style="width: 20%; font-weight: bold">
+		             등   록          
+		            </button>
+		        </div>
+		  </div>
+		</div>
 			</form>
 			<br><br>
 		</div>

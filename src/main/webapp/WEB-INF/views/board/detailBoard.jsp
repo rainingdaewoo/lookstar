@@ -17,9 +17,7 @@
 	crossorigin="anonymous"></script>
 <!-- 로그인 css -->
 <link href="../resources/css/login.css" rel="stylesheet" />
-<!-- 소셜 로그인 -->
-<link rel="stylesheet"
-	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+
 <!-- 게시판 스타일 -->
 <link rel="stylesheet" href="../../resources/css/board_css/board.css">
 <!-- Favicon-->
@@ -54,25 +52,19 @@
 		}
 	}
 	function confirmDeleteComments(comments_no) {
+		console.log(comments_no);
 		if(confirm('정말로 삭제할까요')){
 			location.href='/board/deleteComments.do?comments_no='+comments_no;
 		}
 	}
 	
-	/* function 대댓글쓰기(){
-	      if($('#dis').css('display') == 'none'){
-	      $('#dis').show();
-	    }else{
-	      $('#dis').hide();
-	    }
-	    } */
+
 </script>
 <style type="text/css">
 .board-category {
 	float:left;
 }
 .comments {
-
 }
 #comments-btn {
 	float: left;
@@ -94,21 +86,23 @@
 		<li><a href="#">쇼핑후기</a></li>
 	</ul>
 	</div>
-		<div class="container">
+		<div class="container ArticleContentBox">
 			<h2>게시물 상세</h2>
 		<input type="hidden" name="board_no" value="${b.board_no }">
 	<hr>
+	<input type="hidden" name="users_no" value="${users.users_no}">
 	글번호 : ${b.board_no }<br>
 	글제목 : ${b.board_title }<br>
 	작성자 : ${b.users_nickname }<br>
 	글내용 : <br>
-	<textarea rows="10" cols="80" readonly="readonly">${b.board_content }</textarea><br>
+	 ${b.board_content }<br>
 	등록일 : <fmt:formatDate value="${b.board_date }" pattern="yyyy-MM-dd HH:mm" /><br>
 	조회수 : ${b.board_views }<br>
 	<img class="card-img-top"
-	src="resources/board_img/${b.board_fname }"	style="height: 100%; width: 100%;" />
+	src="../../resources/board_img/${b.board_fname }"	style="height: 100%; width: 100%;" />
 	첨부파일 : ${b.board_fname }(${b.board_fsize })
 	<hr>
+
 	
 	<!-- 댓글 목록 -->
 	<div class="comments">
@@ -120,19 +114,33 @@
 					<li style="padding-left: 50px;  list-style:none;">
 				</c:if>
 							<div class="avc">
-							<p>${comments.comments_no }</p>
+							<div class="comments-usersNickname">
 								<p>${comments.users_nickname} 	</p>
+								</div>
+								<div class="extra-button">
+									<i class="bi bi-plus"></i>
+								</div>
+								
+								<div class="comments-extra">
+								
+								<c:if test="${comments.users_no == users.users_no }">
+									<a class="btn btn-outline-dark pull-right" id="updateCommentsBtn">수정</a>
+									<a onclick="confirmDeleteComments(${comments.comments_no})"
+									class="btn btn-outline-dark pull-right" id="deleteBtn">삭제</a>	
+								</c:if>	
+								<a class="btn btn-outline-dark pull-right" id="reportCommentsBtn">신고</a>
+								
+								
+								</div><br><br>
+								<div class="comments-content">
 								<p>${comments.comments_content }</p>
-								깊이: <input name="depth" value="${comments.depth}"> 
 								<%-- 사진확인:<img class="card-img-top"
 								src="resources/comments_img/${commets.comments_fname }"	style="height: 100%; width: 100%;" /> --%>
-								<a onclick="confirmDeleteComments(${comments.comments_no})"
-								class="btn btn-outline-dark pull-right" id="deleteBtn">삭제</a>
-								<a class="btn btn-outline-dark pull-right rewrite" id="writeRecomments">답글쓰기</a>
-								<p><fmt:formatDate value="${comments.comments_date}" pattern="yyyy-MM-dd HH:ss" /></p>
-								<input type="hidden" name="depth" value="${comments.depth }">
-								
-								
+								</div>
+								<div>
+									<p><fmt:formatDate value="${comments.comments_date}" pattern="yyyy-MM-dd HH:ss" /></p>
+									<p class="writeRecomments">답글쓰기</p>	
+								</div>
 							</div>
 						</li>
 						<!-- 답글 쓰기 생성 -->
@@ -145,23 +153,51 @@
 								<br> 
 							</div>
 						<div class="col-md-6">
-			 					<input type="hidden" name="users_no" value="1"> <br>
+			 					<input type="hidden" name="users_no" value="${users.users_no}"> <br>
 			 					<input type="hidden" name="board_no" value="${b.board_no }"> <br>
 			 					<input type="hidden" name="depth" value="1">
-			 					부모번호: <input name="ori_comments_no" value="${comments.comments_no}">
+			 					<input type="hidden" name="ori_comments_no" value="${comments.comments_no}">
 								<div class="inputArea">
 					 <textarea rows="5" cols="50" class="inputText" name="comments_content" placeholder="댓글을 남겨보세요."></textarea>
 					
 					<input type='file' class="comments_uploadFile" name="comments_uploadFile" accept="image/png, image/jpeg"/>
 					
 					</div>
-
+					
 					<!-- 글쓰기 버튼 생성 -->
 					<input type="submit" class="btn btn-outline-dark right" value="댓글 작성">
 					<input type="reset" class="btn btn-outline-dark right" value="취소"> 
 				</div>
 			</form>
 			</div>
+			<!-- 댓글 수정 -->
+					<div class="updateComments">
+						<form action="updateComments.do" method="post"
+							enctype="multipart/form-data">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+							<div class="row col-md-6">
+								<h1 class="display-5 fw-bolder"></h1>
+								<br> 
+							</div>
+						<div class="col-md-6">
+			 					<input type="hidden" name="users_no" value="${users.users_no}"> <br>
+			 					<input type="hidden" name="board_no" value="${b.board_no }"> <br>
+			 					<input type="hidden" name="depth" value="${comments.depth }">
+			 					<input type="hidden" name="comments_no" value="${comments.comments_no }">
+								<div class="inputArea">
+					 <textarea rows="5" cols="50" class="inputText" name="comments_content">${comments.comments_content }</textarea>
+					
+					<input type='file' class="comments_uploadFile" name="comments_uploadFile" accept="image/png, image/jpeg"/>
+					
+					</div>
+					
+					<!-- 글쓰기 버튼 생성 -->
+					<input type="submit" class="btn btn-outline-dark right" value="댓글 작성">
+					<input type="reset" class="btn btn-outline-dark right" value="취소"> 
+				</div>
+			</form>
+					</div>
+					
 						<hr>
 			</c:when>
 			<c:otherwise>
@@ -183,7 +219,7 @@
 					<br> 
 				</div>
 				<div class="col-md-6">
-	 					<input type="hidden" name="users_no" value="21"> <br>
+	 					<input type="hidden" name="users_no" value="${users.users_no}"> <br>
 	 					<input type="hidden" name="board_no" value="${b.board_no }"> <br>
 	 					<input type="hidden" name="depth" value="0"> <br>
 	 					<input type="hidden" name="ori_comments_no" value="0"> <br>
@@ -203,12 +239,14 @@
 	<!-- 댓글 끝 -->
 	<a href="/board/board_write.do"
 		class="btn btn-outline-dark pull-right">글쓰기</a>
-		
-	<a href="/board/updateBoard.do?board_no=${b.board_no }"
+	<c:if test="${b.users_no == users.users_no }">
+		<a href="/board/updateBoard.do?board_no=${b.board_no }"
 		class="btn btn-outline-dark pull-right" id="updateBtn">수정</a>
-		
-	<a onclick="confirmDeleteBoard(${b.board_no})"
+		<a onclick="confirmDeleteBoard(${b.board_no})"
 		class="btn btn-outline-dark pull-right" id="deleteBtn">삭제</a>
+	</c:if>	
+		
+	
 	<a href="/board/listBoard.do?pageNUM=${pageNUM}"
 		class="btn btn-outline-dark pull-right">글목록</a>
 	</div>	
@@ -222,13 +260,17 @@
 		
 	</section>
 	<script type="text/javascript">
-		$('.rewrite').click(function() {
-			
-			let value = $(this).parent().parent().next().toggle();
-			console.log(value.length);
-			  
-			
+		$('.writeRecomments').click(function() {
+			$(this).parent().parent().parent().next().toggle();
 		});
+		$('.extra-button').click(function() {
+				$(this).next().toggle();
+		});
+		$('#updateCommentsBtn').click(function() {
+			$(this).parent().parent().parent().next().next().toggle();
+		});
+		
+			
 	</script>
 	
 </body>

@@ -6,31 +6,25 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.DBManager;
-import com.example.demo.vo.DMVO;
 import com.example.demo.vo.InsertLookbookCommandVO;
-import com.example.demo.vo.LookInfoVO;
 import com.example.demo.vo.LookbookVO;
-import com.example.demo.vo.Lookbook_styleVO;
-import com.example.demo.vo.RangeWeightHeightVO;
 import com.example.demo.vo.SelectLookbookCommandVO;
-import com.example.demo.vo.UsersVO;
 
 @Repository
 public class LookbookDao {
-	
-	public static int pageSIZE = 4;
-	public static int totalMyLook;
+	public static int pageSIZE = 12;
+	public static int totalRecord;
 	public static int totalPage;
 	
+	public static int my_pageSIZE = 4;
+	public static int totalMyLook;
+	public static int my_totalPage;
+	
 	// lookbook 사진 조회시
-	public List<LookbookVO> listLookbook(HashMap arr_style) {
-		// TODO Auto-generated method stub
-		return DBManager.listLookbook(arr_style);
+	public List<LookbookVO> listLookbookFilter(HashMap map) {
+		return DBManager.listLookbookFilter(map);
 	}
-	public List<LookbookVO> listLookbook(RangeWeightHeightVO rw) {
-		// TODO Auto-generated method stub
-		return DBManager.listLookbook(rw);
-	}
+	
 	// 룩북 넣을 시
 	public int insert(InsertLookbookCommandVO insertlook) {
 		System.out.println("=====Dao의 결과==================");
@@ -40,11 +34,40 @@ public class LookbookDao {
 		System.out.println("===============================");
 		return DBManager.insertLookbook(insertlook);
 	}
+	// 룩북 수정 시
+	public int update(InsertLookbookCommandVO updatelook) {
+		System.out.println("=====Dao의 결과==================");
+		System.out.println("lookbook: "+ updatelook.getLookbook());
+		System.out.println("list_info: "+ updatelook.getList_info());
+		System.out.println("style_no: "+ updatelook.getStyle_no());
+		System.out.println("===============================");
+		return DBManager.updateLookbook(updatelook);
+	}
 	// 룩북 클릭시
 	public SelectLookbookCommandVO selectLookbook(int lookbook_no) {
 		return DBManager.getLookbook(lookbook_no);
 	}
 	
+	public LookbookVO getDelLookbook(int no) {
+		return DBManager.getDelLookbook(no);
+	}
+
+	public int deleteLookbook(int no) {
+		return DBManager.deleteLookbook(no);
+	}
+
+	public List<LookbookVO> listLookbook() {
+		
+		return DBManager.listlookbook();
+	}
+	
+	public void updateLookbookViews(int no) {
+		DBManager.updateLookbookViews(no);
+	}
+
+	public int getTotalRecordLookbook() {
+		return DBManager.getTotalRecordLookbook();
+	}
 	//보민 - 마이페이지 내 룩북 관리
 	
 	public int getTotalMyLook(int users_no) {

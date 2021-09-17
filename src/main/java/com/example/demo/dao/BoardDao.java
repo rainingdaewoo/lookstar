@@ -16,6 +16,23 @@ public class BoardDao {
 	
 	public static int totalMyBoard;
 	public static int totalMyPage;
+	public static String searchTypeKeyword; 
+
+	public String setSearchTypeKeyword(String searchType, String keyword, int board_category_no) {
+	 if(searchType.equals("") || keyword.equals("") || board_category_no == 4000) {
+		 searchTypeKeyword = "&board_category_no=" + board_category_no;
+		 System.out.println("searchTypeKeyword: " + searchTypeKeyword);
+	 }
+	 else {
+	  searchTypeKeyword = "&searchType=" + searchType + "&keyword=" + keyword + "&board_category_no=" + board_category_no; 
+	  System.out.println("searchTypeKeyword: " + searchTypeKeyword);
+	 }
+	return searchTypeKeyword;  
+	}
+
+	public String getSearchTypeKeyword() {
+	 return searchTypeKeyword;
+	}
 	
 	public List<BoardVO> findAll(HashMap map){
 		return DBManager.listBoard(map);
@@ -36,6 +53,14 @@ public class BoardDao {
 	public void updateViews(int no) {
 		DBManager.updateViews(no);
 	}
+	
+	public void plusCommentsCount(int no) {
+		DBManager.plusCommentsCount(no);
+	}
+	
+	public void minusCommentsCount(int no) {
+		DBManager.minusCommentsCount(no);
+	}
 
 	public void updateStep(int b_ref, int b_step) {
 		// TODO Auto-generated method stub
@@ -52,8 +77,8 @@ public class BoardDao {
 		return DBManager.deleteBoard(no);
 	}
 	
-	public int getTotalRecord(String searchType, String keyword) {
-		return DBManager.getTotalRecord(searchType, keyword);
+	public int getTotalRecord(String searchType, String keyword, int board_category_no) {
+		return DBManager.getTotalRecord(searchType, keyword, board_category_no);
 	}
 	
 	//보민
@@ -65,4 +90,5 @@ public class BoardDao {
 	public List<BoardVO> listMyBoard(HashMap map){
 		return DBManager.listMyBoard(map);
 	}
+
 }

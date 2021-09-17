@@ -14,6 +14,10 @@
 	 		 #{lookinfo_url},#{lookinfo_category})
 	 </insert>
 	 
+	 <delete id="delete">
+	 	delete lookinfo where lookbook_no=#{lookbook_no}
+	 </delete>
+	 
 	 <select id="getLookinfo" resultType="lookinfoVO">
 	 	select * from lookinfo where lookbook_no=#{lookbook_no}
 	 	order by lookinfo_category asc

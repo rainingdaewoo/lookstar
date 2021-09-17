@@ -112,6 +112,7 @@ public class JoinController {
 		
 		UsersVO u = insertUsers.getUsers();
 		
+
 		ModelAndView mav = new ModelAndView("redirect:/users/login.do");
 		
 		String path = request.getRealPath("/resources/profile");

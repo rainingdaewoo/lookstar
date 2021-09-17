@@ -5,6 +5,8 @@
 <configuration>
 	<properties resource="com/example/demo/db/db.properties" />
 	<settings>
+		<setting name="cacheEnabled" value="true"/>
+		<setting name="callSettersOnNulls" value="true"/>
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	<typeAliases>
@@ -23,8 +25,10 @@
 		<typeAlias type="com.example.demo.vo.Users_like_styleVO" alias="users_like_styleVO"/>
 		<typeAlias type="com.example.demo.vo.FollowVO" alias="followVO" />
 		<typeAlias type="com.example.demo.vo.Users_outVO" alias="users_outVO" />
+		<typeAlias type="com.example.demo.vo.LooklikeVO" alias="looklikeVO" />
+		<typeAlias type="com.example.demo.vo.RangeWeightHeightVO" alias="rangeVO" />
+		<typeAlias type="com.example.demo.vo.LooklikeVO" alias="looklikeVO"/>
 	</typeAliases>
-	
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
@@ -45,7 +49,10 @@
 		<mapper resource="com/example/demo/db/LookInfoMapper.xml" />
 		<mapper resource="com/example/demo/db/DMMapper.xml" />
 		<mapper resource="com/example/demo/db/Lookbook_StyleMapper.xml" />
+		<mapper resource="com/example/demo/db/LooklikeMapper.xml" />
 		<mapper resource="com/example/demo/db/Users_Like_StyleMapper.xml" />
+		<mapper resource="com/example/demo/db/LooklikeMapper.xml" />
+		<mapper resource="com/example/demo/db/FollowMapper.xml" />
 	</mappers>
 
 </configuration>

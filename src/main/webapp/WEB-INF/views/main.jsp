@@ -33,7 +33,11 @@
 				</h1>
 				<br>
 				<h3>&nbsp;&nbsp;당신의 스타일을 보여주세요!</h3>
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> branch 'main' of https://github.com/Gichan94/lookstargram.git
 			</div>
 			<div class="col-md-4 offset-md-1">
 				<!-- carousel를 구성할 영역 설정 -->

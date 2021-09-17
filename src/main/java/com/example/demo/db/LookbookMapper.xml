@@ -3,37 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lookbook">
-   <!-- 스타일 필터를 통한 조회 -->
-    <select id="findAll" resultType="lookbookVO">
-       select * from lookbook
-      <if test="arr_Style != null">
-       where lookbook_no 
-         in (select distinct l.lookbook_no no from lookbook l, lookbook_style s where l.lookbook_no = s.lookbook_no 
-          and s.style_no in 
-         <foreach item="item" collection="arr_Style" open="(" separator="," close=")">
-                ${item}
-          </foreach>
-          )
-       </if>   
-    </select>
-    
-   <!-- 몸무게 필터를 통한 조회 -->
-   <select id="findRange" resultType="lookbookVO">
-      select * from lookbook 
-   </select>
-   
-   <!-- 룩북 하나 클릭시 -->
-   <select id="getLookbook" resultType="lookbookVO">
-      select * from lookbook where lookbook_no=#{lookbook_no}
-   </select>
-   <!-- 룩북 추가시 -->
-   <insert id="insert" parameterType="lookbookVO">
-      insert into lookbook( LOOKBOOK_NO, USERS_NO, LOOKBOOK_WRITE, LOOKBOOK_DATE, 
-      LOOKBOOK_VIEWS, LOOKBOOK_SHOW, LOOKBOOK_HEIGHT, LOOKBOOK_WEIGHT, LOOKBOOK_FNAME)
-   
-      values(#{lookbook_no}, #{users_no}, #{lookbook_write}, sysdate, 0, 0, 
-      #{lookbook_height}, #{lookbook_weight}, #{lookbook_fname})
-   </insert>
+
+	<!-- 초기 페이지 열 시 룩북 조회 -->
+	<select id="listlookbook" resultType="lookbookVO">
+		select * from lookbook order by lookbook_date desc
+	</select>
 	
 	<!-- 보민 -->
 	<select id="totalMyLook" resultType="int">
@@ -41,11 +15,95 @@
 	</select>
 	
 	<select id="listMyLook" resultType="lookbookVO">
-		select lookbook_fname from 
-		(select rownum n,lookbook_fname from
-		(select l.lookbook_fname from lookbook l, users u where l.users_no=u.users_no and u.users_no=#{users_no}))
-		where n between #{start} and #{end}
+		select lookbook_fname,lookbook_write from 
+		(select rownum n,lookbook_fname,lookbook_write from
+		(select l.lookbook_fname,l.lookbook_write from lookbook l, users u where l.users_no=u.users_no and u.users_no=#{users_no}))
+
+		
 	</select>
 	
+	<!-- 스타일 필터를 통한 조회 -->
+	<select id="findAllFilter" resultType="lookbookVO">
+		select lookbook_no,users_no,lookbook_write,lookbook_date,lookbook_views,lookbook_show,lookbook_height,lookbook_weight,lookbook_fname,lookbook_fsize
+		from
+		(
+			select lookbook_no,users_no,lookbook_write,lookbook_date,lookbook_views,lookbook_show,lookbook_height,lookbook_weight,lookbook_fname,lookbook_fsize, row_number() over(
+			<choose>
+				<when test="sortField==null or sortField.equals('NEW')">
+					order by lookbook_date desc
+				</when>
+				<otherwise>
+					order by lookbook_views desc				
+				</otherwise>
+			</choose>) as rNum 
+			from lookbook where lookbook_show=0
+			
+		)
+		WHERE rNum between #{start} and #{end}
+		<if test="rw.weight_low != null">
+			and (lookbook_weight between #{rw.weight_low} and #{rw.weight_high}) and
+			(lookbook_height between #{rw.height_low} and #{rw.height_high})
+		</if>
+		<if test="arr_Style != null">
+			and lookbook_no
+			in (select distinct l.lookbook_no no from lookbook l, lookbook_style s
+			where l.lookbook_no = s.lookbook_no
+			and s.style_no in
+			<foreach item="item" collection="arr_Style" open="("
+				separator="," close=")">
+				${item}
+			</foreach>
+			)			
+		</if>
+		<choose>
+			<when test="sortField==null or sortField.equals('NEW')">
+				order by lookbook_date desc
+			</when>
+			<otherwise>
+				order by lookbook_views desc				
+			</otherwise>
+		</choose>
+	</select>
+
+	<!-- 룩북 하나 클릭시 -->
+	<select id="getLookbook" resultType="lookbookVO">
+		select * from lookbook where lookbook_no=#{lookbook_no}
+	</select>
 	
+	<!-- 룩북 클릭시 view 증가 -->
+	<update id="updateViews" parameterType="int">
+      update lookbook set lookbook_views=lookbook_views + 1 where lookbook_no=#{lookbook_no} 
+  	</update>
+	
+	<!-- 룩북 업데이트 -->
+	<update id="update">
+		update lookbook set lookbook_write=#{lookbook_write}, lookbook_fname=#{lookbook_fname}  
+		where lookbook_no=#{lookbook_no}
+	</update>
+	
+	<!-- 게시물 숫자 반환 -->
+	<select id="totalRecordLookbook" resultType="int">
+		select count(*) from lookbook l, users u where l.users_no=u.users_no and lookbook_show=0
+	</select>
+	
+	<!-- 삭제할 룩북 선택 -->
+	<select id="getDelBoard" resultType="lookbookVO">
+		select * from lookbook where lookbook_no=#{lookbook_no}
+	</select>
+	<!-- 룩북삭제(update) -->
+	<update id="deleteLookbook">
+		update lookbook set lookbook_show=1 where lookbook_no=#{lookbook_no}
+	</update>
+	<!-- 룩북 추가시 -->
+	<insert id="insert" parameterType="lookbookVO">
+		insert into lookbook( LOOKBOOK_NO, USERS_NO, LOOKBOOK_WRITE, LOOKBOOK_DATE,
+		LOOKBOOK_VIEWS, LOOKBOOK_SHOW, LOOKBOOK_HEIGHT, LOOKBOOK_WEIGHT,
+		LOOKBOOK_FNAME)
+
+		values(#{lookbook_no}, #{users_no}, #{lookbook_write}, sysdate, 0, 0,
+		#{lookbook_height}, #{lookbook_weight}, #{lookbook_fname})
+	</insert>
+
+
+
 </mapper>

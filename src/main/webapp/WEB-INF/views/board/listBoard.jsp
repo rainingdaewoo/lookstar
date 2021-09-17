@@ -44,11 +44,24 @@
 	<!-- Body Section -->
 	<section class="py-5">
 	<div class="container-aside">
-	<ul>
-		<li class="일상게시판"><a href="#">일상게시판</a></li>
-		<li class="자유게시판"><a href="#">자유게시판</a></li>
-		<li class="쇼핑후기"><a href="#">쇼핑후기</a></li>
-	</ul>
+		<ol>
+			<li class="category" id="자유게시판">
+				<a href="/board/listBoard.do?pageNUM=1&board_category_no=0">자유게시판</a>
+			</li>
+			<li class="category" id="쇼핑후기">
+				<a href="/board/listBoard.do?pageNUM=1&board_category_no=1">쇼핑후기</a>
+			</li>
+			<li class="category" id="발매및할인정보">
+				<a href="/board/listBoard.do?pageNUM=1&board_category_no=2">발매 및 할인정보</a>
+			</li>
+			<li class="category" id="비밀글">
+				<a href="/board/listBoard.do?pageNUM=1&board_category_no=3">비밀글</a>
+			</li>
+			<li class="category" id="공지사항">
+				<a href="/board/listBoard.do?pageNUM=1&board_category_no=4">공지사항</a>
+			</li>
+		</ol>
+		<input type="hidden" name="board_category_no" value="${board_category_no}">
 	<script type="text/javascript">
 	
 	</script>
@@ -77,6 +90,9 @@
 						<td>${b.board_no }</td>
 						<td>
 							<a href="detailBoard.do?board_no=${b.board_no }">${b.board_title }</a>
+							<c:if test="${b.board_comments_count > 0 }">
+							<a style="color: red;">(${b.board_comments_count })</a>
+							</c:if>
 						</td>
 						<td>${b.users_nickname }</td>
 						<td>
@@ -105,12 +121,12 @@
 			<!-- 페이징처리 -->
 			<div class="paging">
 				<c:if test="${prev}">
-			 <span>[ <a href="listBoard.do?pageNUM=${startPageNum - 1}">이전</a> ]</span>
+			 <span>[ <a href="listBoard.do?pageNUM=${startPageNum - 1}${searchTypeKeyword}">이전</a> ]</span>
 				</c:if>
 					<c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNUM">
 					 <span>
 					  <c:if test="${select != pageNUM}">
-					 	  <a href="listBoard.do?pageNUM=${pageNUM}">${pageNUM}</a>
+					 	  <a href="listBoard.do?pageNUM=${pageNUM}${searchTypeKeyword}">${pageNUM}</a>
 					  </c:if>    
 					  <c:if test="${select == pageNUM}">
 					   	<b>${pageNUM}</b>
@@ -118,7 +134,7 @@
 					 </span>
 					</c:forEach>
 					<c:if test="${next}">
-				 <span>[ <a href="listBoard.do?pageNUM=${endPageNum + 1}">다음</a> ]</span>
+				 <span>[ <a href="listBoard.do?pageNUM=${endPageNum + 1}${searchTypeKeyword}">다음</a> ]</span>
 			</c:if>
 		</div>
 	</div>
@@ -158,15 +174,19 @@
 				  console.log(searchType)
 				  console.log(keyword)
 				  
-				  location.href = "/board/listBoard.do?pageNUM=1" + "&searchType=" + searchType + "&keyword=" + keyword;
+				  location.href = "/board/listBoard.do?pageNUM=1" + "&searchType=" + searchType + "&keyword=" + keyword
+						  	+ "&board_category_no=" + ${board_category_no};
 				 };
+				 
+				 $('.category').click(function() {
+						let board_category_no= $(this).value;
+						console.log(board_category_no);
+					});
 				</script>
 				
 				
 			</div>
 				</div>
-	
-		
 		
 	</section>
 		<%@ include file=".././inc/footer.jsp"%> 

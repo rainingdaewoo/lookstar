@@ -1,0 +1,68 @@
+/*manage_board.html, manage_looks.html css*/
+@charset "UTF-8";
+
+.board_top{
+	width:75%;
+	margin: auto;
+}
+
+.board_wrap1 {
+   	width: 100%;
+    padding: 0 30px;
+    box-sizing: border-box;
+ }
+
+
+#iframecontainer{
+	float: center;
+}
+
+
+#iframe.horizontal{
+	text-align: center;
+	height: 100%;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+
+
+
+.board_title{
+	margin-bottom: 20px;
+	margin-top: 10px;
+	margin-left: 20px;
+	padding-top: 0px;
+	padding-bottom: 10px;
+	height: 30px;
+}
+
+#imgBox{
+	margin-top:100px;
+	matgin-bottom:100px;
+	margin-right:20px;
+	float:left;
+}
+
+.image-box {
+    width:300px;
+    height:500px;
+    overflow:hidden;
+    margin:0 auto;
+}
+
+.image-thumbnail {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.pagination{
+	display:block;
+	text-align:center;
+}
+
+.pagination > li > a{
+	float:none;
+	margin-left:-5px;
+}

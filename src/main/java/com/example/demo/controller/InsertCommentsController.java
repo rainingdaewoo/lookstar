@@ -29,6 +29,8 @@ public class InsertCommentsController {
 	private UsersDao userdao;
 	@Autowired
 	private CommentsDao dao;
+	@Autowired
+	private BoardDao boarddao;
 	
 	public void setDao(CommentsDao dao) {
 		this.dao = dao;
@@ -42,6 +44,14 @@ public class InsertCommentsController {
 		this.userdao = userdao;
 	}
 	
+	public BoardDao getBoarddao() {
+		return boarddao;
+	}
+
+	public void setBoarddao(BoardDao boarddao) {
+		this.boarddao = boarddao;
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public void form() {
 		
@@ -74,7 +84,7 @@ public class InsertCommentsController {
 			}
 			
 		}
-		
+		boarddao.plusCommentsCount(board_no);
 		int re = dao.insertComments(vo);
 		if(re != 1) {
 			mav.addObject("msg", "댓글 등록에 실패하였습니다.");
