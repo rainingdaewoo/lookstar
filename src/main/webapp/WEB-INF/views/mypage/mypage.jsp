@@ -24,14 +24,34 @@
 			$('#testModal').modal("hide");
 		})
 	});
+	
+	$(function() {
+		$("#upload_file").on('change', function() {
+			readURL(this);
+		});
+	});
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#blah').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+
 </script>
 </head>
 <body>
-<%@ include file="./inc/header.jsp"%>
-<br><br><br><br><br><br>
-<div class="text-center my-5">
+<br><br><br><br><br>
+<%@ include file="../inc/header.jsp" %>
+
+	<div class="text-center my-5">
 		<img id="my_img" class="img-fluid rounded-circle mb-4"
-			src="https://dummyimage.com/150x150/6c757d/dee2e6.jpg" alt="..." />
+			 src="../resources/profile/${users.users_fname}" width="150"/>
+
+<!-- src = "https://dummyimage.com/150x150/6c757d/dee2e6.jpg"/> -->					
+		
 
 		<div class="modal fade" id="testModal" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -43,21 +63,28 @@
 							id="close_btn">X</button>
 					</div>
 
-					<div class="modal-body">변경할 이미지를 선택하시오.</div>
+					<div class="modal-body">변경할 프로필 사진을 선택해주세요.</div>
 					<div>
-						<form action="#">
-							<input type="file" id="ft">
+						<form action="/updateProfile.do" method="post" enctype="multipart/form-data">
+						
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+							<input type="hidden" name="users_no" value="${users.users_no }">
+							<input type="hidden" name="fname" value="${users.users_fname }">
+							<input type="hidden" name="fsize" value="${users.users_fsize }">
+							<input type="file" name="uploadFile">
+							<input type="submit" value="변경">
+							<input type="reset" value="취소">
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+						
 					</div>
 
 				</div>
 			</div>
 		</div>
-		<h1>id</h1>
-		<p>nickname</p>
+		<h1>${users.users_id }</h1>
+		<p>${users.users_nickname }</p>
 	</div>
 <!-- Main Content-->
 	<div id="container">
@@ -67,7 +94,7 @@
 					<div class="col-md-10 col-lg-8 col-xl-7">
 						<div class="my-5">
 
-							<form id="contactForm" data-sb-form-api-token="API_TOKEN">
+							
 								<div class="form-floating">
 									<a href="changePWD.do">비밀번호 변경</a>
 									<hr>
@@ -77,7 +104,11 @@
 									<hr>
 								</div>
 								<div class="form-floating">
-									<a href="manageMyboard.do">내 글 관리</a>
+									<a href="manageMyboard.do?users_no=${users.users_no}">내 글 관리</a>
+									<hr>
+								</div>
+								<div class="form-floating">
+									<a href="manageMylook.do?users_no=${users.users_no}">내 룩북 관리</a>
 									<hr>
 								</div>
 								<div class="form-floating">
@@ -97,18 +128,26 @@
 									<hr>
 								</div>
 								<br />
+						<!--	<div>
+									<a href="/logout.do">LOG-OUT</a>
+								</div>-->
+							  	<form action="/logout.do">
+									<input type="submit" value="LOG-OUT">
+								</form>
 								
-								
-								<!-- Submit Button-->
+								<!-- Submit Button
 								<button class="btn btn-primary text-uppercase disabled"
-									id="submitButton" type="submit">log-out</button>
-							</form>
+									id="submitButton" type="submit">log-out</button>-->
+						
 						</div>
 					</div>
 				</div>
 			</div>
 		</main>
 	</div>
-<%@ include file="./inc/footer.jsp"%>
+	
+	
+			<%@ include file="../inc/footer.jsp" %>
+		
 </body>
 </html>

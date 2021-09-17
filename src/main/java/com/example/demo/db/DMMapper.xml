@@ -4,22 +4,26 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="dm">
  	<insert id="insertDM" parameterType="DMVO">
- 		insert into dm(dm_no,from_id,to_id,dm_content,dm_date) 
- 		values(seq_dm.nextval,#{from_id},#{to_id},#{dm_content},SYSDATE)
+ 		insert into dm(dm_no,from_nickname,to_nickname,dm_content,dm_date) values(seq_dm.nextval,#{from_nickname},#{to_nickname},#{dm_content},SYSDATE)
  	</insert>
  	
- 	
+ 	<!-- dm 발신자가 users_nickname일때 수신자별로 최신 문자만 보여주기 -->
  	<select id="findAll" resultType="DMVO">
- 		select * from dm order by DM_DATE
+ 		select * from dm,
+		(select max(dm_date) d from dm group by to_nickname) sender
+		where from_nickname=#{users_nickname}
+		and dm.dm_date = sender.d
  	</select>
  	
  	
  	<select id="findAll2" resultType="DMVO">
- 		select * from dm order by DM_DATE
+ 		select * from dm where (from_nickname=#{users_nickname}) 
+ 		or (to_nickname=#{users_nickname})
+ 		order by dm_date
  	</select>
  
  	
- 	<select id="getDM" parameterType="int" resultType="DMVo">
+ 	<select id="getDM" parameterType="int" resultType="DMVO">
   		select * from dm where dm_no=#{dm_no}
   	</select>
  </mapper>

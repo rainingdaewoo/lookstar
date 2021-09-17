@@ -8,9 +8,12 @@
 <meta charset="UTF-8">
 <title>내 글 관리</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<link rel = "stylesheet" href="css/manage.css"/>
+<link rel = "stylesheet" href="/resources/css/manage.css"/>
 </head>
 <body>
+<br><br><br><br><br>
+<%@ include file="../inc/header.jsp" %>
+
  <!-- Main Content-->
         
         <div id="container">
@@ -18,15 +21,10 @@
         		<div class="board_wrap1">
 			         <div class="board_top" style="padding-left: 150px">
 				        <div class="board_title">
-				             <strong>내 글 관리</strong>
+				             <h2><strong>내 글 관리</strong></h2>
 				        </div>
 			        
-			  			<div class="btnlist">
-			  				<button type ="button" onclick="location.href='manageMylook.do'" 
-			  					class="btn btn-light" id="looksBtn">looks</button>
-			  				<button type ="button" onclick="location.href='manageMyboard.do'" 
-			  				class="btn btn-secondary" id="boardBtn">게시판</button>
-			  			</div>
+			  			
 			  		</div> <!-- board_top -->	
 	  			
 		  			<br>
@@ -43,7 +41,6 @@
 						      <tr>
 						        <th>no </th>
 						        <th>제목</th>
-						        <th>작성자</th>
 						        <th>작성일</th>
 						        <th>조회</th>
 						      </tr>
@@ -54,7 +51,6 @@
 							    	<tr>
 							    		<td>${b.board_no }</td>
 							    		<td>${b.board_title }</td>
-							    		<td>${b.users_nickname }</td>
 							    		<td><fmt:formatDate value="${b.board_date }" pattern="yyyy-MM-dd" /></td>
 							    		<td>${b.board_views }</td>
 							    	</tr>
@@ -62,21 +58,15 @@
 						    
 						    </tbody>
 						  </table>
-						 </div>		<!-- iframconatiner-->					 
-	  				
-		  				</div>
-				<div class="board_page">
-					<a href="#" class="bt first"> << </a> <a href="#" class="bt prev">
-						< </a> <a href="#" class="num on">1</a> <a href="#" class="num">2</a>
-					<a href="#" class="num">3</a> <a href="#" class="num">4</a> <a
-						href="#" class="num">5</a> <a href="#" class="bt next">></a> <a
-						href="#" class="bt last">>></a>
-				</div>
-				<br>	<br>
-	  				</div> <!-- iframe -->
-	  					
+						 </div>	<!-- iframconatiner-->					 	  				
+		  			</div>
 	  			</div> <!-- board_wrap1 -->
-	  			        
-	        </div> 
+	  		</div> <!-- container -->  		
+	  		<span id="boardPageBox">
+	  			<c:forEach var="i" begin="1" end="${totalMyPage}">
+	  				<a href="/mypage/manageMyboard.do?pageNUM=${i}&users_no=${users.users_no}">${i} &nbsp;</a>
+	  			</c:forEach>
+	  		</span>	        
+<%@ include file="../inc/footer.jsp" %>
 </body>
 </html>

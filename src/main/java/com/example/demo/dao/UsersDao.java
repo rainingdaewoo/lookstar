@@ -1,13 +1,19 @@
 package com.example.demo.dao;
 
+
 import java.util.HashMap;
 import java.util.Map;
+
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.DBManager;
 import com.example.demo.vo.InsertUsersCommandVO;
 import com.example.demo.vo.UsersVO;
+import com.example.demo.vo.Users_outVO;
+import com.example.demo.vo.FollowVO;
+import com.example.demo.vo.UpdateUsersCommandVO;
 
 @Repository
 public class UsersDao {
@@ -26,16 +32,44 @@ public class UsersDao {
 	public UsersVO getUsers(String username) {
 		return DBManager.getUsers(username);
 	}
-	public UsersVO getUsers(int users_no) {
-		return DBManager.getUsers(users_no);
+
+	public UsersVO getUser(int users_no) {
+		return DBManager.getUser(users_no);
 	}
+	
+	//가연
+	public UsersVO getUsersByNickname(String users_nickname) {
+		return DBManager.getUsersByNickname(users_nickname);
+	}
+	
 	//users
 	public int update(UsersVO u) {
 		return DBManager.updateInfo(u);
 	}
+
+	//users
 	
-	public int delete(int users_no,String users_pw) {
-		return DBManager.deleteUser(users_no, users_pw);
+	
+	public int updateUsersDel(int users_no) {
+		return DBManager.updateUsersDel(users_no);
+	}
+	
+	public int updateProfile(UsersVO u) {
+		return DBManager.updateProfile(u);
+	}
+	
+	public int updateUsers(UpdateUsersCommandVO usersc) {
+		System.out.println("users: " + usersc.getUsers());
+		System.out.println("users_like_style: " + usersc.getStyle_no());
+		return DBManager.updateUsersWithStyle(usersc);
+	}
+	
+	public List<UsersVO> listFollow(String users_id){
+		return DBManager.listFollw(users_id);
+	}
+	
+	public int insertUsers_out(Users_outVO uo) {
+		return DBManager.insertUsers_out(uo);
 	}
 	
 	public String findID(String users_email) {

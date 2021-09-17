@@ -14,7 +14,9 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.LookbookDao;
 import com.example.demo.dao.UsersDao;
@@ -95,11 +97,7 @@ public class LookbookController {
 			
 			model.addAttribute("u", userdao.getUsers(id));
 		}
-		
-		
-		
-		
-		
+
 		SelectLookbookCommandVO look = lookbookdao.selectLookbook(lookbook_no);
 		
 		
@@ -108,5 +106,32 @@ public class LookbookController {
 		model.addAttribute("info", look.getList_info());
 		model.addAttribute("style", look.getList_style());
 		
+	}
+	
+	//보민 마이페이지 내 룩북 관리
+	@RequestMapping("/mypage/manageMylook.do")
+	public ModelAndView listMyLook( @RequestParam(value="pageNUM",defaultValue = "1") int pageNUM,int users_no,Model model) {
+		System.out.println("pageNUM:"+pageNUM);
+		LookbookDao.totalMyLook = lookbookdao.getTotalMyLook(users_no);
+		LookbookDao.totalPage = (int)Math.ceil((double)LookbookDao.totalMyLook/LookbookDao.pageSIZE);
+		
+		int start = (pageNUM-1)*LookbookDao.pageSIZE+1;
+		int end = start+LookbookDao.pageSIZE-1;
+		if(end>LookbookDao.totalMyLook) {
+			end = LookbookDao.totalMyLook;
+		}
+		
+		System.out.println("start:"+start);
+		System.out.println("end:"+end);
+		HashMap map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("users_no", users_no);
+		System.out.println("controller users_no:"+users_no);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list",lookbookdao.listMyLook(map));
+		
+		model.addAttribute("totalPage",LookbookDao.totalPage);
+		return mav;
 	}
 }
