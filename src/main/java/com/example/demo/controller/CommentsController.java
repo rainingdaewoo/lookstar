@@ -31,6 +31,8 @@ public class CommentsController {
 	private UsersDao userdao;
 	@Autowired
 	private CommentsDao dao;
+	@Autowired
+	private BoardDao boarddao;
 	
 	public void setDao(CommentsDao dao) {
 		this.dao = dao;
@@ -38,6 +40,14 @@ public class CommentsController {
 	
 	public void setUserdao(UsersDao userdao) {
 		this.userdao = userdao;
+	}
+	
+	public BoardDao getBoarddao() {
+		return boarddao;
+	}
+
+	public void setBoarddao(BoardDao boarddao) {
+		this.boarddao = boarddao;
 	}
 	
 	@RequestMapping("/board/deleteComments.do")
@@ -48,6 +58,7 @@ public class CommentsController {
 		String path = request.getRealPath("resources/comments_img");
 		String oldFname = dao.getComments(comments_no).getComments_fname();
 		
+		boarddao.minusCommentsCount(board_no);
 		int re = dao.deleteComments(comments_no);
 		System.out.println("re = "+re);
 		System.out.println(comments_no);
@@ -59,64 +70,48 @@ public class CommentsController {
 	}
 	
 	
-	@RequestMapping(value = "board/updateComments.do", method = RequestMethod.GET)
-	public void form(HttpServletRequest request, Model model, int comments_no) {
-		model.addAttribute("c", dao.getComments(comments_no));
 	
-	}
 	
-	@RequestMapping(value = "board/updateComments.do", method = RequestMethod.POST)
-	public ModelAndView submit(HttpServletRequest request, CommentsVO c, Model model) {
-		
-		Authentication authentication =
-		SecurityContextHolder.getContext().getAuthentication(); User user =
-		(User)authentication.getPrincipal(); String id = user.getUsername();
-		model.addAttribute("users", userdao.getUsers(id));
-		
-		
-		
-		System.out.println("updateBoard.do POST 동작함.");
-		System.out.println("users_no:" + c.getUsers_no());
-		ModelAndView mav = new ModelAndView("redirect:/board/listBoard.do");
-		String path = request.getRealPath("/resources/board_img");
-		System.out.println("path:"+path);
-		String oldFname= c.getComments_fname();
-		int oldFsize= c.getComments_fsize();
-		
-		String fname = null;
-		int fsize = 0;
-		MultipartFile uploadFile = c.getComments_uploadFile();
-		fname= uploadFile.getOriginalFilename();
-		if(fname != null && !fname.equals("")) {
-			try {
-				byte []data = uploadFile.getBytes();
-				FileOutputStream fos = new FileOutputStream(path + "/" + fname);
-				fos.write(data);
-				fos.close();
-				fsize = data.length;
-				c.setComments_fname(fname);
-				c.setComments_fsize(fsize);
-				
-			}catch (Exception e) {
-				System.out.println("예외발생:"+e.getMessage());
-			}
-			
-		}
-		
-		System.out.println(fname);
-		System.out.println(fsize);
-		System.out.println("수정할 게시물:"+c);
-		int re = dao.updateComments(c);
-		if(re != 1) {
-			mav.addObject("msg", "게시물 수정에 실패하였습니다.");
-			mav.setViewName("error");
-		}else {
-			if(fsize != 0) {
-				File file = new File(path + "/" + oldFname);
-				file.delete();
-			}
-		}
-		
-		return mav;
-	}
+	/*
+	 * @RequestMapping(value = "/board/updateComments.do", method =
+	 * RequestMethod.GET) public void form(HttpServletRequest request, Model model,
+	 * int comments_no) { model.addAttribute("c", dao.getComments(comments_no));
+	 * 
+	 * }
+	 * 
+	 * @RequestMapping(value = "/board/updateComments.do", method =
+	 * RequestMethod.POST) public ModelAndView submit(HttpServletRequest request,
+	 * CommentsVO c, Model model, int board_no) { Authentication authentication =
+	 * SecurityContextHolder.getContext().getAuthentication(); User user
+	 * =(User)authentication.getPrincipal(); String id = user.getUsername();
+	 * model.addAttribute("users", userdao.getUsers(id));
+	 * 
+	 * 
+	 * 
+	 * System.out.println("updateComments.do POST 동작함.");
+	 * System.out.println("users_no:" + c.getUsers_no()); ModelAndView mav = new
+	 * ModelAndView("redirect:/board/detailBoard.do?board_no="+ board_no); String
+	 * path = request.getRealPath("/resources/comments_img");
+	 * System.out.println("path:"+path); String oldFname= c.getComments_fname(); int
+	 * oldFsize= c.getComments_fsize();
+	 * 
+	 * String fname = null; int fsize = 0; MultipartFile uploadFile =
+	 * c.getComments_uploadFile(); fname= uploadFile.getOriginalFilename(); if(fname
+	 * != null && !fname.equals("")) { try { byte []data = uploadFile.getBytes();
+	 * FileOutputStream fos = new FileOutputStream(path + "/" + fname);
+	 * fos.write(data); fos.close(); fsize = data.length;
+	 * c.setComments_fname(fname); c.setComments_fsize(fsize);
+	 * 
+	 * }catch (Exception e) { System.out.println("예외발생:"+e.getMessage()); }
+	 * 
+	 * }
+	 * 
+	 * System.out.println(fname); System.out.println(fsize);
+	 * System.out.println("수정할 댓글:"+c); int re = dao.updateComments(c); if(re != 1)
+	 * { mav.addObject("msg", "댓글 수정에 실패하였습니다."); mav.setViewName("error"); }else {
+	 * if(fsize != 0) { File file = new File(path + "/" + oldFname); file.delete();
+	 * } }
+	 * 
+	 * return mav; }
+	 */
 }

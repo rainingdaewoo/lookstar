@@ -404,7 +404,7 @@ public class DBManager {
 	      return re;
 	   }
 
-	   public static int getTotalRecord(String searchType, String keyword) {
+	   public static int getTotalRecord(String searchType, String keyword, int board_category_no) {
 
 	      SqlSession session = factory.openSession();
 
@@ -412,6 +412,7 @@ public class DBManager {
 
 	      data.put("searchType", searchType);
 	      data.put("keyword", keyword);
+	      data.put("board_category_no", board_category_no);
 
 	      int n = session.selectOne("board.totalRecord", data);
 	      session.close();
@@ -426,40 +427,6 @@ public class DBManager {
 	      session.close();
 	      return list;
 	   }
-	   public static int insertComments(CommentsVO c) {
-		      SqlSession session = factory.openSession(true);
-		      int re = session.insert("comments.insertComments", c);
-		      session.close();
-		      return re;
-		   }
-
-	   public static CommentsVO getComments(int comments_no) {
-		      SqlSession session = factory.openSession();
-		      CommentsVO c = session.selectOne("comments.getComments", comments_no);
-		      session.close();
-		      return c;
-		   }
-
-		public static int deleteComments(int comments_no) {
-		      SqlSession session = factory.openSession(true);
-		      /*
-		       * HashMap map = new HashMap(); map.put("no", board_no);
-		       * System.out.println("map:"+map);
-		       */
-		      int re = session.delete("comments.deleteComments", comments_no);
-		      System.out.println("DBManager 삭제될 게시글 번호 " + comments_no);
-		      session.commit();
-		      session.close();
-		      return re;
-		   }
-
-		public static int updateComments(CommentsVO comments_no) {
-		      SqlSession session = factory.openSession(true);
-		      int re = session.update("comments.updateComments", comments_no);
-		      session.close();
-		      return re;
-		   }
-	   
 	   
 	   
 
@@ -510,7 +477,54 @@ public class DBManager {
 	      return users_nickname;
 	   }
 
+	   public static int insertComments(CommentsVO c) {
+	      SqlSession session = factory.openSession(true);
+	      int re = session.insert("comments.insertComments", c);
+	      System.out.println("DBManger insertComments 작동함");
+	      session.close();
+	      return re;
+	   }
 	   
+	   public static void plusCommentsCount(int no) {
+		      SqlSession session = factory.openSession(true);
+		      session.update("board.plusCommentsCount", no);
+		      session.close();
+		   }
+	   
+	   public static void minusCommentsCount(int no) {
+		      SqlSession session = factory.openSession(true);
+		      session.update("board.minusCommentsCount", no);
+		      session.close();
+		   }
+
+
+	   public static CommentsVO getComments(int comments_no) {
+	      SqlSession session = factory.openSession();
+	      CommentsVO c = session.selectOne("comments.getComments", comments_no);
+	      session.close();
+	      return c;
+	   }
+
+	   public static int deleteComments(int comments_no) {
+	      SqlSession session = factory.openSession(true);
+	      /*
+	       * HashMap map = new HashMap(); map.put("no", board_no);
+	       * System.out.println("map:"+map);
+	       */
+	      int re = session.delete("comments.deleteComments", comments_no);
+	      System.out.println("DBManger deleteComments 작동함");
+	      session.commit();
+	      session.close();
+	      return re;
+	   }
+
+	   public static int updateComments(CommentsVO co) {
+	      SqlSession session = factory.openSession(true);
+	      int re = session.update("comments.updateComments", co);
+	      session.close();
+	      System.out.println("updateComments 작동함");
+	      return re;
+	   }
 	   
 	   public static int updateProfile(UsersVO u) {
 		   System.out.println("디비매니저 프로필변경 작동");
