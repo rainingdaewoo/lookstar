@@ -76,7 +76,6 @@ public class FollowController {
 	
 	
 	
-	
 	@ResponseBody
 	@RequestMapping(value = "/insertFollow.do")
 	public String insertFollow(HttpServletRequest request, Model model, FollowVO follow) {
