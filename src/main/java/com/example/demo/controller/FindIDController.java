@@ -15,7 +15,7 @@ import com.example.demo.dao.UsersDao;
 import com.example.demo.vo.UsersVO;
 
 @Controller
-@RequestMapping("/findID.do")
+@RequestMapping("/users/findID.do")
 public class FindIDController {
 	@Autowired
 	private JavaMailSender javaMailSender;
@@ -34,7 +34,7 @@ public class FindIDController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView mail(String users_email, HttpSession session) {
 		System.out.println("findID.do 동작함");
-		ModelAndView mav = new ModelAndView("redirect:/findOK.do");
+		ModelAndView mav = new ModelAndView("redirect:/users/findOK.do");
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		String id = dao.findID(users_email);
 		mailMessage.setSubject("룩스타그램 아이디");

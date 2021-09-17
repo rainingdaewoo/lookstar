@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<link rel = "stylesheet" href="/resources/css/likeList.css"/>
+<link rel = "stylesheet" href="/resources/css/mypage_css/likeList.css"/>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(function() {
@@ -37,16 +37,24 @@ function readURL(input) {
         </div>
         <c:forEach var="l" items="${list}">
 		  		<!-- 사진파일명 : ${l.lookbook_fname}<br> -->
-		  		<div id="imgBox" style="float:left; width:250px; height:300px; margin:50px; padding:20px;">
-					<a href="/lookbookInfo.do"><img src="/resources/look_img/${l.lookbook_fname}"  height="600px" width="400px;"></a>
+		  		<div class="text-center" style="width:303px;" id="imgBox">
+				   <div class="image-box">
+				      <a href="/lookbookInfo.do">
+				   		<img src="/resources/look_img/${l.lookbook_fname}" height="600px" width="400px;" class="image-thumbnail">
+			        	</a>
+				   </div>
 				</div>	
 		</c:forEach>
     </div>
-    <span id="pageBox">
+    <nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
 		<c:forEach var="i" begin="1" end="${totalPage}">
-				<a href="/mypage/likeList.do?pageNUM=${i}&users_no=${users.users_no}">${i} &nbsp;</a>
+			<li class="page-item">
+				<a class="page-link" href="/mypage/likeList.do?pageNUM=${i}&users_no=${users.users_no}">${i} &nbsp;</a>
+			</li>	
 		</c:forEach>
-	</span>
+	</ul> 
+	</nav>	
     
      <%@ include file="../inc/footer.jsp" %>
 </body>

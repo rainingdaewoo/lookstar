@@ -69,18 +69,18 @@ public class BoardController {
 	}
 	
 
-	
-
 	@GetMapping("/board/listBoard.do")
 	public void listBoard(HttpServletRequest request, @RequestParam(value = "pageNUM", 
 						defaultValue = "1") int pageNUM, Model model,
-			@RequestParam(value = "searchType", required = false, defaultValue = "board_title") String searchType , @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
+			@RequestParam(value = "searchType", required = false, defaultValue = "board_title") String searchType , @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+			@RequestParam(value = "board_category_no", required = false, defaultValue = "0") int board_category_no ) {
 	
 		System.out.println("listBoard.do 동작함");
 		System.out.println("검색컬럼:" +searchType);
 		System.out.println("검색어:" + keyword);
 		System.out.println("pageNUM:"+pageNUM);
-		BoardDao.totalRecord = dao.getTotalRecord(searchType, keyword);
+		System.out.println("board_category_no:"+board_category_no);
+		BoardDao.totalRecord = dao.getTotalRecord(searchType, keyword, board_category_no);
 		BoardDao.totalPage =
 		(int) Math.ceil( (double) BoardDao.totalRecord / BoardDao.pageSIZE);
 		
@@ -111,7 +111,11 @@ public class BoardController {
 		map.put("end", end);
 		map.put("searchType", searchType); 
 		map.put("keyword", keyword);
-		 
+		map.put("board_category_no", board_category_no);
+		
+		// 검색 타입, 검색어, 카테고리
+		dao.setSearchTypeKeyword(searchType, keyword, board_category_no);
+		
 		// 시작 및 끝 번호
 		model.addAttribute("startPageNum", startPageNum);
 		model.addAttribute("endPageNum", endPageNum);
@@ -128,11 +132,17 @@ public class BoardController {
 		// 검색 후에도 검색창 유지
 		model.addAttribute("searchType", searchType);
 		model.addAttribute("keyword", keyword);
+		model.addAttribute("board_category_no", board_category_no);
+		model.addAttribute("searchTypeKeyword", dao.setSearchTypeKeyword(searchType, keyword, board_category_no));
 	}
 	
 	@RequestMapping("/board/detailBoard.do")
 	public void detailBoard(HttpServletRequest request, Model model, int board_no) {
 		dao.updateViews(board_no);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User)authentication.getPrincipal();
+		String id = user.getUsername();
+		model.addAttribute("users", userdao.getUsers(id));
 		model.addAttribute("b",dao.getBoard(board_no));
 		model.addAttribute("comments", commentsdao.findAll(board_no)); 
 	}
@@ -160,15 +170,34 @@ public class BoardController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User)authentication.getPrincipal();
 		String id = user.getUsername();
-		model.addAttribute("u", userdao.getUsers(id));
+		model.addAttribute("users", userdao.getUsers(id));
 	}
+	
 
 	
-	
+	//보민
 	@RequestMapping("/mypage/manageMyboard.do")
-	public ModelAndView listMyBoard() {
+	public ModelAndView listMyBoard(@RequestParam(value="pageNUM",defaultValue = "1") int pageNUM,int users_no,Model model) {
+		System.out.println("BOARD - pageNUM:"+pageNUM);
+		BoardDao.totalMyBoard = dao.getTotalMyBoard(users_no);
+		BoardDao.totalMyPage = (int)Math.ceil((double)BoardDao.totalMyBoard/BoardDao.pageSIZE);
+		
+		int start = (pageNUM-1)*BoardDao.pageSIZE+1;
+		int end = start+BoardDao.pageSIZE-1;
+		if(end> BoardDao.totalMyBoard) {
+			end = BoardDao.totalMyBoard;
+		}
+		
+		System.out.println("board - start:"+start);
+		System.out.println("board - end:"+end);
+		HashMap map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("users_no", users_no);
+		System.out.println("boardcontroller users_no:"+users_no);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list",dao.listMyBoard());
+		mav.addObject("list",dao.listMyBoard(map));
+		model.addAttribute("totalMyPage",BoardDao.totalMyPage);
 		return mav;
 	}
 }

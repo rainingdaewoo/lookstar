@@ -43,6 +43,4 @@ public class LooklikeVO {
 		return "LooklikeVO [like_no=" + like_no + ", users_no=" + users_no + ", lookbook_no=" + lookbook_no + "]";
 	}
 	
-	
-	
 }

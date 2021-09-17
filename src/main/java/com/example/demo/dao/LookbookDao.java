@@ -16,6 +16,10 @@ public class LookbookDao {
 	public static int totalRecord;
 	public static int totalPage;
 	
+	public static int my_pageSIZE = 4;
+	public static int totalMyLook;
+	public static int my_totalPage;
+	
 	// lookbook 사진 조회시
 	public List<LookbookVO> listLookbookFilter(HashMap map) {
 		return DBManager.listLookbookFilter(map);
@@ -63,6 +67,16 @@ public class LookbookDao {
 
 	public int getTotalRecordLookbook() {
 		return DBManager.getTotalRecordLookbook();
+	}
+	//보민 - 마이페이지 내 룩북 관리
+	
+	public int getTotalMyLook(int users_no) {
+		return DBManager.getTotalMyLook(users_no);
+	}
+	
+	public List<LookbookVO> listMyLook(HashMap map){
+		//System.out.println("lookbookdao users_no:"+map.users_no);
+		return DBManager.listMyLook(map);
 	}
 	
 }

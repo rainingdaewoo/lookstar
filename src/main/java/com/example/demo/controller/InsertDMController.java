@@ -29,13 +29,13 @@ public class InsertDMController {
 	@RequestMapping(method=RequestMethod.POST)
 	public ModelAndView submit(DMVO d, Model model) {
 		ModelAndView mav = new ModelAndView("redirect:/listDM.do");
-		
+/*		
 		
 		int re = dao.insertDM(d);
 		if(re != 1) {
 			mav.addObject("msg", "채팅 등록에 실패하였습니다.");
 			mav.setViewName("error");
-		}
+		}*/
 		return mav;
 	}
 }
