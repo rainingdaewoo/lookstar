@@ -10,8 +10,8 @@
 	</select>
 
 	<select id="listLikes" resultType="lookbookVO">
-		select lookbook_fname from (select rownum n,lookbook_fname from (select
-		lookbook_fname from lookbook , looklike
+		select lookbook_fname,lookbook_no from (select rownum n,lookbook_fname,lookbook_no from (select
+		lookbook_fname,lookbook.lookbook_no from lookbook , looklike
 		where lookbook.lookbook_no = looklike.lookbook_no
 		and looklike.users_no=#{users_no}))
 		where n between #{start} and #{end}

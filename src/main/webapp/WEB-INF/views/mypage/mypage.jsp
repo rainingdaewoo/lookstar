@@ -133,13 +133,9 @@
 									<a href="/logout.do">LOG-OUT</a>
 								</div>-->
 							  	<form action="/logout.do">
-									<input type="submit" value="LOG-OUT" id="lobtn">
+									<input type="submit" value="LOG-OUT" class="btn btn-lg btn-primary btn-block">
 								</form>
 								
-								<!-- Submit Button
-								<button class="btn btn-primary text-uppercase disabled"
-									id="submitButton" type="submit">log-out</button>-->
-						
 						</div>
 					</div>
 				</div>

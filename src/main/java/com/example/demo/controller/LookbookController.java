@@ -244,10 +244,11 @@ public class LookbookController {
 			Model model) {
 		System.out.println("pageNUM:" + pageNUM);
 		LookbookDao.totalMyLook = lookbookdao.getTotalMyLook(users_no);
-		LookbookDao.my_totalPage = (int) Math.ceil((double) LookbookDao.totalMyLook / LookbookDao.my_pageSIZE);
-
-		int start = (pageNUM - 1) * LookbookDao.my_pageSIZE + 1;
-		int end = start + LookbookDao.my_pageSIZE - 1;
+		LookbookDao.my_totalPage = (int)Math.ceil((double)LookbookDao.totalMyLook/LookbookDao.my_pageSIZE);
+		System.out.println("my_totalPage:" + LookbookDao.my_totalPage);	
+		System.out.println("LookbookDao.my_pageSIZE:" + LookbookDao.my_pageSIZE);	
+		int start = (pageNUM-1)*LookbookDao.my_pageSIZE + 1;
+		int end = start+LookbookDao.my_pageSIZE-1;
 		if (end > LookbookDao.totalMyLook) {
 			end = LookbookDao.totalMyLook;
 		}

@@ -56,8 +56,8 @@ public class UsersController {
 		ModelAndView mav = new ModelAndView("redirect:/main.do");
 		Authentication authentication
 		= SecurityContextHolder.getContext().getAuthentication();
-		User user = (User)authentication.getPrincipal();
-		String id = user.getUsername();
+		
+		String id = ((User)authentication.getPrincipal()).getUsername();
 		UsersVO u = dao.getUsers(id);
 		session.setAttribute("users", u);
 		
@@ -151,7 +151,6 @@ public class UsersController {
 	@RequestMapping("/mypage/withdrawal.do")
 	public void withdrawal(Model model,HttpSession session) {
 		int users_no = ((UsersVO)session.getAttribute("users")).getUsers_no();
-		System.out.println("users_no:"+users_no);
 		model.addAttribute("users_no",users_no);
 	}
 	

@@ -75,7 +75,6 @@ public class LookbookDao {
 	}
 	
 	public List<LookbookVO> listMyLook(HashMap map){
-		//System.out.println("lookbookdao users_no:"+map.users_no);
 		return DBManager.listMyLook(map);
 	}
 	

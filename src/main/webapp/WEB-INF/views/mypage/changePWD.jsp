@@ -21,16 +21,17 @@
 	}
 $(function(){
 	$("#form").submit(function(){
-		/*if ($("#new_pw").val() ==  /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/) {
-            alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
-          $("#new_pw").focus();
-            return false;
-        };*/
-		
+		 if (!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/.test($("#new_pw").val())) {
+	            alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
+	          $("#new_pw").focus();
+	            return false;
+	        };
+	    
 		if($("#new_pw").val() != $("#new_pw2").val()){
 			alert("비밀번호가 일치하지 않습니다.");
 			$("#new_pw2").focus();
 			return false;
+			
 		}else if($("#new_pw").val() == ""){
 			alert("비밀번호를 입력해주세요.")
 			return false;
@@ -54,7 +55,7 @@ $(function(){
 					        <div class="pw_header">
 					             <h2 class="h2_pw">비밀번호 변경</h2>
 					             <p><h5>회원님의 계정 비밀번호를 재설정 해주세요.<br>
-					             (영문, 숫자, 특수문자 포함 8자 이상 12자 이하)</h5></p>
+					             (영문, 숫자, 특수문자 포함 8자 이상 25자 이하)</h5></p>
 					        </div> <!-- pw_header -->
 	  			
 	  			
@@ -76,8 +77,8 @@ $(function(){
 		  							</p>	
 		  							<br>
 		  							<br>
-		  							<p class="btn_area_btm">
-		  								<input type="submit" value="변경하기" id="cbtn">
+		  							<p>
+		  								<input type="submit" value="변경하기" class="btn btn-lg btn-primary btn-block" >
 		  							</p>
 		  								
 		  						</fieldset>						

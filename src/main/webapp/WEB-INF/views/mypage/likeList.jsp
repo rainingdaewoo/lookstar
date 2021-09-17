@@ -39,7 +39,7 @@ function readURL(input) {
 		  		<!-- 사진파일명 : ${l.lookbook_fname}<br> -->
 		  		<div class="text-center" style="width:303px;" id="imgBox">
 				   <div class="image-box">
-				      <a href="/lookbookInfo.do">
+				      <a href="/lookbook/lookbook_detail.do?lookbook_no=${l.lookbook_no}">
 				   		<img src="/resources/look_img/${l.lookbook_fname}" height="600px" width="400px;" class="image-thumbnail">
 			        	</a>
 				   </div>

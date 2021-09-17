@@ -20,8 +20,8 @@
 	</select>
 	
 	<select id="listFLook" resultType="lookbookVO">
-		select lookbook_fname,lookbook_write from(select rownum n,lookbook_fname,lookbook_write from
-		(select lookbook_fname,lookbook_write from lookbook l,users u
+		select lookbook_fname,lookbook_write,lookbook_no from(select rownum n,lookbook_fname,lookbook_write,lookbook_no from
+		(select lookbook_fname,lookbook_write,l.lookbook_no from lookbook l,users u
 		where l.users_no=u.users_no
 		and u.users_no=#{users_no}))
 		where n between #{start} and #{end}
