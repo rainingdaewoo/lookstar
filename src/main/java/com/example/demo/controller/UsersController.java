@@ -43,12 +43,12 @@ public class UsersController {
 	public void setJavaMailSender(JavaMailSender javaMailSender) {
 		this.javaMailSender = javaMailSender;
 	}
-	@RequestMapping("/login.do")
+	@RequestMapping("/users/login.do")
 	public void login() {
 		
 	}
 	
-	@RequestMapping("/loginOK.do")
+	@RequestMapping("/users/loginOK.do")
 	public ModelAndView loginOK(HttpSession session) {
 		System.out.println("로그인 성공!");
 		ModelAndView mav = new ModelAndView("redirect:/main.do");
@@ -66,7 +66,7 @@ public class UsersController {
 	
 
 	
-	@RequestMapping("/findOK.do")
+	@RequestMapping("/users/findOK.do")
 	public void findOK() {
 		
 	}
@@ -82,7 +82,7 @@ public class UsersController {
 		return mav;
 	}
 
-	@RequestMapping("/compareID.do")
+	@RequestMapping("/users/compareID.do")
 	@ResponseBody
 	public String compareID(String compare_id) {
 		System.out.println("compareID.do동작함" + compare_id);
@@ -90,7 +90,7 @@ public class UsersController {
 		return users_id;
 	}
 	
-	@RequestMapping("/compareNickname.do")
+	@RequestMapping("/users/compareNickname.do")
 	@ResponseBody
 	public String compareNickname(String compare_nickname) {
 		System.out.println("compareNickname.do동작함" + compare_nickname);
@@ -98,7 +98,7 @@ public class UsersController {
 		return users_nickname;
 	}
 	
-	@RequestMapping("/sendCode.do")
+	@RequestMapping("/users/sendCode.do")
 	@ResponseBody
 	public String sendCode(String sendEmail) {
 		System.out.println("sendCode.do동작함" + sendEmail);
