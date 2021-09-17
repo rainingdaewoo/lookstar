@@ -41,6 +41,7 @@ public class UpdateUsersController {
 	public ModelAndView submit(UpdateUsersCommandVO updateUsers, HttpServletRequest request) {
 		UsersVO u = updateUsers.getUsers();
 		ModelAndView mav = new ModelAndView("redirect:/mypage/mypage.do");
+		System.out.println("updateComments.do POST 동작함.");
 		int re = dao.updateUsers(updateUsers);
 		if(re != 1) {
 			mav.addObject("msg","개인 정보 수정에 실패하였습니다.");

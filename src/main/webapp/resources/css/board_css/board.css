@@ -11,6 +11,75 @@
  width:100%; 
  padding:10px 0;
 }
+<<<<<<< HEAD
+=======
+
+.search row{
+	margin-top: 20px;
+}
+
+.container{
+	width: 800px;
+	padding: 29px 29px 0;
+    border: 1px solid var(--skinLayoutBorder);
+    border-radius: 6px;
+}
+.container-aside{
+	    float: left;
+    padding-left: 100px;
+    padding-top: 100px;
+    font-size: 20px;
+}
+.container-aside a{ 
+	color: black;
+}
+.container a {
+	color: black;	
+}
+
+.reComments {
+	display: none;	
+}
+.ArticleContentBox {
+	padding: 29px 29px 0;
+    border: 1px solid var(--skinLayoutBorder);
+    border-radius: 6px;
+}
+#input_board_content {
+	 height: 170px;
+}
+
+.comments-usersNickname {
+	float: left;
+}
+.extra-button {
+	float: right;
+}
+
+.comments-extra {
+	 display: none;
+}
+
+.updateComments {
+	display: none;
+}
+.writeRecomments {
+	width: 70px;	
+}
+
+#inputCategory {
+	float: left;
+}
+/* * {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+
+>>>>>>> branch 'main' of https://github.com/Gichan94/lookstargram.git
  
  aside ul li a:hover { 
  background:#eee; 

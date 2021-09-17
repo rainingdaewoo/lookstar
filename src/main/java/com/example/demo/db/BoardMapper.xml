@@ -4,77 +4,96 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
   <select id="findAll" resultType="boardVO">
-     select board_no, board_title, board_content, users_nickname, board_date, board_views, board_show
-    from (
-        select board_no, board_title, board_content, users_nickname, board_date, board_views, board_show,
+     SELECT board_no, board_title, board_content, users_nickname, board_date, board_views, board_show, board_comments_count, board_category_no
+    FROM (
+        SELECT board_no, board_title, board_content, users_nickname, board_date, board_views, board_show, board_comments_count, board_category_no,
             row_number() over(order by board_no desc) as rNum
-        FROM board, users WHERE board.users_no = users.users_no
+        FROM board, users 
+        WHERE board.users_no = users.users_no
+        	and board_category_no = #{board_category_no}
              <if test="searchType != null and searchType != 'all'" >
-                and ${searchType} like '%' || #{keyword} || '%'
+             	and ${searchType} like '%' || #{keyword} || '%'
              </if>
              <if test="searchType != null and searchType == 'all'">
-                and (board_title like '%' || #{keyword} || '%' or board_content like '%' || #{keyword} || '%')
+             	and (board_title like '%' || #{keyword} || '%' or board_content like '%' || #{keyword} || '%')
              </if>
         ) b
     WHERE rNum between #{start} and #{end} 
     ORDER BY board_no desc
-   </select>
-    
-    
-    
+	</select>
+	
+	
+	
+ 
   <insert id="insertBoard" parameterType="boardVO">
-     insert into board(board_no, board_title, users_no, board_content,
-     board_views, board_date, board_fname, board_fsize, board_show) 
-     values(seq_board.nextval,#{board_title},#{users_no},#{board_content},
-     0, sysdate, #{board_fname},#{board_fsize}, 0)
+  	insert into board(board_no, board_title, users_no, board_content,
+  	board_views, board_date, board_fname, board_fsize, board_show, board_comments_count, board_category_no) 
+  	values(seq_board.nextval,#{board_title},#{users_no},#{board_content},
+  	0, sysdate, #{board_fname},#{board_fsize}, 0, 0, #{board_category_no})
   </insert>
   
   <select id="getNextNo" resultType="int">
-     select nvl(max(no),0)+1 from board
+  	select nvl(max(no),0)+1 from board
   </select>
   
   <select id="getBoard" resultType="boardVO">
-     select board_no, board_title, users_nickname, board_content, board_date, board_views, board_fname, board_fsize 
-     from board, users
-     where board_no=#{board_no} and board.users_no = users.users_no
+  	select board_no, board_title, users_nickname, board_content, board_date, board_views, board_fname, board_fsize, board.users_no
+  	from board, users
+  	where board_no=#{board_no} and board.users_no = users.users_no
   </select>
   
   <update id="updateViews" parameterType="int">
-      update board set board_views=board_views + 1 where board_no=#{board_no} 
+  	 update board set board_views=board_views + 1 where board_no=#{board_no} 
+  </update>
+  
+   <update id="plusCommentsCount" parameterType="int">
+  	 update board set board_comments_count=board_comments_count + 1 where board_no=#{board_no} 
+  </update>
+  
+  <update id="minusCommentsCount" parameterType="int">
+  	 update board set board_comments_count=board_comments_count - 1 where board_no=#{board_no} 
   </update>
   
   <update id="updateStep" >
-     update board set b_step = b_step +1 
-        where b_ref=#{b_ref} and b_step > #{b_step}
+  	update board set b_step = b_step +1 
+  		where b_ref=#{b_ref} and b_step > #{b_step}
   </update>
   
   <update id="updateBoard" parameterType="boardVO">
-     update board set title=#{title},
-     content=#{content},
-     fname=#{fname},
-     fsize=#{fsize} where no=#{no} and pwd=#{pwd}
+  	update board set board_title=#{board_title},
+  	board_content=#{board_content},
+  	board_fname=#{board_fname},
+  	board_fsize=#{board_fsize} 
+  	where board_no = #{board_no}
   </update>
   
   <update id="deleteBoard">
-     UPDATE board SET board_show = 1 WHERE board_no = #{board_no}
+  	UPDATE board SET board_show = 1 WHERE board_no = #{board_no}
    </update>
   
   <select id="totalRecord" resultType="int" parameterType="hashMap">
-     select count(*) FROM board, users 
+  	select count(*) FROM board, users 
         WHERE board.users_no = users.users_no
-       <if test="searchType != null and searchType != 'all'" >
-                and ${searchType} like '%' || #{keyword} || '%'
+        		and board_category_no = #{board_category_no}
+  	  <if test="searchType != null and searchType != 'all'" >
+             	and ${searchType} like '%' || #{keyword} || '%'
              </if>
              <if test="searchType != null and searchType == 'all'">
-                and (board_title like '%' || #{keyword} || '%' or board_content like '%' || #{keyword} || '%')
-             </if>   
+             	and (board_title like '%' || #{keyword} || '%' or board_content like '%' || #{keyword} || '%')
+             </if>	
+  </select>
+  
+  <select id="totalMyBoard" resultType="int">
+  	select count (*) from board where users_no=#{users_no}
   </select>
   
   <select id="listMyBoard" resultType="boardVO">
-    select board_no, BOARD_TITLE, board_date, board_views
-   	FROM board 
-   	WHERE users_no = #{users_no}
-   	and users_no = #{users_no}
+    select board_no,board_title,board_date,board_views from 
+	(select rownum n, board_no,board_title,board_date,board_views from
+	(select b.board_no, b.BOARD_TITLE, b.board_date, b.board_views
+	   	FROM board b, users u
+	   	WHERE b.users_no = u.users_no
+	   	and u.users_no = #{users_no}))
+	where n between #{start} and #{end}
   </select>
-  
 </mapper>

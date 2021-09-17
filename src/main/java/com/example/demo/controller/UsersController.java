@@ -4,8 +4,7 @@ package com.example.demo.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import java.util.Random;
-
-
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -46,12 +45,12 @@ public class UsersController {
 	public void setJavaMailSender(JavaMailSender javaMailSender) {
 		this.javaMailSender = javaMailSender;
 	}
-	@RequestMapping("/login.do")
+	@RequestMapping("/users/login.do")
 	public void login() {
 		
 	}
 	
-	@RequestMapping("/loginOK.do")
+	@RequestMapping("/users/loginOK.do")
 	public ModelAndView loginOK(HttpSession session) {
 		System.out.println("로그인 성공!");
 		ModelAndView mav = new ModelAndView("redirect:/main.do");
@@ -64,12 +63,10 @@ public class UsersController {
 		
 		return mav;
 	}
-
-
 	
 
 	
-	@RequestMapping("/findOK.do")
+	@RequestMapping("/users/findOK.do")
 	public void findOK() {
 		
 	}
@@ -78,14 +75,13 @@ public class UsersController {
 		
 	}
 	
-
 	@RequestMapping("/")
 	public ModelAndView main(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("redirect:/main.do");
 		return mav;
 	}
 
-	@RequestMapping("/compareID.do")
+	@RequestMapping("/users/compareID.do")
 	@ResponseBody
 	public String compareID(String compare_id) {
 		System.out.println("compareID.do동작함" + compare_id);
@@ -93,7 +89,7 @@ public class UsersController {
 		return users_id;
 	}
 	
-	@RequestMapping("/compareNickname.do")
+	@RequestMapping("/users/compareNickname.do")
 	@ResponseBody
 	public String compareNickname(String compare_nickname) {
 		System.out.println("compareNickname.do동작함" + compare_nickname);
@@ -101,7 +97,7 @@ public class UsersController {
 		return users_nickname;
 	}
 	
-	@RequestMapping("/sendCode.do")
+	@RequestMapping("/users/sendCode.do")
 	@ResponseBody
 	public String sendCode(String sendEmail) {
 		System.out.println("sendCode.do동작함" + sendEmail);
@@ -126,6 +122,9 @@ public class UsersController {
 
 	}
 	
+	@RequestMapping("/kakao.do")
+	public void kakao() {}
+	
 	// 보민
 	
 	@RequestMapping(value = "/logout.do")
@@ -149,9 +148,6 @@ public class UsersController {
 		
 	}
 	
-	@RequestMapping("/kakao.do")
-	public void kakao() {}
-
 	@RequestMapping("/mypage/withdrawal.do")
 	public void withdrawal(Model model,HttpSession session) {
 		int users_no = ((UsersVO)session.getAttribute("users")).getUsers_no();
@@ -164,23 +160,26 @@ public class UsersController {
 		
 	}
 	
-	@RequestMapping("/mypage/manageMylook.do")
-	public void manageMylook() {
-		
-	}
-	
-	@RequestMapping("/mypage/followList.do")
-	public void followList(Model model,HttpSession session) {
-		String users_id = ((UsersVO)session.getAttribute("users")).getUsers_id();
-		System.out.println("users_id:"+users_id);
-		List<UsersVO> list = dao.listFollow(users_id);
-		System.out.println("팔로우목록:"+list);
-		model.addAttribute("flist",list);
-	}
-	
-	@RequestMapping("/mypage/likeList.do")
-	public void likeList() {
 
-		
+	@RequestMapping(value = "/updatePwd.do" , method = RequestMethod.POST)
+	public ModelAndView updatePwd(int users_no,String new_pw) {
+		ModelAndView mav = new ModelAndView("redirect:/logout.do");
+		UsersVO u = new UsersVO();
+		u.setUsers_pw("");
+		String encode_pw = passwordEncoder.encode(new_pw);
+		u.setUsers_pw(encode_pw);
+		System.out.println("비번변경컨트롤러 users_no:"+users_no);
+		System.out.println("변경전 비밀번호"+new_pw);
+		System.out.println("암호화된 비밀번호"+encode_pw);
+		HashMap map = new HashMap();
+		map.put("users_no", users_no);
+		map.put("users_pw", encode_pw);
+		int re = dao.updatePWD(map);
+		if(re != 1) {
+			mav.addObject("msg","비밀번호 변경 실패하였습니다.");
+			mav.setViewName("error");
+		}
+		return mav;
 	}
+	
 }

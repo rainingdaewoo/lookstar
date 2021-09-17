@@ -7,11 +7,23 @@
 		select count(*) from follow
 		where follower_id = #{users_id}
 	</select>
+	
+	<select id="totalFRecord" resultType="int">
+		select count(*) from lookbook where users_no=#{users_no}
+	</select>
 
   	<select id="listFollow" resultType="usersVO">
-		select users_id,users_nickname,users_fname from(select rownum n,users_id,users_nickname,users_fname from(
-		select users_id,users_nickname,users_fname from users 
+		select users_id,users_nickname,users_fname,users_no from(select rownum n,users_id,users_nickname,users_fname,users_no from(
+		select users_id,users_nickname,users_fname,users_no from users 
 		where users_id in (select following_id from follow where follower_id = #{users_id})))
+		where n between #{start} and #{end}
+	</select>
+	
+	<select id="listFLook" resultType="lookbookVO">
+		select lookbook_fname,lookbook_write from(select rownum n,lookbook_fname,lookbook_write from
+		(select lookbook_fname,lookbook_write from lookbook l,users u
+		where l.users_no=u.users_no
+		and u.users_no=#{users_no}))
 		where n between #{start} and #{end}
 	</select>
 	
@@ -36,4 +48,4 @@
 	<select id="getNext_follow_no" resultType="int">
 	 	select nvl(max(follow_no),0)+1 from follow
 	</select>
-</mapper>    
+</mapper>

@@ -26,7 +26,7 @@
     <link href="../resources/css/signin.css" rel="stylesheet">
   </head>
 
- <%@ include file="./inc/header.jsp" %>
+ <%@ include file="../inc/header.jsp" %>
 
   <body class="text-center">
   	<section class="container">
@@ -41,7 +41,7 @@
             	</p>
             </div>
             <div class="container px-4 px-lg-5 my-5" id="text2">
-                <form class="form-find" action="login.do">
+                <form class="form-find" action="/users/login.do">
                     <div class="form-group text-center">
                         <input type="submit" class="btn btn-lg btn-primary btn-block" value="로그인하러 가기">
                     </div>
@@ -49,6 +49,6 @@
             </div>
 		</section>
     	<!-- Footer-->
-	<%@ include file="./inc/footer.jsp" %>
+	<%@ include file="../inc/footer.jsp" %>
 </body>
 </html>

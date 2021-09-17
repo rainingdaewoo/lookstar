@@ -16,6 +16,7 @@ public class BoardVO {
 	private int board_views;
 	private String board_fname;
 	private int board_fsize;
+	private int board_comments_count;
 	private MultipartFile board_uploadFile;
 	public int getBoard_no() {
 		return board_no;
@@ -83,6 +84,12 @@ public class BoardVO {
 	public void setBoard_fsize(int board_fsize) {
 		this.board_fsize = board_fsize;
 	}
+	public int getBoard_comments_count() {
+		return board_comments_count;
+	}
+	public void setBoard_comments_count(int board_comments_count) {
+		this.board_comments_count = board_comments_count;
+	}
 	public MultipartFile getBoard_uploadFile() {
 		return board_uploadFile;
 	}
@@ -91,7 +98,7 @@ public class BoardVO {
 	}
 	public BoardVO(int board_no, int board_category_no, int users_no, String users_nickname, String board_title,
 			String board_content, Date board_date, int board_show, int board_views, String board_fname, int board_fsize,
-			MultipartFile board_uploadFile) {
+			int board_comments_count, MultipartFile board_uploadFile) {
 		super();
 		this.board_no = board_no;
 		this.board_category_no = board_category_no;
@@ -104,14 +111,20 @@ public class BoardVO {
 		this.board_views = board_views;
 		this.board_fname = board_fname;
 		this.board_fsize = board_fsize;
+		this.board_comments_count = board_comments_count;
 		this.board_uploadFile = board_uploadFile;
 	}
 	public BoardVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
+	@Override
+	public String toString() {
+		return "BoardVO [board_no=" + board_no + ", board_category_no=" + board_category_no + ", users_no=" + users_no
+				+ ", users_nickname=" + users_nickname + ", board_title=" + board_title + ", board_content="
+				+ board_content + ", board_date=" + board_date + ", board_show=" + board_show + ", board_views="
+				+ board_views + ", board_fname=" + board_fname + ", board_fsize=" + board_fsize
+				+ ", board_comments_count=" + board_comments_count + ", board_uploadFile=" + board_uploadFile + "]";
+	}
 	
 }
