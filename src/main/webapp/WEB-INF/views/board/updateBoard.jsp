@@ -53,7 +53,7 @@
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			<input type="hidden" name="users_no" value="${users.users_no}"> <br>	
 			<input type="hidden" name="board_no" value="${b.board_no }"> <br>
-				<div class="container">
+				<div class="container-sm">
 		    <div class="content" style="width: 120%">
 		    
 		        <div class="row justify-content-md-center">
@@ -98,7 +98,7 @@
 		                </div>
 		            </div> 
 		      </div>
-		        <div class="row justify-content-md-center">
+		        <div class="uploadFile">
 		            <div class="input-group mb-3">
 		              <div class="input-group-prepend">
 		                <span class="input-group-text" id="inputGroupFileAddon01">첨부파일</span>

@@ -11,8 +11,6 @@
  width:100%; 
  padding:10px 0;
 }
-<<<<<<< HEAD
-=======
 
 .search row{
 	margin-top: 20px;
@@ -33,7 +31,7 @@
 .container-aside a{ 
 	color: black;
 }
-.container a {
+.container-sm a {
 	color: black;	
 }
 
@@ -70,100 +68,61 @@
 #inputCategory {
 	float: left;
 }
-/* * {
-    margin: 0;
-    padding: 0;
+
+
+.article_header {
+	margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid grey;
 }
 
-
-
-
-
->>>>>>> branch 'main' of https://github.com/Gichan94/lookstargram.git
- 
- aside ul li a:hover { 
- background:#eee; 
+.article_info {
+	font-size: 13px;
+    line-height: 14px;
+    color: grey;
 }
 
- aside ul li { 
- text-align:center; 
- margin-bottom:10px; 
+.writerInfo {
+	margin-bottom: 6px;
 }
 
-.container{
-	width: 90%;
-}
-.container aside{
-	    float: left;
-    padding-left: 80px;
-    padding-top: 120px;
-    font-size: 20px;
-}
-
-ul, li {
-    list-style: none;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.board_wrap {
-    width: 80%;
-    margin: 100px auto;
-    float:right;
-    padding-right:50px; 
-}
-
-.board_category{
-	width: 30%;
+.ArticleTool {
 	
+	float: right;
 }
 
-.board_title {
-    margin-bottom: 30px;
+.uploadFile {
+	display: none;
 }
 
-.board_title strong {
-    font-size: 3rem;
+.category-list {
+	list-style: none;
 }
 
-.board_title p {
-    margin-top: 5px;
-    font-size: 1.4rem;
+.table-head { 
+	text-align: center;
 }
 
-.bt_wrap {
-    margin-top: 30px;
-    text-align: center;
-    font-size: 0;
-    float: right;
+.table-content {
+	text-align: center;
 }
 
-.bt_wrap a {
-    display: inline-block;
-    min-width: 80px;
-    margin-left: 10px;
-    padding: 10px;
-    border: 1px solid #000;
-    border-radius: 2px;
-    font-size: 1.4rem;
+.paging-center {
+	text-align: center;
 }
 
-.bt_wrap a:first-child {
-    margin-left: 0;
+#comments_uploadFile{
+	display: none;
 }
 
-.bt_wrap a.on {
-    background: #000;
-    color: #fff;
-}
 
-.board_list {
-    width: 100%;
-    /* border-top: 2px solid #000; */
-}
+
+
+
+
+
+
+
 
 .board_list > div {
     border-bottom: 1px solid #ddd;
@@ -304,9 +263,6 @@ a {
     font-size: 1.4rem;
 }
 
-.board_view .info dl dt {
-
-}
 
 .board_view .info dl dd {
     margin-left: 10px;

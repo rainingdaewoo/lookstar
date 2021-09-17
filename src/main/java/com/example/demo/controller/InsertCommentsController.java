@@ -84,13 +84,13 @@ public class InsertCommentsController {
 			}
 			
 		}
-		boarddao.plusCommentsCount(board_no);
+		
 		int re = dao.insertComments(vo);
 		if(re != 1) {
 			mav.addObject("msg", "댓글 등록에 실패하였습니다.");
 			mav.setViewName("error");
 		}
-		
+		boarddao.plusCommentsCount(board_no);
 		return mav;
 	}
 }

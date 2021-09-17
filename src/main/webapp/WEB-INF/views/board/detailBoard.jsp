@@ -79,30 +79,57 @@
 	<!-- Body Section -->
 	<!-- 게시판 내용 -->
 	<section class="py-5">
-	<div class="container-aside">
-	<ul>
-		<li><a href="#">일상게시판</a></li>
-		<li><a href="#">자유게시판</a></li>
-		<li><a href="#">쇼핑후기</a></li>
-	</ul>
+<div class="container-aside">
+		<ol>
+			<li class="category" id="자유게시판">
+				<a href="/board/listBoard.do?pageNUM=1&board_category_no=0">자유게시판</a>
+			</li>
+			<li class="category" id="쇼핑후기">
+				<a href="/board/listBoard.do?pageNUM=1&board_category_no=1">쇼핑후기</a>
+			</li>
+			<li class="category" id="발매및할인정보">
+				<a href="/board/listBoard.do?pageNUM=1&board_category_no=2">발매 및 할인정보</a>
+			</li>
+			<li class="category" id="비밀글">
+				<a href="/board/listBoard.do?pageNUM=1&board_category_no=3">비밀글</a>
+			</li>
+			<li class="category" id="공지사항">
+				<a href="/board/listBoard.do?pageNUM=1&board_category_no=4">공지사항</a>
+			</li>
+		</ol>
+		<input type="hidden" name="board_category_no" value="${board_category_no}">
+	
 	</div>
-		<div class="container ArticleContentBox">
-			<h2>게시물 상세</h2>
+		<div class="container-sm">
 		<input type="hidden" name="board_no" value="${b.board_no }">
 	<hr>
 	<input type="hidden" name="users_no" value="${users.users_no}">
-	글번호 : ${b.board_no }<br>
-	글제목 : ${b.board_title }<br>
-	작성자 : ${b.users_nickname }<br>
-	글내용 : <br>
-	 ${b.board_content }<br>
-	등록일 : <fmt:formatDate value="${b.board_date }" pattern="yyyy-MM-dd HH:mm" /><br>
-	조회수 : ${b.board_views }<br>
-	<img class="card-img-top"
-	src="../../resources/board_img/${b.board_fname }"	style="height: 100%; width: 100%;" />
-	첨부파일 : ${b.board_fname }(${b.board_fsize })
+	<div class="article_header">
+		<h3 class="title_text">${b.board_title }</h3>
+		<div class="writerInfo">
+					<img id="my_img" class="img-fluid rounded-circle mb-4"
+			 src="../resources/profile/${users.users_fname}" width="30" onerror="this.src='/resources/images/user.png'"/>
+			 ${b.users_nickname }<br>
+			<div class="article_info">
+				<fmt:formatDate value="${b.board_date }" pattern="yyyy-MM-dd HH:mm" />
+				조회 ${b.board_views }
+			</div>
+			<div class="ArticleTool">
+		댓글  <a style="color: red;">(${b.board_comments_count })</a>
+		</div>
+		</div> 
+		
+		<div>
+		
+		</div>
+	</div>
+	<div class="board-content">
+			${b.board_content }
+	</div>
+	 
 	<hr>
-
+	<h3>댓글</h3>
+	
 	
 	<!-- 댓글 목록 -->
 	<div class="comments">
@@ -115,7 +142,11 @@
 				</c:if>
 							<div class="avc">
 							<div class="comments-usersNickname">
-								<p>${comments.users_nickname} 	</p>
+							<img id="my_img" class="img-fluid rounded-circle mb-4"
+			 src="../resources/profile/${users.users_fname}" width="30" onerror="this.src='/resources/images/user.png'"/>
+								</div>
+								<div class="comments-usersNickname">
+									<p>${comments.users_nickname} 	</p>
 								</div>
 								<div class="extra-button">
 									<i class="bi bi-plus"></i>
@@ -203,7 +234,8 @@
 			<c:otherwise>
 				<div>
 						<c:if test="${comments.comments_show == 1 }">
-							삭제된 댓글입니다.
+							삭제된 댓글입니다.<br><hr>
+							
 						</c:if>
 				</div>
 			</c:otherwise>
@@ -219,13 +251,15 @@
 					<br> 
 				</div>
 				<div class="col-md-6">
-	 					<input type="hidden" name="users_no" value="${users.users_no}"> <br>
-	 					<input type="hidden" name="board_no" value="${b.board_no }"> <br>
-	 					<input type="hidden" name="depth" value="0"> <br>
-	 					<input type="hidden" name="ori_comments_no" value="0"> <br>
+	 					<input type="hidden" name="users_no" value="${users.users_no}"> 
+	 					<input type="hidden" name="board_no" value="${b.board_no }"> 
+	 					<input type="hidden" name="depth" value="0"> 
+	 					<input type="hidden" name="ori_comments_no" value="0"> 
 						<div class="inputArea">
-					 <textarea rows="5" cols="50" id="gdsDes" name="comments_content" placeholder="댓글을 남겨보세요."></textarea>
-					
+					<div class="form-floating">
+					  <textarea class="form-control" placeholder="댓글을 남겨보세요." name="comments_content"></textarea>
+					  <label for="floatingTextarea">Comments</label>
+					</div>
 					<input type='file' id="comments_uploadFile" name="comments_uploadFile" accept="image/png, image/jpeg"/>
 					
 					</div>
