@@ -166,6 +166,14 @@ public class DBManager {
 		   return list;
 	   }
 	   
+	   public static List<LookbookVO> listFLook(HashMap map) {
+		   System.out.println("map:"+map);
+			SqlSession session = factory.openSession();
+			List<LookbookVO> list = session.selectList("follow.listFLook",map);
+			System.out.println("list:"+list);
+			session.close();
+			return list;
+		}
 	   
 
 	   public static int getTotalMyLook(int users_no) {
@@ -194,6 +202,14 @@ public class DBManager {
 		   int n = session.selectOne("follow.totalRecord",users_id);
 		   session.close();
 		   return n;
+	   }
+	   
+	   public static int getTotalFRecord(int users_no) {
+		   System.out.println("bbb users_no 81 dbmanager:"+users_no);
+			SqlSession session = factory.openSession();
+			int n = session.selectOne("follow.totalFRecord",users_no);
+			session.close();
+			return n;
 	   }
 	   
 	   public static int deleteUser(int users_no, String users_pw) {
@@ -532,6 +548,10 @@ public class DBManager {
 			session.close();
 			return d;
 		}
+
+		
+
+		
 
 
 	}

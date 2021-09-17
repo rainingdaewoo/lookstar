@@ -29,7 +29,8 @@
 	            <div class="media-body pb-3 mb-0 lh-125 border-grey">
 	            	<div class="d-flex justify-content-between align-items-center w-100">
 	            		<h5><strong class="text-gray-dark">${f.users_id }</strong></h5>
-	            		<a href="#">계정</a>
+	            		<a href="/mypage/followingLookbook.do?users_no=${f.users_no }&users_nickname=${f.users_nickname}">계정</a>
+	            		<!-- ${f.users_no} -->
 	            	</div>
 	            	<span class="d-block">${f.users_nickname }</span>
 	            </div>          
