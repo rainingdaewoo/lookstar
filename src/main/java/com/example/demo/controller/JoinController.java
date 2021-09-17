@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,7 +19,7 @@ import com.example.demo.vo.InsertUsersCommandVO;
 import com.example.demo.vo.UsersVO;
 
 @Controller
-@RequestMapping("/join.do")
+@RequestMapping("/users/join.do")
 public class JoinController {
 	@Autowired
 	private UsersDao dao;
@@ -33,10 +34,38 @@ public class JoinController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public void form() {
-		System.out.println("join.do get동작"); 
+	public void form(Model model, String kakaoprofile, String kakaoemail, String kakaogender) {
+		System.out.println("join.do get동작");
+		System.out.println("카카오프로필" +kakaoprofile);
+		System.out.println("카카오이메일" +kakaoemail);
+		System.out.println("카카오성별" +kakaogender);
 		
+		String type = "1";
+		String correct = "1";
+		if(kakaoemail != null) {
+			System.out.println("카카오 로그인 do");
+			System.out.println("카카오프로필" +kakaoprofile);
+			int idx = kakaoemail.indexOf("@");
+			String mail1 = kakaoemail.substring(0,idx);
+			String mail2 = kakaoemail.substring(idx+1);
+			type = "2";
+			correct = "2";
+			model.addAttribute("kakaoprofile",kakaoprofile);
+			model.addAttribute("mail1",mail1);
+			model.addAttribute("mail2",mail2);
+			model.addAttribute("kakaogender",kakaogender);
+		}
+		System.out.println("유저타입" +type);
+		model.addAttribute("users_jointype",type);
+		model.addAttribute("correct",correct);
+  		//<input type="hidden" name="kakaoprofile" id="kakaoprofile"/>
+  		//<input type="hidden" name="kakaoemail" id="kakaoemail"/>
+  		//<input type="hidden" name="kakaogender" id="kakaogender"/>
+  		//<input type="hidden" name="users_jointype" value="1">
+  		
 	}
+	
+	
 	/*
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
@@ -83,7 +112,8 @@ public class JoinController {
 		
 		UsersVO u = insertUsers.getUsers();
 		
-		ModelAndView mav = new ModelAndView("redirect:/login.do");
+
+		ModelAndView mav = new ModelAndView("redirect:/users/login.do");
 		
 		String path = request.getRealPath("/resources/profile");
 		System.out.println("path:" +path);

@@ -142,12 +142,21 @@ public class DBManager {
 		  return list;
 	  }
 
+
 	  public static List<UsersVO> listFollw(HashMap map) {
 	      SqlSession session = factory.openSession();
 	      List<UsersVO> flist = session.selectList("follow.listFollow",map);
 	      session.close();
 	      return flist;
 	   }
+	  
+	   public static int updateInfo(UsersVO u) {
+	      SqlSession session = factory.openSession(true);
+	      int re = session.update("look.updateMyInfo", u);
+	      session.close();
+	      return re;
+	   }
+
 
 	   public static List<BoardVO> listMyBoard(HashMap map) {
 	      SqlSession session = factory.openSession();
@@ -175,7 +184,6 @@ public class DBManager {
 			return list;
 		}
 	   
-
 	   public static int getTotalMyLook(int users_no) {
 		   SqlSession session = factory.openSession();
 		   int n = session.selectOne("lookbook.totalMyLook",users_no);

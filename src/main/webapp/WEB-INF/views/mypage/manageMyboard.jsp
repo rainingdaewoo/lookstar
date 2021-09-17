@@ -75,7 +75,8 @@
 	  				</li>	
 	  			</c:forEach>
 	  	</ul> 
-	</nav>	    
+	</nav>	    	
+	  		       
 <%@ include file="../inc/footer.jsp" %>
 </body>
 </html>

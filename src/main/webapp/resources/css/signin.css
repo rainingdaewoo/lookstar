@@ -34,9 +34,6 @@ body {
   padding-top: 50px;
   margin: auto;
 }
-.form-signin .checkbox {
-  font-weight: 400;
-}
 .form-signin .form-control {
   position: relative;
   box-sizing: border-box;
@@ -56,6 +53,10 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+#kakaologin{
+	position : relative;
+	left: 45.5%;	
 }
 
 .bd-placeholder-img {

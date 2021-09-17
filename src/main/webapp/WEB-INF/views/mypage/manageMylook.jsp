@@ -29,8 +29,25 @@
 		}
 	}
 </script>
-<style type="text/css">
-</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<link rel = "stylesheet" href="/resources/css/manage.css"/>
+<script type="text/javascript"src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$("#upload_file").on('change', function() {
+		readURL(this);
+	});
+});
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$('#blah').attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+</script>
 </head>
 <body>
 	<!-- Main Content-->

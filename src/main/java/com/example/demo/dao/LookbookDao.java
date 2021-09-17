@@ -57,5 +57,4 @@ public class LookbookDao {
 		return DBManager.listMyLook(map);
 	}
 	
-
 }

@@ -26,8 +26,6 @@ function readURL(input) {
 	}
 }
 </script>
-<style type="text/css">
-</style>
 </head>
 <body>
 <br><br><br><br><br>
