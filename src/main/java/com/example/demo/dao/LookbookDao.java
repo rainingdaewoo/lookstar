@@ -11,6 +11,7 @@ import com.example.demo.vo.InsertLookbookCommandVO;
 import com.example.demo.vo.LookInfoVO;
 import com.example.demo.vo.LookbookVO;
 import com.example.demo.vo.Lookbook_styleVO;
+import com.example.demo.vo.LooklikeVO;
 import com.example.demo.vo.RangeWeightHeightVO;
 import com.example.demo.vo.SelectLookbookCommandVO;
 import com.example.demo.vo.UsersVO;

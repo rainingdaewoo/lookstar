@@ -13,6 +13,12 @@
 	left:50%;
 }
 
+#boardPageBox{
+	position:absolute;
+	top:80%;
+	left:50%;
+}
+
 .board_top{
 	width:75%;
 	margin: auto;
@@ -82,11 +88,6 @@
         padding-top: 6px;
     }
     
-    
-
-
-
-
 .board_page1 {
     margin-top: 150px;
     text-align: center;
@@ -135,5 +136,11 @@
 }
 
 #imgBox{
+<<<<<<< HEAD
+	margin-top:100px;
+	matgin-bottom:100px;
+	margin-right:20px;
+=======
+>>>>>>> branch 'main' of https://github.com/Gichan94/lookstargram.git
 	float:left;
 }

@@ -19,6 +19,7 @@ import com.example.demo.vo.CommentsVO;
 import com.example.demo.vo.InsertUsersCommandVO;
 import com.example.demo.vo.LookbookVO;
 import com.example.demo.vo.Lookbook_styleVO;
+import com.example.demo.vo.LooklikeVO;
 import com.example.demo.vo.RangeWeightHeightVO;
 import com.example.demo.vo.SelectLookbookCommandVO;
 import com.example.demo.vo.UpdateUsersCommandVO;
@@ -73,6 +74,15 @@ public class DBManager {
 	   }
 	   // 김보민
 
+	   public static int updatePWD(HashMap map) {
+		   int re = -1;
+		   SqlSession session = factory.openSession();
+		   re = session.update("users.updatePwd", map);
+		   session.commit();
+		   session.close();
+		   return re;
+	   }
+	   
 	   // 회원탈퇴시 users테이블 속성 업데이트
 	   public static int updateUsersDel(int users_no) {
 	      SqlSession session = factory.openSession(true);
@@ -124,20 +134,29 @@ public class DBManager {
 
 	      }
 
-	   public static int updateStyle(int users_no) {
-	      System.out.println("dbmanager updatestyle 동작함");
-	      SqlSession session = factory.openSession(true);
-	      int re = session.update("Users_like_Style.updateUsers_like_Style", users_no);
-	      session.close();
-	      return re;
-	   }
+	  public static List<LookbookVO> listLikes(HashMap map){
+		  SqlSession session = factory.openSession();
+		  List<LookbookVO> list = session.selectList("looklike.listLikes",map);
+		  
+		  session.close();
+		  return list;
+	  }
 
+
+	  public static List<UsersVO> listFollw(HashMap map) {
+	      SqlSession session = factory.openSession();
+	      List<UsersVO> flist = session.selectList("follow.listFollow",map);
+	      session.close();
+	      return flist;
+	   }
+	  
 	   public static int updateInfo(UsersVO u) {
 	      SqlSession session = factory.openSession(true);
 	      int re = session.update("look.updateMyInfo", u);
 	      session.close();
 	      return re;
 	   }
+
 
 	   public static List<BoardVO> listMyBoard(HashMap map) {
 	      SqlSession session = factory.openSession();
@@ -155,7 +174,16 @@ public class DBManager {
 		   session.close();
 		   return list;
 	   }
-
+	   
+	   public static List<LookbookVO> listFLook(HashMap map) {
+		   System.out.println("map:"+map);
+			SqlSession session = factory.openSession();
+			List<LookbookVO> list = session.selectList("follow.listFLook",map);
+			System.out.println("list:"+list);
+			session.close();
+			return list;
+		}
+	   
 	   public static int getTotalMyLook(int users_no) {
 		   SqlSession session = factory.openSession();
 		   int n = session.selectOne("lookbook.totalMyLook",users_no);
@@ -168,6 +196,28 @@ public class DBManager {
 		   int n = session.selectOne("board.totalMyBoard",users_no);
 		   session.close();
 		   return n;
+	   }
+	   
+	   public static int getTotalMyLikes(int users_no) {
+		   SqlSession session = factory.openSession();
+		   int n = session.selectOne("looklike.totalRecord",users_no);
+		   session.close();
+		   return n;
+	   }
+	   
+	   public static int getTotalMyFollow(String users_id) {
+		   SqlSession session = factory.openSession();
+		   int n = session.selectOne("follow.totalRecord",users_id);
+		   session.close();
+		   return n;
+	   }
+	   
+	   public static int getTotalFRecord(int users_no) {
+		   System.out.println("bbb users_no 81 dbmanager:"+users_no);
+			SqlSession session = factory.openSession();
+			int n = session.selectOne("follow.totalFRecord",users_no);
+			session.close();
+			return n;
 	   }
 	   
 	   public static int deleteUser(int users_no, String users_pw) {
@@ -195,6 +245,8 @@ public class DBManager {
 	      return u;
 	   }
 
+	   
+	   //lookbook
 	   public static List<LookbookVO> listLookbook(HashMap map) {
 	      String[] arr = (String[]) map.get("arr_Style");
 	      System.out.println("Map 정보: " + Arrays.toString(arr));
@@ -375,13 +427,7 @@ public class DBManager {
 	      return list;
 	   }
 	   
-	   public static List<UsersVO> listFollw(String users_id) {
-	      System.out.println("매니저에서의 users_id:"+users_id);
-	      SqlSession session = factory.openSession();
-	      List<UsersVO> flist = session.selectList("users.listFollow",users_id);
-	      session.close();
-	      return flist;
-	   }
+	   
 
 	   public static String findID(String users_email) {
 	      System.out.println("DBManager findID동작함" + users_email);
@@ -510,6 +556,10 @@ public class DBManager {
 			session.close();
 			return d;
 		}
+
+		
+
+		
 
 
 	}

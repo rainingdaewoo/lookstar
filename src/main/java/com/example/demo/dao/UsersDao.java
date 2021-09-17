@@ -41,15 +41,10 @@ public class UsersDao {
 	public UsersVO getUsersByNickname(String users_nickname) {
 		return DBManager.getUsersByNickname(users_nickname);
 	}
-	
-	//users
-	public int update(UsersVO u) {
-		return DBManager.updateInfo(u);
-	}
 
-	//users
 	
 	
+	//보민
 	public int updateUsersDel(int users_no) {
 		return DBManager.updateUsersDel(users_no);
 	}
@@ -64,14 +59,17 @@ public class UsersDao {
 		return DBManager.updateUsersWithStyle(usersc);
 	}
 	
-	public List<UsersVO> listFollow(String users_id){
-		return DBManager.listFollw(users_id);
-	}
-	
 	public int insertUsers_out(Users_outVO uo) {
 		return DBManager.insertUsers_out(uo);
 	}
 	
+	public int updatePWD(HashMap map) {
+		return DBManager.updatePWD(map);
+	}
+	
+	
+	
+	//끝
 	public String findID(String users_email) {
 		return DBManager.findID(users_email);
 	}

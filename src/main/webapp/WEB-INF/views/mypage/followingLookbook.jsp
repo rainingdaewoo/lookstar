@@ -29,25 +29,8 @@
 		}
 	}
 </script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<link rel = "stylesheet" href="/resources/css/manage.css"/>
-<script type="text/javascript"src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-$(function() {
-	$("#upload_file").on('change', function() {
-		readURL(this);
-	});
-});
-function readURL(input) {
-	if (input.files && input.files[0]) {
-		var reader = new FileReader();
-		reader.onload = function(e) {
-			$('#blah').attr('src', e.target.result);
-		}
-		reader.readAsDataURL(input.files[0]);
-	}
-}
-</script>
+<style type="text/css">
+</style>
 </head>
 <body>
 	<!-- Main Content-->
@@ -63,7 +46,7 @@ function readURL(input) {
 			<div class="board_top" style="padding-left: 150px">
 				<div class="board_title">
 					<h2>
-						<strong>내 룩북 관리</strong>
+						<strong>${fusers_nickname}님의 룩북</strong>
 					</h2>
 				</div>
 				<div class="text-center">
@@ -95,7 +78,7 @@ function readURL(input) {
 		<ul class="pagination justify-content-center">
 			<c:forEach var="i" begin="1" end="${totalPage}">
 				<li class="page-item"><a class="page-link"
-					href="/mypage/manageMylook.do?pageNUM=${i}&users_no=${users.users_no}">${i}
+					href="/mypage/followingLookbook.do?pageNUM=${i}&users_no=${fusers_no}&users_nickname=${fusers_nickname}">${i}
 					&nbsp;</a></li>
 			</c:forEach>
 		</ul> 
