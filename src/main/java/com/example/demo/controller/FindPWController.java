@@ -17,7 +17,7 @@ import com.example.demo.dao.UsersDao;
 import com.example.demo.vo.UsersVO;
 
 @Controller
-@RequestMapping("/findPW.do")
+@RequestMapping("/users/findPW.do")
 public class FindPWController {
 	@Autowired
 	private JavaMailSender javaMailSender;
@@ -44,7 +44,7 @@ public class FindPWController {
 	public ModelAndView mail(String users_id,String users_email,HttpSession session) {
 		System.out.println("findPW.do 동작함");
 		UsersVO u = new UsersVO();
-		ModelAndView mav = new ModelAndView("redirect:/findOK.do");
+		ModelAndView mav = new ModelAndView("redirect:/users/findOK.do");
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		Random r = new Random();
 		int a = r.nextInt(10);

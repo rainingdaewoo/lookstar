@@ -14,6 +14,8 @@ public class BoardDao {
 	public static int totalRecord;
 	public static int totalPage;
 	
+	public static int totalMyBoard;
+	public static int totalMyPage;
 	
 	public List<BoardVO> findAll(HashMap map){
 		return DBManager.listBoard(map);
@@ -55,7 +57,12 @@ public class BoardDao {
 	}
 	
 	//보민
-	public List<BoardVO> listMyBoard(){
-		return DBManager.listMyBoard();
+	
+	public int getTotalMyBoard(int users_no) {
+		return DBManager.getTotalMyBoard(users_no);
+	}
+	
+	public List<BoardVO> listMyBoard(HashMap map){
+		return DBManager.listMyBoard(map);
 	}
 }

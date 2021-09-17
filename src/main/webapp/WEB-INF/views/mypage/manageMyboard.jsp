@@ -8,7 +8,10 @@
 <meta charset="UTF-8">
 <title>내 글 관리</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<link rel = "stylesheet" href="resources/css/manage.css"/>
+<link rel = "stylesheet" href="/resources/css/mypage_css/manageMyboard.css"/>
+<style type="text/css">
+
+</style>
 </head>
 <body>
 <br><br><br><br><br>
@@ -21,15 +24,10 @@
         		<div class="board_wrap1">
 			         <div class="board_top" style="padding-left: 150px">
 				        <div class="board_title">
-				             <strong>내 글 관리</strong>
+				             <h2><strong>내 글 관리</strong></h2>
 				        </div>
 			        
-			  			<div class="btnlist">
-			  				<button type ="button" onclick="location.href='manageMylook.do'" 
-			  					class="btn btn-light" id="looksBtn">looks</button>
-			  				<button type ="button" onclick="location.href='manageMyboard.do'" 
-			  				class="btn btn-secondary" id="boardBtn">게시판</button>
-			  			</div>
+			  			
 			  		</div> <!-- board_top -->	
 	  			
 		  			<br>
@@ -63,12 +61,22 @@
 						    
 						    </tbody>
 						  </table>
-						 </div>		<!-- iframconatiner-->					 
-	  				
-		  				</div>
-	  				</div> <!-- iframe -->
-	  			</div> <!-- board_wrap1 -->  			        
-	        </div> 
-	        <%@ include file="../inc/footer.jsp" %>
+						 </div>	<!-- iframconatiner-->					 	  				
+		  			</div>
+	  			</div> <!-- board_wrap1 -->
+	  		</div> <!-- container -->  	
+	  		
+	  			
+	  <nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+	  			<c:forEach var="i" begin="1" end="${totalMyPage}">
+	  				<li class="page-item">
+	  					<a class="page-link" href="/mypage/manageMyboard.do?pageNUM=${i}&users_no=${users.users_no}">${i} &nbsp;</a>
+	  				</li>	
+	  			</c:forEach>
+	  	</ul> 
+	</nav>	    	
+	  		       
+<%@ include file="../inc/footer.jsp" %>
 </body>
 </html>

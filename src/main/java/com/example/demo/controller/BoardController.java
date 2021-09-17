@@ -164,11 +164,29 @@ public class BoardController {
 	}
 
 	
-	
+	//보민
 	@RequestMapping("/mypage/manageMyboard.do")
-	public ModelAndView listMyBoard() {
+	public ModelAndView listMyBoard(@RequestParam(value="pageNUM",defaultValue = "1") int pageNUM,int users_no,Model model) {
+		System.out.println("BOARD - pageNUM:"+pageNUM);
+		BoardDao.totalMyBoard = dao.getTotalMyBoard(users_no);
+		BoardDao.totalMyPage = (int)Math.ceil((double)BoardDao.totalMyBoard/BoardDao.pageSIZE);
+		
+		int start = (pageNUM-1)*BoardDao.pageSIZE+1;
+		int end = start+BoardDao.pageSIZE-1;
+		if(end> BoardDao.totalMyBoard) {
+			end = BoardDao.totalMyBoard;
+		}
+		
+		System.out.println("board - start:"+start);
+		System.out.println("board - end:"+end);
+		HashMap map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("users_no", users_no);
+		System.out.println("boardcontroller users_no:"+users_no);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list",dao.listMyBoard());
+		mav.addObject("list",dao.listMyBoard(map));
+		model.addAttribute("totalMyPage",BoardDao.totalMyPage);
 		return mav;
 	}
 }

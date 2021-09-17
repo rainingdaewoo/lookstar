@@ -18,7 +18,7 @@
 		$('#my_img').click(function(e) {
 			e.preventDefault();
 			$('#testModal').modal("show");
-		});
+		});    
 		
 		$('#close_btn').click(function(){
 			$('#testModal').modal("hide");
@@ -30,17 +30,18 @@
 			readURL(this);
 		});
 	});
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$('#blah').attr('src', e.target.result);
-			}
-			reader.readAsDataURL(input.files[0]);
-		}
-	}
 
 </script>
+<style type="text/css">
+#lobtn{
+	margin-left:100px;
+	border-color: #1081FA;
+    background: #1081FA;
+    color: white;
+    border-radius: 1px;
+    text-transform: uppercase;
+}
+</style>
 </head>
 <body>
 <br><br><br><br><br>
@@ -48,7 +49,7 @@
 
 	<div class="text-center my-5">
 		<img id="my_img" class="img-fluid rounded-circle mb-4"
-			 src="../resources/profile/${users.users_fname}" width="150"/>
+			 src="../resources/profile/${users.users_fname}" width="150" onerror="this.src='/resources/images/user.png'"/>
 
 <!-- src = "https://dummyimage.com/150x150/6c757d/dee2e6.jpg"/> -->					
 		
@@ -104,15 +105,19 @@
 									<hr>
 								</div>
 								<div class="form-floating">
-									<a href="manageMyboard.do">내 글 관리</a>
+									<a href="manageMyboard.do?users_no=${users.users_no}">내 글 관리</a>
 									<hr>
 								</div>
 								<div class="form-floating">
-									<a href="followList.do">팔로우 목록</a>
+									<a href="manageMylook.do?users_no=${users.users_no}">내 룩북 관리</a>
 									<hr>
 								</div>
 								<div class="form-floating">
-									<a href="likeList.do">좋아요 목록</a>
+									<a href="followList.do?users_id=${users.users_id}">팔로우 목록</a>
+									<hr>
+								</div>
+								<div class="form-floating">
+									<a href="likeList.do?users_no=${users.users_no}">좋아요 목록</a>
 									<hr>
 								</div>
 								<div class="form-floating">
@@ -128,7 +133,7 @@
 									<a href="/logout.do">LOG-OUT</a>
 								</div>-->
 							  	<form action="/logout.do">
-									<input type="submit" value="LOG-OUT">
+									<input type="submit" value="LOG-OUT" id="lobtn">
 								</form>
 								
 								<!-- Submit Button

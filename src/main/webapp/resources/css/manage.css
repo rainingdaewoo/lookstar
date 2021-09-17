@@ -1,6 +1,23 @@
 /*manage_board.html, manage_looks.html css*/
 @charset "UTF-8";
 
+#pageBox{
+	position:absolute;
+	top:80%;
+	left:50%;
+}
+
+#boardPageBox{
+	position:absolute;
+	top:80%;
+	left:50%;
+}
+
+#boardPageBox{
+	position:absolute;
+	top:80%;
+	left:50%;
+}
 
 .board_top{
 	width:75%;
@@ -71,11 +88,6 @@
         padding-top: 6px;
     }
     
-    
-
-
-
-
 .board_page1 {
     margin-top: 150px;
     text-align: center;
@@ -117,10 +129,18 @@
     border-left: 1px solid #ddd;
 }
 
-
-
 .form-group1{
 	width:50%;
 	margin:auto;
 	margin-top:20px;
+}
+
+#imgBox{
+<<<<<<< HEAD
+	margin-top:100px;
+	matgin-bottom:100px;
+	margin-right:20px;
+=======
+>>>>>>> branch 'main' of https://github.com/Gichan94/lookstargram.git
+	float:left;
 }
