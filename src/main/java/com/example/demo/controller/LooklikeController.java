@@ -4,6 +4,9 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +48,11 @@ public class LooklikeController {
 	
 	@RequestMapping("/mypage/likeList.do")
 	public ModelAndView listLikes(@RequestParam(value="pageNUM",defaultValue = "1") int pageNUM ,int users_no,Model	model){
-		//System.out.println("좋아요 페이지 넘버:"+pageNUM);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User)authentication.getPrincipal();
+		String id = user.getUsername();
+		model.addAttribute("users", usersdao.getUsers(id));
+		
 		LooklikeDao.totalRecord = likedao.getTotalRecord(users_no);
 		LooklikeDao.totalPage = (int)Math.ceil((double)LooklikeDao.totalRecord/LooklikeDao.pageSIZE);
 		

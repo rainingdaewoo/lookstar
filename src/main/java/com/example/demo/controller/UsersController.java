@@ -45,24 +45,16 @@ public class UsersController {
 	public void setJavaMailSender(JavaMailSender javaMailSender) {
 		this.javaMailSender = javaMailSender;
 	}
-	@RequestMapping("/users/login.do")
+	
+	@RequestMapping("/login.do")
 	public void login() {
 		
 	}
 	
-	@RequestMapping("/users/loginOK.do")
-	public ModelAndView loginOK(HttpSession session) {
-		System.out.println("로그인 성공!");
-		ModelAndView mav = new ModelAndView("redirect:/main.do");
-		Authentication authentication
-		= SecurityContextHolder.getContext().getAuthentication();
+/*	@RequestMapping("/users/loginOK.do")
+	public ModelAndView loginOK() {
 		
-		String id = ((User)authentication.getPrincipal()).getUsername();
-		UsersVO u = dao.getUsers(id);
-		session.setAttribute("users", u);
-		
-		return mav;
-	}
+	}*/
 	
 
 	
@@ -71,8 +63,13 @@ public class UsersController {
 		
 	}
 	@RequestMapping("/main.do")
-	public void main() {
+	public void main(HttpSession session) {
+		Authentication authentication
+		= SecurityContextHolder.getContext().getAuthentication();
 		
+		String id = ((User)authentication.getPrincipal()).getUsername();
+		UsersVO u = dao.getUsers(id);
+		session.setAttribute("users", u);
 	}
 	
 	@RequestMapping("/")
@@ -134,8 +131,11 @@ public class UsersController {
 	}
 	
 	@RequestMapping("/mypage/mypage.do")
-	public void mypage() {
-		
+	public void mypage(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User)authentication.getPrincipal();
+		String id = user.getUsername();
+		model.addAttribute("users", dao.getUsers(id));
 	}
 	
 	@RequestMapping("/mypage/changePWD.do")

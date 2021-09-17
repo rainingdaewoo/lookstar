@@ -61,7 +61,7 @@
     </script>
   </head>
 
-  <%@ include file="../inc/header.jsp" %>
+  <%@ include file="./inc/header.jsp" %>
 	
   <body class="text-center">
     <form class="form-signin" name="login_frm" action="login.do" method="post" >
@@ -101,6 +101,6 @@
 </form>
 	
 	<!-- Footer-->
-	<%@ include file="../inc/footer.jsp" %>
+	<%@ include file="./inc/footer.jsp" %>
 </body>
 </html>

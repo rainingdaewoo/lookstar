@@ -18,13 +18,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.anyRequest().authenticated(); 
 
 		
-		http.formLogin().loginPage("/users/login.do").permitAll()
-		.defaultSuccessUrl("/users/loginOK.do");
+		http.formLogin().loginPage("/login.do").permitAll()
+		.defaultSuccessUrl("/main.do");
 		
 		http.logout()
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout.do"))
 		.invalidateHttpSession(true)
-		.logoutSuccessUrl("/users/login.do");
+		.logoutSuccessUrl("/login.do");
 		
 		http.httpBasic();	
 

@@ -16,7 +16,7 @@ public class LookbookDao {
 	public static int totalRecord;
 	public static int totalPage;
 	
-	public static int my_pageSIZE = 4;
+	public static int my_pageSIZE = 12;
 	public static int totalMyLook;
 	public static int my_totalPage;
 	
