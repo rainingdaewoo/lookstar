@@ -7,7 +7,7 @@
 <title>비밀번호 변경</title>
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<link rel = "stylesheet" href="resources/css/changepw.css"/>
+<link rel = "stylesheet" href="/resources/css/changepw.css"/>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<!-- 웹 페이지 크기 및 위치 자동 고정하기 -->
@@ -22,7 +22,7 @@
 			
 			function alertDialogBox(){
 				alert("비밀번호가 변경되었습니다.");
-			}
+			}   
 		</script>
 </head>
 <body>
@@ -36,8 +36,8 @@
 			        	<div class="section_pwconfirm" id="boxForm">			        		
 					        <div class="pw_header">
 					             <h2 class="h2_pw">비밀번호 변경</h2>
-					             <p class="pp">회원님의 계정 비밀번호를 재설정 해주세요.<br>
-					             (영문, 숫자, 특수문자 포함 8자 이상 12자 이하)</p>
+					             <p><h5>회원님의 계정 비밀번호를 재설정 해주세요.<br>
+					             (영문, 숫자, 특수문자 포함 8자 이상 12자 이하)</h5></p>
 					        </div> <!-- pw_header -->
 			  			
 	  			

@@ -90,7 +90,7 @@
 
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>			
+			<artifactId>spring-context-support</artifactId>
 		</dependency>
 		<!-- Java Mail API -->
 		<dependency>
@@ -102,19 +102,27 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
-		
-		  <!-- spring security tag library/ 로그인 상황에 따른 동적 jsp 구현 -->
-      <dependency>
-         <groupId>org.springframework.security</groupId>
-         <artifactId>spring-security-taglibs</artifactId>
-      </dependency>
-      
-      
+
+		<!-- spring security tag library/ 로그인 상황에 따른 동적 jsp 구현 -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+		</dependency>
+
+
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
-			 <artifactId>gson</artifactId>
+			<artifactId>gson</artifactId>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/jason/jason -->
+
+		<!-- JSON 데이터 자동 처리 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+
+
 
 	</dependencies>
 

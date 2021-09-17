@@ -15,7 +15,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests()
 
-		.mvcMatchers("/","/dmTest.do","insertDM.do","/board/listBoard.do","/board/detalBoard.do","/lookbook/ListLookbook.do","/lookbook/ListWeightHeight.do","/lookbook/lookbook_detail.do","/dmTest.do", "listChat.do","/insertDM.do","/main.do","/join.do","/login.do","/lookbook/lookbook.do","/resources/**","/findID.do","/findOK.do","/findPW.do","/compareID.do","/compareNickname.do","/sendCode.do","/kakao.do").permitAll()
+		.mvcMatchers("/","/lookbook/ListLookbook.do","/dmTest.do","insertDM.do","/board/listBoard.do","/board/detalBoard.do","/lookbook/lookbook_detail.do","/dmTest.do", "listChat.do","/insertDM.do","/main.do","/join.do","/login.do","/lookbook/lookbook.do","/resources/**","/findID.do","/findOK.do","/findPW.do","/compareID.do","/compareNickname.do","/sendCode.do","/kakao.do").permitAll()
 		.anyRequest().authenticated(); 
 
 		

@@ -98,4 +98,6 @@ td {
 	color: red;
 }
 
-
+#cr_email{
+	display: none;
+}

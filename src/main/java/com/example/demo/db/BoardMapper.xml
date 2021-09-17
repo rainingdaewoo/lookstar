@@ -8,8 +8,7 @@
     from (
         select board_no, board_title, board_content, users_nickname, board_date, board_views, board_show,
             row_number() over(order by board_no desc) as rNum
-        FROM board, users 
-        WHERE board.users_no = users.users_no
+        FROM board, users WHERE board.users_no = users.users_no
              <if test="searchType != null and searchType != 'all'" >
                 and ${searchType} like '%' || #{keyword} || '%'
              </if>
