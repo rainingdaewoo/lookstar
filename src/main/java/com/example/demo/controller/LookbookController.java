@@ -242,7 +242,11 @@ public class LookbookController {
 	@RequestMapping("/mypage/manageMylook.do")
 	public ModelAndView listMyLook(@RequestParam(value = "pageNUM", defaultValue = "1") int pageNUM, int users_no,
 			Model model) {
-		System.out.println("pageNUM:" + pageNUM);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User)authentication.getPrincipal();
+		String id = user.getUsername();
+		model.addAttribute("users", userdao.getUsers(id));
+		
 		LookbookDao.totalMyLook = lookbookdao.getTotalMyLook(users_no);
 		LookbookDao.my_totalPage = (int)Math.ceil((double)LookbookDao.totalMyLook/LookbookDao.my_pageSIZE);
 		System.out.println("my_totalPage:" + LookbookDao.my_totalPage);	

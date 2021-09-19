@@ -51,7 +51,10 @@ public class FollowController {
 	
 	@RequestMapping("/mypage/followList.do")
 	public ModelAndView followList(@RequestParam(value="pageNUM",defaultValue = "1") int pageNUM, Model model,HttpSession session,String users_id) {
-		System.out.println("users_id:"+users_id);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User)authentication.getPrincipal();
+		String id = user.getUsername();
+		model.addAttribute("users", usersdao.getUsers(id));
 		
 		System.out.println("controller 팔로우 pageNUM:"+pageNUM);
 		FollowDao.totalRecord = fdao.getTotalRecord(users_id);

@@ -30,6 +30,15 @@
 			readURL(this);
 		});
 	});
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#my_img').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
 
 </script>
 <style type="text/css">
@@ -73,7 +82,7 @@
 							<input type="hidden" name="fname" value="${users.users_fname }">
 							<input type="hidden" name="fsize" value="${users.users_fsize }">
 							<input type="file" name="uploadFile">
-							<input type="submit" value="변경">
+							<input type="submit" value="변경" id="upload_file">
 							<input type="reset" value="취소">
 						</form>
 					</div>
@@ -121,17 +130,15 @@
 									<hr>
 								</div>
 								<div class="form-floating">
-									<a href="termsOfService.do">서비스 약관</a>
+									<a href="/mypage/termsOfService.do">서비스 약관</a>
 									<hr>
 								</div>
 								<div class="form-floating">
-									<a href="withdrawal.do">회원 탈퇴</a>
+									<a href="/mypage/withdrawal.do">회원 탈퇴</a>
 									<hr>
 								</div>
-								<br />
-						<!--	<div>
-									<a href="/logout.do">LOG-OUT</a>
-								</div>-->
+								<br>
+						
 							  	<form action="/logout.do">
 									<input type="submit" value="LOG-OUT" class="btn btn-lg btn-primary btn-block">
 								</form>

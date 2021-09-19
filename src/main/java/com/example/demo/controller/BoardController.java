@@ -178,7 +178,11 @@ public class BoardController {
 	//보민
 	@RequestMapping("/mypage/manageMyboard.do")
 	public ModelAndView listMyBoard(@RequestParam(value="pageNUM",defaultValue = "1") int pageNUM,int users_no,Model model) {
-		System.out.println("BOARD - pageNUM:"+pageNUM);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User)authentication.getPrincipal();
+		String id = user.getUsername();
+		model.addAttribute("users", userdao.getUsers(id));
+		
 		BoardDao.totalMyBoard = dao.getTotalMyBoard(users_no);
 		BoardDao.totalMyPage = (int)Math.ceil((double)BoardDao.totalMyBoard/BoardDao.pageSIZE);
 		

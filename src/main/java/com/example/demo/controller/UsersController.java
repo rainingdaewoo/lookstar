@@ -51,12 +51,6 @@ public class UsersController {
 		
 	}
 	
-/*	@RequestMapping("/users/loginOK.do")
-	public ModelAndView loginOK() {
-		
-	}*/
-	
-
 	
 	@RequestMapping("/users/findOK.do")
 	public void findOK() {
@@ -139,13 +133,19 @@ public class UsersController {
 	}
 	
 	@RequestMapping("/mypage/changePWD.do")
-	public void updatePWD() {
-		
+	public void updatePWD(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User)authentication.getPrincipal();
+		String id = user.getUsername();
+		model.addAttribute("users", dao.getUsers(id));
 	}
 	
 	@RequestMapping("/mypage/myInform.do")
-	public void updateInfo() {
-		
+	public void updateInfo(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User)authentication.getPrincipal();
+		String id = user.getUsername();
+		model.addAttribute("users", dao.getUsers(id));
 	}
 	
 	@RequestMapping("/mypage/withdrawal.do")
