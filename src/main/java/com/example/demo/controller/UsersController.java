@@ -56,8 +56,8 @@ public class UsersController {
 		ModelAndView mav = new ModelAndView("redirect:/main.do");
 		Authentication authentication
 		= SecurityContextHolder.getContext().getAuthentication();
-		User user = (User)authentication.getPrincipal();
-		String id = user.getUsername();
+		
+		String id = ((User)authentication.getPrincipal()).getUsername();
 		UsersVO u = dao.getUsers(id);
 		session.setAttribute("users", u);
 		
@@ -130,7 +130,7 @@ public class UsersController {
 	@RequestMapping(value = "/logout.do")
 	public String logout(HttpSession session) throws Exception {
 		session.invalidate();
-		return "redirect:/login.do";
+		return "redirect:/users/login.do";
 	}
 	
 	@RequestMapping("/mypage/mypage.do")

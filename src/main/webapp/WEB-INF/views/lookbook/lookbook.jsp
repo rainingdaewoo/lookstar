@@ -186,6 +186,39 @@
 	<br>
 
 	<section id="content">
+		<!-- 글쓰기 버튼 -->
+			<a href="/lookbook/lookbook_write.do"
+				class="btn btn-outline-dark pull-right">글쓰기</a>
+		<!-- 신체 필터/검색 -->
+		<div class="FnS">
+			<div style="float: left; padding-left: 50px">
+				키&nbsp; <select name="height" id="height" class="bodyspec form-select">
+					<option value="0~230" selected>-선택-</option>
+					<option value="140~150">140~150</option>
+					<option value="151~160">151~160</option>
+					<option value="161~170">161~170</option>
+					<option value="171~180">171~180</option>
+					<option value="181~190">181~190</option>
+					<option value="191~230">190이상</option>
+				</select>
+			</div>
+			<!-- 키 필터 -->
+			<div style="float: left; padding-left: 50px" class="bodyspec form-select">
+				몸무게&nbsp; <select name="weight" id="weight">
+					<option value="0~150" selected>-선택-</option>
+					<option value="41~50">41~50</option>
+					<option value="51~60">51~60</option>
+					<option value="61~70">61~70</option>
+					<option value="71~80">71~80</option>
+					<option value="81~90">81~90</option>
+					<option value="91~100">91~100</option>
+					<option value="101~150">100 이상</option>
+				</select>
+			</div>
+			<!-- 몸무게 필터 -->
+		</div>
+		
+		
 		<!-- 스타일필터와 검색 -->
 		<div class="ftr" style="justify-content: center">
 			<span class="sortField">NEW</span>&nbsp; <span class="sortField">HOT</span>&nbsp;
@@ -199,52 +232,8 @@
 			<span class="unchosenF">데일리</span>
 
 		</div>
-		<!-- 글쓰기 버튼 -->
-			<a href="/lookbook/lookbook_write.do"
-				class="btn btn-outline-dark pull-right">글쓰기</a>
-		<!-- 신체 필터/검색 -->
-		<div class="FnS">
-			<!-- 
-         <form class="navbar-form pull-left" style="float: right;">
-            <button class="btn dropdown-toggle" data-toggle="dropdown">
-               <span id="searchF">작성자</span>
-            </button>
-            <div class="dropdown-menu" id="dropdown-search">
-               <a class="dropdown-item">작성자</a> <a class="dropdown-item">내용</a>
-            </div>
-            <input type="text" style="width: 200px;">
-            <button type="submit" class="btn btn-outline-dark">검색</button>
-         </form>*/
-      -->
-			<div style="float: left; padding-left: 50px">
-				키: <select name="height" id="height" class="bodyspec">
-					<option value="0~230" selected>-선택-</option>
-					<option value="140~150">140~150</option>
-					<option value="151~160">151~160</option>
-					<option value="161~170">161~170</option>
-					<option value="171~180">171~180</option>
-					<option value="181~190">181~190</option>
-					<option value="191~230">190이상</option>
-				</select>
-			</div>
-			<!-- 키 필터 -->
-			<div style="float: left; padding-left: 50px" class="bodyspec">
-				몸무게: <select name="weight" id="weight">
-					<option value="0~150" selected>-선택-</option>
-					<option value="41~50">41~50</option>
-					<option value="51~60">51~60</option>
-					<option value="61~70">61~70</option>
-					<option value="71~80">71~80</option>
-					<option value="81~90">81~90</option>
-					<option value="91~100">91~100</option>
-					<option value="101~150">100 이상</option>
-				</select>
-			</div>
-
-		</div>
-		<!-- 몸무게 필터 -->
-
-		<br> <br>
+		
+<br>
 		<hr>
 		<div class="center-block px-4 px-lg-5 mt-5 justify-content-center">
 			<div
