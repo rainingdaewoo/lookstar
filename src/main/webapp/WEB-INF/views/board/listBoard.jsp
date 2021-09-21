@@ -132,8 +132,10 @@
 	  </tbody>
 	</table>
 				<div> 
-				<a href="board_write.do"
+					<c:if test="${board_category_no != 4}">
+					<a href="board_write.do"
 				class="btn btn-outline-dark pull-right" id="writeBtn">글쓰기</a>
+				</c:if>
 			</div>	
 			<!-- 페이징처리 -->
 			<div class="paging-center">
@@ -162,8 +164,7 @@
 			<br><br>
 			<!-- 검색창 -->
 			<div class="seach row">
-				<div class="col-xs-2 col-sm-2">
-				<select name="searchType" class="from-control">
+				<select name="searchType" class="form-select" aria-label="Default select example">
 						<option value="board_title"
 							<c:if test="${searchType eq 'board_title'}">selected</c:if>>제목</option>
 						<option value="board_content"
@@ -174,7 +175,6 @@
 							<c:if test="${searchType eq 'users_nickname'}">selected</c:if>>작성자</option> 
 					</select> 
 			
-				</div>
 				
 					<div class="input-group-btn col-sm-8">
 						<input type="text" value="${keyword }" name="keyword" id="ketwordInput" class="form-control"/>

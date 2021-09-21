@@ -80,7 +80,7 @@
 	<!-- 게시판 내용 -->
 	<section class="py-5">
 <div class="container-aside">
-		<ol>
+		<ol class="category-list">
 			<li class="category" id="자유게시판">
 				<a href="/board/listBoard.do?pageNUM=1&board_category_no=0">자유게시판</a>
 			</li>
@@ -101,6 +101,12 @@
 	
 	</div>
 		<div class="container-sm">
+		
+		<c:choose>
+			<c:when test="${b.board_show == 0 }">
+				<div class="board-detail">
+		
+		
 		<input type="hidden" name="board_no" value="${b.board_no }">
 	<hr>
 	<input type="hidden" name="users_no" value="${users.users_no}">
@@ -125,8 +131,17 @@
 	</div>
 	<div class="board-content">
 			${b.board_content }
+		
 	</div>
-	 
+	 </div>
+			
+			</c:when>
+				<c:otherwise>
+					<h2>삭제된 게시물입니다.</h2>
+				</c:otherwise>
+		</c:choose>
+		
+		
 	<hr>
 	<h3>댓글</h3>
 	
@@ -176,6 +191,7 @@
 						</li>
 						<!-- 답글 쓰기 생성 -->
 						<div class="reComments">
+						<hr>
 							<form action="insertComments.do" method="post"
 							enctype="multipart/form-data">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
@@ -184,16 +200,16 @@
 								<br> 
 							</div>
 						<div class="col-md-6">
-			 					<input type="hidden" name="users_no" value="${users.users_no}"> <br>
-			 					<input type="hidden" name="board_no" value="${b.board_no }"> <br>
+			 					<input type="hidden" name="users_no" value="${users.users_no}"> 
+			 					<input type="hidden" name="board_no" value="${b.board_no }"> 
 			 					<input type="hidden" name="depth" value="1">
 			 					<input type="hidden" name="ori_comments_no" value="${comments.comments_no}">
-								<div class="inputArea">
-					 <textarea rows="5" cols="50" class="inputText" name="comments_content" placeholder="댓글을 남겨보세요."></textarea>
-					
+								<div class="form-floating">
+					  <textarea class="form-control" placeholder="댓글을 남겨보세요." name="comments_content"></textarea>
+					  <label for="floatingTextarea">Comments</label>
+					</div>
 					<input type='file' class="comments_uploadFile" name="comments_uploadFile" accept="image/png, image/jpeg"/>
 					
-					</div>
 					
 					<!-- 글쓰기 버튼 생성 -->
 					<input type="submit" class="btn btn-outline-dark right" value="댓글 작성">
@@ -203,6 +219,7 @@
 			</div>
 			<!-- 댓글 수정 -->
 					<div class="updateComments">
+					<hr>
 						<form action="updateComments.do" method="post"
 							enctype="multipart/form-data">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
@@ -211,8 +228,7 @@
 								<br> 
 							</div>
 						<div class="col-md-6">
-			 					<input type="hidden" name="users_no" value="${users.users_no}"> <br>
-			 					<input type="hidden" name="board_no" value="${b.board_no }"> <br>
+			 					<input type="hidden" name="users_no" value="${users.users_no}"> 			 					<input type="hidden" name="board_no" value="${b.board_no }"> 
 			 					<input type="hidden" name="depth" value="${comments.depth }">
 			 					<input type="hidden" name="comments_no" value="${comments.comments_no }">
 								<div class="inputArea">
@@ -234,6 +250,7 @@
 			<c:otherwise>
 				<div>
 						<c:if test="${comments.comments_show == 1 }">
+						<hr>
 							삭제된 댓글입니다.<br><hr>
 							
 						</c:if>
@@ -260,7 +277,7 @@
 					  <textarea class="form-control" placeholder="댓글을 남겨보세요." name="comments_content"></textarea>
 					  <label for="floatingTextarea">Comments</label>
 					</div>
-					<input type='file' id="comments_uploadFile" name="comments_uploadFile" accept="image/png, image/jpeg"/>
+					<input type='file' class="comments_uploadFile" name="comments_uploadFile" accept="image/png, image/jpeg"/>
 					
 					</div>
 

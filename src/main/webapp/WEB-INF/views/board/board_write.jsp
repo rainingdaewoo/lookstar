@@ -37,6 +37,8 @@
           reader.readAsDataURL(input.files[0]);
         }
     }
+    
+    $(function)
 </script>
 </head>
 <body>
@@ -57,25 +59,23 @@
 		    <div class="content" style="width: 120%">
 		    
 		        <div class="row justify-content-md-center">
+		        
 		            <div class="col-sm-4" id="inputCategory">
-		                <div class="input-group mb-3">
+		             
+		                <div class="input-group mb-1">
 		                    <select class="custom-select" id="inputGroupSelect03" name="board_category_no">
 		                  <!--  <select class="board-category"> -->
 								 <option value="0">자유게시판</option>
 								 <option value="1">쇼핑후기</option>
-								 <option value="2">발매정보</option>
+								 <option value="2">발매 및 할인</option>
 								 <option value="3">비밀글</option>
 							 </select>
 		                </div>
-		            </div> 
-		            <div class="col-sm-9">
-		            <div class="input-group mb-3">
-		                <div class="input-group-prepend">
+		                <div class="input-group mb-2">
 		                    <label class="input-group-text">제목</label>
 						 <input class="form-control" type="text" id="board_title" name="board_title" placeholder="제목을 작성해주세요."/>
-		                  </div>            
 		                </div>
-		            </div>
+		            </div> 
 		      </div>
 		      
 		      <hr>
@@ -110,7 +110,7 @@
 		            </div>
 		      </div>
 		      <div class="row justify-content-md-center">
-		        <button type="submit" class="btn btn-outline-secondary" style="width: 20%; font-weight: bold">
+		        <button type="submit" id="writeBtn" class="btn btn-outline-secondary" style="width: 20%; font-weight: bold">
 		             등   록          
 		            </button>
 		        </div>
@@ -123,8 +123,22 @@
 			<br><br>
 		</div> 
 	</section>
+	
+	
 	<!-- Footer-->
 	<%@ include file=".././inc/footer.jsp"%>
-
+		<script type="text/javascript">
+		$('#writeBtn').click(function(e) {
+			if ($('#board_title').val() == '') {
+				alert('제목을 입력해주세요');
+				e.preventDefault();
+			}
+		else if($('#input_board_content').val() == '') {
+				alert('내용을 입력해주세요');
+				e.preventDefault();
+			} 
+			
+		});
+	</script>
 </body>
 </html>

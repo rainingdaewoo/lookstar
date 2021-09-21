@@ -10,6 +10,7 @@
             row_number() over(order by board_no desc) as rNum
         FROM board, users 
         WHERE board.users_no = users.users_no
+          and board_show = 0
         	and board_category_no = #{board_category_no}
              <if test="searchType != null and searchType != 'all'" >
              	and ${searchType} like '%' || #{keyword} || '%'
@@ -37,7 +38,7 @@
   </select>
   
   <select id="getBoard" resultType="boardVO">
-  	select board_no, board_title, users_nickname, board_content, board_date, board_views, board_fname, board_fsize, board.users_no, board_comments_count
+  	select board_no, board_title, users_nickname, board_content, board_date, board_views, board_fname, board_fsize, board.users_no, board_comments_count, board_show
   	from board, users
   	where board_no=#{board_no} and board.users_no = users.users_no
   </select>
@@ -74,6 +75,7 @@
   <select id="totalRecord" resultType="int" parameterType="hashMap">
   	select count(*) FROM board, users 
         WHERE board.users_no = users.users_no
+         and board_show = 0
         		and board_category_no = #{board_category_no}
   	  <if test="searchType != null and searchType != 'all'" >
              	and ${searchType} like '%' || #{keyword} || '%'
