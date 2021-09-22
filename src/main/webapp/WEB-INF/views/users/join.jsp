@@ -55,32 +55,19 @@ $(function(){
 	  	    return false;
 	  	};
 	  	
-<<<<<<< HEAD
-	  	 if ($("#users_pw").val() !=  !/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/) {
-	            alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
-	          $("#users_pw").focus();
-	            return false;
-	    };
-=======
-	  	/*if ($("#users_pw").val() !=  !/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/) {
-	  	    alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
-	  	  $("#users_pw").focus();
-	  	    return false;
-	  	};*/
 	  	
 		if (!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/.test($("#users_pw").val())) {
 	  	    alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
 	  	  $("#users_pw").focus();
 	  	    return false;
 	  	};
->>>>>>> refs/heads/users5
 	  	
 	  	if ($("#users_pw").val() !== $("#pwdCheck").val()) {
 	  	   alert("비밀번호가 일치하지 않습니다. 재확인 바랍니다.");
 	  		$("#pwdCheck").focus();
 	  	   return false;
 	  	};
-	  	
+	  	 
 	  	if ( $("#users_email").val() == "") {
 		    alert("이메일 주소를 입력하세요.");
 		    $("#users_email").focus();

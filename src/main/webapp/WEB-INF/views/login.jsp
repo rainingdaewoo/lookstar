@@ -72,11 +72,11 @@
   <div class="checkbox mb-3">
     <label>
     <span>아직 회원이 아니신가요?</span>
-      <a href="join.do" id="join">회원가입</a> 
+      <a href="/users/join.do" id="join">회원가입</a> 
     </label>
     <label>
-    <span><a href="findID.do">findID</a></span><span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>
-    <span><a href="findPW.do">findPassword</a></span><br>
+    <span><a href="/users/findID.do">findID</a></span><span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>
+    <span><a href="/users/findPW.do">findPassword</a></span><br>
     </label>
   </div>
   <input type="submit" class="btn btn-lg btn-primary btn-block" value="login">
