@@ -14,7 +14,7 @@ import com.example.demo.vo.LookbookVO;
 
 @Repository
 public class LooklikeDao {
-	public static int pageSIZE = 4;
+	public static int pageSIZE = 12;
 	public static int totalRecord;
 	public static int totalPage;
 	

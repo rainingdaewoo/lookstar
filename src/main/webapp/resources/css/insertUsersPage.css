@@ -97,13 +97,11 @@ td {
 .num {
 	color: red;
 }
-<<<<<<< HEAD
 
 #cr_email{
 	display: none;
 }
-<<<<<<< HEAD
-=======
+
 #users_email2{
 	margin-top: 30px;	
 }
@@ -119,20 +117,3 @@ td {
 	margin-left: 10px;
 }
 
->>>>>>> branch 'main' of https://github.com/Gichan94/lookstargram.git
-=======
-#users_email2{
-	margin-top: 30px;	
-}
-#mailspan{
-	margin-top: 10px;
-}
-#mailslc{
-	margin-top: 30px;
-	margin-left: 5px;
-}
-#sendCode{
-	margin-top: 30px;
-	margin-left: 10px;
-}
->>>>>>> refs/heads/lookbook

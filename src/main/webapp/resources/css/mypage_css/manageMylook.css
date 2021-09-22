@@ -39,7 +39,7 @@
 
 #imgBox{
 	margin-top:100px;
-	matgin-bottom:100px;
+	margin-bottom:100px;
 	margin-right:20px;
 	float:left;
 }
@@ -64,5 +64,4 @@
 
 .pagination > li > a{
 	float:none;
-	margin-left:-5px;
 }

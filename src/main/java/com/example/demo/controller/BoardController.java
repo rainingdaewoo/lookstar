@@ -178,7 +178,11 @@ public class BoardController {
 	//보민
 	@RequestMapping("/mypage/manageMyboard.do")
 	public ModelAndView listMyBoard(@RequestParam(value="pageNUM",defaultValue = "1") int pageNUM,int users_no,Model model) {
-		System.out.println("BOARD - pageNUM:"+pageNUM);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User)authentication.getPrincipal();
+		String id = user.getUsername();
+		model.addAttribute("users", userdao.getUsers(id));
+		
 		BoardDao.totalMyBoard = dao.getTotalMyBoard(users_no);
 		BoardDao.totalMyPage = (int)Math.ceil((double)BoardDao.totalMyBoard/BoardDao.pageSIZE);
 		
@@ -188,8 +192,18 @@ public class BoardController {
 			end = BoardDao.totalMyBoard;
 		}
 		
-		System.out.println("board - start:"+start);
-		System.out.println("board - end:"+end);
+		int endPageNum = (int)(Math.ceil((double)pageNUM/(double)BoardDao.pageSIZE)*BoardDao.pageSIZE);
+		int startPageNum = endPageNum - (BoardDao.pageSIZE -1);
+		int endPageNum_tmp = (int)(Math.ceil((double)BoardDao.totalMyBoard / (double)BoardDao.pageSIZE));
+		
+		if(endPageNum > endPageNum_tmp) {
+			endPageNum = endPageNum_tmp;
+		}
+		
+		boolean prev = startPageNum == 1 ? false : true;
+		boolean next = endPageNum * BoardDao.pageSIZE >= BoardDao.totalMyBoard ? false : true;
+		
+		
 		HashMap map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);
@@ -197,7 +211,20 @@ public class BoardController {
 		System.out.println("boardcontroller users_no:"+users_no);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list",dao.listMyBoard(map));
+		
 		model.addAttribute("totalMyPage",BoardDao.totalMyPage);
+		// 시작 및 끝 번호
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+
+		// 이전 및 다음 
+		model.addAttribute("prev", prev);
+		model.addAttribute("next", next);
+		System.out.println("prev:"+prev);	
+		System.out.println("next:"+next);
+		// 현재 페이지
+		model.addAttribute("select", pageNUM);
+				
 		return mav;
 	}
 }

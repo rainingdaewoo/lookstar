@@ -9,16 +9,7 @@
 	left:50%;
 }
 
-<<<<<<< HEAD
-img{
-	padding:10px;
-	margin:10px;
-}
-
-=======
->>>>>>> refs/heads/lookbook
 #imgBox{
-	padding:10px;
 	margin:10px;
 }
 
@@ -47,7 +38,7 @@ img{
 
 #imgBox{
 	margin-top:100px;
-	matgin-bottom:100px;
+	margin-bottom:100px;
 	margin-right:20px;
 	float:left;
 }
