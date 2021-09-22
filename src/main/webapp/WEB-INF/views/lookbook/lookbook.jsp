@@ -173,6 +173,7 @@
 		});
 
 	});
+	
 </script>
 </head>
 <body>
@@ -192,7 +193,7 @@
 		<!-- 신체 필터/검색 -->
 		<div class="FnS">
 			<div style="float: left; padding-left: 50px">
-				키&nbsp; <select name="height" id="height" class="bodyspec form-select">
+				키&nbsp; <select name="height" id="height" class="bodyspec form-select form-control form-control-sm">
 					<option value="0~230" selected>-선택-</option>
 					<option value="140~150">140~150</option>
 					<option value="151~160">151~160</option>
@@ -204,7 +205,7 @@
 			</div>
 			<!-- 키 필터 -->
 			<div style="float: left; padding-left: 50px" class="bodyspec form-select">
-				몸무게&nbsp; <select name="weight" id="weight">
+				몸무게&nbsp; <select name="weight" id="weight" class="form-control form-control-sm">
 					<option value="0~150" selected>-선택-</option>
 					<option value="41~50">41~50</option>
 					<option value="51~60">51~60</option>
@@ -221,15 +222,12 @@
 		
 		<!-- 스타일필터와 검색 -->
 		<div class="ftr" style="justify-content: center">
-			<span class="sortField">NEW</span>&nbsp; <span class="sortField">HOT</span>&nbsp;
-
-
-			<span class="unchosenF" id="firstclick">미니멀</span>&nbsp; <span
-				class="unchosenF">캐주얼</span>&nbsp; <span class="unchosenF">비즈니스</span>&nbsp;
-			<span class="unchosenF">아메카지</span>&nbsp; <span class="unchosenF">스트릿</span>&nbsp;
-			<span class="unchosenF">스포츠</span>&nbsp; <span class="unchosenF">레트로</span>&nbsp;
-			<span class="unchosenF">캠퍼스</span>&nbsp; <span class="unchosenF">댄디</span>&nbsp;
-			<span class="unchosenF">데일리</span>
+			<span class="sortField newhot" id="hottag">HOT</span><span class="sortField newhot" id="newtag">NEW</span>
+			<span class="unchosenF" id="firstclick">미니멀</span><span class="unchosenF">캐주얼</span>
+			<span class="unchosenF">비즈니스</span><span class="unchosenF">아메카지</span>
+			<span class="unchosenF">스트릿</span><span class="unchosenF">스포츠</span>
+			<span class="unchosenF">레트로</span><span class="unchosenF">캠퍼스</span>
+			<span class="unchosenF">댄디</span><span class="unchosenF">데일리</span>
 
 		</div>
 		
@@ -239,28 +237,6 @@
 			<div
 				class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center infinite"
 				id="lookbookimage"></div>
-			<!-- 
-			<div class="paging pagination">
-				<c:if test="${prev}">
-					<span>[ <a href="ListLookbook.do?pageNUM=${startPageNum - 1}">이전</a>
-						]
-					</span>
-				</c:if>
-				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNUM">
-					<span> <c:if test="${select != pageNUM}">
-							<b class="page" href="lookbook.do?pageNUM=${pageNUM}">${pageNUM}</b>
-						</c:if> <c:if test="${select == pageNUM}">
-							<b class="page">${pageNUM}</b>
-						</c:if>
-					</span>
-				</c:forEach>
-				<c:if test="${next}">
-					<span>[ <a href="/lookbook/lookbook?pageNUM=${endPageNum + 1}">다음</a>
-						]
-					</span>
-				</c:if>
-			</div>
-			페이징처리 -->
 			
 		</div>
 		<br>
