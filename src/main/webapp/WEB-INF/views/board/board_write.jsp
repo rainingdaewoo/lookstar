@@ -99,6 +99,16 @@
 		                </div>
 		            </div> 
 		      </div>
+		      <div class="uploadFile">
+		            <div class="input-group mb-3">
+		              <div class="input-group-prepend">
+		                <span class="input-group-text" id="inputGroupFileAddon01">첨부파일</span>
+		              </div>
+		              <div class="custom-file">
+		                  &nbsp; <input type='file' class="form-control-file" id="board_uploadFile" name="board_uploadFile" accept="image/png, image/jpeg"/>
+		              </div>
+		            </div>
+		      </div>
 		      
 		      <div class="row justify-content-md-center">
 		        <button type="submit" class="btn btn-outline-secondary" style="width: 20%; font-weight: bold">

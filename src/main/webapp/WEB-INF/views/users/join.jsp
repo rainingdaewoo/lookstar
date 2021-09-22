@@ -55,7 +55,13 @@ $(function(){
 	  	    return false;
 	  	};
 	  	
-	  	if ($("#users_pw").val() ==  /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/) {
+	  	/*if ($("#users_pw").val() !=  !/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/) {
+	  	    alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
+	  	  $("#users_pw").focus();
+	  	    return false;
+	  	};*/
+	  	
+		if (!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/.test($("#users_pw").val())) {
 	  	    alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
 	  	  $("#users_pw").focus();
 	  	    return false;
@@ -338,7 +344,34 @@ $(function(){
 				</div>	
 				<br>
 				<div class="form-group" style="text-align: center">
-					<textarea rows="3" cols="80" name="content" readonly="readonly"></textarea>
+					<textarea rows="3" cols="80" name="content" readonly="readonly">1. lookstagram 서비스
+lookstagram는 사용자가 좋아하는 것을 발견하고 직접 해볼 수 있도록 도우며 개인에게 맞춤화된 서비스를 제공합니다. 
+lookstagram에서 사용자와 관련된 콘텐츠를 제공하기 위해 저희는 사용자가 무엇을 좋아하는지 알아야 합니다.
+						
+2. lookstagram 사용
+lookstagram는 모든 연령이 이용할 수 있습니다.
+						
+3. 사용자 동의
+① lookstagram에 게시한 콘텐츠의 소유권은 게시자에게 있습니다
+② 회원님이 lookstagram에 콘텐츠를 게시하면 lookstagram는 이를 다른 사람들에게 공개할 수 있고 사람들은 해당 콘텐츠를 저장할 수 있습니다. 
+   포르노를 게시하거나, 스팸을 보내거나, 다른 Pinterest 사용자에게 피해를 주지 마세요. 
+③ 회원님이 콘텐츠를 게시하기로 하면 lookstagram 서비스를 제공하고 개선하기 위해 저희가 해당 콘텐츠를 사용할 수 있도록 허락한 것으로 간주됩니다. 
+	다른 사람과 공유한 콘텐츠의 사본은 회원님이 본인의 계정에서 해당 콘텐츠를 삭제한 이후에도 계속 남아 있을 수 있습니다.
+④ 저희는 여러분의 의견을 받아들여 lookstagram을 더욱 멋진 곳으로 만들기 위해 노력합니다.
+						
+4. 저작권 정책
+lookstagram은 저작권을 존중합니다. 여러분도 존중해 주세요.
+						
+5. 보안
+저희는 lookstagram 사용자의 보안을 중요하게 생각합니다. 
+lookstagram는 회원님의 콘텐츠와 계정의 보안을 보호하기 위해 노력하고 있지만 어느 누구도 무단으로 lookstagram의 보안을 뚫을 수 없다는 것을 
+보장하지는 못합니다. 항상 비밀번호 보안에 주의하시기 바랍니다. 계정이 도용되었거나 무단으로 사용되었다고 생각되는 때에는 지체 없이 알려주시기 바랍니다.
+						
+6. 해지
+						
+lookstagram은 어떠한 이유로든 적절한 공지를 통해서 회원님이 lookstagram을 사용할 수 있는 권리를 해지하거나 보류할 수 있습니다. 
+저희는 커뮤니티 가이드라인 위반 등과 같이 합당한 이유가 있을 때에는 아무런 공지 없이 즉시 회원님의 사용 권한을 해지하거나 보류할 수 있습니다. 
+					</textarea>
 					<br>		
 						<input type="checkbox" id="agree"> <a>이용약관에 동의합니다.</a>
 				</div>
