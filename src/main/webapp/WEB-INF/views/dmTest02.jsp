@@ -78,7 +78,7 @@ $(document).ready(function(){
 								</c:when>
 								
 								<c:otherwise>	
-									<div class="incoming_msg_img" width="100%"> <img  src="/resources/profile/${dto_users_fname }" alt="profile"> 
+									<div class="incoming_msg_img" width="100%"> <img  src="/resources/profile/${dto_users_fname }" alt="profile" onerror="this.src='/resources/images/user.png'"> 
 									</div>
 									<div class="received_msg">
 										<div class="received_withd_msg">
