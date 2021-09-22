@@ -38,9 +38,10 @@ public class UsersDao {
 	}
 	
 	//가연
-	public UsersVO getUsersByNickname(String users_nickname) {
-		return DBManager.getUsersByNickname(users_nickname);
-	}
+	/*
+	 * public UsersVO getUsersByNickname(String users_nickname) { return
+	 * DBManager.getUsersByNickname(users_nickname); }
+	 */
 
 	
 	
