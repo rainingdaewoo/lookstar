@@ -109,6 +109,10 @@
 		              </div>
 		            </div>
 		      </div>
+<<<<<<< HEAD
+=======
+		      
+>>>>>>> refs/heads/users5
 		      <div class="row justify-content-md-center">
 		        <button type="submit" id="writeBtn" class="btn btn-outline-secondary" style="width: 20%; font-weight: bold">
 		             등   록          
