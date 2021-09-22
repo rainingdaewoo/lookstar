@@ -23,7 +23,7 @@
 <body>
 	<%@ include file="./inc/header_home.jsp"%>
 
-	<br> ${users.users_id}님 로그인 되었습니다.
+	<br>
 	<section class="py-5">
 		<div class="row align-items-center">
 

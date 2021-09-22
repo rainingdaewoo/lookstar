@@ -135,10 +135,14 @@
 						
 						<c:choose>
 							<c:when test="${write_u.users_fname==null}">
-								<img src="/resources/images/user.png" width=50 height=50>
+								<a href="/dmTest02.do?users_id=${write_u.users_id }&users_fname=${write_u.users_fname }&users_nickname=${write_u.users_nickname}&lookbook_no=${look.lookbook_no}"> 
+									<img src="/resources/images/user.png" width=50 height=50>
+								</a>
 							</c:when>
 							<c:when test="${write_u.users_fname!=null}">
-								<img src="/resources/profile/${write_u.users_fname}" class="rounded-circle" width=50 height=50>
+								<a href="/dmTest02.do?users_id=${write_u.users_id }&users_fname=${write_u.users_fname }&users_nickname=${write_u.users_nickname}&lookbook_no=${look.lookbook_no}"> 
+									<img src="/resources/profile/${write_u.users_fname}" class="rounded-circle" width=50 height=50>
+								</a>
 							</c:when>
 						</c:choose>
 						&nbsp;&nbsp;&nbsp;${write_u.users_nickname}<span></span>

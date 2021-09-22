@@ -69,7 +69,7 @@ $(document).ready(function(){
 							
 							var row = row+"<div class='chat_list active_chat' style='cursor: pointer' onclick='location.href=\"/dmTest03.do?room_no="+$room_no+"&to_id="+$other_id+"&to_nickname="+$to_nickname+"&to_profile="+$to_profile+" \";'>";
 							var row = row+"<div class='chat_people'>";
-							var row = row+"<div class='chat_img'><img src='/resources/profile/"+$to_profile+"' alt='profile'>"+"</div>";
+							var row = row+"<div class='chat_img'><img src='/resources/profile/"+$to_profile+"' alt='profile' onerror=\"this.src='/resources/images/user.png'\">"+"</div>";
 							var row = row+"<div class='chat_ib'>";
 							var row = row+"<h5>"+$to_nickname;
 							var row = row+"<span class='chat_date'>"+date+"</span>"+"</h5>";
@@ -78,7 +78,7 @@ $(document).ready(function(){
 						else{
 							var row = row+"<div class='chat_list' style='cursor: pointer' onclick='location.href=\"/dmTest03.do?room_no="+$room_no+"&to_id="+$other_id+"&to_nickname="+$to_nickname+"&to_profile="+$to_profile+" \";'>";
 							var row = row+"<div class='chat_people'>";
-							var row = row+"<div class='chat_img'><img src='/resources/profile/"+$to_profile+"' alt='profile'>"+"</div>";
+							var row = row+"<div class='chat_img'><img src='/resources/profile/"+$to_profile+"' alt='profile' onerror=\"this.src='/resources/images/user.png'\">"+"</div>";
 							var row = row+"<div class='chat_ib'>";
 							var row = row+"<h5>"+$to_nickname;
 							var row = row+"<span class='chat_date'>"+date+"</span>"+"</h5>";
