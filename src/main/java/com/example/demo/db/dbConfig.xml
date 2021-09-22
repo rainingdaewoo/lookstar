@@ -20,7 +20,6 @@
 			alias="lookinfoVO" />
 		<typeAlias type="com.example.demo.vo.Lookbook_styleVO"
 			alias="lookbook_styleVO" />
-		<typeAlias type="com.example.demo.vo.DMVO" alias="dmVO" />
 		<typeAlias type="com.example.demo.vo.CommentsVO" alias="commentsVO"/>
 		<typeAlias type="com.example.demo.vo.Users_like_styleVO" alias="users_like_styleVO"/>
 		<typeAlias type="com.example.demo.vo.FollowVO" alias="followVO" />
@@ -47,7 +46,6 @@
 		<mapper resource="com/example/demo/db/CommentsMapper.xml"/>
 		<mapper resource="com/example/demo/db/LookbookMapper.xml" />
 		<mapper resource="com/example/demo/db/LookInfoMapper.xml" />
-		<mapper resource="com/example/demo/db/DMMapper.xml" />
 		<mapper resource="com/example/demo/db/Lookbook_StyleMapper.xml" />
 		<mapper resource="com/example/demo/db/LooklikeMapper.xml" />
 		<mapper resource="com/example/demo/db/Users_Like_StyleMapper.xml" />

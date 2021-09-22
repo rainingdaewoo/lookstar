@@ -74,19 +74,21 @@
 	<br>
 	<br>
 	<section style="position: relative; text-align: center;">
-		<br>
+		<br><br>
 		<h3 class="mt-5">나의 룩 작성</h3>
 		<hr>
-		<div class="align-items-center">
-			<form action="/lookbook/insertLookbook.do" method="post"
-				enctype="multipart/form-data">
+		<div class="mt-5" style="display: inline-block; text-align: center;" >
+			<form action="/lookbook/insertLookbook.do" method="post" enctype="multipart/form-data" >
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-				<div class="row" style="width:80%, text-align: center;">
+				<div class="row" style="text-align: center;">
 					<h1 class="display-5 fw-bolder"></h1>
-					<br> <img id="blah" src="/YouSoSick/image/ready.png" height="400px" /><br> <br> 
-					<input type='file' id="upload_file" name="lookbook.uploadFile" accept="image/png, image/jpeg" />
+					<br> <img id="blah" src="" height="400px" /><br> <br>
+					<div> 
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="upload_file" class="btn btn-outline-dark">사진 업로드</label>
+					<input type='file' id="upload_file" name="lookbook.uploadFile" accept="image/png, image/jpeg" style="display: none;"/>
+					</div>
 				</div>
-				<div style="width: 80%; text-align: center; ">
+				<div style="text-align: center; ">
 					<input type="hidden" name="lookbook.users_no" value="${u.users_no}"> <br>
 					<input type="hidden" name="lookbook.lookbook_height"
 						value="${u.users_height}"> 
@@ -99,8 +101,8 @@
 					
 					<div id="styleInput"></div>
 					<br> <input class="btn btn-outline-dark" type="button"
-						value="추가" onclick="addInput();" />&nbsp;&nbsp;&nbsp; <input
-						class="btn btn-outline-dark" type="button" value="삭제"
+						value="+ 옷추가" onclick="addInput();" />&nbsp;&nbsp;&nbsp; <input
+						class="btn btn-outline-dark" type="button" value="-"
 						onclick="deleteInput();" /> <br>
 					<br>
 
@@ -120,10 +122,13 @@
 						댄디&nbsp; <input type="checkbox" name="style_no" value="10">
 						데일리
 					</div>
+					<hr>
 
 					<!-- 글쓰기 버튼 생성 -->
-					<input type="reset" class="btn btn-outline-dark pull-right"	value="취소"> 
-					<input type="submit" class="btn btn-outline-dark pull-right" value="작성">
+					<input type="submit" class="btn btn-outline-dark" value="작성">
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="reset" class="btn btn-outline-dark"	value="취소"> 
+					
 				</div>
 			</form>
 			<br> <br>

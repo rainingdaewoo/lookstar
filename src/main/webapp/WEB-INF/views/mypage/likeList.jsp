@@ -28,8 +28,9 @@ function readURL(input) {
 </script>
 </head>
 <body>
-<br><br><br><br><br>
+
 <%@ include file="../inc/header.jsp" %>
+<br><br><br><br><br>
 	<!-- 좋아요 목록 -->
 	<div class="board_wrap">
         <div class="board_title">
