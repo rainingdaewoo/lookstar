@@ -45,18 +45,19 @@ public class UpdateCommentsController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView submit(HttpServletRequest request, CommentsVO c, Model model) {
+	public ModelAndView submit(HttpServletRequest request, CommentsVO c, Model model, int board_no) {
 		
 		Authentication authentication =
 		SecurityContextHolder.getContext().getAuthentication(); User user =
-		(User)authentication.getPrincipal(); String id = user.getUsername();
+		(User)authentication.getPrincipal(); 
+		String id = user.getUsername();
 		model.addAttribute("users", userdao.getUsers(id));
 		
 		
 		
 		System.out.println("updateComments.do POST 동작함.");
 		System.out.println("users_no:" + c.getUsers_no());
-		ModelAndView mav = new ModelAndView("redirect:/board/listBoard.do");
+		ModelAndView mav = new ModelAndView("redirect:/board/detailBoard.do?board_no="+ board_no);
 		String path = request.getRealPath("/resources/board_img");
 		System.out.println("path:"+path);
 		String oldFname= c.getComments_fname();

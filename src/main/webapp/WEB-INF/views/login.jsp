@@ -84,7 +84,7 @@
   <br>
   
   
-  <form name="kakaologinF" method="get" action="join.do" id="kakaologinF">
+  <form name="kakaologinF" method="get" action="/users/join.do" id="kakaologinF">
   <div class="form-group row" id="kakaologin">
   	<div class="kakaobtn">
   		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">

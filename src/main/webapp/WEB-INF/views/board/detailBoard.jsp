@@ -250,7 +250,6 @@
 			<c:otherwise>
 				<div>
 						<c:if test="${comments.comments_show == 1 }">
-						<hr>
 							삭제된 댓글입니다.<br><hr>
 							
 						</c:if>
