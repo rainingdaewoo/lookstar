@@ -612,43 +612,196 @@ public class DBManager {
 
 	   
 	 //dbmanager/db
-		//가연
-		public static UsersVO getUsersByNickname(String users_nickname) {
-			SqlSession session = factory.openSession();
-			UsersVO u = session.selectOne("users.getUsersByNickname",users_nickname);
-			session.close();
-			return u;
-		}
+	   //가연
+	      public static List<DMVO> listDM(HashMap map) {   //룩북에서 dm select
+	        SqlSession session = factory.openSession();
+	        List<DMVO> dlist = session.selectList("dm.findAll2",map);
+	        session.close();
+	        return dlist;
+	      }
+	         
+	      
+	      public static int insertDM(DMVO d) {   //디엠아이콘, 룩북에서의 insert
+	         SqlSession session = factory.openSession(true);
+	         String dm_no = session.selectOne("dm.findDM_no",d);
+	         d.setDm_no(Integer.toString(Integer.parseInt(dm_no)+1));
+	         System.out.println("번호갖고와    "+d.getDm_no());
+	         System.out.println("dm_no: "+dm_no);
+	         
+	         String room_no = session.selectOne("dm.existRoom",d);
+	         System.out.println("room_no: "+room_no);
 
-		public static int insertDM(DMVO d) {
-			SqlSession session = factory.openSession(true);
-			int re = session.insert("dm.insertDM",d);
-			session.close();
-			return re;
-		}
-		
-		public static List<DMVO> listPeople(String users_nickname){
-			SqlSession session = factory.openSession();
-			List<DMVO> list = session.selectList("dm.findAll",users_nickname);
-			session.close();
-			return list;
-			
-		}
-		
-		public static List<DMVO> listDM(String users_nickname){
-			SqlSession session = factory.openSession();
-			List<DMVO> dmList = session.selectList("dm.findAll2",users_nickname);
-			session.close();
-			return dmList;
-			
-		}
-		
-		public static DMVO getDM(int dm_no) {
-			SqlSession session = factory.openSession();
-			DMVO d = session.selectOne("dm.getDM",dm_no);
-			session.close();
-			return d;
-		}
+	         int re = 0;
+	         //방번호 불러와줘
+	         if (Integer.parseInt(room_no)!=0) {
+	            //기존방 있으면 그 번호 불러와줘
+	            String room_old = session.selectOne("dm.findRoom_no",d);
+	            d.setRoom_no(Integer.toString(Integer.parseInt(room_old)));
+	            System.out.println("d의 값: " + d);
+	            
+	         }
+	         else {
+	            String room_new = session.selectOne("dm.findNextRoom_no",d);
+	            System.out.println("새로운방 번호: "+room_new);
+	            d.setRoom_no(Integer.toString(Integer.parseInt(room_new)));
+	            System.out.println("d의 값: " + d);
+	         }
+
+	         re = session.insert("dm.InsertDM",d);
+	         session.close();
+	         return re;
+	      }
+	      
+	      
+	      //여기서부터 디엠아이콘
+	      //채팅리스트 불러오기
+	     public static List<DMVO> iconListPeople(String users_id){
+	        SqlSession session = factory.openSession();
+	        System.out.println("users_id가 무엇일까: "+users_id);
+	        List<DMVO> list = session.selectList("dm.findRecentDM",users_id);        
+	             
+	        //내가 to_id이더라도 상대방 닉네임과 상대방 프로필 갖고와야해        
+	        for(DMVO dvo: list) {
+	          if(dvo.getTo_id().equals(users_id)) {
+	             
+	             //내가 to_id면 상대방 아이디 from_id로 저장
+	             String other_id = dvo.getFrom_id();
+	             dvo.setOther_id(other_id);
+	             
+	             String to_id = dvo.getFrom_id();
+	             System.out.println("to_id: "+to_id);
+	             String to_nickname=session.selectOne("dm.getToNickname",to_id);
+	             dvo.setTo_nickname(to_nickname);
+	             String to_profile = session.selectOne("dm.getToProfile",to_id);
+	             dvo.setTo_profile(to_profile);
+	             System.out.println("/////////////////////////////////////");
+	             System.out.println("닉네임이밍미: "+to_nickname);
+	             System.out.println("프로필이이ㅣ이일: "+to_profile);
+	             System.out.println("ddddd의정보오오오: "+dvo);
+	             System.out.println("종료");             
+	         }
+	              
+	         else {
+	            //내가 from_id라면 상대방 아이디 to_id로 저장
+	            String other_id = dvo.getTo_id();
+	            dvo.setOther_id(other_id);
+	            
+	            String to_id = dvo.getTo_id();
+	            System.out.println("to_id: "+to_id);
+	            String to_nickname=session.selectOne("dm.getFromNickname",to_id);
+	            dvo.setTo_nickname(to_nickname);
+	            String to_profile = session.selectOne("dm.getFromProfile",to_id);
+	            dvo.setTo_profile(to_profile);
+	            System.out.println("/////////////////////////////////////");
+	            System.out.println("닉네임이밍미: "+to_nickname);
+	            System.out.println("프로필이이ㅣ이일: "+to_profile);
+	            System.out.println("ddddd의정보오오오: "+dvo);
+	            System.out.println("종료");
+	          }      
+	        }           
+	        return list;
+	     }
+	      
+	      
+	     public static List<DMVO> iconListDM(String room_no) {
+	        SqlSession session = factory.openSession();
+	        System.out.println();
+	        
+	        List<DMVO> dlist = session.selectList("dm.findAll3",room_no);
+	        System.out.println("room_no의 메세지정보: "+room_no);
+	        
+	        System.out.println("ddddd의정보: "+dlist);
+	        session.close();
+	        return dlist;        
+	     }
+	     
+	     
+	     
+	     
+	     public static int iconInsertDM(DMVO d) {
+	         SqlSession session = factory.openSession(true);
+	         String dm_no = session.selectOne("dm.findDM_no",d);
+	         d.setDm_no(Integer.toString(Integer.parseInt(dm_no)+1));
+	         System.out.println("번호갖고와    "+d.getDm_no());
+	         System.out.println("dm_no: "+dm_no);
+	         
+	         String room_no = session.selectOne("dm.existRoom",d);
+	         System.out.println("room_no: "+room_no);
+
+	         int re = 0;
+	         //방번호 불러와줘
+	         if (Integer.parseInt(room_no)!=0) {
+	            //기존방 있으면 그 번호 불러와줘
+	            String room_old = session.selectOne("dm.findRoom_no",d);
+	            d.setRoom_no(Integer.toString(Integer.parseInt(room_old)));
+	            System.out.println("d의 값: " + d);
+	            
+	         }
+	         else {
+	            String room_new = session.selectOne("dm.findNextRoom_no",d);
+	            System.out.println("새로운방 번호: "+room_new);
+	            d.setRoom_no(Integer.toString(Integer.parseInt(room_new)));
+	            System.out.println("d의 값: " + d);
+	         }
+
+	         re = session.insert("dm.InsertDM",d);
+	         session.close();
+	         return re;
+	      }
+	     
+	     
+	     
+	     
+	     
+	      /* 
+	      //dm아이콘의 사용자 ->수신자 아이디, 닉네임, 사진 정보 리스트갖고오기
+	      public static List<ToDMListVO> iconListDM(String users_id) {
+	         SqlSession session = factory.openSession(true);
+	         
+	         List<ToDMListVO> list= session.selectList("dm.findToAll",users_id);
+	         System.out.println("list의 정보들: "+list);
+	         session.close();
+	         return list;
+	  
+	      }
+	      
+	      //닉네임으로 사용자정보불러오기 (from_id, to_id로 하면서 안씀)
+	      public static UsersVO getUsersByNickname(String users_nickname) {
+	         SqlSession session = factory.openSession();
+	         UsersVO u = session.selectOne("users.getUsersByNickname",users_nickname);
+	         session.close();
+	         return u;
+	      }
+
+	      //수신자를 직접 입력했을때 사용 (룩북디엠한 유저만 디엠하기로 하면서 안씀)
+	      public static List<DMVO> listPeople(String users_nickname){
+	         SqlSession session = factory.openSession();
+	         List<DMVO> list = session.selectList("dm.findAll",users_nickname);
+	         session.close();
+	         return list;         
+	      }
+	         
+	      //룩북디엠리스트 불러올때 
+	      //lookbook_no, users_id가 필요해 nickname->map으로 매개변수 변경
+	      public static List<DMVO> listDM(String users_nickname){
+	         SqlSession session = factory.openSession();
+	         List<DMVO> dmList = session.selectList("dm.findAll2",users_nickname);
+	         session.close();
+	         return dmList;            
+	      }
+	      
+	      //dm_no로 불러올일이없었음
+	      public static DMVO getDM(int dm_no) {
+	         SqlSession session = factory.openSession();
+	         DMVO d = session.selectOne("dm.getDM",dm_no);
+	         session.close();
+	         return d;
+	      }
+	      */             
+	//여기까지가 디엠
+	   
+	   
+	   
 		
 		
 		

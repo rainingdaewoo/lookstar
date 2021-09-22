@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <link rel = "stylesheet" href="/resources/css/mypage_css/likeList.css"/>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -28,8 +27,8 @@ function readURL(input) {
 </script>
 </head>
 <body>
-<br><br><br><br><br>
 <%@ include file="../inc/header.jsp" %>
+<br><br><br><br><br>
 	<!-- 좋아요 목록 -->
 	<div class="board_wrap">
         <div class="board_title">
@@ -39,8 +38,8 @@ function readURL(input) {
 		  		<!-- 사진파일명 : ${l.lookbook_fname}<br> -->
 		  		<div class="text-center" style="width:303px;" id="imgBox">
 				   <div class="image-box">
-				      <a href="/lookbookInfo.do">
-				   		<img src="/resources/look_img/${l.lookbook_fname}" height="600px" width="400px;" class="image-thumbnail">
+				      <a href="/lookbook/lookbook_detail.do?lookbook_no=${l.lookbook_no}">
+				   		<img id="lookimg" src="/resources/look_img/${l.lookbook_fname}" height="600px" width="400px;" class="image-thumbnail">
 			        	</a>
 				   </div>
 				</div>	

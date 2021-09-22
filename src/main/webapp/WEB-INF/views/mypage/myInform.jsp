@@ -110,7 +110,7 @@ $(function(){
 					</div>
 					
                     <div>
-                        <input type="submit" value="수정" style="margin-top: 30px" class="update" id="upbtn">
+                        <input type="submit" value="수정" style="margin-top: 30px" class="btn btn-lg btn-primary btn-block" >
                     </div>
               </form>
                     

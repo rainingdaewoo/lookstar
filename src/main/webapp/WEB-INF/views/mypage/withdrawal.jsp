@@ -11,6 +11,18 @@
 <link rel = "stylesheet" href="/resources/css/mypage_css/withdrawal.css"/>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		
+		$("#form").submit(function(){
+			if($("#checkPwd").val()==""){
+				alert("비밀번호를 입력해주세요.");
+				$("#checkPwd").focus();
+				return false;
+			}
+		})
+	})
+</script>	
 </head>
 <body>
 <br><br><br><br><br>
@@ -19,26 +31,20 @@
         <main class="mb-4">
         <br><br><br><br><br>
             <div class="container" id="container">
-                <div class="p-4 mb-3 bg-light rounded" align="center" id="box">
-                <h1 align="center" style="color:red;">회원탈퇴</h1>
+                <h1 align="center">회원탈퇴</h1>
 	                <div id="container">
 			                <div id="info">
-			                <p align="center"><h5>※회원을 탈퇴하면 좋아요,게시글,채팅,팔로우,룩북 등 모든 정보가 삭제 됩니다※</h5></p>  
-			                </div><br>     
-			                
-			                
+			                <p align="center"><h5 style="color:red;">※회원을 탈퇴하면 좋아요,게시글,채팅,팔로우,룩북 등 <br>모든 정보가 삭제 됩니다※</h5></p>  
+			                </div><br><br>                  
 			                <div id="checkPWD">
 			                	<div id="pwd" class="input-group">
-				                	<form action="/deleteUsers.do" method="post" class="needs-validation">
+				                	<form action="/deleteUsers.do" method="post" class="needs-validation" onsubmit="return confirm('정말로 탈퇴하시겠습니까?');">
 					                	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					                	<input type="hidden" name="users_out_no" value="0">
 					                	<div class="form-row">
-					                		<div id="long" align="center">
-					                			<label for="checkPwd">비밀번호를 입력해주세요</label>
-					                			
+					                		<div id="long" align="center">				                			
 					                			<input type="hidden" name="users_no" value=${users.users_no}>				                			
-					                			<input type="password" name="users_pw" id="checkPwd" class="form-control">
-					                			<div class="invalid-feedback">비밀번호가 불일치합니다.</div>
+					       
 					                			<br>
 					                			
 					                			<div id="reason" >
@@ -52,8 +58,8 @@
 								                       
 								                </div>
 					                		</div>
-					                	</div><br>	                	
-						                <input type="submit" class="btn btn_blue" id="wb" value="탈퇴">
+					                	</div><br><br><br>	                	
+						                <input type="submit" class="btn btn-lg btn-primary btn-block" id="btn" value="탈퇴">
 					                </form>	
 			                	</div>
 		                	</div>
@@ -61,7 +67,6 @@
 		                
 	                  </div>   
                 </div>
-            </div>
         </main>
         <%@ include file="../inc/footer.jsp" %>
 </body>

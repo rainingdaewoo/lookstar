@@ -53,7 +53,7 @@
 							    <c:forEach var="b" items="${list }">
 							    	<tr>
 							    		<td>${b.board_no }</td>
-							    		<td>${b.board_title }</td>
+							    		<td><a href="/board/detailBoard.do?board_no=${b.board_no}">${b.board_title }</a></td>
 							    		<td><fmt:formatDate value="${b.board_date }" pattern="yyyy-MM-dd" /></td>
 							    		<td>${b.board_views }</td>
 							    	</tr>
@@ -66,17 +66,28 @@
 	  			</div> <!-- board_wrap1 -->
 	  		</div> <!-- container -->  	
 	  		
-	  			
+	  		
 	  <nav aria-label="Page navigation example">
+	 
 		<ul class="pagination justify-content-center">
-	  			<c:forEach var="i" begin="1" end="${totalMyPage}">
-	  				<li class="page-item">
-	  					<a class="page-link" href="/mypage/manageMyboard.do?pageNUM=${i}&users_no=${users.users_no}">${i} &nbsp;</a>
-	  				</li>	
-	  			</c:forEach>
-	  	</ul> 
+		 <c:if test="${prev}">
+			<li class="page-item">
+				<a class="page-link" aria-label="Previous" href="/mypage/manageMyboard.do?pageNUM=${startPageNum - 1}&users_no=${users.users_no}"><span aria-hidden="true">&laquo;</span></a> 
+			</li>
+				</c:if>	
+	  			<c:forEach var="pageNUM" begin="${startPageNum}" end="${endPageNum}">
+	  					<li class="page-item"><a class="page-link" href="/mypage/manageMyboard.do?pageNUM=${pageNUM}&users_no=${users.users_no}">${pageNUM} &nbsp;</a></li>
+	  				
+	  			</c:forEach>	
+	  			<c:if test="${next}">
+				 <li class="page-item">
+				 	<a class="page-link" aria-label="Next" href="/mypage/manageMyboard.do?pageNUM=${endPageNum + 1}&users_no=${users.users_no}"><span aria-hidden="true">&raquo;</span></a>
+				 </li>	
+			</c:if>	
+	  	</ul>
+	  
 	</nav>	    	
-	  		       
+	  		        
 <%@ include file="../inc/footer.jsp" %>
 </body>
 </html>

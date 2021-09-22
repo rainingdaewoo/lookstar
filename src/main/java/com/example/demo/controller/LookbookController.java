@@ -184,10 +184,17 @@ public class LookbookController {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			System.out.println("인증정보: " + authentication);
 			User user = (User) authentication.getPrincipal();
+			
+			
+			
+			// id는 뭔지 안다! id안에 있는 fname 등등은 모름 아직
 			String id = user.getUsername();
 			System.out.println("ooooooooooooooooooooo");
 			System.out.println("id값: " + id);
 			model.addAttribute("u", userdao.getUsers(id));
+			
+			
+		
 			String follower_id = id;
 			String following_id = look.getUsers().getUsers_id();
 			System.out.println("로그인한 아이디: " + follower_id);
@@ -242,12 +249,17 @@ public class LookbookController {
 	@RequestMapping("/mypage/manageMylook.do")
 	public ModelAndView listMyLook(@RequestParam(value = "pageNUM", defaultValue = "1") int pageNUM, int users_no,
 			Model model) {
-		System.out.println("pageNUM:" + pageNUM);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User)authentication.getPrincipal();
+		String id = user.getUsername();
+		model.addAttribute("users", userdao.getUsers(id));
+		
 		LookbookDao.totalMyLook = lookbookdao.getTotalMyLook(users_no);
-		LookbookDao.my_totalPage = (int) Math.ceil((double) LookbookDao.totalMyLook / LookbookDao.my_pageSIZE);
-
-		int start = (pageNUM - 1) * LookbookDao.my_pageSIZE + 1;
-		int end = start + LookbookDao.my_pageSIZE - 1;
+		LookbookDao.my_totalPage = (int)Math.ceil((double)LookbookDao.totalMyLook/LookbookDao.my_pageSIZE);
+		System.out.println("my_totalPage:" + LookbookDao.my_totalPage);	
+		System.out.println("LookbookDao.my_pageSIZE:" + LookbookDao.my_pageSIZE);	
+		int start = (pageNUM-1)*LookbookDao.my_pageSIZE + 1;
+		int end = start+LookbookDao.my_pageSIZE-1;
 		if (end > LookbookDao.totalMyLook) {
 			end = LookbookDao.totalMyLook;
 		}

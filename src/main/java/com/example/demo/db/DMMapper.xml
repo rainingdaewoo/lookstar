@@ -3,27 +3,172 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="dm">
- 	<insert id="insertDM" parameterType="DMVO">
- 		insert into dm(dm_no,from_nickname,to_nickname,dm_content,dm_date) values(seq_dm.nextval,#{from_nickname},#{to_nickname},#{dm_content},SYSDATE)
- 	</insert>
+ 		 
+	 <!-- dm_no 가장큰값 찾기-->
+	 <select id = "findDM_no" resultType="String">
+	 	select nvl(max(dm_no),0) as dm_no from dm
+	 </select>
+	 
+	 <!-- 룩북, 디엠아이콘 insert -->
+	 <insert id="InsertDM" parameterType="dmVO">
+	 	insert into dm(dm_no, room_no, from_id, to_id, dm_content, read_date, send_date, read_chk) 
+	 	values(#{dm_no}, #{room_no}, #{from_id}, #{to_id}, #{dm_content}, sysdate, sysdate,  0)
+	 </insert>
+	
+	
+	<!-- 대화한 room_no 존재 여부 조회 -->
+	<select id="existRoom" resultType="String">
+		select count(room_no) as room_no from dm 
+		where (from_id =#{from_id} and to_id=#{to_id})
+		or (from_id =#{to_id} and to_id=#{from_id})
+	</select>
+	
+	
+	<!-- 대화한 room_no 조회  //2개이상 나오는걸 방지-->
+ 	<select id="findRoom_no" resultType="String">
+ 		select distinct room_no as room_no from dm 
+		where (from_id =#{from_id} and to_id=#{to_id})
+		or (from_id =#{to_id} and to_id=#{from_id})
+ 	</select>
  	
- 	<!-- dm 발신자가 users_nickname일때 수신자별로 최신 문자만 보여주기 -->
- 	<select id="findAll" resultType="DMVO">
+ 	
+ 	<!-- max room_no+1 조회 -->
+ 	<select id="findNextRoom_no" resultType="String">
+ 		select nvl(max(room_no),0)+1 as room_no from dm
+ 	</select>
+ 	
+ 	
+ 	<!-- 로그인한 사용자의 디엠정보갖고오기 (룩북)-->
+ 	<select id="findAll2" resultType="dmVO">
+ 		select * from dm
+		where 
+		(to_id=(select users_id from users 
+				where users_no=(select users_no from lookbook where lookbook_no=#{lookbook_no}))
+		and from_id=#{users_id})
+		or
+		(from_id=(select users_id from users 
+				where users_no=(select users_no from lookbook where lookbook_no=#{lookbook_no}))
+		and to_id=#{users_id})
+		order by send_date
+ 	</select>
+ 	
+ 	
+ 	
+ 	<!-- 여기서부터 디엠버튼 눌렀을때 -->
+ 	<!-- 사용자의 방별로 채팅 최신디엠리스트 갖고오기 -->
+ 	<select id="findRecentDM" resultType="dmVO">
+ 		select dm_no, room_no, from_id, to_id, dm_content, read_date, send_date, read_chk
+		from dm
+		where dm_no in (select max(dm_no) from dm group by room_no)
+		and (to_id=#{users_id} or from_id=#{users_id})
+		order by dm_no desc
+ 	</select>
+ 	
+ 	
+ 	<!-- 사용자의 방별로 채팅 최신to_id만 출력 -->
+ 	<select id="findRecentTO" resultType="String">
+ 		select to_id from dm
+		where dm_no in (select max(dm_no) from dm group by room_no)
+		and (to_id=#{users_id} or from_id=#{users_id})
+ 	</select>
+ 	
+ 	
+ 	<!-- 수신자 프로필갖고오기 -->
+	<select id ="getFromProfile" resultType="String">
+		select users_fname as to_fname from users
+		where users_id = (select distinct to_id from dm where to_id=#{to_id})
+	</select>
+ 	
+ 	
+ 	<!-- 발신자 프로필 갖고오기 -->
+ 	<select id ="getToProfile" resultType="String">
+		select users_fname as to_fname from users
+		where users_id = (select distinct from_id from dm where from_id=#{to_id})
+	</select>
+ 	
+ 	
+ 	<!-- 수신자 닉네임 갖고오기 -->
+ 	<select id="getFromNickname" resultType="String">
+ 		select users_nickname as to_nickname from users
+ 		where users_id = (select distinct to_id from dm where to_id=#{to_id})
+ 	</select>
+ 	
+ 	
+ 	<!-- 발신자 닉네임 갖고오기 -->
+ 	<select id="getToNickname" resultType="String">
+ 		select users_nickname as to_fname from users
+		where users_id = (select distinct from_id from dm where from_id=#{to_id})
+ 	</select>
+ 	
+ 	
+ 	<!-- 수신자 아이디 갖고오기 -->
+ 	<select id="getToID" resultType="String">
+ 		select to_id from dm where (from_id=#{users_id} or to_id=#{users_id}
+ 	</select>
+ 	
+ 	
+ 	
+ 	<!-- 발신-수신 채팅목록 -->
+ 	<select id="findAll3" resultType="dmVO">
+ 		select * from dm 
+ 		where room_no=#{room_no}
+ 		order by dm_no
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	 
+ 	<!-- 사용자별로 수신자 정보, 최신메세지 다 갖고오기 -->
+ 	<!--
+ 	<select id = "findToAll" resultType="todmlistVO">
+ 		select dm_no, room_no, from_id, to_id, 
+		users_nickname as to_nickname, users_fname as to_fname,
+		dm_content,  send_date
+		from 
+		(select dm_no, room_no, from_id, to_id, dm_content, send_date
+		from dm
+		where dm_no in (select max(dm_no) from dm group by room_no)
+		and (to_id=#{users_id} or from_id=#{users_id})) a
+		full outer join
+		(select users_id,users_nickname,users_fname from
+		(select rownum n,users_id,users_nickname,users_fname 
+		from(select users_id,users_nickname,users_fname from users 
+		where users_id in (select to_id from dm where from_id = #{users_id})))) b
+		on a.to_id = b.users_id
+		order by send_date desc
+ 	</select>
+ 	 -->
+ 	
+ 	<!-- 채팅하는 사람의 정보(아이디, 닉네임, 사진) -->
+	<select id= "infoTO" resultType="usersVO">
+  		select users_id,users_nickname,users_fname  
+  		from(select rownum n,users_id,users_nickname,users_fname 
+  		from(select users_id,users_nickname,users_fname from users 
+		where users_id in (select to_id from dm where from_id = #{users_id})))
+		order by users_id
+	</select>
+ 	
+ 	
+ 	
+ 	<!-- dm 발신자가 users_nickname일때 수신자별로 최신 문자만 보여주기(이거틀림) -->
+ 	<select id="findAll" resultType="dmVO">
  		select * from dm,
-		(select max(dm_date) d from dm group by to_nickname) sender
-		where from_nickname=#{users_nickname}
-		and dm.dm_date = sender.d
+		(select max(send_date) d from dm group by to_id) sender
+		where from_id=#{users_id} and to_id=#{to_id}
+		and dm.send_date = sender.d
  	</select>
  	
- 	
- 	<select id="findAll2" resultType="DMVO">
- 		select * from dm where (from_nickname=#{users_nickname}) 
- 		or (to_nickname=#{users_nickname})
- 		order by dm_date
- 	</select>
- 
- 	
- 	<select id="getDM" parameterType="int" resultType="DMVO">
+ 	<select id="getDM" parameterType="int" resultType="dmVO">
   		select * from dm where dm_no=#{dm_no}
   	</select>
+  	
+  	<!-- 팔로우한 사람 목록 -->
+  	<select id= "ddddddd" resultType="dmVO">
+  	select users_id,users_nickname,users_fname,users_no from(select rownum n,users_id,users_nickname,users_fname,users_no from(
+		select users_id,users_nickname,users_fname,users_no from users 
+		where users_id in (select following_id from follow where follower_id = #{users_id})))
+	</select>	
  </mapper>

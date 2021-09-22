@@ -110,6 +110,8 @@
 		$(".follow,.heartlook").click(function(){
 			location.reload();
 		})
+		
+		console.log()
 	});
 </script>
 </head>
@@ -131,7 +133,19 @@
 				<div>
 					<h5>
 						
-						<img src="/resources/images/user.png" width=50 height=50>&nbsp;&nbsp;&nbsp;${write_u.users_nickname}<span></span>
+						<c:choose>
+							<c:when test="${write_u.users_fname==null}">
+								<a href="/dmTest02.do?users_id=${write_u.users_id }&users_fname=${write_u.users_fname }&users_nickname=${write_u.users_nickname}&lookbook_no=${look.lookbook_no}"> 
+									<img src="/resources/images/user.png" width=50 height=50>
+								</a>
+							</c:when>
+							<c:when test="${write_u.users_fname!=null}">
+								<a href="/dmTest02.do?users_id=${write_u.users_id }&users_fname=${write_u.users_fname }&users_nickname=${write_u.users_nickname}&lookbook_no=${look.lookbook_no}"> 
+									<img src="/resources/profile/${write_u.users_fname}" class="rounded-circle" width=50 height=50>
+								</a>
+							</c:when>
+						</c:choose>
+						&nbsp;&nbsp;&nbsp;${write_u.users_nickname}<span></span>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="hidden" id="follower_id" name="follower_id" value="${u.users_id}">
 							<input type="hidden" id="following_id" name="following_id" value="${write_u.users_id}">
@@ -218,6 +232,7 @@
 
 
 					</table>
+					<br><br><br>
 					<c:choose>
 						<c:when test="${look.users_no == u.users_no}">
 							<a href="/lookbook/lookbook_update.do?lookbook_no=${look.lookbook_no}"><button type="button"

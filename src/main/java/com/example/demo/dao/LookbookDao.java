@@ -16,7 +16,7 @@ public class LookbookDao {
 	public static int totalRecord;
 	public static int totalPage;
 	
-	public static int my_pageSIZE = 4;
+	public static int my_pageSIZE = 12;
 	public static int totalMyLook;
 	public static int my_totalPage;
 	
@@ -75,7 +75,6 @@ public class LookbookDao {
 	}
 	
 	public List<LookbookVO> listMyLook(HashMap map){
-		//System.out.println("lookbookdao users_no:"+map.users_no);
 		return DBManager.listMyLook(map);
 	}
 	

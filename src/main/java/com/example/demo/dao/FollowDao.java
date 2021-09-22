@@ -11,7 +11,7 @@ import com.example.demo.vo.LookbookVO;
 @Repository
 public class FollowDao {
 
-	public static int pageSIZE = 3;
+	public static int pageSIZE = 5;
 	public static int totalRecord;
 	public static int totalPage;
 	
