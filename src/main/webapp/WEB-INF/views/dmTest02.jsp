@@ -44,6 +44,7 @@ $(document).ready(function(){
 
 <body>
 <!-- 룩북에서 DM view -->
+
 <div class="container vsc-initialized">	
 	<div class="messaging" width="100%">
 		<h2 id="messaging" class="text-center">Messaging</h2>
