@@ -127,10 +127,10 @@
 				alert('제목을 입력해주세요');
 				e.preventDefault();
 			}
-			else if($('#input_board_content').val() == '') {
+			/* else if($('#input_board_content').val() == '') {
 				alert('내용을 입력해주세요');
 				e.preventDefault();
-			}
+			} */
 			
 		});
 	</script>

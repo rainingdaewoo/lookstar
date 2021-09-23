@@ -96,6 +96,7 @@
 	(select b.board_no, b.BOARD_TITLE, b.board_date, b.board_views
 	   	FROM board b, users u
 	   	WHERE b.users_no = u.users_no
+	    and b.board_show = 0
 	   	and u.users_no = #{users_no}))
 	where n between #{start} and #{end}
   </select>
