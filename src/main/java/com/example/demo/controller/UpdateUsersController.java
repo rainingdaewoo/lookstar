@@ -104,7 +104,7 @@ public class UpdateUsersController {
 	}
 	
 	@RequestMapping(value = "/deleteUsers.do",method = RequestMethod.POST)
-	public ModelAndView deleteSubmit(int users_no,String users_pw,HttpServletRequest request,Users_outVO uo,HttpSession session) throws Exception {
+	public ModelAndView deleteSubmit(int users_no,HttpServletRequest request,Users_outVO uo,HttpSession session) throws Exception {
 		ModelAndView mav = new ModelAndView("redirect:/login.do");
 		
 		int re = dao.insertUsers_out(uo);

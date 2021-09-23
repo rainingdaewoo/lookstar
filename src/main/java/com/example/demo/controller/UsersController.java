@@ -146,8 +146,10 @@ public class UsersController {
 	
 	@RequestMapping("/mypage/withdrawal.do")
 	public void withdrawal(Model model,HttpSession session) {
-		int users_no = ((UsersVO)session.getAttribute("users")).getUsers_no();
-		model.addAttribute("users_no",users_no);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User)authentication.getPrincipal();
+		String id = user.getUsername();
+		model.addAttribute("users", dao.getUsers(id));
 	}
 	
 	@RequestMapping("/mypage/termsOfService.do")
