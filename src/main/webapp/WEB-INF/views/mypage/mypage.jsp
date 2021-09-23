@@ -50,6 +50,11 @@
     border-radius: 1px;
     text-transform: uppercase;
 }
+
+#my_img {
+	height: 150px;
+  object-fit: cover;
+}
 </style>
 </head>
 <body>
