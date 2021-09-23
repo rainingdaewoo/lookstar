@@ -68,7 +68,7 @@
 								 <option value="0">자유게시판</option>
 								 <option value="1">쇼핑후기</option>
 								 <option value="2">발매 및 할인</option>
-								 <option value="3">비밀글</option>
+								 <option value="4">공지사항</option>
 							 </select>
 		                </div>
 		                <div class="input-group mb-2">

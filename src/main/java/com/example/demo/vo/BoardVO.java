@@ -9,6 +9,7 @@ public class BoardVO {
 	private int board_category_no;
 	private int users_no;
 	private String users_nickname;
+	private String users_fname;
 	private String board_title;
 	private String  board_content;
 	private Date board_date;
@@ -41,6 +42,12 @@ public class BoardVO {
 	}
 	public void setUsers_nickname(String users_nickname) {
 		this.users_nickname = users_nickname;
+	}
+	public String getUsers_fname() {
+		return users_fname;
+	}
+	public void setUsers_fname(String users_fname) {
+		this.users_fname = users_fname;
 	}
 	public String getBoard_title() {
 		return board_title;
@@ -96,14 +103,15 @@ public class BoardVO {
 	public void setBoard_uploadFile(MultipartFile board_uploadFile) {
 		this.board_uploadFile = board_uploadFile;
 	}
-	public BoardVO(int board_no, int board_category_no, int users_no, String users_nickname, String board_title,
-			String board_content, Date board_date, int board_show, int board_views, String board_fname, int board_fsize,
-			int board_comments_count, MultipartFile board_uploadFile) {
+	public BoardVO(int board_no, int board_category_no, int users_no, String users_nickname, String users_fname,
+			String board_title, String board_content, Date board_date, int board_show, int board_views,
+			String board_fname, int board_fsize, int board_comments_count, MultipartFile board_uploadFile) {
 		super();
 		this.board_no = board_no;
 		this.board_category_no = board_category_no;
 		this.users_no = users_no;
 		this.users_nickname = users_nickname;
+		this.users_fname = users_fname;
 		this.board_title = board_title;
 		this.board_content = board_content;
 		this.board_date = board_date;
@@ -121,10 +129,12 @@ public class BoardVO {
 	@Override
 	public String toString() {
 		return "BoardVO [board_no=" + board_no + ", board_category_no=" + board_category_no + ", users_no=" + users_no
-				+ ", users_nickname=" + users_nickname + ", board_title=" + board_title + ", board_content="
-				+ board_content + ", board_date=" + board_date + ", board_show=" + board_show + ", board_views="
-				+ board_views + ", board_fname=" + board_fname + ", board_fsize=" + board_fsize
+				+ ", users_nickname=" + users_nickname + ", users_fname=" + users_fname + ", board_title=" + board_title
+				+ ", board_content=" + board_content + ", board_date=" + board_date + ", board_show=" + board_show
+				+ ", board_views=" + board_views + ", board_fname=" + board_fname + ", board_fsize=" + board_fsize
 				+ ", board_comments_count=" + board_comments_count + ", board_uploadFile=" + board_uploadFile + "]";
 	}
+	
+	
 	
 }

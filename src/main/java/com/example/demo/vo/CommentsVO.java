@@ -9,6 +9,7 @@ public class CommentsVO {
 	private int board_no;
 	private int users_no;
 	private String users_nickname;
+	private String users_fname;
 	private String comments_content;
 	private Date comments_date;
 	private int comments_show;
@@ -40,6 +41,12 @@ public class CommentsVO {
 	}
 	public void setUsers_nickname(String users_nickname) {
 		this.users_nickname = users_nickname;
+	}
+	public String getUsers_fname() {
+		return users_fname;
+	}
+	public void setUsers_fname(String users_fname) {
+		this.users_fname = users_fname;
 	}
 	public String getComments_content() {
 		return comments_content;
@@ -89,14 +96,23 @@ public class CommentsVO {
 	public void setComments_uploadFile(MultipartFile comments_uploadFile) {
 		this.comments_uploadFile = comments_uploadFile;
 	}
-	public CommentsVO(int comments_no, int board_no, int users_no, String users_nickname, String comments_content,
-			Date comments_date, int comments_show, String comments_fname, int comments_fsize, int depth,
-			int ori_comments_no, MultipartFile comments_uploadFile) {
+	@Override
+	public String toString() {
+		return "CommentsVO [comments_no=" + comments_no + ", board_no=" + board_no + ", users_no=" + users_no
+				+ ", users_nickname=" + users_nickname + ", users_fname=" + users_fname + ", comments_content="
+				+ comments_content + ", comments_date=" + comments_date + ", comments_show=" + comments_show
+				+ ", comments_fname=" + comments_fname + ", comments_fsize=" + comments_fsize + ", depth=" + depth
+				+ ", ori_comments_no=" + ori_comments_no + ", comments_uploadFile=" + comments_uploadFile + "]";
+	}
+	public CommentsVO(int comments_no, int board_no, int users_no, String users_nickname, String users_fname,
+			String comments_content, Date comments_date, int comments_show, String comments_fname, int comments_fsize,
+			int depth, int ori_comments_no, MultipartFile comments_uploadFile) {
 		super();
 		this.comments_no = comments_no;
 		this.board_no = board_no;
 		this.users_no = users_no;
 		this.users_nickname = users_nickname;
+		this.users_fname = users_fname;
 		this.comments_content = comments_content;
 		this.comments_date = comments_date;
 		this.comments_show = comments_show;
@@ -110,14 +126,8 @@ public class CommentsVO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	@Override
-	public String toString() {
-		return "CommentsVO [comments_no=" + comments_no + ", board_no=" + board_no + ", users_no=" + users_no
-				+ ", users_nickname=" + users_nickname + ", comments_content=" + comments_content + ", comments_date="
-				+ comments_date + ", comments_show=" + comments_show + ", comments_fname=" + comments_fname
-				+ ", comments_fsize=" + comments_fsize + ", depth=" + depth + ", ori_comments_no=" + ori_comments_no
-				+ ", comments_uploadFile=" + comments_uploadFile + "]";
-	}
+	
+	
 	
 	
 	

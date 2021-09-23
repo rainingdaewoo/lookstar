@@ -54,9 +54,6 @@
 			<li class="category" id="발매및할인정보">
 				<a href="/board/listBoard.do?pageNUM=1&board_category_no=2">발매 및 할인정보</a>
 			</li>
-			<li class="category" id="비밀글">
-				<a href="/board/listBoard.do?pageNUM=1&board_category_no=3">비밀글</a>
-			</li>
 			<li class="category" id="공지사항">
 				<a href="/board/listBoard.do?pageNUM=1&board_category_no=4">공지사항</a>
 			</li>
@@ -91,7 +88,7 @@
 	    <tr>
 	      <th class="table-head" scope="col">글번호</th>
 	      <th class="table-head" scope="col" width="600" >글제목</th>
-	      <th class="table-head" scope="col" width="100">작성자</th>
+	      <th class="table-head" scope="col" width="120">작성자</th>
 	      <th class="table-head" scope="col" width="200">작성일</th>
 	      <th class="table-head" scope="col" width="100">조회수</th>
 	    </tr>

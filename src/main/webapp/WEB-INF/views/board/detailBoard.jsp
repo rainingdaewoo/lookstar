@@ -90,9 +90,6 @@
 			<li class="category" id="발매및할인정보">
 				<a href="/board/listBoard.do?pageNUM=1&board_category_no=2">발매 및 할인정보</a>
 			</li>
-			<li class="category" id="비밀글">
-				<a href="/board/listBoard.do?pageNUM=1&board_category_no=3">비밀글</a>
-			</li>
 			<li class="category" id="공지사항">
 				<a href="/board/listBoard.do?pageNUM=1&board_category_no=4">공지사항</a>
 			</li>
@@ -114,7 +111,7 @@
 		<h3 class="title_text">${b.board_title }</h3>
 		<div class="writerInfo">
 					<img id="my_img" class="img-fluid rounded-circle mb-4"
-			 src="../resources/profile/${users.users_fname}" width="30" onerror="this.src='/resources/images/user.png'"/>
+			 src="../resources/profile/${b.users_fname}" width="30"  onerror="this.src='/resources/images/user.png'"/>
 			 ${b.users_nickname }<br>
 			<div class="article_info">
 				<fmt:formatDate value="${b.board_date }" pattern="yyyy-MM-dd HH:mm" />
@@ -158,7 +155,7 @@
 							<div class="avc">
 							<div class="comments-usersNickname">
 							<img id="my_img" class="img-fluid rounded-circle mb-4"
-			 src="../resources/profile/${users.users_fname}" width="30" onerror="this.src='/resources/images/user.png'"/>
+			 src="../resources/profile/${comments.users_fname}" width="30" onerror="this.src='/resources/images/user.png'"/>
 								</div>
 								<div class="comments-usersNickname">
 									<p>${comments.users_nickname} 	</p>
@@ -285,7 +282,7 @@
 				</div>
 			</form>
 			</div>				
-				<br><br>	
+				
 	<!-- 댓글 끝 -->
 	<a href="/board/board_write.do"
 		class="btn btn-outline-dark pull-right">글쓰기</a>

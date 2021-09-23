@@ -3,7 +3,10 @@
     padding: 0;
 }
 
-
+#my_img {
+	height: 30px;
+  object-fit: cover;
+}
 
 
  aside ul li a { 
