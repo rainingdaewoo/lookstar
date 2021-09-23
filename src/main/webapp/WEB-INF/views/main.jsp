@@ -43,17 +43,21 @@
 						<!-- 슬라이드 쇼 -->
 						<div class="carousel-item active">
 							<!--가로-->
-							<img class="d-block w-100" src="../../resources/assets/Eom.png"
+							<img class="d-block w-100" src="../../resources/assets/img1.jpg"
 								alt="First slide">
 
 						</div>
 						<div class="carousel-item">
 							<img class="d-block w-100"
-								src="../../resources/assets/image1.webp" alt="Second slide">
+								src="../../resources/assets/img2.jpg" alt="Second slide">
 						</div>
 						<div class="carousel-item">
 							<img class="d-block w-100"
-								src="../../resources/assets/image2.jpg" alt="Third slide">
+								src="../../resources/assets/img3.jpg" alt="Third slide">
+						</div>
+						<div class="carousel-item">
+							<img class="d-block w-100"
+								src="../../resources/assets/img4.jpg" alt="Fourth slide">
 						</div>
 						<!-- / 슬라이드 쇼 끝 -->
 						<!-- 왼쪽 오른쪽 화살표 버튼 -->
@@ -71,6 +75,7 @@
 							<!--0번부터시작-->
 							<li data-target="#demo" data-slide-to="1"></li>
 							<li data-target="#demo" data-slide-to="2"></li>
+							<li data-target="#demo" data-slide-to="3"></li>
 						</ul>
 						<!-- 인디케이터 끝 -->
 					</div>

@@ -62,6 +62,7 @@
   
   <update id="updateBoard" parameterType="boardVO">
   	update board set board_title=#{board_title},
+  	board_category_no = #{board_category_no},
   	board_content=#{board_content},
   	board_fname=#{board_fname},
   	board_fsize=#{board_fsize} 
