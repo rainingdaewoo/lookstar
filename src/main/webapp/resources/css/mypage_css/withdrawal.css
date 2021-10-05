@@ -1,0 +1,47 @@
+.container{
+	margin-top:200px;
+	border : 1px black;
+	text-align:center;
+}
+
+#subContainer{
+	margin-top:50px;
+}
+
+#info{
+	margin-top:50px;
+	display:inline-block;
+	width:500px;	
+	text-align:center;
+}
+
+#long{
+	display:inline-block;
+	width:500px;	
+	text-align:center;
+	margin-left:70px;
+}
+
+#reason{
+	display:inline-block;
+	width:500px;	
+	text-align:center;
+}
+
+#box{
+	margin-top:50px;
+	margin:auto;
+	width:800px;
+}
+
+#container{
+	margin:0 auto;
+}
+
+#btn{
+	width:500px;
+	margin-left:70px;
+	margin-right:50px;
+	
+}
+

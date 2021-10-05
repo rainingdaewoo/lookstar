@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties resource="com/example/demo/db/db.properties" />
+	<settings>
+		<setting name="cacheEnabled" value="true"/>
+		<setting name="callSettersOnNulls" value="true"/>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	<typeAliases>
+		<typeAlias type="com.example.demo.vo.BoardVO"
+			alias="boardVO" />
+		<typeAlias type="com.example.demo.vo.UsersVO"
+			alias="usersVO" />
+		<typeAlias type="com.example.demo.vo.LookbookVO"
+			alias="lookbookVO" />
+		<typeAlias type="com.example.demo.vo.LookInfoVO"
+			alias="lookinfoVO" />
+		<typeAlias type="com.example.demo.vo.Lookbook_styleVO"
+			alias="lookbook_styleVO" />
+		<typeAlias type="com.example.demo.vo.CommentsVO" alias="commentsVO"/>
+		<typeAlias type="com.example.demo.vo.Users_like_styleVO" alias="users_like_styleVO"/>
+		<typeAlias type="com.example.demo.vo.FollowVO" alias="followVO" />
+		<typeAlias type="com.example.demo.vo.Users_outVO" alias="users_outVO" />
+		<typeAlias type="com.example.demo.vo.LooklikeVO" alias="looklikeVO" />
+		<typeAlias type="com.example.demo.vo.RangeWeightHeightVO" alias="rangeVO" />
+		<typeAlias type="com.example.demo.vo.LooklikeVO" alias="looklikeVO"/>
+		<typeAlias type="com.example.demo.vo.DMVO" alias="dmVO"/>
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="com/example/demo/db/UsersMapper.xml" />
+		<mapper resource="com/example/demo/db/BoardMapper.xml"/>
+		<mapper resource="com/example/demo/db/CommentsMapper.xml"/>
+		<mapper resource="com/example/demo/db/LookbookMapper.xml" />
+		<mapper resource="com/example/demo/db/LookInfoMapper.xml" />
+		<mapper resource="com/example/demo/db/Lookbook_StyleMapper.xml" />
+		<mapper resource="com/example/demo/db/LooklikeMapper.xml" />
+		<mapper resource="com/example/demo/db/Users_Like_StyleMapper.xml" />
+		<mapper resource="com/example/demo/db/LooklikeMapper.xml" />
+		<mapper resource="com/example/demo/db/FollowMapper.xml" />
+		<mapper resource="com/example/demo/db/DMMapper.xml" />
+	</mappers>
+
+</configuration>

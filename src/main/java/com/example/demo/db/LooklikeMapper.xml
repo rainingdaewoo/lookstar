@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="looklike">
+
+	<select id="totalRecord" resultType="int">
+		select count(*) from
+		looklike where users_no=#{users_no}
+	</select>
+
+	<select id="listLikes" resultType="lookbookVO">
+		select lookbook_fname,lookbook_no from (select rownum n,lookbook_fname,lookbook_no from (select
+		lookbook_fname,lookbook.lookbook_no from lookbook , looklike
+		where lookbook.lookbook_no = looklike.lookbook_no
+		and looklike.users_no=#{users_no}))
+		where n between #{start} and #{end}
+	</select>
+
+	<!-- 좋아요 번호 -->
+	<select id="getNext_like_no" resultType="int">
+		select nvl(max(like_no),0)+1 from looklike
+	</select>
+
+
+	<!-- 좋아요 여부 조회 -->
+	<select id="isLooklike" resultType="int">
+		select count(*) from looklike
+		where users_no=#{users_no} and lookbook_no=#{lookbook_no}
+	</select>
+
+	<!-- 좋아요 -->
+	<insert id="insertLooklike" parameterType="looklikeVO">
+		insert into looklike
+		(like_no,users_no,lookbook_no) values
+		(#{like_no},#{users_no},#{lookbook_no})
+	</insert>
+
+	<!-- 좋아요 취소 -->
+	<delete id="deleteLooklike">
+		delete looklike where lookbook_no=#{lookbook_no} and
+		users_no=#{users_no}
+	</delete>
+
+	<!-- 좋아요 개수 확인 -->
+	<select id="countLooklike" resultType="int">
+		select count(*) from
+		looklike
+		where lookbook_no=#{lookbook_no}
+	</select>
+</mapper>    

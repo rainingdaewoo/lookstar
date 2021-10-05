@@ -1,0 +1,40 @@
+.lookbook{
+	margin:10px;
+	padding:10px;
+	display:inline;		
+}
+.follow{
+	margin:10px;
+	padding:10px;
+	display:inline;		
+}
+.like{
+	margin:10px;
+	padding:10px;
+	display:inline;		
+
+}
+
+.board_wrap{
+	margin : 50px;
+	margin-left:400px;
+	padding : 70px;
+	width:70%;
+}
+
+.board_title{
+	margin : 20px;
+	padding : 20px;
+}
+
+#followBox{
+	width:70%;
+	margin:60px;
+	paddig:30px;
+}
+
+#pageBox{
+	position:absolute;
+	top:80%;
+	left:50%;
+}

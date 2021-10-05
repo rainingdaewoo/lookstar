@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="users">
+
+
+	<insert id="insert" parameterType="usersVO">
+		insert into users
+		( USERS_NO,
+		USERS_ID, USERS_PW, USERS_EMAIL,
+		USERS_NICKNAME, USERS_BIRTH, USERS_GENDER,
+		USERS_HEIGHT, USERS_WEIGHT, USERS_JOINTYPE, USERS_GRANT,
+		USERS_FNAME, USERS_FSIZE,users_del)
+		values
+		(#{users_no},#{users_id},#{users_pw},#{users_email},
+		#{users_nickname},#{users_birth},#{users_gender},#{users_height},
+		#{users_weight},#{users_jointype},#{users_grant},#{users_fname},
+		#{users_fsize},0)
+	</insert>
+
+
+	<select id="getUsers" resultType="usersVO">
+		select * from users where users_id=#{username} and users_del != 1
+	</select>
+	
+	
+	<select id="getUsersbyNo" resultType="usersVO">
+		select * from users where
+		users_no=#{user_no}
+	</select>
+	
+	<select id="getUser" resultType="usersVO">
+		select * from users where
+		users_no=#{users_no}
+	</select>
+	
+	<select id="getNext_users_no" resultType="int">
+		select nvl(max(users_no),0)+1 from users
+	</select>
+	
+	<update id="updateMyInfo" parameterType="usersVO">
+		update users set users_nickname=#{users_nickname},
+		users_birth=#{users_birth},
+		users_gender=#{users_gender},
+		users_height=#{users_height},
+		users_weight=#{users_weight} where users_no=#{users_no}
+	</update>
+
+	<delete id="deleteUser">
+		delete users where users_no=4 and users_pw=#{users_pw}
+	</delete>
+	<select id="findID" resultType="String" parameterType="String">
+		select nvl(users_id,'') from users where users_email=#{users_email}
+	</select>
+	
+	<!-- <select id="findPW" resultType="String">
+		select nvl(users_pw,'') from users where users_id=#{users_id} and users_email=#{users_email}
+	</select>
+	-->
+	
+	<update id="updatePW">
+		update users set users_pw=#{users_pw} where users_id =#{users_id} and users_email=#{users_email}
+	</update>
+	
+	<select id="compareID" resultType="String" parameterType="String">
+		select nvl(users_id,'') from users where users_id=#{users_id}
+	</select>
+	
+	<select id="compareNickname" resultType="String" parameterType="String">
+		select users_nickname from users where users_nickname=#{users_nickname}
+	</select>
+	
+	<update id="updateUsersDel" >
+		update users set users_del = 1 where users_no = #{users_no}
+	</update>
+	
+	<insert id="insertUsers_out">
+		insert into users_out(users_out_no,users_out_reason) values (out_no.nextval,#{users_out_reason})
+	</insert>
+	
+	<update id="updateProfile" parameterType="usersVO">
+		update users set users_fname=#{users_fname},
+		users_fsize=#{users_fsize} where users_no=#{users_no}	
+	</update>
+	
+	<update id="updatePwd">
+		update users set users_pw=#{users_pw} where users_no=#{users_no}
+	</update>
+	
+	
+</mapper>
